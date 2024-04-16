@@ -12,17 +12,18 @@
     #define KO 84
     #define ERR -1
 
-    #include "amazed.h"
-    #include "proto.h"
-    #include "macro.h"
+    #include "rpg.h"
 
     #include <stdlib.h>
-    #include <stdio.h>
     #include <stddef.h>
+    #include <stdio.h>
     #include <unistd.h>
     #include <fcntl.h>
+    #include <sys/stat.h>
     #include <string.h>
     #include <stdbool.h>
+    #include <math.h>
+    #include <SFML/Window.h>
 
 int error_handling(int argc, char const *const *argv);
 

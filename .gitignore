@@ -1,0 +1,5 @@
+*.o
+*.a
+coding-style-reports.log
+.vscode
+World_of_Sylveria

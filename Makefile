@@ -5,17 +5,21 @@
 ## solostumper
 ##
 
-MAIN =		main.c							\
+MAIN =		main.c						\
 
-SRC =		
+SRC =		src/error_handling.c		\
+			src/launch.c				\
+			src/rpg_loop.c				\
+			src/event/event.c			\
+			src/destroy.c				\
 
-SRCTEST = 	tests/test_lib.c				\
+SRCTEST = 	tests/test_lib.c			\
 
 OBJ = $(SRC:.c=.o)	$(MAIN:.c=.o)
 
 OBJTEST = $(SRCTEST:.c=.o)
 
-NAME =		rpg
+NAME =		World_of_Sylveria
 
 NAMETEST = 	unit_tests
 
