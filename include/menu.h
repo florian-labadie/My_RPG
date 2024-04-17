@@ -6,32 +6,42 @@
 */
 
 #ifndef MENU_H_
-#define MENU_H_
+    #define MENU_H_
 
-    #include "rpg.h"
+    #include "help.h"
+    #include "settings.h"
 
-    #include <SFML/Graphics.h>
-    #include <SFML/Window.h>
     #include <SFML/Audio.h>
+
     #define BACKGROUND "assets/sprite/background_menu.png"
     #define BUTTON_OPTION "assets/button/option.png"
     #define BG_RECT ((sfIntRect) {0, 0, 560, 272})
 
+typedef enum main_menu_s {
+    MAIN,
+    HELP,
+    SETTING,
+    MAIN_MENU_STATE_SIZE
+} main_menu_t;
+
 typedef struct button_s {
-    sfSprite *sprite;
     sfTexture *texture;
 
-    sfIntRect texture_rect;
-    sfClock *anim_clock;
+    sfSprite **sprite;
+    sfText **text;
 } button_t;
 
 typedef struct menu_s {
-    char *user;
+    main_menu_t screen;
 
     sfMusic *menu_sound;
     sfSprite *background_sprite;
     sfTexture *background_texture;
     sfClock *bg_anim_clock;
+
+    help_t *help;
+    settings_t *settings;
+
 } menu_t;
 
 #endif /* !MENU_H_ */

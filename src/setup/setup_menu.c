@@ -10,6 +10,7 @@
 int setup_menu(rpg_t *rpg)
 {
     rpg->menu = malloc(sizeof(menu_t));
+    rpg->menu->screen = MAIN;
     if (rpg->menu == NULL)
         return KO;
     if (setup_background_menu(rpg->menu) == KO)

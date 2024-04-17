@@ -18,13 +18,9 @@ int rpg_loop(rpg_t *rpg)
     sfEvent event = {};
 
     while (sfRenderWindow_isOpen(rpg->window)) {
-        background_menu_manager(rpg->menu);
         sfRenderWindow_clear(rpg->window, sfWhite);
-        while (sfRenderWindow_pollEvent(rpg->window, &event)) {
-            if (event.type == sfEvtClosed)
-                sfRenderWindow_close(rpg->window);
-        }
-        // event_manager(rpg);
+        background_menu_manager(rpg->menu);
+        event_manager(rpg);
         draw_menu(rpg);
         sfRenderWindow_display(rpg->window);
     }

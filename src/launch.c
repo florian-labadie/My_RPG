@@ -9,6 +9,7 @@
 
 static int rpg_setup(rpg_t *rpg, char const *user)
 {
+    rpg->screen = MAIN_MENU;
     if (setup_menu(rpg) == KO)
         return KO;
     return OK;

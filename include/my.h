@@ -12,6 +12,12 @@
     #define KO 84
     #define ERR -1
 
+    #include <SFML/Graphics.h>
+    #include <SFML/Window.h>
+    #include <SFML/Audio.h>
+
+    #include "rpg.h"
+
     #include "proto.h"
     #include "macro.h"
 
@@ -22,9 +28,6 @@
     #include <fcntl.h>
     #include <sys/stat.h>
     #include <string.h>
-    #include <SFML/Graphics.h>
-    #include <SFML/Window.h>
-    #include <SFML/Audio.h>
     #include <stdbool.h>
     #include <math.h>
 

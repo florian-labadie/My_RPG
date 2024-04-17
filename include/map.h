@@ -8,7 +8,8 @@
 #ifndef MAP_H_
 #define MAP_H_
 
-    #include "rpg.h"
+    #include <SFML/Graphics.h>
+    #include <SFML/Window.h>
 
 typedef struct map_s {
     sfRenderTexture *map;
