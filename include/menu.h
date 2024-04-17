@@ -40,7 +40,6 @@ typedef struct button_s {
     char **button_name;
     sfIntRect rectangle_rect;
     sfSprite **play_sprite;
-    sfText **text;
 } button_t;
 
 typedef struct menu_s {
