@@ -13,7 +13,8 @@ static void bg_animation(menu_t *menu)
 
     if (!menu)
         return;
-    if (sfTime_asMilliseconds(sfClock_getElapsedTime(menu->bg_anim_clock)) > 100) {
+    if (sfTime_asMilliseconds(sfClock_getElapsedTime(menu->bg_anim_clock)) >
+        100) {
         rect = sfSprite_getTextureRect(menu->background_sprite);
         rect.left += 560;
         if (rect.left >= 2800) {

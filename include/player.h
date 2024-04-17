@@ -11,7 +11,7 @@
     #include "rpg.h"
 
 typedef struct player_s {
-    
+
 } player_t;
 
 #endif /* !PLAYER_H_ */

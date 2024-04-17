@@ -21,6 +21,7 @@ void destroy_resources(rpg_t *rpg);
 
 /* FCT Générique*/
 sfSprite *create_button(sfTexture *texture, sfVector2f scale, sfVector2f pos);
+sfText *create_text(sfFont *font, char *sentence, int size, sfVector2f pos);
 
 /* MENU */
 int setup_menu(rpg_t *rpg);

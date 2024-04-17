@@ -9,8 +9,12 @@
 
 static void draw_menu(rpg_t *rpg)
 {
-
     sfRenderWindow_drawSprite(rpg->window, rpg->menu->background_sprite, NULL);
+    for (int i = 0; rpg->menu->button->play_sprite[i] != NULL; i += 1) {
+        sfRenderWindow_drawSprite(rpg->window,
+        rpg->menu->button->play_sprite[i], NULL);
+        sfRenderWindow_drawText(rpg->window, rpg->menu->button->text[i], NULL);
+    }
 }
 
 int rpg_loop(rpg_t *rpg)
@@ -20,11 +24,6 @@ int rpg_loop(rpg_t *rpg)
     while (sfRenderWindow_isOpen(rpg->window)) {
         background_menu_manager(rpg->menu);
         sfRenderWindow_clear(rpg->window, sfWhite);
-        while (sfRenderWindow_pollEvent(rpg->window, &event)) {
-            if (event.type == sfEvtClosed)
-                sfRenderWindow_close(rpg->window);
-        }
-        // event_manager(rpg);
         draw_menu(rpg);
         sfRenderWindow_display(rpg->window);
     }

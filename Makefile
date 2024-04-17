@@ -14,8 +14,10 @@ SRC =		src/error_handling.c		\
 			src/rpg_loop.c				\
 			src/destroy.c				\
 			src/fct_générique/create_button.c	\
+			src/fct_générique/create_text.c	\
 			src/setup/background_menu_setup.c	\
 			src/setup/setup_menu.c	\
+			src/setup/menu_button.c	\
 			src/manager/background_menu_manager.c	\
 
 SRCTEST = 	tests/test_lib.c			\
