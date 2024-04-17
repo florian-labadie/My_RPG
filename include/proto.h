@@ -8,19 +8,23 @@
 #ifndef PROTO_H_
     #define PROTO_H_
 
-    #include "my.h"
+    #include "rpg.h"
 
-int launch_amazed(void);
-int parse(amazed_t *amazed);
-void check_commentary(char **line);
-int display(amazed_t *amazed, recovery_t *rec);
-int put_room(amazed_t *amazed, room_status_t *status, char *line);
-int put_tunnel(amazed_t *amazed, char *line);
-int init_matrix(amazed_t *amazed);
-int get_room_pos(char **names, char *name);
-int free_amazed(amazed_t *amazed, int ret);
-int get_path(matrix_t *matrix, int *parent);
-int robot_parcour(matrix_t *matrix, int robot_nbr);
-int my_bfs(matrix_t *matrix);
+char *check_env(char const *const *env);
+char *fs_open_file(char const *filepath);
+int error_handling(int argc, char const *const *argv);
+
+int launch_rpg(char const *user);
+int rpg_loop(rpg_t *rpg);
+// void event_manager(rpg_t *rpg);
+void destroy_resources(rpg_t *rpg);
+
+/* FCT Générique*/
+sfSprite *create_button(sfTexture *texture, sfVector2f scale, sfVector2f pos);
+
+/* MENU */
+int setup_menu(rpg_t *rpg);
+int setup_background_menu(menu_t *menu);
+void background_menu_manager(menu_t *menu);
 
 #endif /* PROTO_H_ */

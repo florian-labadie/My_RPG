@@ -12,7 +12,8 @@
     #define KO 84
     #define ERR -1
 
-    #include "rpg.h"
+    #include "proto.h"
+    #include "macro.h"
 
     #include <stdlib.h>
     #include <stddef.h>
@@ -21,12 +22,13 @@
     #include <fcntl.h>
     #include <sys/stat.h>
     #include <string.h>
+    #include <SFML/Graphics.h>
+    #include <SFML/Window.h>
+    #include <SFML/Audio.h>
     #include <stdbool.h>
     #include <math.h>
-    #include <SFML/Window.h>
 
 int error_handling(int argc, char const *const *argv);
-
 int my_putchar(char c);
 int my_put_errchar(char c);
 int my_putstr(char const *str);

@@ -8,10 +8,15 @@
 MAIN =		main.c						\
 
 SRC =		src/error_handling.c		\
+			src/read_file.c				\
+			src/check_env.c				\
 			src/launch.c				\
 			src/rpg_loop.c				\
-			src/event/event.c			\
 			src/destroy.c				\
+			src/fct_générique/create_button.c	\
+			src/setup/background_menu_setup.c	\
+			src/setup/setup_menu.c	\
+			src/manager/background_menu_manager.c	\
 
 SRCTEST = 	tests/test_lib.c			\
 
@@ -19,7 +24,7 @@ OBJ = $(SRC:.c=.o)	$(MAIN:.c=.o)
 
 OBJTEST = $(SRCTEST:.c=.o)
 
-NAME =		World_of_Sylveria
+NAME =		my_rpg
 
 NAMETEST = 	unit_tests
 
@@ -29,14 +34,16 @@ CPPFLAGS	=	-I./include
 
 LDFLAGS = -L./lib/my
 
-LDLIBS = -lmy
+LDLIBS 	=	-lmy -lm
+
+GRAPHICS	=	-lcsfml-graphics -lcsfml-system -lcsfml-audio -lcsfml-window
 
 CC = gcc
 
 all: buildlib $(NAME)
 
 $(NAME):	$(OBJ)
-	$(CC) $(LDFLAGS) -o $@ $(OBJ) $(LDLIBS)
+	$(CC) $(LDFLAGS) -o $@ $(OBJ) $(LDLIBS) $(GRAPHICS)
 
 buildlib:
 	make -C ./lib/my

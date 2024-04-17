@@ -6,7 +6,9 @@
 */
 
 #ifndef PLAYER_H_
-#define PLAYER_H_
+    #define PLAYER_H_
+
+    #include "rpg.h"
 
 typedef struct player_s {
     

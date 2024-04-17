@@ -14,6 +14,7 @@ SRC     =	my_putchar.c	\
 			my_getnbr.c		\
 			my_strcat.c		\
 			my_strcmp.c		\
+			my_strncmp.c	\
 			my_strcpy.c		\
 			my_strdup.c		\
 			my_strcat.c		\

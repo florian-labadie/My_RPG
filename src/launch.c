@@ -7,22 +7,21 @@
 
 #include "my.h"
 
-static int rpg_setup(rpg_t *rpg, char const *filepath, char const *user)
+static int rpg_setup(rpg_t *rpg, char const *user)
 {
-    
+    if (setup_menu(rpg) == KO)
+        return KO;
+    return OK;
 }
 
-int launch(char const *filepath, char const *user)
+int launch_rpg(char const *user)
 {
     rpg_t rpg = {};
     sfVideoMode videoMode = {1920, 1080, 60};
 
-    if (filepath && check_file(filepath) == KO)
-        return KO;
     rpg.window = sfRenderWindow_create(videoMode,
-    "rpg", sfClose | sfResize, NULL);
-    if (rpg_setup(&rpg, filepath, user) == KO ||
-        setup_cursor(&rpg) == KO)
+    "World_of_Sylveria", sfClose | sfResize, NULL);
+    if (rpg_setup(&rpg, user) == KO)
         return KO;
     return rpg_loop(&rpg);
 }

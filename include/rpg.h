@@ -6,14 +6,11 @@
 */
 
 #ifndef RPG_H_
-#define RPG_H_
+    #define RPG_H_
 
     #include "player.h"
     #include "menu.h"
     #include "map.h"
-
-    #include <SFML/Graphics.h>
-    #include <SFML/Window.h>
 
 typedef enum screen_s {
     MAIN_MENU,
@@ -25,7 +22,7 @@ typedef enum screen_s {
 } screen_t;
 
 typedef struct rpg_s {
-    sfWindow *window;
+    sfRenderWindow *window;
     screen_t screen;
 
     player_t *player;
