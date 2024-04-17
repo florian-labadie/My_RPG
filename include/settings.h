@@ -6,7 +6,7 @@
 */
 
 #ifndef SETTINGS_H_
-#define SETTINGS_H_
+    #define SETTINGS_H_
 
 typedef struct settings_s {
 } settings_t;

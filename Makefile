@@ -5,7 +5,7 @@
 ## solostumper
 ##
 
-MAIN	=	main.c								\
+MAIN	=	main.c										\
 
 SRC =		src/error_handling.c						\
 			src/read_file.c								\
@@ -13,26 +13,31 @@ SRC =		src/error_handling.c						\
 			src/launch.c								\
 			src/rpg_loop.c								\
 			src/destroy.c								\
-			src/fct_générique/create_button.c			src/fct_générique/create_text.c	\
-			\
-			src/setup/setup_menu.c	\
-			src/setup/menu_button.c	\
-			src/setup/background_menu_setup.c			\
-			src/setup/background_player_setup.c						\
-			src/manager/background_menu_manager.c		\
+			src/fct_générique/create_button.c			\
+			src/fct_générique/create_text.c				\
+
+SETUP	=	src/setup/menu_setup.c						\
+			src/setup/menu/background_menu_setup.c		\
+			src/setup/menu/background_player_setup.c	\
+			src/setup/menu/menu_button.c				\
+			src/setup/game_setup.c						\
 
 EVENT	=	src/event/event.c							\
-			src/event/main_menu/main_menu_event.c		\
-			src/event/main_menu/help_menu_event.c		\
-			src/event/main_menu/settings_menu_event.c	\
+			src/event/menu/main_menu_event.c			\
+			src/event/menu/help_menu_event.c			\
+			src/event/menu/settings_menu_event.c		\
 			src/event/game/game_event.c					\
 			src/event/game/pause_menu_event.c			\
 			src/event/game/inventory_menu_event.c		\
-			src/manager/background_player_manager.c	\
 
-SRCTEST = 	tests/test_lib.c					\
+MANAGER	=	src/manager/menu_manager.c					\
+			src/manager/background_menu_manager.c		\
+			src/manager/background_player_manager.c		\
+			src/manager/game_manager.c					\
 
-OBJ = $(MAIN:.c=.o) $(SRC:.c=.o) $(EVENT:.c=.o)
+SRCTEST = 	tests/test_lib.c							\
+
+OBJ = $(MAIN:.c=.o) $(SRC:.c=.o) $(SETUP:.c=.o) $(EVENT:.c=.o) $(MANAGER:.c=.o)
 
 OBJTEST = $(SRCTEST:.c=.o)
 

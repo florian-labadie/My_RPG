@@ -24,7 +24,8 @@ static void bg_animation_human(menu_t *menu)
 
     if (!menu)
         return;
-    if (sfTime_asMilliseconds(sfClock_getElapsedTime(menu->human_anim_clock)) > 100) {
+    if (sfTime_asMilliseconds(sfClock_getElapsedTime(menu->human_anim_clock))
+        > 100) {
         player_mouvement(menu->human_sprites);
         rect = sfSprite_getTextureRect(menu->human_sprites);
         rect.left += 52;
@@ -41,7 +42,8 @@ static void bg_animation_elf(menu_t *menu)
 
     if (!menu)
         return;
-    if (sfTime_asMilliseconds(sfClock_getElapsedTime(menu->elf_anim_clock)) > 100) {
+    if (sfTime_asMilliseconds(sfClock_getElapsedTime(menu->elf_anim_clock))
+        > 100) {
         player_mouvement(menu->elf_sprites);
         rect = sfSprite_getTextureRect(menu->elf_sprites);
         rect.left += 52;
@@ -58,7 +60,8 @@ static void bg_animation_dwarf(menu_t *menu)
 
     if (!menu)
         return;
-    if (sfTime_asMilliseconds(sfClock_getElapsedTime(menu->dwarf_anim_clock)) > 100) {
+    if (sfTime_asMilliseconds(sfClock_getElapsedTime(menu->dwarf_anim_clock))
+        > 100) {
         player_mouvement(menu->dwarf_sprites);
         rect = sfSprite_getTextureRect(menu->dwarf_sprites);
         rect.left += 52;

@@ -7,6 +7,11 @@
 
 #include "my.h"
 
+static void draw_game(rpg_t *rpg)
+{
+    return;
+}
+
 static void draw_menu(rpg_t *rpg)
 {
     sfRenderWindow_drawSprite(rpg->window, rpg->menu->background_sprite, NULL);
@@ -22,14 +27,15 @@ static void draw_menu(rpg_t *rpg)
 
 int rpg_loop(rpg_t *rpg)
 {
-    sfEvent event = {};
+    void (*draw_fct[])(rpg_t *rpg) = {draw_menu, draw_game};
+    void (*mangager_fct[])(rpg_t *rpg) = {menu_manager, game_manager};
 
     while (sfRenderWindow_isOpen(rpg->window)) {
         background_player_manager(rpg->menu);
         sfRenderWindow_clear(rpg->window, sfWhite);
-        background_menu_manager(rpg->menu);
+        mangager_fct[rpg->screen](rpg);
         event_manager(rpg);
-        draw_menu(rpg);
+        draw_fct[rpg->screen](rpg);
         sfRenderWindow_display(rpg->window);
     }
     sfRenderWindow_close(rpg->window);

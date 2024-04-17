@@ -61,7 +61,7 @@ static int set_button(button_t *button)
     return OK;
 }
 
-int menu_button(button_t *button)
+int menu_button_setup(button_t *button)
 {
     if (set_button(button) == KO)
         return KO;

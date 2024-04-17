@@ -7,17 +7,17 @@
 
 #include "my.h"
 
-int setup_menu(rpg_t *rpg)
+int menu_setup(rpg_t *rpg, char const *user)
 {
+    if (!rpg || !user)
+        return KO;
     rpg->menu = malloc(sizeof(menu_t));
-    rpg->menu->button = malloc(sizeof(button_t));
     rpg->menu->screen = MAIN;
     if (rpg->menu == NULL)
         return KO;
-    if (setup_background_menu(rpg->menu) == KO ||
-        setup_background_player(rpg->menu) == KO)
-        return KO;
-    if (menu_button(rpg->menu->button) == KO)
+    if (background_menu_setup(rpg->menu) == KO ||
+        background_player_setup(rpg->menu) == KO ||
+        menu_button_setup(rpg->menu->button) == KO)
         return KO;
     return OK;
 }

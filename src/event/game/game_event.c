@@ -7,7 +7,7 @@
 
 #include "rpg.h"
 
-void game_event(rpg_t *rpg)
+void game_event(rpg_t *rpg, sfEvent event)
 {
     return;
 }

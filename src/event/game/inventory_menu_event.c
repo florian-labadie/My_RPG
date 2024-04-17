@@ -7,7 +7,7 @@
 
 #include "rpg.h"
 
-void inventory_menu_event(rpg_t *rpg)
+void inventory_menu_event(rpg_t *rpg, sfEvent event)
 {
     return;
 }

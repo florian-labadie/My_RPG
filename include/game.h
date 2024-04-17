@@ -6,7 +6,7 @@
 */
 
 #ifndef GAME_H_
-#define GAME_H_
+    #define GAME_H_
 
     #include "player.h"
 
@@ -18,7 +18,7 @@ typedef enum game_state_s {
 } game_state_t;
 
 typedef struct game_s {
-    game_state_t state;
+    game_state_t screen;
 
     player_t *player;
 } game_t;

@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-int setup_background_menu(menu_t *menu)
+int background_menu_setup(menu_t *menu)
 {
     menu->background_texture = sfTexture_createFromFile(BACKGROUND, NULL);
     menu->background_sprite = create_button(menu->background_texture,

@@ -45,7 +45,7 @@ static int setup_dwarf_bg(menu_t *menu)
     return OK;
 }
 
-int setup_background_player(menu_t *menu)
+int background_player_setup(menu_t *menu)
 {
     if (setup_dwarf_bg(menu) == KO || setup_elf_bg(menu) == KO ||
         setup_human_bg(menu) == KO)
