@@ -15,6 +15,9 @@ static void draw_menu(rpg_t *rpg)
         rpg->menu->button->play_sprite[i], NULL);
         sfRenderWindow_drawText(rpg->window, rpg->menu->button->text[i], NULL);
     }
+    sfRenderWindow_drawSprite(rpg->window, rpg->menu->elf_sprites, NULL);
+    sfRenderWindow_drawSprite(rpg->window, rpg->menu->dwarf_sprites, NULL);
+    sfRenderWindow_drawSprite(rpg->window, rpg->menu->human_sprites, NULL);
 }
 
 int rpg_loop(rpg_t *rpg)
@@ -22,8 +25,10 @@ int rpg_loop(rpg_t *rpg)
     sfEvent event = {};
 
     while (sfRenderWindow_isOpen(rpg->window)) {
-        background_menu_manager(rpg->menu);
+        background_player_manager(rpg->menu);
         sfRenderWindow_clear(rpg->window, sfWhite);
+        background_menu_manager(rpg->menu);
+        event_manager(rpg);
         draw_menu(rpg);
         sfRenderWindow_display(rpg->window);
     }

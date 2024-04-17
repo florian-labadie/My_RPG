@@ -11,9 +11,11 @@ int setup_menu(rpg_t *rpg)
 {
     rpg->menu = malloc(sizeof(menu_t));
     rpg->menu->button = malloc(sizeof(button_t));
+    rpg->menu->screen = MAIN;
     if (rpg->menu == NULL)
         return KO;
-    if (setup_background_menu(rpg->menu) == KO)
+    if (setup_background_menu(rpg->menu) == KO ||
+        setup_background_player(rpg->menu) == KO)
         return KO;
     if (menu_button(rpg->menu->button) == KO)
         return KO;

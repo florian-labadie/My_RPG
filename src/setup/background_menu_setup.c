@@ -11,7 +11,7 @@ int setup_background_menu(menu_t *menu)
 {
     menu->background_texture = sfTexture_createFromFile(BACKGROUND, NULL);
     menu->background_sprite = create_button(menu->background_texture,
-        (sfVector2f) {3.5, 4}, (sfVector2f) {0, 0});
+        (sfVector2f) {1920.0 / 560.0, 1080.0 / 272.0}, (sfVector2f) {0, 0});
     menu->bg_anim_clock = sfClock_create();
     if (!menu->background_texture || !menu->background_sprite)
         return KO;

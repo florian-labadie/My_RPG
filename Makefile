@@ -5,24 +5,34 @@
 ## solostumper
 ##
 
-MAIN =		main.c						\
+MAIN	=	main.c								\
 
-SRC =		src/error_handling.c		\
-			src/read_file.c				\
-			src/check_env.c				\
-			src/launch.c				\
-			src/rpg_loop.c				\
-			src/destroy.c				\
-			src/fct_générique/create_button.c	\
-			src/fct_générique/create_text.c	\
-			src/setup/background_menu_setup.c	\
+SRC =		src/error_handling.c						\
+			src/read_file.c								\
+			src/check_env.c								\
+			src/launch.c								\
+			src/rpg_loop.c								\
+			src/destroy.c								\
+			src/fct_générique/create_button.c			src/fct_générique/create_text.c	\
+			\
 			src/setup/setup_menu.c	\
 			src/setup/menu_button.c	\
-			src/manager/background_menu_manager.c	\
+			src/setup/background_menu_setup.c			\
+			src/setup/background_player_setup.c						\
+			src/manager/background_menu_manager.c		\
 
-SRCTEST = 	tests/test_lib.c			\
+EVENT	=	src/event/event.c							\
+			src/event/main_menu/main_menu_event.c		\
+			src/event/main_menu/help_menu_event.c		\
+			src/event/main_menu/settings_menu_event.c	\
+			src/event/game/game_event.c					\
+			src/event/game/pause_menu_event.c			\
+			src/event/game/inventory_menu_event.c		\
+			src/manager/background_player_manager.c	\
 
-OBJ = $(SRC:.c=.o)	$(MAIN:.c=.o)
+SRCTEST = 	tests/test_lib.c					\
+
+OBJ = $(MAIN:.c=.o) $(SRC:.c=.o) $(EVENT:.c=.o)
 
 OBJTEST = $(SRCTEST:.c=.o)
 
@@ -30,7 +40,7 @@ NAME =		my_rpg
 
 NAMETEST = 	unit_tests
 
-CFLAGS = -Wall -Wextra -std=c99 -g3
+CFLAGS = -Wall -Wextra -std=c99
 
 CPPFLAGS	=	-I./include
 
