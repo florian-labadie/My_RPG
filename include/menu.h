@@ -14,8 +14,12 @@
     #include <SFML/Audio.h>
 
     #define BACKGROUND "assets/sprite/background_menu.png"
+    #define PLAYER "assets/sprite/main_character.png"
     #define BUTTON_OPTION "assets/button/option.png"
     #define BG_RECT ((sfIntRect) {0, 0, 560, 272})
+    #define DWARF_RECT ((sfIntRect) {156, 110, 52, 60})
+    #define ELF_RECT ((sfIntRect) {212, 228, 52, 62})//{212, 228, 264, 292})
+    #define HUMAN_RECT ((sfIntRect) {208, 0, 52, 56})
 
 typedef enum main_menu_s {
     MAIN,
@@ -35,6 +39,7 @@ typedef struct menu_s {
     main_menu_t screen;
 
     sfMusic *menu_sound;
+
     sfSprite *background_sprite;
     sfTexture *background_texture;
     sfClock *bg_anim_clock;
@@ -42,6 +47,16 @@ typedef struct menu_s {
     help_t *help;
     settings_t *settings;
 
+
+    sfSprite *dwarf_sprites;
+    sfTexture *dwarf_texture;
+    sfClock *dwarf_anim_clock;
+    sfSprite *elf_sprites;
+    sfTexture *elf_texture;
+    sfClock *elf_anim_clock;
+    sfSprite *human_sprites;
+    sfTexture *human_texture;
+    sfClock *human_anim_clock;
 } menu_t;
 
 #endif /* !MENU_H_ */

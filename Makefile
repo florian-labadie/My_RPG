@@ -14,8 +14,9 @@ SRC =		src/error_handling.c						\
 			src/rpg_loop.c								\
 			src/destroy.c								\
 			src/fct_générique/create_button.c			\
+			src/setup/setup_menu.c	\
 			src/setup/background_menu_setup.c			\
-			src/setup/setup_menu.c						\
+			src/setup/background_player_setup.c						\
 			src/manager/background_menu_manager.c		\
 
 EVENT	=	src/event/event.c							\
@@ -25,6 +26,7 @@ EVENT	=	src/event/event.c							\
 			src/event/game/game_event.c					\
 			src/event/game/pause_menu_event.c			\
 			src/event/game/inventory_menu_event.c		\
+			src/manager/background_player_manager.c	\
 
 SRCTEST = 	tests/test_lib.c					\
 

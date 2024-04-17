@@ -13,7 +13,8 @@ int setup_menu(rpg_t *rpg)
     rpg->menu->screen = MAIN;
     if (rpg->menu == NULL)
         return KO;
-    if (setup_background_menu(rpg->menu) == KO)
+    if (setup_background_menu(rpg->menu) == KO ||
+        setup_background_player(rpg->menu) == KO)
         return KO;
     return OK;
 }

@@ -25,6 +25,8 @@ sfSprite *create_button(sfTexture *texture, sfVector2f scale, sfVector2f pos);
 int setup_menu(rpg_t *rpg);
 int setup_background_menu(menu_t *menu);
 void background_menu_manager(menu_t *menu);
+int setup_background_player(menu_t *menu);
+void background_player_manager(menu_t *menu);
 
 // EVENT MANAGEMENT FUNCTIONS
 void event_manager(rpg_t *rpg);
