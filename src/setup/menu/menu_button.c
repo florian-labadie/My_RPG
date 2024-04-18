@@ -25,18 +25,18 @@ static char **fill_name(char **button_name)
 
 static int creation_loop(button_t *button)
 {
-    sfVector2f pos = {785.0, 165.25};
+    sfVector2f pos = {815.0, 165.25};
 
     for (int i = 0; i < 3; i += 1) {
         if (button->play_sprite != NULL)
             button->play_sprite[i] = create_button(button->rectangle_text,
-            (sfVector2f) {2.3, 2.3}, pos);
+            (sfVector2f) {0.4, 0.4}, pos);
         if (!button->play_sprite[i] || !button->play_sprite ||
         !button->rectangle_text)
             return KO;
         sfSprite_setTextureRect(button->play_sprite[i], RECTANGLE_RECT);
         button->text[i] = create_text(button->font, button->button_name[i],
-        150, (sfVector2f) {pos.x + 75.0, pos.y - 75.0});
+        150, (sfVector2f) {pos.x + 50.0, pos.y - 80.0});
         pos = (sfVector2f) {pos.x, pos.y + 250.0};
     }
     return OK;
@@ -47,7 +47,7 @@ static int set_button(button_t *button)
     button->font = sfFont_createFromFile(FONT);
     button->play_sprite = malloc(sizeof(sfSprite *) * 4);
     button->text = malloc(sizeof(sfText *) * 4);
-    button->rectangle_text = sfTexture_createFromFile(BUTTON_PANEL, NULL);
+    button->rectangle_text = sfTexture_createFromFile(BUTTON_MENU, NULL);
     button->button_name = fill_name(button->button_name);
     if (!button->button_name)
         return 84;
