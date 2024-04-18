@@ -11,8 +11,9 @@ void menu_music(rpg_t *rpg)
 {
     if (sfMusic_getStatus(rpg->menu->menu_sound) == sfStopped ||
         sfMusic_getStatus(rpg->menu->menu_sound) == sfPaused)
-        sfMusic_play(rpg->menu->menu_sound);     
-    if (sfTime_asSeconds(sfMusic_getPlayingOffset(rpg->menu->menu_sound)) >= 21.5)
+        sfMusic_play(rpg->menu->menu_sound);
+    if (sfTime_asSeconds(sfMusic_getPlayingOffset(rpg->menu->menu_sound))
+        >= 21.5)
         sfMusic_setPlayingOffset(rpg->menu->menu_sound, sfSeconds(1));
 }
 
