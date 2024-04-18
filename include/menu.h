@@ -17,10 +17,11 @@
     #define PLAYER "assets/sprite/main_character.png"
     #define BUTTON_OPTION "assets/button/option.png"
     #define BUTTON_PANEL "assets/button/wood_button.png"
+    #define BUTTON_MENU "assets/button/button.png"
     #define FONT "assets/Font/game_over.ttf"
     #define MUSIC_MENU "assets/music/menu_music.ogg"
     #define BG_RECT ((sfIntRect) {0, 0, 560, 272})
-    #define RECTANGLE_RECT ((sfIntRect) {15, 160, 150, 65})
+    #define RECTANGLE_RECT ((sfIntRect) {0.0, 0.0, 748.0, 287.0})
     #define DWARF_RECT ((sfIntRect) {156, 110, 52, 60})
     #define ELF_RECT ((sfIntRect) {212, 228, 52, 62})//{212, 228, 264, 292})
     #define HUMAN_RECT ((sfIntRect) {208, 0, 52, 56})
