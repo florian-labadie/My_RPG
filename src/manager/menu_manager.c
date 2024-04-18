@@ -5,10 +5,11 @@
 ** menu_manager
 */
 
-#include "rpg.h"
+#include "my.h"
 
 void menu_manager(rpg_t *rpg)
 {
     background_menu_manager(rpg->menu);
+    background_player_manager(rpg->menu);
     return;
 }

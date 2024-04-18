@@ -31,7 +31,6 @@ int rpg_loop(rpg_t *rpg)
     void (*mangager_fct[])(rpg_t *rpg) = {menu_manager, game_manager};
 
     while (sfRenderWindow_isOpen(rpg->window)) {
-        background_player_manager(rpg->menu);
         sfRenderWindow_clear(rpg->window, sfWhite);
         mangager_fct[rpg->screen](rpg);
         event_manager(rpg);

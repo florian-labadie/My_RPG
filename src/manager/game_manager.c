@@ -5,7 +5,7 @@
 ** game_manager
 */
 
-#include "rpg.h"
+#include "my.h"
 
 void game_manager(rpg_t *rpg)
 {
