@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-void menu_music(rpg_t *rpg)
+static void menu_music(rpg_t *rpg)
 {
     if (sfMusic_getStatus(rpg->menu->menu_sound) == sfStopped ||
         sfMusic_getStatus(rpg->menu->menu_sound) == sfPaused)
@@ -21,6 +21,5 @@ void menu_manager(rpg_t *rpg)
 {
     menu_music(rpg);
     background_menu_manager(rpg->menu);
-    background_player_manager(rpg->menu);
     return;
 }

@@ -24,9 +24,8 @@ sfText *create_text(sfFont *font, char *sentence, int size, sfVector2f pos);
 
 /* MENU SETUP */
 int menu_setup(rpg_t *rpg, char const *user);
-int background_menu_setup(menu_t *menu);
-int background_player_setup(menu_t *menu);
-int menu_button_setup(button_t *button);
+int background_menu_setup(menu_t *menu, sfVector2u window_size);
+int menu_button_setup(main_menu_buttons_t **button);
 
 /* GAME SETUP */
 int game_setup(rpg_t *rpg);
@@ -45,7 +44,6 @@ void inventory_menu_event(rpg_t *rpg, sfEvent event);
 /* MENU MANAGER */
 void menu_manager(rpg_t *rpg);
 void background_menu_manager(menu_t *menu);
-void background_player_manager(menu_t *menu);
 
 /* GAME MANAGER */
 void game_manager(rpg_t *rpg);

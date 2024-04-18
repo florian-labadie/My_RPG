@@ -10,6 +10,7 @@
 static int rpg_setup(rpg_t *rpg, char const *user)
 {
     rpg->screen = MAIN_MENU;
+    rpg->window_size = sfRenderWindow_getSize(rpg->window);
     if (menu_setup(rpg, user) == KO)
         return KO;
     return OK;

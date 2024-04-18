@@ -12,17 +12,28 @@ static void draw_game(rpg_t *rpg)
     return;
 }
 
+static void draw_menu_buttons(sfRenderWindow *window,
+    main_menu_buttons_t *main_menu_buttons)
+{
+    for (int i = 0; main_menu_buttons->sprites[i] != NULL; i++) {
+        sfRenderWindow_drawSprite(window,
+            main_menu_buttons->sprites[i], NULL);
+        sfRenderWindow_drawText(window, main_menu_buttons->text[i], NULL);
+    }
+}
+
+static void draw_menu_background(sfRenderWindow *window,
+    background_menu_t *background)
+{
+    sfRenderWindow_drawSprite(window, background->background_sprite, NULL);
+    for (int i = 0; background->characters[i] != NULL; i++)
+        sfRenderWindow_drawSprite(window, background->characters[i], NULL);
+}
+
 static void draw_menu(rpg_t *rpg)
 {
-    sfRenderWindow_drawSprite(rpg->window, rpg->menu->background_sprite, NULL);
-    for (int i = 0; rpg->menu->button->play_sprite[i] != NULL; i += 1) {
-        sfRenderWindow_drawSprite(rpg->window,
-        rpg->menu->button->play_sprite[i], NULL);
-        sfRenderWindow_drawText(rpg->window, rpg->menu->button->text[i], NULL);
-    }
-    sfRenderWindow_drawSprite(rpg->window, rpg->menu->elf_sprites, NULL);
-    sfRenderWindow_drawSprite(rpg->window, rpg->menu->dwarf_sprites, NULL);
-    sfRenderWindow_drawSprite(rpg->window, rpg->menu->human_sprites, NULL);
+    draw_menu_background(rpg->window, rpg->menu->background);
+    draw_menu_buttons(rpg->window, rpg->menu->main_menu->buttons);
 }
 
 int rpg_loop(rpg_t *rpg)

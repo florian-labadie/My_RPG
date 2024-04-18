@@ -7,18 +7,29 @@
 
 #include "my.h"
 
+static int setup_main_menu(menu_t *menu)
+{
+    if (menu_button_setup(&menu->main_menu->buttons) == KO)
+        return KO;
+    return OK;
+}
+
 int menu_setup(rpg_t *rpg, char const *user)
 {
-    if (!rpg || !user)
-        return KO;
     rpg->menu = malloc(sizeof(menu_t));
-    rpg->menu->button = malloc(sizeof(button_t));
-    rpg->menu->screen = MAIN;
-    if (rpg->menu == NULL || rpg->menu->button == NULL)
+    if (!rpg || !rpg->menu || !user)
         return KO;
-    if (background_menu_setup(rpg->menu) == KO ||
-        background_player_setup(rpg->menu) == KO ||
-        menu_button_setup(rpg->menu->button) == KO)
+    rpg->menu->main_menu = malloc(sizeof(main_menu_t));
+    rpg->menu->help = malloc(sizeof(help_t));
+    rpg->menu->settings = malloc(sizeof(settings_t));
+    rpg->menu->screen = MAIN;
+    rpg->menu->menu_sound = sfMusic_createFromFile(MUSIC_MENU);
+    sfMusic_setLoop(rpg->menu->menu_sound, true);
+    sfMusic_setVolume(rpg->menu->menu_sound, 50.0);
+    if (!rpg->menu->main_menu || !rpg->menu->help || !rpg->menu->settings)
+        return KO;
+    if (background_menu_setup(rpg->menu, rpg->window_size) == KO ||
+        setup_main_menu(rpg->menu) == KO)
         return KO;
     return OK;
 }

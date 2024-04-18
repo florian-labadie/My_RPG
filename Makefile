@@ -13,13 +13,15 @@ SRC =		src/error_handling.c						\
 			src/launch.c								\
 			src/rpg_loop.c								\
 			src/destroy.c								\
-			src/fct_générique/create_button.c			\
-			src/fct_générique/create_text.c				\
+
+GLOBALS	=	src/global_functions/create_button.c		\
+			src/global_functions/create_text.c			\
+			src/global_functions/hover_functions.c		\
+			src/global_functions/bounds_functions.c		\
 
 SETUP	=	src/setup/menu_setup.c						\
 			src/setup/menu/background_menu_setup.c		\
-			src/setup/menu/background_player_setup.c	\
-			src/setup/menu/menu_button.c				\
+			src/setup/menu/menu_button_setup.c			\
 			src/setup/game_setup.c						\
 
 EVENT	=	src/event/event.c							\
@@ -32,12 +34,12 @@ EVENT	=	src/event/event.c							\
 
 MANAGER	=	src/manager/menu_manager.c					\
 			src/manager/background_menu_manager.c		\
-			src/manager/background_player_manager.c		\
 			src/manager/game_manager.c					\
 
 SRCTEST = 	tests/test_lib.c							\
 
-OBJ = $(MAIN:.c=.o) $(SRC:.c=.o) $(SETUP:.c=.o) $(EVENT:.c=.o) $(MANAGER:.c=.o)
+OBJ = 	$(MAIN:.c=.o)	$(SRC:.c=.o)	$(SETUP:.c=.o)	$(GLOBALS:.c=.o)\
+		$(EVENT:.c=.o)	$(MANAGER:.c=.o)
 
 OBJTEST = $(SRCTEST:.c=.o)
 
