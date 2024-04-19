@@ -11,8 +11,13 @@ static int setup_background_characters(background_menu_t **background,
     sfVector2u window_size)
 {
     sfVector2f scales[3] = {{1, 1}, {0.9, 0.9}, {1, 1}};
-    sfVector2f pos[3] = {{-20, (window_size.y * 963.0) / 1080.0}, {-100, (window_size.y * 965.0) / 1080.0}, {-180, (window_size.y * 955.0) / 1080.0}};
+    sfVector2f pos[3] = {{-20, (window_size.y * 1019.0) / 1080.0},
+        {-100, (window_size.y * 1019.0) / 1080.0},
+        {-180, (window_size.y * 1017.0) / 1080.0}};
     sfIntRect rects[3] = {HUMAN_RECT, DWARF_RECT, ELF_RECT};
+    sfVector2f origins[3] = {{0, HUMAN_RECT.height},
+                            {0, DWARF_RECT.height},
+                            {0, ELF_RECT.height}};
 
     printf("1 : %3f, 2 : %3f, 3 : %3f\n", pos[0].y, pos[1].y, pos[2].y);
     (*background)->characters = malloc(sizeof(sfSprite *) * 4);
@@ -22,6 +27,7 @@ static int setup_background_characters(background_menu_t **background,
         (*background)->characters[i] = create_button
             ((*background)->characters_texture, scales[i], pos[i]);
         sfSprite_setTextureRect((*background)->characters[i], rects[i]);
+        sfSprite_setOrigin((*background)->characters[i], origins[i]);
         if (!(*background)->characters[i])
             return KO;
     }
