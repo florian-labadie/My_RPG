@@ -7,12 +7,14 @@
 
 #include "my.h"
 
-static int setup_background_characters(background_menu_t **background)
+static int setup_background_characters(background_menu_t **background,
+    sfVector2u window_size)
 {
     sfVector2f scales[3] = {{1, 1}, {0.9, 0.9}, {1, 1}};
-    sfVector2f pos[3] = {{-20, 898}, {-100, 900}, {-180, 890}};
+    sfVector2f pos[3] = {{-20, window_size.y - 117}, {-100, window_size.y - 115}, {-180, window_size.y - 125}};
     sfIntRect rects[3] = {HUMAN_RECT, DWARF_RECT, ELF_RECT};
 
+    printf("x : %d et y : %d\n", window_size.x, window_size.y);
     (*background)->characters = malloc(sizeof(sfSprite *) * 4);
     (*background)->characters[3] = NULL;
     (*background)->characters_texture = sfTexture_createFromFile(PLAYER, NULL);
@@ -39,7 +41,7 @@ int background_menu_setup(menu_t *menu, sfVector2u window_size)
         !menu->background->background_sprite)
         return KO;
     sfSprite_setTextureRect(menu->background->background_sprite, BG_RECT);
-    if (setup_background_characters(&menu->background) == KO)
+    if (setup_background_characters(&menu->background, window_size) == KO)
         return KO;
     return OK;
 }
