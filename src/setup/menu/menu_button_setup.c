@@ -26,7 +26,7 @@ static char **fill_name(void)
 
 static int creation_loop(main_menu_buttons_t **button, char **button_name)
 {
-    sfVector2f pos = {810.4, 235.25};
+    sfVector2f pos = {810.4, 335.25};
 
     (*button)->font = sfFont_createFromFile(FONT);
     for (int i = 0; i < 3; i += 1) {
@@ -38,7 +38,7 @@ static int creation_loop(main_menu_buttons_t **button, char **button_name)
         sfSprite_setTextureRect((*button)->sprites[i], BUTTON_RECT);
         (*button)->text[i] = create_text((*button)->font, button_name[i],
         150, (sfVector2f) {pos.x + 50.0, pos.y - 80.0});
-        pos = (sfVector2f) {pos.x, pos.y + 250.0};
+        pos = (sfVector2f) {pos.x, pos.y + 200.0};
     }
     return OK;
 }

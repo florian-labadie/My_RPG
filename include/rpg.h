@@ -23,8 +23,8 @@ typedef struct rpg_s {
     screen_t screen;
 
     sfVector2u window_size;
-    game_t *game;
     menu_t *menu;
+    game_t *game;
     map_t *map;
 } rpg_t;
 

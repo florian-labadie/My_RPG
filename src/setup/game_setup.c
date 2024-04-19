@@ -9,8 +9,5 @@
 
 int game_setup(rpg_t *rpg)
 {
-    if (!rpg)
-        return KO;
-    rpg->game = malloc(sizeof(game_t));
     return OK;
 }

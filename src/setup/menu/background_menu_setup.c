@@ -34,7 +34,6 @@ static int setup_background_characters(background_menu_t **background,
 
 int background_menu_setup(menu_t *menu, sfVector2u window_size)
 {
-    menu->background = malloc(sizeof(background_menu_t));
     menu->background->background_texture =
         sfTexture_createFromFile(BACKGROUND, NULL);
     menu->background->background_sprite =
