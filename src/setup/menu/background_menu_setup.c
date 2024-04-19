@@ -11,10 +11,9 @@ static int setup_background_characters(background_menu_t **background,
     sfVector2u window_size)
 {
     sfVector2f scales[3] = {{1, 1}, {0.9, 0.9}, {1, 1}};
-    sfVector2f pos[3] = {{-20, (window_size.y * (1080 - 117)) / 1080}, {-100, (window_size.y * (1080 - 115)) / 1080}, {-180, (window_size.y * (1080 - 125)) / 1080}};
+    sfVector2f pos[3] = {{-20, (1080 / window_size.y) * 963}, {-100, (1080 / window_size.y) * 965}, {-180, (1080 / window_size.y) * 955}};
     sfIntRect rects[3] = {HUMAN_RECT, DWARF_RECT, ELF_RECT};
 
-    printf("x : %d et y : %d\n", window_size.x, window_size.y);
     (*background)->characters = malloc(sizeof(sfSprite *) * 4);
     (*background)->characters[3] = NULL;
     (*background)->characters_texture = sfTexture_createFromFile(PLAYER, NULL);
