@@ -47,7 +47,7 @@ NAME =		my_rpg
 
 NAMETEST = 	unit_tests
 
-CFLAGS = -Wall -Wextra -std=c99
+CFLAGS = -Wall -Wextra -std=c99 -g
 
 CPPFLAGS	=	-I./include
 

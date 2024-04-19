@@ -15,11 +15,13 @@
     #include <SFML/Audio.h>
 
     #define BACKGROUND "assets/sprite/background_menu.png"
+    #define WOS_SIGN "assets/sprite/tropical_button.png"
     #define PLAYER "assets/sprite/main_character.png"
     #define BUTTON_OPTION "assets/button/option.png"
     #define BUTTON_PANEL "assets/button/wood_button.png"
     #define BUTTON_MENU "assets/button/button.png"
     #define FONT "assets/Font/game_over.ttf"
+    #define TITLE_FONT "assets/Font/GAMERIA.ttf"
     #define MUSIC_MENU "assets/music/menu_music.ogg"
     #define BG_RECT ((sfIntRect) {0, 0, 560, 272})
     #define BUTTON_RECT ((sfIntRect) {0.0, 0.0, 748.0, 287.0})

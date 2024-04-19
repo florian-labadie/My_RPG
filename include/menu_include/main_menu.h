@@ -19,6 +19,10 @@ typedef struct main_menu_buttons_s {
 } main_menu_buttons_t;
 
 typedef struct main_menu_s {
+    sfTexture *wos_text;
+    sfSprite *wos_sprite;
+    sfText *wos;
+
     main_menu_buttons_t *buttons;
 } main_menu_t;
 

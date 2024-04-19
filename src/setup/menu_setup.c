@@ -11,6 +11,12 @@ static int setup_main_menu(menu_t *menu)
 {
     if (menu_button_setup(&menu->main_menu->buttons) == KO)
         return KO;
+    menu->main_menu->wos_text = sfTexture_createFromFile(WOS_SIGN, NULL);
+    menu->main_menu->wos_sprite = create_button(menu->main_menu->wos_text,
+    (sfVector2f) {2.5, 1.3}, (sfVector2f) {410.0, -10.0});
+    menu->main_menu->buttons->font = sfFont_createFromFile(TITLE_FONT);
+    menu->main_menu->wos = create_text(menu->main_menu->buttons->font,
+    "World Of silveria", 80, (sfVector2f) {630.0, 70.0});
     return OK;
 }
 

@@ -11,7 +11,6 @@ sfText *create_text(sfFont *font, char *sentence, int size, sfVector2f pos)
 {
     sfText *text = sfText_create();
 
-    font = sfFont_createFromFile(FONT);
     sfText_setFont(text, font);
     sfText_setCharacterSize(text, size);
     sfText_setFillColor(text, sfBlack);

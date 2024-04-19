@@ -17,7 +17,7 @@ static int setup_background_characters(background_menu_t **background,
     sfIntRect rects[3] = {HUMAN_RECT, DWARF_RECT, ELF_RECT};
     sfVector2f origins[3] = {{0, HUMAN_RECT.height}, {0, DWARF_RECT.height},
         {0, ELF_RECT.height}};
-    
+
     (*background)->characters = malloc(sizeof(sfSprite *) * 4);
     (*background)->characters[3] = NULL;
     (*background)->characters_texture = sfTexture_createFromFile(PLAYER, NULL);
