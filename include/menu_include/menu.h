@@ -23,11 +23,12 @@
     #define FONT "assets/Font/game_over.ttf"
     #define TITLE_FONT "assets/Font/GAMERIA.ttf"
     #define MUSIC_MENU "assets/music/menu_music.ogg"
+    #define SOUND_CLICK_BUTTON "assets/music/tap_sound.ogg"
     #define BG_RECT ((sfIntRect) {0, 0, 560, 272})
     #define BUTTON_RECT ((sfIntRect) {0.0, 0.0, 748.0, 287.0})
     #define HUMAN_RECT ((sfIntRect) {210, 0, 52, 56})
     #define DWARF_RECT ((sfIntRect) {156, 110, 52, 60})
-    #define ELF_RECT ((sfIntRect) {212, 228, 52, 62})
+    #define ELF_RECT ((sfIntRect) {212, 228, 52, 60})
 
 typedef enum menu_state_s {
     MAIN,
@@ -50,6 +51,7 @@ typedef struct menu_s {
     menu_state_t screen;
 
     sfMusic *menu_sound;
+    sfSound *click_button_sound;
 
     background_menu_t *background;
 

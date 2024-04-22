@@ -24,6 +24,18 @@ static int malloc_struct(rpg_t *rpg)
     return OK;
 }
 
+static int setup_menu_music(menu_t *menu)
+{
+    menu->menu_sound = sfMusic_createFromFile(MUSIC_MENU);
+    menu->click_button_sound =
+        sfSoundBuffer_createFromFile(SOUND_CLICK_BUTTON);
+    if (!menu->menu_sound || !menu->click_button_sound)
+        return KO;
+    sfSound_setVolume(menu->click_button_sound, 50.0);
+    sfMusic_setVolume(menu->menu_sound, 50.0);
+    return OK;
+}
+
 static int setup_main_menu(menu_t *menu)
 {
     if (menu_button_setup(&menu->main_menu->buttons) == KO)
@@ -42,13 +54,10 @@ int menu_setup(rpg_t *rpg, char const *user)
     if (!rpg || !user || malloc_struct(rpg) == KO)
         return KO;
     rpg->menu->screen = MAIN;
-    rpg->menu->menu_sound = sfMusic_createFromFile(MUSIC_MENU);
-    sfMusic_setLoop(rpg->menu->menu_sound, true);
-    sfMusic_setVolume(rpg->menu->menu_sound, 50.0);
     if (!rpg->menu->main_menu || !rpg->menu->help || !rpg->menu->settings)
         return KO;
     if (background_menu_setup(rpg->menu, rpg->window_size) == KO ||
-        setup_main_menu(rpg->menu) == KO)
+        setup_main_menu(rpg->menu) == KO || setup_menu_music(rpg->menu) == KO)
         return KO;
     return OK;
 }

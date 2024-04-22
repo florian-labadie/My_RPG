@@ -22,12 +22,10 @@ static void main_menu_button(sfSprite **buttons, button_state_t *button_status,
     for (int i = 0; buttons[i]; i++) {
         if (get_sprite_bounds(buttons[i], mouse_pos) == sfTrue &&
             button_status[i] != status)
-            change_button_rect(buttons[i],
-                &button_status[i], status);
+            change_button_rect(buttons[i], &button_status[i], status);
         if (get_sprite_bounds(buttons[i], mouse_pos) == sfFalse &&
             button_status[i] != NORMAL)
-            change_button_rect(buttons[i],
-                &button_status[i], NORMAL);
+            change_button_rect(buttons[i], &button_status[i], NORMAL);
     }
 }
 
@@ -38,7 +36,7 @@ void main_menu_event(rpg_t *rpg, sfEvent event)
 
     if (sfMouse_isButtonPressed(sfMouseLeft)) {
         if (already_pressed(rpg->menu->main_menu->buttons->buttons_status)
-            == OK)
+            == OK) 
             return;
         main_menu_button(rpg->menu->main_menu->buttons->sprites,
             rpg->menu->main_menu->buttons->buttons_status, mouse_pos, PRESSED);
