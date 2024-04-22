@@ -7,6 +7,18 @@
 
 #include "my.h"
 
+static int help_button(main_menu_buttons_t **button)
+{
+    (*button)->help_book = sfTexture_createFromFile(HELP_BOOK, NULL);
+    (*button)->help_book_spr = create_button((*button)->help_book,
+    (sfVector2f) {0.13, 0.13}, (sfVector2f) {1818.0, 41.0});
+    (*button)->help_back = sfTexture_createFromFile(BUTTON_PANEL, NULL);
+    (*button)->help_back_spr = create_button((*button)->help_back,
+    (sfVector2f) {1.6, 1.6}, (sfVector2f) {1800.0, 25.0});
+    sfSprite_setTextureRect((*button)->help_back_spr, BACK_HELP);
+    return OK;
+}
+
 static char **fill_name(void)
 {
     char **button_name = malloc(sizeof(char *) * 4);
@@ -59,6 +71,9 @@ static int set_button(main_menu_buttons_t **button)
     if (creation_loop(button, button_name) == KO)
         return KO;
     (*button)->sprites[3] = NULL;
+    help_button(button);
+    if (!(*button)->help_book || !(*button)->help_book_spr)
+        return 84;
     for (int i = 0; button_name[i] != NULL; i += 1)
         free(button_name[i]);
     free(button_name);
