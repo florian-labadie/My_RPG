@@ -7,6 +7,24 @@
 
 #include "my.h"
 
+static void change_text_rect(main_menu_buttons_t **button,
+    button_state_t status, int i)
+{
+    int move = 5;
+    sfVector2f current_pos = {};
+
+    if ((*button)->buttons_status[i] == status)
+        return;
+    if ((*button)->buttons_status[i] > status) {
+        move = -move;
+    }
+    if ((*button)->buttons_status[i] == PRESSED && status == NORMAL)
+        move *= 2;
+    current_pos = sfText_getPosition((*button)->text[i]);
+    sfText_setPosition((*button)->text[i],
+                        (sfVector2f){current_pos.x, current_pos.y + move});
+}
+
 static int already_pressed(button_state_t *button_status)
 {
     for (int i = 0; i < 3; i++) {
@@ -16,16 +34,22 @@ static int already_pressed(button_state_t *button_status)
     return KO;
 }
 
-static void main_menu_button(sfSprite **buttons, button_state_t *button_status,
-    sfVector2f mouse_pos, button_state_t status)
+static void main_menu_button(main_menu_buttons_t **buttons,
+    sfVector2f mouse_pos, button_state_t status, sfSound *sound)
 {
     for (int i = 0; buttons[i]; i++) {
-        if (get_sprite_bounds(buttons[i], mouse_pos) == sfTrue &&
-            button_status[i] != status)
-            change_button_rect(buttons[i], &button_status[i], status);
-        if (get_sprite_bounds(buttons[i], mouse_pos) == sfFalse &&
-            button_status[i] != NORMAL)
-            change_button_rect(buttons[i], &button_status[i], NORMAL);
+        if (get_sprite_bounds((*buttons)->sprites[i], mouse_pos) == sfTrue &&
+            (*buttons)->buttons_status[i] != status) {
+            change_text_rect(buttons, status, i);
+            return change_button_rect((*buttons)->sprites[i],
+                &(*buttons)->buttons_status[i], status, sound);
+            }
+        if (get_sprite_bounds((*buttons)->sprites[i], mouse_pos) == sfFalse &&
+            (*buttons)->buttons_status[i] != NORMAL) {
+            change_text_rect(buttons, NORMAL, i);
+            return change_button_rect((*buttons)->sprites[i],
+                &(*buttons)->buttons_status[i], NORMAL, sound);
+            }
     }
 }
 
@@ -36,12 +60,12 @@ void main_menu_event(rpg_t *rpg, sfEvent event)
 
     if (sfMouse_isButtonPressed(sfMouseLeft)) {
         if (already_pressed(rpg->menu->main_menu->buttons->buttons_status)
-            == OK) 
+            == OK)
             return;
-        main_menu_button(rpg->menu->main_menu->buttons->sprites,
-            rpg->menu->main_menu->buttons->buttons_status, mouse_pos, PRESSED);
+        main_menu_button(&rpg->menu->main_menu->buttons, mouse_pos,
+                        PRESSED, rpg->menu->click_button_sound);
     } else {
-        main_menu_button(rpg->menu->main_menu->buttons->sprites,
-            rpg->menu->main_menu->buttons->buttons_status, mouse_pos, HOVER);
+        main_menu_button(&rpg->menu->main_menu->buttons, mouse_pos,
+                        HOVER, rpg->menu->click_button_sound);
     }
 }

@@ -16,11 +16,13 @@ void set_rect_button(sfSprite *button, button_state_t status)
     sfSprite_setTextureRect(button, rect);
 }
 
-void change_button_rect(menu_t *menu, sfSprite *sprite,
-    button_state_t *changed_status, button_state_t status)
+void change_button_rect(sfSprite *sprite, button_state_t *changed_status,
+    button_state_t status, sfSound *sound)
 {
     *changed_status = status;
-    if (status == PRESSED)
-        sfSound_play(menu->click_button_sound);
+    if ((sfSound_getStatus(sound) == sfStopped ||
+        sfSound_getStatus(sound) == sfPaused) && *changed_status == PRESSED) {
+        sfSound_play(sound);
+    }
     set_rect_button(sprite, status);
 }

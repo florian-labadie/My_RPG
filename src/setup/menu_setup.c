@@ -27,11 +27,12 @@ static int malloc_struct(rpg_t *rpg)
 static int setup_menu_music(menu_t *menu)
 {
     menu->menu_sound = sfMusic_createFromFile(MUSIC_MENU);
-    menu->click_button_sound =
-        sfSoundBuffer_createFromFile(SOUND_CLICK_BUTTON);
-    if (!menu->menu_sound || !menu->click_button_sound)
+    menu->sound_buffer = sfSoundBuffer_createFromFile(SOUND_CLICK_BUTTON);
+    menu->click_button_sound = sfSound_create();
+    if (!menu->menu_sound || !menu->click_button_sound || !menu->sound_buffer)
         return KO;
-    sfSound_setVolume(menu->click_button_sound, 50.0);
+    sfSound_setBuffer(menu->click_button_sound, menu->sound_buffer);
+    sfSound_setVolume(menu->click_button_sound, 100.0);
     sfMusic_setVolume(menu->menu_sound, 50.0);
     return OK;
 }

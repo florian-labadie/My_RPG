@@ -54,6 +54,7 @@ typedef struct menu_s {
 
     sfMusic *menu_sound;
     sfSound *click_button_sound;
+    sfSoundBuffer *sound_buffer;
 
     background_menu_t *background;
 
