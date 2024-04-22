@@ -20,6 +20,8 @@ static void draw_menu_buttons(sfRenderWindow *window,
             main_menu_buttons->sprites[i], NULL);
         sfRenderWindow_drawText(window, main_menu_buttons->text[i], NULL);
     }
+    sfRenderWindow_drawSprite(window, main_menu_buttons->help_back_spr, NULL);
+    sfRenderWindow_drawSprite(window, main_menu_buttons->help_book_spr, NULL);
 }
 
 static void draw_menu_background(sfRenderWindow *window,
