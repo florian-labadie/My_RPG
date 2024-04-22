@@ -6,3 +6,15 @@
 */
 
 #include "my.h"
+
+bool get_sprite_bounds(sfSprite *sprite, sfVector2f pos)
+{
+    sfFloatRect b = {-100, -100, -100, -100};
+    sfBool contains = sfFalse;
+
+    if (!sprite)
+        return sfFalse;
+    b = sfSprite_getGlobalBounds(sprite);
+    contains = sfFloatRect_contains(&b, pos.x, pos.y);
+    return contains;
+}

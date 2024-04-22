@@ -7,13 +7,18 @@
 
 #include "my.h"
 
-void set_hover_button(main_menu_buttons_t *button, int i)
+void set_rect_button(sfSprite *button, button_state_t status)
 {
     sfIntRect rect = {0, 0, 0, 0};
 
-    rect = sfSprite_getTextureRect(button->sprites[i]);
-    rect.left += 748;
-    if (rect.left >= 2244)
-        rect.left = 0;
-    sfSprite_setTextureRect(button->sprites[i], rect);
+    rect = sfSprite_getTextureRect(button);
+    rect.left = rect.width * (int)status;
+    sfSprite_setTextureRect(button, rect);
+}
+
+void change_button_rect(sfSprite *sprite,
+    button_state_t *changed_status, button_state_t status)
+{
+    *changed_status = status;
+    set_rect_button(sprite, status);
 }

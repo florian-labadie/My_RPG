@@ -10,6 +10,8 @@
 
     #include "rpg.h"
 
+    #include "stdbool.h"
+
 char *check_env(char const *const *env);
 char *fs_open_file(char const *filepath);
 int error_handling(int argc, char const *const *argv);
@@ -21,6 +23,10 @@ void destroy_resources(rpg_t *rpg);
 /* GLOBAL FUNCTION*/
 sfSprite *create_button(sfTexture *texture, sfVector2f scale, sfVector2f pos);
 sfText *create_text(sfFont *font, char *sentence, int size, sfVector2f pos);
+bool get_sprite_bounds(sfSprite *sprite, sfVector2f pos);
+void set_rect_button(sfSprite *button, button_state_t status);
+void change_button_rect(sfSprite *sprite,
+    button_state_t *changed_status, button_state_t status);
 
 /* MENU SETUP */
 int menu_setup(rpg_t *rpg, char const *user);

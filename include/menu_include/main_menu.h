@@ -14,6 +14,7 @@ typedef struct main_menu_buttons_s {
     sfTexture *rectangle_text;
     sfFont *font;
 
+    button_state_t *buttons_status;
     sfSprite **sprites;
     sfText **text;
 } main_menu_buttons_t;

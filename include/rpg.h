@@ -8,6 +8,8 @@
 #ifndef RPG_H_
     #define RPG_H_
 
+    #include "enum.h"
+
     #include "game_include/game.h"
     #include "menu_include/menu.h"
     #include "map.h"

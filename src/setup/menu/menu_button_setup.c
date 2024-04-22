@@ -29,7 +29,8 @@ static int creation_loop(main_menu_buttons_t **button, char **button_name)
     sfVector2f pos = {810.4, 335.25};
 
     (*button)->font = sfFont_createFromFile(FONT);
-    for (int i = 0; i < 3; i += 1) {
+    for (int i = 0; button_name[i]; i += 1) {
+        (*button)->sprites[i] = NORMAL;
         (*button)->sprites[i] = create_button((*button)->rectangle_text,
             (sfVector2f) {0.4, 0.4}, pos);
         if (!(*button)->sprites || !(*button)->sprites[i] ||
@@ -48,6 +49,7 @@ static int set_button(main_menu_buttons_t **button)
     char **button_name = fill_name();
 
     *button = malloc(sizeof(main_menu_buttons_t));
+    (*button)->buttons_status = malloc(sizeof(button_state_t) * 3);
     if (!button_name || !button || !(*button))
         return KO;
     (*button)->font = sfFont_createFromFile(FONT);
