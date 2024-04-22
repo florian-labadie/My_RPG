@@ -37,7 +37,7 @@ static int already_pressed(button_state_t *button_status)
 static void main_menu_button(main_menu_buttons_t **buttons,
     sfVector2f mouse_pos, button_state_t status, sfSound *sound)
 {
-    for (int i = 0; buttons[i]; i++) {
+    for (int i = 0; (*buttons)->sprites[i]; i++) {
         if (get_sprite_bounds((*buttons)->sprites[i], mouse_pos) == sfTrue &&
             (*buttons)->buttons_status[i] != status) {
             change_text_rect(buttons, status, i);
