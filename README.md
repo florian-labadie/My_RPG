@@ -22,7 +22,7 @@ This "My_rpg" project is about all the things we learned about this year, as you
 ```bash
 $> make re
 [...]
-./mon_rpg
+./my_rpg
 ```
 
 ### Launch tests
@@ -44,9 +44,10 @@ $> valgrind --leak-check=full --show-leak-kinds=all -s ./my_rpg
 
 | Commit Type | Description                                                                                                               |
 |:------------|:--------------------------------------------------------------------------------------------------------------------------|
+| add         | adding new features                                                                                                       |
+| modified    | changes on a file                                                                                                         |
 | build       | Changes that affect the build system or external dependencies (npm, make, etc.)                                           |
 | ci          | Changes related to integration files and scripts or configuration (Travis, Ansible, BrowserStack, etc.)                   |
-| feat        | Addition of a new feature                                                                                                 |
 | fix         | Bug fix                                                                                                                   |
 | perf        | Performance improvements                                                                                                  |
 | refactor    | Modification that neither adds a new feature nor improves performance                                                     |
