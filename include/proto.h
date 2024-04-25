@@ -31,6 +31,7 @@ int check_blankline(char *line);
 void check_commentary(char **line);
 sfVector2f get_resize(sfRenderWindow *window, float x, float y);
 sfVector2f get_mouse_pos(sfRenderWindow *window, sfVector2u window_size);
+float get_less_size(sfRenderWindow *window, float value);
 
 /* MENU SETUP */
 int menu_setup(rpg_t *rpg, char const *user);

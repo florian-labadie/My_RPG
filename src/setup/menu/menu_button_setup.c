@@ -51,10 +51,10 @@ static int creation_loop(main_menu_buttons_t **button, char **button_name,
             return KO;
         sfSprite_setTextureRect((*button)->sprites[i], BUTTON_RECT);
         (*button)->text[i] = create_text((*button)->font, button_name[i],
-            (int)get_resize(window, 0, 150.0).y,
-            (sfVector2f) {pos.x + get_resize(window, 50.0, 0).x,
-            pos.y - get_resize(window, 0, 80.0).y});
-        pos = (sfVector2f) {pos.x, pos.y + get_resize(window, 0, 200.0).y};
+            get_less_size(window, 150.0),
+            (sfVector2f) {pos.x + get_less_size(window, 50),
+            pos.y - get_less_size(window, 80.0)});
+        pos = (sfVector2f) {pos.x, pos.y + get_less_size(window, 200.0)};
     }
     return OK;
 }

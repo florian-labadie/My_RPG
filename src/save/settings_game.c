@@ -13,7 +13,7 @@ static void check_status(rpg_t *rpg, char *line)
             rpg->setting->status = SETTINGS;
 }
 
-static int set_settings_menu(setting_t *setting, char *line)
+static int set_settings_menu(stock_setting_t *setting, char *line)
 {
     char *param = NULL;
 
@@ -41,7 +41,7 @@ int settings_game(rpg_t *rpg)
     size_t len = 0;
     char *line = NULL;
 
-    rpg->setting = malloc(sizeof(setting_t));
+    rpg->setting = malloc(sizeof(stock_setting_t));
     rpg->setting->status = malloc(sizeof(status_t));
     rpg->setting->status = SETTINGS;
     if (!rpg->setting || !file)

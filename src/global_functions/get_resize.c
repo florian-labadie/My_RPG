@@ -25,3 +25,11 @@ sfVector2f get_resize(sfRenderWindow *window, float x, float y)
     resize.y = (y * window_size.y) / 1080.0;
     return resize;
 }
+
+float get_less_size(sfRenderWindow *window, float value)
+{
+    float x = get_resize(window, value, 0).x;
+    float y = get_resize(window, 0, value).y;
+
+    return x > y ? y : x;
+}

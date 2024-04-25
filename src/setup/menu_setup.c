@@ -24,7 +24,7 @@ static int malloc_struct(rpg_t *rpg)
     return OK;
 }
 
-static int setup_menu_music(menu_t *menu, setting_t *setting)
+static int setup_menu_music(menu_t *menu, stock_setting_t *setting)
 {
     menu->menu_sound = sfMusic_createFromFile(MUSIC_MENU);
     menu->sound_buffer = sfSoundBuffer_createFromFile(SOUND_CLICK_BUTTON);
@@ -46,7 +46,7 @@ static int setup_main_menu(menu_t *menu, sfRenderWindow *window)
         get_resize(window, 2.5, 1.3), get_resize(window, 410, -10));
     menu->main_menu->buttons->font = sfFont_createFromFile(TITLE_FONT);
     menu->main_menu->wos = create_text(menu->main_menu->buttons->font,
-        "World Of silveria", (int)get_resize(window, 0, 80.0).y,
+        "World Of silveria", get_less_size(window, 80.0),
         get_resize(window, 630, 70.0));
     return OK;
 }

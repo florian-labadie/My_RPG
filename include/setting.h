@@ -18,12 +18,12 @@ typedef enum status_s {
     SAVE
 } status_t;
 
-typedef struct setting_s {
+typedef struct stock_setting_s {
     sfVector2f size_screen;
     bool screen_mode;
     float fps;
     float sound_game;
     status_t *status;
-} setting_t;
+} stock_setting_t;
 
 #endif /* !SETTING_H_ */

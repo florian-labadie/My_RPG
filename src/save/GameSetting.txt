@@ -1,7 +1,7 @@
 [SETTINGS]
 
-Sizescreen.x=1020.0
-Sizescreen.y=780.0
+Sizescreen.x=1920.0
+Sizescreen.y=1080.0
 ScreenMode=0
 FPS=60.0
-SoundGame=50.0
+SoundGame=5.0
