@@ -12,8 +12,6 @@
     #include "help.h"
     #include "settings.h"
 
-    #include <SFML/Audio.h>
-
     #define BACKGROUND "assets/sprite/background_menu.png"
     #define WOS_SIGN "assets/sprite/tropical_button.png"
     #define PLAYER "assets/sprite/main_character.png"

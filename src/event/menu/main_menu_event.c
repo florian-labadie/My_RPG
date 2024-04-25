@@ -55,8 +55,7 @@ static void main_menu_button(main_menu_buttons_t **buttons,
 
 void main_menu_event(rpg_t *rpg, sfEvent event)
 {
-    sfVector2i __2imouse_pos = sfMouse_getPositionRenderWindow(rpg->window);
-    sfVector2f mouse_pos = (sfVector2f){__2imouse_pos.x, __2imouse_pos.y};
+    sfVector2f mouse_pos = get_mouse_pos(rpg->window, rpg->window_size);
 
     if (sfMouse_isButtonPressed(sfMouseLeft)) {
         if (already_pressed(rpg->menu->main_menu->buttons->buttons_status)
