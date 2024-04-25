@@ -21,6 +21,11 @@ int launch_rpg(char const *user)
     rpg_t rpg = {};
     sfVideoMode videoMode = {1920, 1080, 60};
 
+    if (settings_game(&rpg) == KO)
+        return KO;
+    videoMode.width = rpg.setting->size_screen.x;
+    videoMode.height = rpg.setting->size_screen.y;
+    videoMode.bitsPerPixel = rpg.setting->fps;
     rpg.window = sfRenderWindow_create(videoMode,
         "World_of_Sylveria", sfClose | sfResize, NULL);
     if (rpg_setup(&rpg, user) == KO)
