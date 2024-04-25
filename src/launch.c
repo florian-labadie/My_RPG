@@ -7,6 +7,23 @@
 
 #include "my.h"
 
+static void set_video_mode(rpg_t *rpg)
+{
+    sfVideoMode FullScreenMode = {1920, 1080, 32};
+    sfVideoMode videoMode = {0, 0, 0};
+
+    videoMode.width = rpg->setting->size_screen.x;
+    videoMode.height = rpg->setting->size_screen.y;
+    videoMode.bitsPerPixel = rpg->setting->fps;
+    if (rpg->setting->screen_mode == true) {
+        rpg->window = sfRenderWindow_create(FullScreenMode,"World_of_Sylveria",
+        sfFullscreen, NULL);
+    } else {
+        rpg->window = sfRenderWindow_create(videoMode,
+            "World_of_Sylveria", sfClose | sfResize, NULL);
+    }
+}
+
 static int rpg_setup(rpg_t *rpg, char const *user)
 {
     rpg->screen = MAIN_MENU;
@@ -19,15 +36,10 @@ static int rpg_setup(rpg_t *rpg, char const *user)
 int launch_rpg(char const *user)
 {
     rpg_t rpg = {};
-    sfVideoMode videoMode = {1920, 1080, 60};
 
     if (settings_game(&rpg) == KO)
         return KO;
-    videoMode.width = rpg.setting->size_screen.x;
-    videoMode.height = rpg.setting->size_screen.y;
-    videoMode.bitsPerPixel = rpg.setting->fps;
-    rpg.window = sfRenderWindow_create(videoMode,
-        "World_of_Sylveria", sfClose | sfResize, NULL);
+    set_video_mode(&rpg);
     if (rpg_setup(&rpg, user) == KO)
         return KO;
     return rpg_loop(&rpg);
