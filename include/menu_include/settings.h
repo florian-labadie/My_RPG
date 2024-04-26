@@ -9,6 +9,10 @@
     #define SETTINGS_H_
 
 typedef struct settings_s {
+    sfTexture *open_book;
+    sfSprite *open_book_spr;
+    sfClock *book_clock;
+    sfIntRect rect;
 } settings_t;
 
 #endif /* !SETTINGS_H_ */

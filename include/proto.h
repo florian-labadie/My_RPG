@@ -60,5 +60,13 @@ void background_menu_manager(menu_t *menu);
 /* GAME MANAGER */
 void game_manager(rpg_t *rpg);
 
+/* OPTION */
+int setup(settings_t *settings);
+int display_book(settings_t *settings);
+
+/* OPTION */
+int setup(settings_t *settings);
+int display_book(settings_t *settings);
+
 int settings_game(rpg_t *rpg);
 #endif /* PROTO_H_ */

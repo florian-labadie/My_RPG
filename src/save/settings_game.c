@@ -13,7 +13,7 @@ static void setting_by_default(stock_setting_t *setting)
         setting->size_screen = (sfVector2f){1920.0, 1080.0};
     if (setting->fps < 0)
         setting->fps = 60.0;
-    if (setting->screen_mode < 0)
+    if (setting->screen_mode != false && setting->screen_mode != true)
         setting->screen_mode = true;
     if (setting->sound_game < 0)
         setting->sound_game = 50.0;
