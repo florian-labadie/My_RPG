@@ -7,14 +7,16 @@
 
 #ifndef MAP_H_
     #define MAP_H_
+    #define MAP_P "assets/map/map_rpg.png"
 
     #include <SFML/Graphics.h>
     #include <SFML/Window.h>
 
 typedef struct map_s {
-    sfRenderTexture *map;
     sfTexture *texture;
     sfSprite *sprite;
+    sfView *view;
+    sfFloatRect rect;
 } map_t;
 
 #endif /* !MAP_H_ */

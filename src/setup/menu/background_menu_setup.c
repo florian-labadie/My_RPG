@@ -8,12 +8,12 @@
 #include "my.h"
 
 static int setup_background_characters(background_menu_t **background,
-    sfVector2u window_size)
+    sfRenderWindow *window)
 {
-    sfVector2f scales[3] = {{1, 1}, {0.9, 0.9}, {1, 1}};
-    sfVector2f pos[3] = {{-20, (window_size.y * 1019.0) / 1080.0},
-        {-100, (window_size.y * 1019.0) / 1080.0},
-        {-180, (window_size.y * 1017.0) / 1080.0}};
+    sfVector2f scales[3] = {get_resize(window, 1, 1),
+        get_resize(window, 0.9, 0.9), get_resize(window, 1, 1)};
+    sfVector2f pos[3] = {get_resize(window, -20.0, 1019.0),
+    get_resize(window, -100.0, 1019.0), get_resize(window, -180.0, 1017.0)};
     sfIntRect rects[3] = {HUMAN_RECT, DWARF_RECT, ELF_RECT};
     sfVector2f origins[3] = {{0, HUMAN_RECT.height}, {0, DWARF_RECT.height},
         {0, ELF_RECT.height}};
@@ -32,8 +32,10 @@ static int setup_background_characters(background_menu_t **background,
     return OK;
 }
 
-int background_menu_setup(menu_t *menu, sfVector2u window_size)
+int background_menu_setup(menu_t *menu, sfRenderWindow *window)
 {
+    sfVector2u window_size = sfRenderWindow_getSize(window);
+
     menu->background->background_texture =
         sfTexture_createFromFile(BACKGROUND, NULL);
     menu->background->background_sprite =
@@ -44,7 +46,7 @@ int background_menu_setup(menu_t *menu, sfVector2u window_size)
         !menu->background->background_sprite)
         return KO;
     sfSprite_setTextureRect(menu->background->background_sprite, BG_RECT);
-    if (setup_background_characters(&menu->background, window_size) == KO)
+    if (setup_background_characters(&menu->background, window) == KO)
         return KO;
     return OK;
 }

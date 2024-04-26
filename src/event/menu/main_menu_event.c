@@ -34,6 +34,19 @@ static int already_pressed(button_state_t *button_status)
     return KO;
 }
 
+static void change_screen_status(rpg_t **rpg, int i)
+{
+    if (i == 0) {
+        if ((*rpg)->screen != GAME)
+            (*rpg)->screen = GAME;
+        (*rpg)->game->screen = PLAYING;
+    }
+    if (i == 1)
+        (*rpg)->menu->screen = SETTING;
+    if (i == 2)
+        sfRenderWindow_close((*rpg)->window);
+}
+
 static void main_menu_button(main_menu_buttons_t **buttons,
     sfVector2f mouse_pos, button_state_t status, sfSound *sound)
 {
@@ -53,19 +66,28 @@ static void main_menu_button(main_menu_buttons_t **buttons,
     }
 }
 
+static void buttons_action(rpg_t *rpg, sfEvent event, sfVector2f mouse_pos)
+{
+    for (int i = 0; rpg->menu->main_menu->buttons->sprites[i]; i++) {
+        if (get_sprite_bounds
+            (rpg->menu->main_menu->buttons->sprites[i], mouse_pos) == sfTrue)
+            return change_screen_status(&rpg, i);
+    }
+}
+
 void main_menu_event(rpg_t *rpg, sfEvent event)
 {
-    sfVector2i __2imouse_pos = sfMouse_getPositionRenderWindow(rpg->window);
-    sfVector2f mouse_pos = (sfVector2f){__2imouse_pos.x, __2imouse_pos.y};
+    sfVector2f mouse_pos = get_mouse_pos(rpg->window, rpg->window_size);
 
+    if (event.mouseButton.type == sfEvtMouseButtonReleased)
+        return buttons_action(rpg, event, mouse_pos);
     if (sfMouse_isButtonPressed(sfMouseLeft)) {
         if (already_pressed(rpg->menu->main_menu->buttons->buttons_status)
             == OK)
             return;
-        main_menu_button(&rpg->menu->main_menu->buttons, mouse_pos,
+        return main_menu_button(&rpg->menu->main_menu->buttons, mouse_pos,
                         PRESSED, rpg->menu->click_button_sound);
-    } else {
-        main_menu_button(&rpg->menu->main_menu->buttons, mouse_pos,
-                        HOVER, rpg->menu->click_button_sound);
     }
+    return main_menu_button(&rpg->menu->main_menu->buttons, mouse_pos,
+                        HOVER, rpg->menu->click_button_sound);
 }

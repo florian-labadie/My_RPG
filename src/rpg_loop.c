@@ -7,8 +7,27 @@
 
 #include "my.h"
 
+    // if (rpg->map->rect.left + 450 >= get_resize(rpg->window, 1000, 0).x) {
+    //     if (rpg->map->rect.top + 250 < get_resize(rpg->window, 745, 0).x) {
+    //         rpg->map->rect.top += 1;
+    //         rpg->map->view = sfView_createFromRect(rpg->map->rect);
+    //         sfRenderWindow_setView(rpg->window, rpg->map->view);
+    //     }
+    // if (rpg->map->rect.left <= 0) {
+    //     if (rpg->map->rect.top > 0) {
+    //         rpg->map->rect.top -= 1;
+        //     rpg->map->view = sfView_createFromRect(rpg->map->rect);
+        //     sfRenderWindow_setView(rpg->window, rpg->map->view);
+        // }
+        // return;
+    // }
+    // rpg->map->rect.left -= 1;
 static void draw_game(rpg_t *rpg)
 {
+    sfRenderWindow_drawSprite(rpg->window, rpg->map->sprite, NULL);
+    sfRenderWindow_setView(rpg->window, rpg->map->view);
+    rpg->map->view = sfView_createFromRect(rpg->map->rect);
+    sfRenderWindow_setView(rpg->window, rpg->map->view);
     return;
 }
 

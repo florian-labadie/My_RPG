@@ -27,14 +27,20 @@ bool get_sprite_bounds(sfSprite *sprite, sfVector2f pos);
 void set_rect_button(sfSprite *button, button_state_t status);
 void change_button_rect(sfSprite *sprite, button_state_t *changed_status,
     button_state_t status, sfSound *sound);
+int check_blankline(char *line);
+void check_commentary(char **line);
+sfVector2f get_resize(sfRenderWindow *window, float x, float y);
+sfVector2f get_mouse_pos(sfRenderWindow *window, sfVector2u window_size);
+float get_less_size(sfRenderWindow *window, float value);
 
 /* MENU SETUP */
 int menu_setup(rpg_t *rpg, char const *user);
-int background_menu_setup(menu_t *menu, sfVector2u window_size);
-int menu_button_setup(main_menu_buttons_t **button);
+int background_menu_setup(menu_t *menu, sfRenderWindow *window);
+int menu_button_setup(main_menu_buttons_t **button, sfRenderWindow *window);
 
 /* GAME SETUP */
 int game_setup(rpg_t *rpg);
+int set_up_map(map_t *map, sfRenderWindow *window);
 
 /* MENU EVENT */
 void event_manager(rpg_t *rpg);
@@ -54,4 +60,5 @@ void background_menu_manager(menu_t *menu);
 /* GAME MANAGER */
 void game_manager(rpg_t *rpg);
 
+int settings_game(rpg_t *rpg);
 #endif /* PROTO_H_ */

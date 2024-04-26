@@ -8,10 +8,13 @@
 #ifndef RPG_H_
     #define RPG_H_
 
+    #include <SFML/Audio.h>
+    #include <SFML/Graphics.h>
     #include "enum.h"
 
     #include "game_include/game.h"
     #include "menu_include/menu.h"
+    #include "setting.h"
     #include "map.h"
 
 typedef enum screen_s {
@@ -25,6 +28,7 @@ typedef struct rpg_s {
     screen_t screen;
 
     sfVector2u window_size;
+    stock_setting_t *setting;
     menu_t *menu;
     game_t *game;
     map_t *map;
