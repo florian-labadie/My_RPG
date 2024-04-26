@@ -16,7 +16,6 @@ int set_up_map(map_t *map, sfRenderWindow *window)
         return KO;
     map->sprite = create_button(map->texture, (sfVector2f) {1.0, 1.0},
     (sfVector2f) {0.0, 0.0});
-    map->view = sfView_create();
     map->view = sfView_createFromRect(map->rect);
     return OK;
 }

@@ -8,10 +8,16 @@
 #ifndef ENUM_H_
     #define ENUM_H_
 
+typedef enum key_status_s {
+    NOT_PRESSED,
+    KEY_PRESSED,
+    KEY_STATUS_SIZE
+} key_status_t;
+
 typedef enum button_state_s {
     NORMAL,
     HOVER,
-    PRESSED,
+    BUTTON_PRESSED,
     BUTTON_STATE_SIZE
 } button_state_t;
 
