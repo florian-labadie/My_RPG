@@ -68,11 +68,14 @@ static void main_menu_button(main_menu_buttons_t **buttons,
 
 static void buttons_action(rpg_t *rpg, sfEvent event, sfVector2f mouse_pos)
 {
-    for (int i = 0; i < 3; i++) {
-        if (rpg->menu->main_menu->buttons->buttons_status[i] == BUTTON_PRESSED)
-            rpg->menu->main_menu->buttons->buttons_status[i] == NORMAL;
-    }
     for (int i = 0; rpg->menu->main_menu->buttons->sprites[i]; i++) {
+        if (rpg->menu->main_menu->buttons->buttons_status[i] ==
+            BUTTON_PRESSED) {
+            change_text_rect(&rpg->menu->main_menu->buttons, NORMAL, i);
+            change_button_rect(rpg->menu->main_menu->buttons->sprites[i],
+                &rpg->menu->main_menu->buttons->buttons_status[i],
+                    NORMAL, NULL);
+        }
         if (get_sprite_bounds
             (rpg->menu->main_menu->buttons->sprites[i], mouse_pos) == sfTrue)
             return change_screen_status(&rpg, i);
