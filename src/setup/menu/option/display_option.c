@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-int display_book(settings_t *settings)
+int opening_book(settings_t *settings)
 {
     if (sfTime_asSeconds(sfClock_getElapsedTime(settings->book_clock)) > 0.1 && settings->rect.left < 2709) {
         settings->rect.left += 252;

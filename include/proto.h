@@ -62,7 +62,7 @@ void game_manager(rpg_t *rpg);
 
 /* OPTION */
 int setup(settings_t *settings);
-int display_book(settings_t *settings);
+int opening_book(settings_t *settings);
 
 /* OPTION */
 int setup(settings_t *settings);
