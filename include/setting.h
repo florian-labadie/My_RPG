@@ -20,9 +20,11 @@ typedef enum status_s {
 
 typedef struct stock_setting_s {
     sfVector2f size_screen;
+
     bool screen_mode;
     float fps;
     float sound_game;
+
     status_t *status;
 } stock_setting_t;
 
