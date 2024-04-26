@@ -20,8 +20,8 @@ void change_button_rect(sfSprite *sprite, button_state_t *changed_status,
     button_state_t status, sfSound *sound)
 {
     *changed_status = status;
-    if (sound && (sfSound_getStatus(sound) == sfStopped ||
-        sfSound_getStatus(sound) == sfPaused) && *changed_status == PRESSED) {
+    if (sound && (sfSound_getStatus(sound) == sfStopped || sfSound_getStatus
+                (sound) == sfPaused) && *changed_status == BUTTON_PRESSED) {
         sfSound_play(sound);
     }
     set_rect_button(sprite, status);

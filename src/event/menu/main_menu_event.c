@@ -18,7 +18,7 @@ static void change_text_rect(main_menu_buttons_t **button,
     if ((*button)->buttons_status[i] > status) {
         move = -move;
     }
-    if ((*button)->buttons_status[i] == PRESSED && status == NORMAL)
+    if ((*button)->buttons_status[i] == BUTTON_PRESSED && status == NORMAL)
         move *= 2;
     current_pos = sfText_getPosition((*button)->text[i]);
     sfText_setPosition((*button)->text[i],
@@ -28,7 +28,7 @@ static void change_text_rect(main_menu_buttons_t **button,
 static int already_pressed(button_state_t *button_status)
 {
     for (int i = 0; i < 3; i++) {
-        if (button_status[i] == PRESSED)
+        if (button_status[i] == BUTTON_PRESSED)
             return OK;
     }
     return KO;
@@ -37,8 +37,8 @@ static int already_pressed(button_state_t *button_status)
 static void change_screen_status(rpg_t **rpg, int i)
 {
     if (i == 0) {
-        if ((*rpg)->screen != GAME)
-            (*rpg)->screen = GAME;
+        (*rpg)->screen = GAME;
+        sfRenderWindow_setView((*rpg)->window, (*rpg)->map->view);
         (*rpg)->game->screen = PLAYING;
     }
     if (i == 1)
@@ -68,6 +68,10 @@ static void main_menu_button(main_menu_buttons_t **buttons,
 
 static void buttons_action(rpg_t *rpg, sfEvent event, sfVector2f mouse_pos)
 {
+    for (int i = 0; i < 3; i++) {
+        if (rpg->menu->main_menu->buttons->buttons_status[i] == BUTTON_PRESSED)
+            rpg->menu->main_menu->buttons->buttons_status[i] == NORMAL;
+    }
     for (int i = 0; rpg->menu->main_menu->buttons->sprites[i]; i++) {
         if (get_sprite_bounds
             (rpg->menu->main_menu->buttons->sprites[i], mouse_pos) == sfTrue)
@@ -81,12 +85,13 @@ void main_menu_event(rpg_t *rpg, sfEvent event)
 
     if (event.mouseButton.type == sfEvtMouseButtonReleased)
         return buttons_action(rpg, event, mouse_pos);
-    if (sfMouse_isButtonPressed(sfMouseLeft)) {
+    if (event.mouseButton.type == sfEvtMouseButtonPressed ||
+        already_pressed(rpg->menu->main_menu->buttons->buttons_status) == OK) {
         if (already_pressed(rpg->menu->main_menu->buttons->buttons_status)
             == OK)
             return;
         return main_menu_button(&rpg->menu->main_menu->buttons, mouse_pos,
-                        PRESSED, rpg->menu->click_button_sound);
+                        BUTTON_PRESSED, rpg->menu->click_button_sound);
     }
     return main_menu_button(&rpg->menu->main_menu->buttons, mouse_pos,
                         HOVER, rpg->menu->click_button_sound);
