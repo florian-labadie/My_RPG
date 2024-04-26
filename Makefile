@@ -40,12 +40,15 @@ MANAGER	=	src/manager/menu_manager.c					\
 			src/manager/background_menu_manager.c		\
 			src/manager/game_manager.c					\
 
-SAVE	=	src/save/settings_game.c						\
+SAVE	=	src/save/settings_game.c					\
+
+OPTION =	src/setup/menu/option/book_setup.c			\
+			src/setup/menu/option/display_option.c		\
 
 SRCTEST = 	tests/test_lib.c							\
 
 OBJ = 	$(MAIN:.c=.o)	$(SRC:.c=.o)	$(SETUP:.c=.o)	$(GLOBALS:.c=.o)\
-		$(EVENT:.c=.o)	$(MANAGER:.c=.o) $(SAVE:.c=.o)
+		$(EVENT:.c=.o)	$(MANAGER:.c=.o) $(SAVE:.c=.o) $(OPTION:.c=.o)
 
 OBJTEST = $(SRCTEST:.c=.o)
 

@@ -9,5 +9,7 @@
     #define MACRO_H_
 
     #define COMMENT_CHAR '#'
+    #define OPEN_BOOK_P "assets/book_animation/book_1.png"
+    #define OPEN_BOOK_RECT ((sfIntRect) {0, 0, 226, 297})
 
 #endif /* !MACRO_H_ */

@@ -64,5 +64,7 @@ int menu_setup(rpg_t *rpg, char const *user)
         return KO;
     if (game_setup(rpg) == KO)
         return OK;
+    if (setup(rpg->menu->settings) == KO)
+        return KO;
     return OK;
 }
