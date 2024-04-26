@@ -79,15 +79,15 @@ void main_menu_event(rpg_t *rpg, sfEvent event)
 {
     sfVector2f mouse_pos = get_mouse_pos(rpg->window, rpg->window_size);
 
-    if (event.mouseButton.type == sfEvtMouseButtonReleased) {
+    if (event.mouseButton.type == sfEvtMouseButtonReleased)
         return buttons_action(rpg, event, mouse_pos);
-    } else if (sfMouse_isButtonPressed(sfMouseLeft)) {
+    if (sfMouse_isButtonPressed(sfMouseLeft)) {
         if (already_pressed(rpg->menu->main_menu->buttons->buttons_status)
             == OK)
             return;
         return main_menu_button(&rpg->menu->main_menu->buttons, mouse_pos,
                         PRESSED, rpg->menu->click_button_sound);
-    } else
-        return main_menu_button(&rpg->menu->main_menu->buttons, mouse_pos,
+    }
+    return main_menu_button(&rpg->menu->main_menu->buttons, mouse_pos,
                         HOVER, rpg->menu->click_button_sound);
 }

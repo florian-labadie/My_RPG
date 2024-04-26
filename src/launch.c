@@ -16,8 +16,8 @@ static void set_video_mode(rpg_t *rpg)
     videoMode.height = rpg->setting->size_screen.y;
     videoMode.bitsPerPixel = rpg->setting->fps;
     if (rpg->setting->screen_mode == true) {
-        rpg->window = sfRenderWindow_create(FullScreenMode,"World_of_Sylveria",
-        sfFullscreen, NULL);
+        rpg->window = sfRenderWindow_create(FullScreenMode,
+            "World_of_Sylveria", sfFullscreen, NULL);
     } else {
         rpg->window = sfRenderWindow_create(videoMode,
             "World_of_Sylveria", sfClose | sfResize, NULL);

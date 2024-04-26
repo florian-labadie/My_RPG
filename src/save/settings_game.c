@@ -37,6 +37,7 @@ static char *check_is_value(void)
 static int set_settings_menu(stock_setting_t *setting, char *line)
 {
     char *param = NULL;
+
     if (!line)
         return KO;
     param = my_strtok(line, " =");

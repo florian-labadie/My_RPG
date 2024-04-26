@@ -13,9 +13,10 @@
     #include <SFML/Window.h>
 
 typedef struct map_s {
-    sfRenderTexture *map;
     sfTexture *texture;
     sfSprite *sprite;
+    sfView *view;
+    sfFloatRect rect;
 } map_t;
 
 #endif /* !MAP_H_ */

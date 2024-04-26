@@ -40,7 +40,7 @@ int menu_button_setup(main_menu_buttons_t **button, sfRenderWindow *window);
 
 /* GAME SETUP */
 int game_setup(rpg_t *rpg);
-int set_up_map(map_t *map);
+int set_up_map(map_t *map, sfRenderWindow *window);
 
 /* MENU EVENT */
 void event_manager(rpg_t *rpg);
