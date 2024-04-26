@@ -62,5 +62,7 @@ int menu_setup(rpg_t *rpg, char const *user)
         setup_main_menu(rpg->menu, rpg->window) == KO ||
         setup_menu_music(rpg->menu, rpg->setting) == KO)
         return KO;
+    if (game_setup(rpg) == KO)
+        return OK;
     return OK;
 }

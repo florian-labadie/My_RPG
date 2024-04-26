@@ -9,6 +9,7 @@
 
 static void draw_game(rpg_t *rpg)
 {
+    sfRenderWindow_drawSprite(rpg->window, rpg->map->sprite, NULL);
     return;
 }
 

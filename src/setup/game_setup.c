@@ -9,5 +9,7 @@
 
 int game_setup(rpg_t *rpg)
 {
+    if (set_up_map(rpg->map) == KO)
+        return KO;
     return OK;
 }

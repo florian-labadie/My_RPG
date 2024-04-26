@@ -26,6 +26,7 @@ SETUP	=	src/setup/menu_setup.c						\
 			src/setup/menu/background_menu_setup.c		\
 			src/setup/menu/menu_button_setup.c			\
 			src/setup/game_setup.c						\
+			src/setup/map/map_set_up.c					\
 
 EVENT	=	src/event/event.c							\
 			src/event/menu/main_menu_event.c			\

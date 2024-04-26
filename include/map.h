@@ -7,6 +7,7 @@
 
 #ifndef MAP_H_
     #define MAP_H_
+    #define MAP_P "assets/map/map_rpg.png"
 
     #include <SFML/Graphics.h>
     #include <SFML/Window.h>
