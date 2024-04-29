@@ -43,7 +43,7 @@ MANAGER	=	src/manager/menu_manager.c					\
 SAVE	=	src/save/settings_game.c					\
 
 OPTION =	src/setup/menu/option/book_setup.c			\
-			src/setup/menu/option/display_option.c		\
+			src/setup/menu/option/anim_book.c			\
 
 SRCTEST = 	tests/test_lib.c							\
 

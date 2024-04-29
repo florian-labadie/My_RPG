@@ -64,7 +64,10 @@ int menu_setup(rpg_t *rpg, char const *user)
         return KO;
     if (game_setup(rpg) == KO)
         return OK;
-    if (setup(rpg->menu->settings) == KO)
+    if (setup_open_book(rpg->menu->settings) == KO ||
+        setup_next_page(rpg->menu->settings) == KO ||
+        setup_previous_page(rpg->menu->settings) == KO ||
+        setup_close_book(rpg->menu->settings) == KO)
         return KO;
     return OK;
 }

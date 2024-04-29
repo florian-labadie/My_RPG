@@ -58,6 +58,7 @@ static void draw_menu(rpg_t *rpg)
     sfRenderWindow_drawSprite(rpg->window, rpg->menu->main_menu->wos_sprite,
     NULL);
     sfRenderWindow_drawText(rpg->window, rpg->menu->main_menu->wos, NULL);
+    
 }
 
 int rpg_loop(rpg_t *rpg)

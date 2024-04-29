@@ -14,6 +14,7 @@
 
     #include "game_include/game.h"
     #include "menu_include/menu.h"
+    #include "menu_include/settings.h"
     #include "setting.h"
     #include "map.h"
 

@@ -10,6 +10,8 @@
 
     #define COMMENT_CHAR '#'
     #define OPEN_BOOK_P "assets/book_animation/book_1.png"
-    #define OPEN_BOOK_RECT ((sfIntRect) {0, 0, 226, 297})
+    #define NEXT_PAGE_P "assets/book_animation/book_2.png"
+    #define PREVIOUS_PAGE_P "assets/book_animation/book_3.png"
+    #define CLOSE_BOOK_P "assets/book_animation/book_4.png"
 
 #endif /* !MACRO_H_ */
