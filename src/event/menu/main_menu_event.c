@@ -27,7 +27,7 @@ static void change_text_rect(main_menu_buttons_t **button,
 
 static int already_pressed(button_state_t *button_status)
 {
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 4; i++) {
         if (button_status[i] == BUTTON_PRESSED)
             return OK;
     }
@@ -36,15 +36,14 @@ static int already_pressed(button_state_t *button_status)
 
 static void change_screen_status(rpg_t **rpg, int i)
 {
-    if (i == 0) {
+    if (i <= 1) {
         (*rpg)->screen = GAME;
         sfMusic_stop((*rpg)->menu->menu_sound);
-        sfRenderWindow_setView((*rpg)->window, (*rpg)->map->view);
-        (*rpg)->game->screen = PLAYING;
+        (*rpg)->game->screen = (game_state_t)i;
     }
-    if (i == 1)
-        (*rpg)->menu->screen = SETTING;
     if (i == 2)
+        (*rpg)->menu->screen = SETTING;
+    if (i == 3)
         sfRenderWindow_close((*rpg)->window);
 }
 

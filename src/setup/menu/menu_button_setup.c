@@ -21,15 +21,16 @@ static int help_button(main_menu_buttons_t **button, sfRenderWindow *window)
 
 static char **fill_name(void)
 {
-    char **button_name = malloc(sizeof(char *) * 4);
+    char **button_name = malloc(sizeof(char *) * (4 + 1));
 
     button_name[0] = my_strdup(" Jouer");
-    button_name[1] = my_strdup("Options");
-    button_name[2] = my_strdup("Quitter");
-    button_name[3] = NULL;
+    button_name[1] = my_strdup("Charger");
+    button_name[2] = my_strdup("Options");
+    button_name[3] = my_strdup("Quitter");
+    button_name[4] = NULL;
     if (!button_name)
         return NULL;
-    for (int i = 0; i < 3; i += 1) {
+    for (int i = 0; i < 4; i += 1) {
         if (!button_name[i])
             return NULL;
     }
@@ -39,7 +40,7 @@ static char **fill_name(void)
 static int creation_loop(main_menu_buttons_t **button, char **button_name,
     sfRenderWindow *window)
 {
-    sfVector2f pos = get_resize(window, 810.4, 335.25);
+    sfVector2f pos = get_resize(window, 810.4, 300.25);
 
     (*button)->font = sfFont_createFromFile(FONT);
     for (int i = 0; button_name[i]; i += 1) {
@@ -54,7 +55,7 @@ static int creation_loop(main_menu_buttons_t **button, char **button_name,
             get_less_size(window, 150.0),
             (sfVector2f) {pos.x + get_less_size(window, 50),
             pos.y - get_less_size(window, 80.0)});
-        pos = (sfVector2f) {pos.x, pos.y + get_less_size(window, 200.0)};
+        pos = (sfVector2f) {pos.x, pos.y + get_less_size(window, 175.0)};
     }
     return OK;
 }
@@ -64,19 +65,19 @@ static int set_button(main_menu_buttons_t **button, sfRenderWindow *window)
     char **button_name = fill_name();
 
     *button = malloc(sizeof(main_menu_buttons_t));
-    (*button)->buttons_status = malloc(sizeof(button_state_t) * 3);
+    (*button)->buttons_status = malloc(sizeof(button_state_t) * 4);
     if (!button_name || !button || !(*button))
         return KO;
     (*button)->font = sfFont_createFromFile(FONT);
-    (*button)->sprites = malloc(sizeof(sfSprite *) * 4);
-    (*button)->text = malloc(sizeof(sfText *) * 4);
+    (*button)->sprites = malloc(sizeof(sfSprite *) * (4 + 1));
+    (*button)->text = malloc(sizeof(sfText *) * (4 + 1));
     (*button)->rectangle_text = sfTexture_createFromFile(BUTTON_MENU, NULL);
     if (creation_loop(button, button_name, window) == KO)
         return KO;
-    (*button)->sprites[3] = NULL;
+    (*button)->sprites[4] = NULL;
     help_button(button, window);
     if (!(*button)->help_book || !(*button)->help_book_spr)
-        return 84;
+        return KO;
     for (int i = 0; button_name[i] != NULL; i += 1)
         free(button_name[i]);
     free(button_name);
