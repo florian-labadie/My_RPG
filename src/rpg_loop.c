@@ -19,7 +19,7 @@ int rpg_loop(rpg_t *rpg)
         draw_fct[rpg->screen](rpg);
         sfRenderWindow_display(rpg->window);
     }
-    writte_setting_in_file(rpg);
+    write_setting_in_file(rpg);
     sfRenderWindow_close(rpg->window);
     destroy_resources(rpg);
     return 0;

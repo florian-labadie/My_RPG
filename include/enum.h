@@ -8,6 +8,13 @@
 #ifndef ENUM_H_
     #define ENUM_H_
 
+typedef enum player_race_s {
+    HUMAN,
+    DWARF,
+    ELF,
+    PLAYER_RACE_SIZE
+} player_race_t;
+
 typedef enum key_status_s {
     NOT_PRESSED,
     KEY_PRESSED,

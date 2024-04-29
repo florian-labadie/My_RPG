@@ -14,8 +14,6 @@ static void draw_help_menu(sfRenderWindow *window, menu_t *menu)
 
 static void draw_option_menu(sfRenderWindow *window, menu_t *menu)
 {
-    open_book(menu->settings);
-    sfRenderWindow_drawSprite(window, menu->settings->open_book_spr, NULL);
 }
 
 static void draw_main_menu(sfRenderWindow *window,

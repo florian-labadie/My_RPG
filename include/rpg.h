@@ -10,8 +10,8 @@
 
     #include "enum.h"
 
-    #include "game_include/game.h"
     #include "menu_include/menu.h"
+    #include "game_include/game.h"
     #include "setting.h"
     #include "map.h"
 

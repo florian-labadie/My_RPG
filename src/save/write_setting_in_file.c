@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-int writte_setting_in_file(rpg_t *rpg)
+int write_setting_in_file(rpg_t *rpg)
 {
     FILE *file_setting = fopen(FILE_SETTING, "w");
 

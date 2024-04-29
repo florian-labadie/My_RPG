@@ -21,11 +21,18 @@ typedef struct stats_s {
     float defense;
 } stats_t;
 
+typedef struct player_sprites_s {
+    sfTexture *player_text;
+    sfSprite *player;
+} player_sprites_t;
+
 typedef struct player_s {
     char *name;
+    player_race_t *player_race;
 
     sfVector2f position;
 
+    player_sprites_t *sprites;
     stats_t stats;
 } player_t;
 

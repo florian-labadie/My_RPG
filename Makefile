@@ -28,7 +28,7 @@ SETUP	=	src/setup/menu_setup.c						\
 			src/setup/game_setup.c						\
 			src/setup/map/map_setup.c					\
 			src/setup/menu/option_menu_setup.c			\
-			src/setup/menu/display_option.c				\
+			src/setup/menu/anim_book.c					\
 
 EVENT	=	src/event/event.c							\
 			src/event/menu/main_menu_event.c			\
@@ -46,9 +46,7 @@ DRAW	=	src/draw/draw_menu.c						\
 			src/draw/draw_game.c						\
 
 SAVE	=	src/save/settings_game.c					\
-
-OPTION =	src/setup/menu/option/book_setup.c			\
-			src/setup/menu/option/display_option.c		\
+			src/save/write_setting_in_file.c			\
 
 SRCTEST = 	tests/test_lib.c							\
 

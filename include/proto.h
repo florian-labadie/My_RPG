@@ -64,10 +64,6 @@ void background_menu_manager(menu_t *menu);
 void game_manager(rpg_t *rpg);
 
 /* OPTION */
-int setup_open_book(settings_t *settings);
-int setup_next_page(settings_t *settings);
-int setup_previous_page(settings_t *settings);
-int setup_close_book(settings_t *settings);
 int anim_open_book(settings_t *settings);
 int anim_next_page(settings_t *settings);
 int anim_previous_page(settings_t *settings);
@@ -79,7 +75,7 @@ int display_book(settings_t *settings);
 
 /* SETTINGS */
 int settings_game(rpg_t *rpg);
-int writte_setting_in_file(rpg_t *rpg);
+int write_setting_in_file(rpg_t *rpg);
 
 /* DRAWING FUNCTIONS */
 void draw_game(rpg_t *rpg);
