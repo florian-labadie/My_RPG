@@ -38,6 +38,7 @@ static void change_screen_status(rpg_t **rpg, int i)
 {
     if (i == 0) {
         (*rpg)->screen = GAME;
+        sfMusic_stop((*rpg)->menu->menu_sound);
         sfRenderWindow_setView((*rpg)->window, (*rpg)->map->view);
         (*rpg)->game->screen = PLAYING;
     }

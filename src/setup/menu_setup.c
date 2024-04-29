@@ -32,8 +32,6 @@ static int setup_menu_music(menu_t *menu, stock_setting_t *setting)
     if (!menu->menu_sound || !menu->click_button_sound || !menu->sound_buffer)
         return KO;
     sfSound_setBuffer(menu->click_button_sound, menu->sound_buffer);
-    sfSound_setVolume(menu->click_button_sound, setting->sound_game * 2);
-    sfMusic_setVolume(menu->menu_sound, setting->sound_game);
     return OK;
 }
 

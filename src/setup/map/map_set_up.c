@@ -14,6 +14,7 @@ int set_up_map(map_t *map, sfRenderWindow *window)
                 400.0, 200.0};
     map->texture_ground = sfTexture_createFromFile(MAP_P, NULL);
     map->texture_obj = sfTexture_createFromFile(MAP_OBJ, NULL);
+    map->game_sound = sfMusic_createFromFile(AMB_MUSIC);
     if (!map->texture_ground)
         return KO;
     map->sprite_ground = create_button(map->texture_ground, (sfVector2f) {1.0, 1.0},
@@ -21,5 +22,6 @@ int set_up_map(map_t *map, sfRenderWindow *window)
     map->sprite_obj = create_button(map->texture_obj, (sfVector2f) {1.0, 1.0},
     (sfVector2f) {0.0, 0.0});
     map->view = sfView_createFromRect(map->rect);
+    sfMusic_setLoop(map->game_sound, sfTrue);
     return OK;
 }
