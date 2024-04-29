@@ -69,6 +69,7 @@ int opening_book(settings_t *settings);
 
 /* SETTINGS */
 int settings_game(rpg_t *rpg);
+int writte_setting_in_file(rpg_t *rpg);
 
 /* DRAWING FUNCTIONS */
 void draw_game(rpg_t *rpg);
