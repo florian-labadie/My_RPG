@@ -27,7 +27,6 @@ static void get_movements_realesed(rpg_t *rpg, sfEvent event)
 {
     if (event.key.code == sfKeyZ && event.key.type == sfEvtKeyReleased)
         rpg->map->move_vect.y = 0;
-
     if ((event.key.code == sfKeyS && event.key.type == sfEvtKeyReleased))
         rpg->map->move_vect.y = 0;
     if ((event.key.code == sfKeyQ && event.key.type == sfEvtKeyReleased))
@@ -38,14 +37,18 @@ static void get_movements_realesed(rpg_t *rpg, sfEvent event)
 
 static void get_movements(rpg_t *rpg, sfEvent event)
 {
-    if (event.key.code == sfKeyZ && event.key.type == sfEvtKeyPressed)
-        rpg->map->move_vect.y += -2;
-    if (event.key.code == sfKeyS && event.key.type == sfEvtKeyPressed)
-            rpg->map->move_vect.y += 2;
-    if (event.key.code == sfKeyQ && event.key.type == sfEvtKeyPressed)
-        rpg->map->move_vect.x += -2;
-    if (event.key.code == sfKeyD && event.key.type == sfEvtKeyPressed)
-            rpg->map->move_vect.x += 2;
+    if (rpg->map->move_vect.y != -1 && event.key.code == sfKeyZ &&
+        event.key.type == sfEvtKeyPressed)
+        rpg->map->move_vect.y += -1;
+    if (rpg->map->move_vect.y != -1 && event.key.code == sfKeyS &&
+        event.key.type == sfEvtKeyPressed)
+            rpg->map->move_vect.y += 1;
+    if (rpg->map->move_vect.x != -1 && event.key.code == sfKeyQ &&
+        event.key.type == sfEvtKeyPressed)
+        rpg->map->move_vect.x += -1;
+    if (rpg->map->move_vect.x != 1 && event.key.code == sfKeyD &&
+        event.key.type == sfEvtKeyPressed)
+            rpg->map->move_vect.x += 1;
 }
 
 void game_event(rpg_t *rpg, sfEvent event)

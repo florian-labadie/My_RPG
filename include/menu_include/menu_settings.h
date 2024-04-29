@@ -8,6 +8,8 @@
 #ifndef SETTINGS_H_
     #define SETTINGS_H_
 
+    #include <SFML/Graphics.h>
+
 typedef struct settings_s {
     sfTexture *open_book;
     sfSprite *open_book_spr;

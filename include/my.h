@@ -18,8 +18,8 @@
 
     #include "rpg.h"
 
-    #include "proto.h"
     #include "macro.h"
+    #include "proto.h"
 
     #include <stdlib.h>
     #include <stddef.h>

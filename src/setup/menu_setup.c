@@ -58,11 +58,10 @@ int menu_setup(rpg_t *rpg, char const *user)
         return KO;
     if (background_menu_setup(rpg->menu, rpg->window) == KO ||
         setup_main_menu(rpg->menu, rpg->window) == KO ||
-        setup_menu_music(rpg->menu, rpg->setting) == KO)
+        setup_menu_music(rpg->menu, rpg->setting) == KO ||
+        setup_option_menu(rpg->menu->settings, rpg->window) == KO)
         return KO;
     if (game_setup(rpg) == KO)
         return OK;
-    if (setup(rpg->menu->settings) == KO)
-        return KO;
     return OK;
 }
