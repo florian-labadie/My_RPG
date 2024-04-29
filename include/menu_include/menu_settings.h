@@ -13,28 +13,14 @@
     #define PREVIOUS_PAGE_P "assets/book_animation/book_3.png"
     #define CLOSE_BOOK_P "assets/book_animation/book_4.png"
 
-typedef struct rect_s {
-    sfIntRect rect;
-    sfIntRect ract;
-    sfIntRect ruct;
-    sfIntRect rict;
-} rect_t;
-
-typedef struct anim_s {
-    sfTexture *open_book;
-    sfSprite *open_book_spr;
-    sfTexture *next_page;
-    sfSprite *next_page_spr;
-    sfTexture *previous_page;
-    sfSprite *previous_page_spr;
-    sfTexture *close_book;
-    sfSprite *close_book_spr;
-    sfClock *book_clock;
-} anim_t;
+    #define OPEN_BOOK_RECT ((sfIntRect) {-50, 0, 252, 297})
+    #define TURN_PAGE_RECT ((sfIntRect) {-9, 0, 248, 297})
+    #define CLOSE_BOOK_RECT ((sfIntRect) {-9, 0, 252, 297})
 
 typedef struct settings_s {
-    rect_t *react;
-    anim_t *anim;
+    sfTexture **book_textures;
+    sfSprite **book_sprites;
+    sfClock *book_clock;
 } settings_t;
 
 #endif /* !SETTINGS_H_ */
