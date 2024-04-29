@@ -21,6 +21,7 @@ typedef struct map_s {
     sfSprite *sprite_ground;
     sfView *view;
     sfFloatRect rect;
+    sfVector2f move_vect;
 } map_t;
 
 #endif /* !MAP_H_ */

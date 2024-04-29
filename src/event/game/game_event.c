@@ -7,36 +7,50 @@
 
 #include "my.h"
 
-static void change_view(rpg_t *rpg)
+void change_view(rpg_t *rpg)
 {
+    rpg->map->rect.top += rpg->map->move_vect.y;
+    rpg->map->rect.left += rpg->map->move_vect.x;
+    if (rpg->map->rect.top < 0)
+        rpg->map->rect.top = 0;
+    if (rpg->map->rect.top > 495)
+        rpg->map->rect.top = 495;
+    if (rpg->map->rect.left < 0)
+        rpg->map->rect.left = 0;
+    if (rpg->map->rect.left > 560)
+        rpg->map->rect.left = 560;
     rpg->map->view = sfView_createFromRect(rpg->map->rect);
     sfRenderWindow_setView(rpg->window, rpg->map->view);
 }
 
+static void get_movements_realesed(rpg_t *rpg, sfEvent event)
+{
+    if (event.key.code == sfKeyZ && event.key.type == sfEvtKeyReleased)
+        rpg->map->move_vect.y = 0;
+
+    if ((event.key.code == sfKeyS && event.key.type == sfEvtKeyReleased))
+        rpg->map->move_vect.y = 0;
+    if ((event.key.code == sfKeyQ && event.key.type == sfEvtKeyReleased))
+        rpg->map->move_vect.x = 0;
+    if ((event.key.code == sfKeyD && event.key.type == sfEvtKeyReleased))
+        rpg->map->move_vect.x = 0;
+}
+
 static void get_movements(rpg_t *rpg, sfEvent event)
 {
-    if (sfKeyboard_isKeyPressed(sfKeyZ) && rpg->map->rect.top > 0) {                
-        rpg->map->rect.top -= 5;
-        change_view(rpg);
-    }
-    if (sfKeyboard_isKeyPressed(sfKeyS) &&
-            rpg->map->rect.top < get_resize(rpg->window, 495, 0).x) {
-        rpg->map->rect.top += 5;
-        change_view(rpg);
-    }
-    if (sfKeyboard_isKeyPressed(sfKeyQ) && rpg->map->rect.left > 0) {
-        rpg->map->rect.left -= 5;
-        change_view(rpg);
-    }
-    if (sfKeyboard_isKeyPressed(sfKeyD) &&
-            rpg->map->rect.left < get_resize(rpg->window, 560, 0).x) {
-        rpg->map->rect.left += 5;
-        change_view(rpg);
-    }
+    if (event.key.code == sfKeyZ && event.key.type == sfEvtKeyPressed)
+        rpg->map->move_vect.y += -2;
+    if (event.key.code == sfKeyS && event.key.type == sfEvtKeyPressed)
+            rpg->map->move_vect.y += 2;
+    if (event.key.code == sfKeyQ && event.key.type == sfEvtKeyPressed)
+        rpg->map->move_vect.x += -2;
+    if (event.key.code == sfKeyD && event.key.type == sfEvtKeyPressed)
+            rpg->map->move_vect.x += 2;
 }
 
 void game_event(rpg_t *rpg, sfEvent event)
 {
     get_movements(rpg, event);
+    get_movements_realesed(rpg, event);
     return;
 }
