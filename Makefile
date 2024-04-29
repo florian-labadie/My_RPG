@@ -46,7 +46,9 @@ DRAW	=	src/draw/draw_menu.c						\
 			src/draw/draw_game.c						\
 
 SAVE	=	src/save/settings_game.c					\
-			src/save/writte_setting_in_file.c			\
+
+OPTION =	src/setup/menu/option/book_setup.c			\
+			src/setup/menu/option/display_option.c		\
 
 SRCTEST = 	tests/test_lib.c							\
 
