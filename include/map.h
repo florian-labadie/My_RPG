@@ -7,12 +7,14 @@
 
 #ifndef MAP_H_
     #define MAP_H_
+
     #define MAP_P "assets/map/map_rpg.png"
     #define MAP_OBJ "assets/map/map_rpg_texture.png"
     #define AMB_MUSIC "assets/music/ambiance_music.ogg"
 
     #include <SFML/Graphics.h>
     #include <SFML/Window.h>
+    #include <SFML/Audio.h>
 
 typedef struct map_s {
     sfTexture *texture_obj;
@@ -24,7 +26,6 @@ typedef struct map_s {
     sfSprite *sprite_ground;
     sfView *view;
     sfFloatRect rect;
-    sfVector2f move_vect;
 } map_t;
 
 #endif /* !MAP_H_ */

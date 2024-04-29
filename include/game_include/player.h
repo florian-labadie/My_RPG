@@ -13,13 +13,13 @@
     #include <SFML/Graphics.h>
     #include <SFML/Window.h>
 
-typedef struct stats_s {
+typedef struct player_stats_s {
     float health;
     float mana;
     float attack;
     float magic_attack;
     float defense;
-} stats_t;
+} player_stats_t;
 
 typedef struct player_sprites_s {
     sfTexture *player_text;
@@ -28,12 +28,12 @@ typedef struct player_sprites_s {
 
 typedef struct player_s {
     char *name;
-    player_race_t *player_race;
+    player_race_t race;
 
     sfVector2f position;
 
     player_sprites_t *sprites;
-    stats_t stats;
+    player_stats_t stats;
 } player_t;
 
 #endif /* !PLAYER_H_ */

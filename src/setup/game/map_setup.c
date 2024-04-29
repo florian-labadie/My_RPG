@@ -7,9 +7,8 @@
 
 #include "my.h"
 
-int set_up_map(map_t *map, sfRenderWindow *window)
+int setup_map(map_t *map, sfRenderWindow *window)
 {
-    map->move_vect = (sfVector2f) {0.0, 0.0};
     map->rect = (sfFloatRect) {0.0, get_resize(window, 495.0, 0).x,
                 400.0, 200.0};
     map->texture_ground = sfTexture_createFromFile(MAP_P, NULL);

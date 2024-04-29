@@ -9,14 +9,18 @@
 
 static void game_music(rpg_t *rpg)
 {
-    sfMusic_setVolume(rpg->map->game_sound, rpg->setting->sound_game);
-    if (sfMusic_getStatus(rpg->map->game_sound) == sfStopped ||
-        sfMusic_getStatus(rpg->map->game_sound) == sfPaused)
-        sfMusic_play(rpg->map->game_sound);
+    sfMusic_setVolume(rpg->game->map->game_sound, rpg->setting->sound_game);
+    if (sfMusic_getStatus(rpg->game->map->game_sound) == sfStopped ||
+        sfMusic_getStatus(rpg->game->map->game_sound) == sfPaused)
+        sfMusic_play(rpg->game->map->game_sound);
 }
 
 void game_manager(rpg_t *rpg)
 {
+    if (!rpg->game->player) {
+        if (game_setup(rpg) == KO)
+            return;
+    }
     game_music(rpg);
     return;
 }

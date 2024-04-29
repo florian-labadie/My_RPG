@@ -9,8 +9,9 @@
 
 void draw_game(rpg_t *rpg)
 {
-    sfRenderWindow_drawSprite(rpg->window, rpg->map->sprite_ground, NULL);
-    sfRenderWindow_drawSprite(rpg->window, rpg->map->sprite_obj, NULL);
+    sfRenderWindow_drawSprite(rpg->window,
+        rpg->game->map->sprite_ground, NULL);
+    sfRenderWindow_drawSprite(rpg->window, rpg->game->map->sprite_obj, NULL);
     change_view(rpg);
     return;
 }

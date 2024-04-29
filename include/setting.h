@@ -8,7 +8,10 @@
 #ifndef SETTING_H_
     #define SETTING_H_
 
+    #include <SFML/Graphics.h>
+
     #include <stdbool.h>
+
     #define FILE_SETTING "src/save/GameSetting.txt"
     #define SETTING_STR "[SETTINGS]"
     #define SAVE_STR "[SAVE]"

@@ -26,8 +26,10 @@ void event_manager(rpg_t *rpg)
     char status = 0;
 
     while (sfRenderWindow_pollEvent(rpg->window, &event)) {
-        if (event.type == sfEvtClosed)
+        if (event.type == sfEvtClosed) {
+            rpg->screen = -1;
             return sfRenderWindow_close(rpg->window);
+        }
         charnge_enum_status(rpg, &status);
         events_manager[rpg->screen][(int)status](rpg, event);
     }

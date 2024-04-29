@@ -43,8 +43,10 @@ static void change_screen_status(rpg_t **rpg, int i)
     }
     if (i == 2)
         (*rpg)->menu->screen = SETTING;
-    if (i == 3)
+    if (i == 3) {
+        (*rpg)->screen = -1;
         sfRenderWindow_close((*rpg)->window);
+    }
 }
 
 static void main_menu_button(main_menu_buttons_t **buttons,

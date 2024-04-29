@@ -21,6 +21,9 @@ typedef enum game_state_s {
 typedef struct game_s {
     game_state_t screen;
 
+    sfVector2f player_move;
+
+    map_t *map;
     player_t *player;
 } game_t;
 

@@ -42,7 +42,8 @@ int open_book(settings_t *settings);
 
 /* GAME SETUP */
 int game_setup(rpg_t *rpg);
-int set_up_map(map_t *map, sfRenderWindow *window);
+int player_setup(sfRenderWindow *window, player_t *player);
+int setup_map(map_t *map, sfRenderWindow *window);
 void change_view(rpg_t *rpg);
 
 /* MENU EVENT */

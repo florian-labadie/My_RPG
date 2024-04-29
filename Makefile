@@ -25,10 +25,11 @@ GLOBALS	=	src/global_functions/create_button.c		\
 SETUP	=	src/setup/menu_setup.c						\
 			src/setup/menu/background_menu_setup.c		\
 			src/setup/menu/menu_button_setup.c			\
-			src/setup/game_setup.c						\
-			src/setup/map/map_setup.c					\
 			src/setup/menu/option_menu_setup.c			\
 			src/setup/menu/anim_book.c					\
+			src/setup/game_setup.c						\
+			src/setup/game/map_setup.c					\
+			src/setup/game/player_setup.c				\
 
 EVENT	=	src/event/event.c							\
 			src/event/menu/main_menu_event.c			\

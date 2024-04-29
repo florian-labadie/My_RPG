@@ -42,8 +42,8 @@ jobs:
 
             - name: Check bianry presence
               run: |
-                if [ ! -f ./rpg ]; then
-                    echo "::error file =rpg, title=Binary Error::Binary not found"
+                if [ ! -f ./my_rpg ]; then
+                    echo "::error file =my_rpg, title=Binary Error::Binary not found"
                     exit 1
                 fi
                 exit 0

@@ -10,10 +10,10 @@
 
     #include "enum.h"
 
-    #include "menu_include/menu.h"
-    #include "game_include/game.h"
     #include "setting.h"
     #include "map.h"
+    #include "menu_include/menu.h"
+    #include "game_include/game.h"
 
 typedef enum screen_s {
     MAIN_MENU,
@@ -29,7 +29,6 @@ typedef struct rpg_s {
     stock_setting_t *setting;
     menu_t *menu;
     game_t *game;
-    map_t *map;
 } rpg_t;
 
 #endif /* !RPG_H_ */

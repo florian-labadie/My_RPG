@@ -14,13 +14,15 @@ int rpg_loop(rpg_t *rpg)
 
     while (sfRenderWindow_isOpen(rpg->window)) {
         sfRenderWindow_clear(rpg->window, sfWhite);
-        mangager_fct[rpg->screen](rpg);
         event_manager(rpg);
+        if (rpg->screen == -1)
+            break;
+        mangager_fct[rpg->screen](rpg);
         draw_fct[rpg->screen](rpg);
         sfRenderWindow_display(rpg->window);
     }
-    write_setting_in_file(rpg);
     sfRenderWindow_close(rpg->window);
+    write_setting_in_file(rpg);
     destroy_resources(rpg);
     return 0;
 }

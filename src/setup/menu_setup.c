@@ -10,16 +10,13 @@
 static int malloc_struct(rpg_t *rpg)
 {
     rpg->menu = malloc(sizeof(menu_t));
+    rpg->game = malloc(sizeof(game_t));
     rpg->menu->main_menu = malloc(sizeof(main_menu_t));
     rpg->menu->help = malloc(sizeof(help_t));
     rpg->menu->settings = malloc(sizeof(settings_t));
     rpg->menu->background = malloc(sizeof(background_menu_t));
-    rpg->game = malloc(sizeof(game_t));
-    rpg->game->player = malloc(sizeof(player_t));
-    rpg->map = malloc(sizeof(map_t));
-    if (!rpg->menu || !rpg->menu->main_menu || !rpg->menu->help ||
-        !rpg->menu->settings || !rpg->menu->background || !rpg->game ||
-        !rpg->game->player || !rpg->map)
+    if (!rpg->menu || !rpg->game || !rpg->menu->main_menu ||
+        !rpg->menu->help || !rpg->menu->settings || !rpg->menu->background)
         return KO;
     return OK;
 }
@@ -61,7 +58,5 @@ int menu_setup(rpg_t *rpg, char const *user)
         setup_menu_music(rpg->menu, rpg->setting) == KO ||
         setup_option_menu(rpg->menu->settings, rpg->window) == KO)
         return KO;
-    if (game_setup(rpg) == KO)
-        return OK;
     return OK;
 }
