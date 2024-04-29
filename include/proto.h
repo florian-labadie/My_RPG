@@ -37,6 +37,8 @@ float get_less_size(sfRenderWindow *window, float value);
 int menu_setup(rpg_t *rpg, char const *user);
 int background_menu_setup(menu_t *menu, sfRenderWindow *window);
 int menu_button_setup(main_menu_buttons_t **button, sfRenderWindow *window);
+int setup_option_menu(settings_t *settings, sfRenderWindow *window);
+int open_book(settings_t *settings);
 
 /* GAME SETUP */
 int game_setup(rpg_t *rpg);
@@ -65,9 +67,11 @@ void game_manager(rpg_t *rpg);
 int setup(settings_t *settings);
 int opening_book(settings_t *settings);
 
-/* OPTION */
-int setup(settings_t *settings);
-int display_book(settings_t *settings);
-
+/* SETTINGS */
 int settings_game(rpg_t *rpg);
+
+/* DRAWING FUNCTIONS */
+void draw_game(rpg_t *rpg);
+void draw_menu(rpg_t *rpg);
+
 #endif /* PROTO_H_ */

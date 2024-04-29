@@ -8,9 +8,11 @@
 #ifndef MENU_H_
     #define MENU_H_
 
+    #include <SFML/Audio.h>
+
     #include "main_menu.h"
     #include "help.h"
-    #include "settings.h"
+    #include "menu_settings.h"
 
     #define BACKGROUND "assets/sprite/background_menu.png"
     #define WOS_SIGN "assets/sprite/tropical_button.png"

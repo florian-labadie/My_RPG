@@ -26,7 +26,9 @@ SETUP	=	src/setup/menu_setup.c						\
 			src/setup/menu/background_menu_setup.c		\
 			src/setup/menu/menu_button_setup.c			\
 			src/setup/game_setup.c						\
-			src/setup/map/map_set_up.c					\
+			src/setup/map/map_setup.c					\
+			src/setup/menu/option_menu_setup.c			\
+			src/setup/menu/display_option.c				\
 
 EVENT	=	src/event/event.c							\
 			src/event/menu/main_menu_event.c			\
@@ -40,15 +42,15 @@ MANAGER	=	src/manager/menu_manager.c					\
 			src/manager/background_menu_manager.c		\
 			src/manager/game_manager.c					\
 
-SAVE	=	src/save/settings_game.c					\
+DRAW	=	src/draw/draw_menu.c						\
+			src/draw/draw_game.c						\
 
-OPTION =	src/setup/menu/option/book_setup.c			\
-			src/setup/menu/option/display_option.c		\
+SAVE	=	src/save/settings_game.c					\
 
 SRCTEST = 	tests/test_lib.c							\
 
-OBJ = 	$(MAIN:.c=.o)	$(SRC:.c=.o)	$(SETUP:.c=.o)	$(GLOBALS:.c=.o)\
-		$(EVENT:.c=.o)	$(MANAGER:.c=.o) $(SAVE:.c=.o) $(OPTION:.c=.o)
+OBJ = 	$(MAIN:.c=.o) $(SRC:.c=.o) $(SETUP:.c=.o) $(GLOBALS:.c=.o)\
+		$(EVENT:.c=.o) $(MANAGER:.c=.o) $(SAVE:.c=.o) $(DRAW:.c=.o)
 
 OBJTEST = $(SRCTEST:.c=.o)
 

@@ -8,8 +8,6 @@
 #ifndef RPG_H_
     #define RPG_H_
 
-    #include <SFML/Audio.h>
-    #include <SFML/Graphics.h>
     #include "enum.h"
 
     #include "game_include/game.h"
