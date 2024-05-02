@@ -7,20 +7,20 @@
 
 #include "my.h"
 
-void change_view(rpg_t *rpg)
+void change_view(game_t *game, sfRenderWindow *window)
 {
-    rpg->game->map->rect.top += rpg->game->player_move.y;
-    rpg->game->map->rect.left += rpg->game->player_move.x;
-    if (rpg->game->map->rect.top < 0)
-        rpg->game->map->rect.top = 0;
-    if (rpg->game->map->rect.top > 495)
-        rpg->game->map->rect.top = 495;
-    if (rpg->game->map->rect.left < 0)
-        rpg->game->map->rect.left = 0;
-    if (rpg->game->map->rect.left > 560)
-        rpg->game->map->rect.left = 560;
-    rpg->game->map->view = sfView_createFromRect(rpg->game->map->rect);
-    sfRenderWindow_setView(rpg->window, rpg->game->map->view);
+    game->map->rect.top += game->player_move.y;
+    game->map->rect.left += game->player_move.x;
+    if (game->map->rect.top < 0)
+        game->map->rect.top = 0;
+    if (game->map->rect.top > 495)
+        game->map->rect.top = 495;
+    if (game->map->rect.left < 0)
+        game->map->rect.left = 0;
+    if (game->map->rect.left > 560)
+        game->map->rect.left = 560;
+    game->map->view = sfView_createFromRect(game->map->rect);
+    sfRenderWindow_setView(window, game->map->view);
 }
 
 static void get_movements_realesed(rpg_t *rpg, sfEvent event)
@@ -51,9 +51,9 @@ static void get_movements(rpg_t *rpg, sfEvent event)
             rpg->game->player_move.x += 0.25;
 }
 
-void game_event(rpg_t *rpg, sfEvent event)
+int game_event(rpg_t *rpg, sfEvent event)
 {
     get_movements(rpg, event);
     get_movements_realesed(rpg, event);
-    return;
+    return OK;
 }

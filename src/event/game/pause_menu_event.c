@@ -5,9 +5,9 @@
 ** pause_menu_event
 */
 
-#include "rpg.h"
+#include "my.h"
 
-void pause_menu_event(rpg_t *rpg, sfEvent event)
+int pause_menu_event(rpg_t *rpg, sfEvent event)
 {
-    return;
+    return OK;
 }

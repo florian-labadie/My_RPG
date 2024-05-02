@@ -18,6 +18,7 @@
 typedef enum screen_s {
     MAIN_MENU,
     GAME,
+    END,
     SCREEN_STATES_SIZE
 } screen_t;
 

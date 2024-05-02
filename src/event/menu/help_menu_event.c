@@ -5,9 +5,9 @@
 ** help_menu_event
 */
 
-#include "rpg.h"
+#include "my.h"
 
-void help_menu_event(rpg_t *rpg, sfEvent event)
+int help_menu_event(rpg_t *rpg, sfEvent event)
 {
-    return;
+    return OK;
 }

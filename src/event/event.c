@@ -7,9 +7,9 @@
 
 #include "my.h"
 
-static void (*events_manager[][GAME_STATE_SIZE])(rpg_t *rpg, sfEvent event) = {
+static int (*events_manager[][GAME_STATE_SIZE])(rpg_t *rpg, sfEvent event) = {
     {main_menu_event, help_menu_event, settings_menu_event},
-    {game_event, pause_menu_event, inventory_menu_event}
+    {select_event, game_event, pause_menu_event, inventory_menu_event}
 };
 
 static void charnge_enum_status(rpg_t *rpg, char *status)
@@ -27,7 +27,7 @@ void event_manager(rpg_t *rpg)
 
     while (sfRenderWindow_pollEvent(rpg->window, &event)) {
         if (event.type == sfEvtClosed) {
-            rpg->screen = -1;
+            rpg->screen = END;
             return sfRenderWindow_close(rpg->window);
         }
         charnge_enum_status(rpg, &status);

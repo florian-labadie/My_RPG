@@ -9,10 +9,12 @@
     #define GAME_H_
 
     #include "player.h"
+    #include "selection.h"
 
 typedef enum game_state_s {
-    PLAYING,
+    SELECTION,
     LOAD_GAME,
+    PLAYING,
     PAUSE,
     INVENTORY,
     GAME_STATE_SIZE
@@ -23,6 +25,7 @@ typedef struct game_s {
 
     sfVector2f player_move;
 
+    select_t *select;
     map_t *map;
     player_t *player;
 } game_t;

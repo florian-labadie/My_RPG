@@ -15,7 +15,7 @@ int rpg_loop(rpg_t *rpg)
     while (sfRenderWindow_isOpen(rpg->window)) {
         sfRenderWindow_clear(rpg->window, sfWhite);
         event_manager(rpg);
-        if (rpg->screen == -1)
+        if (rpg->screen == END)
             break;
         mangager_fct[rpg->screen](rpg);
         draw_fct[rpg->screen](rpg);

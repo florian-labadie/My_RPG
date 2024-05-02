@@ -7,14 +7,14 @@
 
 #include "my.h"
 
-static void change_text_rect(main_menu_buttons_t **button,
+static int change_text_rect(main_menu_buttons_t **button,
     button_state_t status, int i)
 {
     int move = 5;
     sfVector2f current_pos = {};
 
     if ((*button)->buttons_status[i] == status)
-        return;
+        return OK;
     if ((*button)->buttons_status[i] > status) {
         move = -move;
     }
@@ -23,6 +23,7 @@ static void change_text_rect(main_menu_buttons_t **button,
     current_pos = sfText_getPosition((*button)->text[i]);
     sfText_setPosition((*button)->text[i],
                         (sfVector2f){current_pos.x, current_pos.y + move});
+    return OK;
 }
 
 static int already_pressed(button_state_t *button_status)
@@ -34,9 +35,11 @@ static int already_pressed(button_state_t *button_status)
     return KO;
 }
 
-static void change_screen_status(rpg_t **rpg, int i)
+static int change_screen_status(rpg_t **rpg, int i)
 {
     if (i <= 1) {
+        if (game_setup(*rpg) == KO)
+            return KO;
         (*rpg)->screen = GAME;
         sfMusic_stop((*rpg)->menu->menu_sound);
         (*rpg)->game->screen = (game_state_t)i;
@@ -44,12 +47,13 @@ static void change_screen_status(rpg_t **rpg, int i)
     if (i == 2)
         (*rpg)->menu->screen = SETTING;
     if (i == 3) {
-        (*rpg)->screen = -1;
+        (*rpg)->screen = END;
         sfRenderWindow_close((*rpg)->window);
     }
+    return OK;
 }
 
-static void main_menu_button(main_menu_buttons_t **buttons,
+static int main_menu_button(main_menu_buttons_t **buttons,
     sfVector2f mouse_pos, button_state_t status, sfSound *sound)
 {
     for (int i = 0; (*buttons)->sprites[i]; i++) {
@@ -66,25 +70,25 @@ static void main_menu_button(main_menu_buttons_t **buttons,
                 &(*buttons)->buttons_status[i], NORMAL, sound);
             }
     }
+    return OK;
 }
 
-static void buttons_action(rpg_t *rpg, sfEvent event, sfVector2f mouse_pos)
+static int buttons_action(rpg_t *rpg, sfEvent event, sfVector2f mouse_pos)
 {
     for (int i = 0; rpg->menu->main_menu->buttons->sprites[i]; i++) {
-        if (rpg->menu->main_menu->buttons->buttons_status[i] ==
-            BUTTON_PRESSED) {
+        if (get_sprite_bounds
+            (rpg->menu->main_menu->buttons->sprites[i], mouse_pos) == sfTrue) {
             change_text_rect(&rpg->menu->main_menu->buttons, NORMAL, i);
             change_button_rect(rpg->menu->main_menu->buttons->sprites[i],
                 &rpg->menu->main_menu->buttons->buttons_status[i],
                     NORMAL, NULL);
-        }
-        if (get_sprite_bounds
-            (rpg->menu->main_menu->buttons->sprites[i], mouse_pos) == sfTrue)
             return change_screen_status(&rpg, i);
+        }
     }
+    return OK;
 }
 
-void main_menu_event(rpg_t *rpg, sfEvent event)
+int main_menu_event(rpg_t *rpg, sfEvent event)
 {
     sfVector2f mouse_pos = get_mouse_pos(rpg->window, rpg->window_size);
 
@@ -94,7 +98,7 @@ void main_menu_event(rpg_t *rpg, sfEvent event)
         already_pressed(rpg->menu->main_menu->buttons->buttons_status) == OK) {
         if (already_pressed(rpg->menu->main_menu->buttons->buttons_status)
             == OK)
-            return;
+            return OK;
         return main_menu_button(&rpg->menu->main_menu->buttons, mouse_pos,
                         BUTTON_PRESSED, rpg->menu->click_button_sound);
     }

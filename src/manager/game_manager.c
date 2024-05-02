@@ -17,10 +17,6 @@ static void game_music(rpg_t *rpg)
 
 void game_manager(rpg_t *rpg)
 {
-    if (!rpg->game->player) {
-        if (game_setup(rpg) == KO)
-            return;
-    }
     game_music(rpg);
     return;
 }

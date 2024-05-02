@@ -30,11 +30,13 @@ SETUP	=	src/setup/menu_setup.c						\
 			src/setup/game_setup.c						\
 			src/setup/game/map_setup.c					\
 			src/setup/game/player_setup.c				\
+			src/setup/game/selection_charac.c			\
 
 EVENT	=	src/event/event.c							\
 			src/event/menu/main_menu_event.c			\
 			src/event/menu/help_menu_event.c			\
 			src/event/menu/settings_menu_event.c		\
+			src/event/game/select_event.c				\
 			src/event/game/game_event.c					\
 			src/event/game/pause_menu_event.c			\
 			src/event/game/inventory_menu_event.c		\

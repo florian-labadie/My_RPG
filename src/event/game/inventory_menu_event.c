@@ -5,9 +5,9 @@
 ** inventory_menu_event
 */
 
-#include "rpg.h"
+#include "my.h"
 
-void inventory_menu_event(rpg_t *rpg, sfEvent event)
+int inventory_menu_event(rpg_t *rpg, sfEvent event)
 {
-    return;
+    return OK;
 }

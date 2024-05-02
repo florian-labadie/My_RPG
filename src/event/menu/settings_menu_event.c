@@ -5,9 +5,9 @@
 ** settings_menu_event
 */
 
-#include "rpg.h"
+#include "my.h"
 
-void settings_menu_event(rpg_t *rpg, sfEvent event)
+int settings_menu_event(rpg_t *rpg, sfEvent event)
 {
-    return;
+    return OK;
 }

@@ -23,6 +23,7 @@ static void player_stats_setup(player_t *player)
 static int player_sprites_setup(sfRenderWindow *window, player_t *player)
 {
     player->sprites = malloc(sizeof(player_sprites_t));
+    return OK;
 }
 
 int player_setup(sfRenderWindow *window, player_t *player)

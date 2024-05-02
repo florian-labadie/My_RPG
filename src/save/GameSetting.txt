@@ -2,6 +2,6 @@
 
 Sizescreen.x=1920.0
 Sizescreen.y=1080.0
-ScreenMode=1
+ScreenMode=0
 FPS=60.0
-SoundGame=50.0
+SoundGame=5.0
