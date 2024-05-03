@@ -12,7 +12,7 @@
 
     #include <stdbool.h>
 
-    #define FILE_SETTING "src/save/GameSetting.txt"
+    #define FILE_SETTING "Data/setting/GameSetting.txt"
     #define SETTING_STR "[SETTINGS]"
     #define SAVE_STR "[SAVE]"
 
@@ -27,6 +27,7 @@ typedef struct stock_setting_s {
     bool screen_mode;
     float fps;
     float sound_game;
+    char *language;
 
     status_t *status;
 } stock_setting_t;

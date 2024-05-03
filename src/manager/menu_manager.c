@@ -9,9 +9,6 @@
 
 static void menu_music(rpg_t *rpg)
 {
-    sfSound_setVolume(rpg->menu->click_button_sound,
-        rpg->setting->sound_game * 2);
-    sfMusic_setVolume(rpg->menu->menu_sound, rpg->setting->sound_game);
     if (sfMusic_getStatus(rpg->menu->menu_sound) == sfStopped ||
         sfMusic_getStatus(rpg->menu->menu_sound) == sfPaused)
         sfMusic_play(rpg->menu->menu_sound);

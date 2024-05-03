@@ -19,5 +19,6 @@ int game_setup(rpg_t *rpg)
         player_setup(rpg->window, rpg->game->player) == KO ||
         select_charac(rpg->game, rpg->window) == KO)
         return KO;
+    set_volume_music(rpg);
     return OK;
 }

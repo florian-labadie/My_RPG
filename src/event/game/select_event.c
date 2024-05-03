@@ -48,9 +48,9 @@ static int change_screen_status(rpg_t **rpg, int i)
 static int buttons_select_action(rpg_t *rpg, sfEvent event,
     sfVector2f mouse_pos)
 {
-    for (int i = 0; rpg->game->select->valid[i] != NULL; i++) {
+    for (int i = 0; rpg->game->select->button_select[i] != NULL; i++) {
         if (get_sprite_bounds
-            (rpg->game->select->valid[i], mouse_pos) == sfTrue)
+            (rpg->game->select->button_select[i], mouse_pos) == sfTrue)
             return change_screen_status(&rpg, i);
     }
     for (int i = 0; rpg->game->select->characters[i] != NULL; i++) {

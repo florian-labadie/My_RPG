@@ -42,5 +42,6 @@ int launch_rpg(char const *user)
     set_video_mode(&rpg);
     if (rpg_setup(&rpg, user) == KO)
         return KO;
+    set_volume_music(&rpg);
     return rpg_loop(&rpg);
 }

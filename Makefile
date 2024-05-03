@@ -22,6 +22,7 @@ GLOBALS	=	src/global_functions/create_button.c		\
 			src/global_functions/check_commentary.c		\
 			src/global_functions/get_resize.c			\
 			src/global_functions/set_mid_origin.c		\
+			src/global_functions/set_volume_music.c		\
 
 SETUP	=	src/setup/menu_setup.c						\
 			src/setup/menu/background_menu_setup.c		\

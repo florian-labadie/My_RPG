@@ -7,6 +7,38 @@
 
 #include "my.h"
 
+static char **fill_name(void)
+{
+    char **descript = malloc(sizeof(char *) * (3 + 1));
+
+    descript[0] = my_strdup("Je viens du village de VLADIMIR.");
+    descript[1] = my_strdup("Je suis un nain du royaume de sous la montagne");
+    descript[2] = my_strdup("Je suis un elf du royaume de BeauBois");
+    descript[3] = NULL;
+    if (!descript)
+        return NULL;
+    for (int i = 0; i < 3; i += 1) {
+        if (!descript[i])
+            return NULL;
+    }
+    return descript;
+}
+
+static int setup_description(select_t **select, sfRenderWindow *window)
+{
+    char **descript = fill_name();
+
+    if (!descript)
+        return KO;
+    (*select)->text = malloc(sizeof(sfText *) * PLAYER_RACE_SIZE);
+    (*select)->font = sfFont_createFromFile(FONT);
+    for (int i = 0; descript[i] != NULL; i++) {
+        (*select)->text[i] = create_text((*select)->font, descript[i],
+            get_less_size(window, 100.0), get_resize(window, 1100.0, 90.0));
+    }
+    return OK;
+}
+
 static int setup_arrow(select_t *select, sfRenderWindow *window)
 {
     select->arrow_selec_text = sfTexture_createFromFile(ARROW_SELEC, NULL);
@@ -19,22 +51,24 @@ static int setup_arrow(select_t *select, sfRenderWindow *window)
     return OK;
 }
 
-static int setup_button_selec(select_t **select, sfRenderWindow *window,
-    sfTexture *button)
+static int setup_button_selec(select_t **select, sfRenderWindow *window)
 {
     sfVector2f scales[2] = {get_resize(window, 2, 2),
         get_resize(window, 2, 2)};
-    sfVector2f pos[2] = {get_resize(window, 1600.0, 850.0),
-        get_resize(window, 250.0, 850.0)};
+    sfVector2f pos[2] = {get_resize(window, 1600.0, 800.0),
+        get_resize(window, 250.0, 800.0)};
     sfIntRect rects[2] = {VALID_RECT, BACK_RECT};
 
-    (*select)->valid = malloc(sizeof(sfSprite *) * 3);
-    (*select)->valid[2] = NULL;
+    (*select)->button_select_texture =
+        sfTexture_createFromFile(BUTTON_SELECT, NULL);
+    (*select)->button_select = malloc(sizeof(sfSprite *) * 3);
+    (*select)->button_select[2] = NULL;
     for (int i = 0; i < 2; i += 1) {
-        (*select)->valid[i] = create_button(button, scales[i], pos[i]);
-        if (!(*select)->valid)
+        (*select)->button_select[i] =
+            create_button((*select)->button_select_texture, scales[i], pos[i]);
+        if (!(*select)->button_select)
             return KO;
-        sfSprite_setTextureRect((*select)->valid[i], rects[i]);
+        sfSprite_setTextureRect((*select)->button_select[i], rects[i]);
     }
     return OK;
 }
@@ -76,15 +110,15 @@ int select_charac(game_t *game, sfRenderWindow *window)
         sfTexture_createFromFile(BACKBOARD, NULL);
     game->select->backboard =
         create_button(game->select->backboard_texture,
-        get_resize(window, 10, 7.50), get_resize(window, 30.0, 30.0));
+        get_resize(window, 3.8, 4.7), get_resize(window, 75.0, 50.0));
     if (!game->select->backboard)
         return KO;
     game->select->player = 0;
     sfSprite_setTextureRect(game->select->backboard, BACKBOARD_RECT);
     if (setup_select_characters(&game->select, window) == KO ||
-        setup_button_selec(&game->select, window,
-        game->select->backboard_texture) == KO ||
-        setup_arrow(game->select, window) == KO)
+        setup_button_selec(&game->select, window) == KO ||
+        setup_arrow(game->select, window) == KO ||
+        setup_description(&game->select, window) == KO)
         return KO;
     return OK;
 }

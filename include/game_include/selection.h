@@ -10,9 +10,10 @@
 
     #include <SFML/Graphics.h>
     #define PLAYER "assets/sprite/main_character.png"
-    #define BACKBOARD "assets/button/wood_button.png"
+    #define BACKBOARD "assets/button/wood-plank.png"
+    #define BUTTON_SELECT "assets/button/wood_button.png"
     #define ARROW_SELEC "assets/button/arrow_selec.png"
-    #define BACKBOARD_RECT ((sfIntRect){75, 20, 185, 132})
+    #define BACKBOARD_RECT ((sfIntRect){0, 0, 469, 200})
     #define HUMAN_STILL_RECT ((sfIntRect){0, 0, 52, 56})
     #define DWARF_STILL_RECT ((sfIntRect){0, 110, 52, 60})
     #define ELF_STILL_RECT ((sfIntRect){0, 228, 52, 62})
@@ -20,6 +21,9 @@
     #define BACK_RECT ((sfIntRect){284, 216, 43, 41})
 
 typedef struct select_s {
+    sfText **text;
+    sfFont *font;
+
     player_race_t player;
 
     sfTexture *arrow_selec_text;
@@ -27,7 +31,9 @@ typedef struct select_s {
 
     sfTexture *backboard_texture;
     sfSprite *backboard;
-    sfSprite **valid;
+
+    sfTexture *button_select_texture;
+    sfSprite **button_select;
 
     sfTexture *characters_texture;
     sfSprite **characters;

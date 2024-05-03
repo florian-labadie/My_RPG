@@ -21,6 +21,7 @@ int write_setting_in_file(rpg_t *rpg)
     fprintf(file_setting, "ScreenMode=%d\n", rpg->setting->screen_mode);
     fprintf(file_setting, "FPS=%.1f\n", rpg->setting->fps);
     fprintf(file_setting, "SoundGame=%.1f\n", rpg->setting->sound_game);
+    fprintf(file_setting, "Language=%s\n", rpg->setting->language);
     fclose(file_setting);
     return OK;
 }
