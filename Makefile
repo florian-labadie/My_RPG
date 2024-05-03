@@ -21,6 +21,7 @@ GLOBALS	=	src/global_functions/create_button.c		\
 			src/global_functions/blanck_line.c			\
 			src/global_functions/check_commentary.c		\
 			src/global_functions/get_resize.c			\
+			src/global_functions/set_mid_origin.c		\
 
 SETUP	=	src/setup/menu_setup.c						\
 			src/setup/menu/background_menu_setup.c		\
@@ -37,6 +38,7 @@ EVENT	=	src/event/event.c							\
 			src/event/menu/help_menu_event.c			\
 			src/event/menu/settings_menu_event.c		\
 			src/event/game/select_event.c				\
+			src/event/game/load_save_event.c			\
 			src/event/game/game_event.c					\
 			src/event/game/pause_menu_event.c			\
 			src/event/game/inventory_menu_event.c		\

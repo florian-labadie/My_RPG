@@ -23,7 +23,7 @@ static char **fill_name(void)
 {
     char **button_name = malloc(sizeof(char *) * (4 + 1));
 
-    button_name[0] = my_strdup(" Jouer");
+    button_name[0] = my_strdup("Jouer");
     button_name[1] = my_strdup("Charger");
     button_name[2] = my_strdup("Options");
     button_name[3] = my_strdup("Quitter");
@@ -53,9 +53,9 @@ static int creation_loop(main_menu_buttons_t **button, char **button_name,
         sfSprite_setTextureRect((*button)->sprites[i], BUTTON_RECT);
         (*button)->text[i] = create_text((*button)->font, button_name[i],
             get_less_size(window, 150.0),
-            (sfVector2f) {pos.x + get_less_size(window, 50),
-            pos.y - get_less_size(window, 80.0)});
-        pos = (sfVector2f) {pos.x, pos.y + get_less_size(window, 175.0)};
+            (sfVector2f) {get_resize(window, 960.0, 0).x,
+            pos.y - BUTTON_RECT.height * 0.4 / 2.1});
+        pos.y = pos.y + get_less_size(window, 175.0);
     }
     return OK;
 }

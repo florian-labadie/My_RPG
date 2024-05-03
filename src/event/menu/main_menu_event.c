@@ -38,7 +38,7 @@ static int already_pressed(button_state_t *button_status)
 static int change_screen_status(rpg_t **rpg, int i)
 {
     if (i <= 1) {
-        if (game_setup(*rpg) == KO)
+        if (!(*rpg)->game->map && game_setup(*rpg) == KO)
             return KO;
         (*rpg)->screen = GAME;
         sfMusic_stop((*rpg)->menu->menu_sound);
@@ -76,14 +76,15 @@ static int main_menu_button(main_menu_buttons_t **buttons,
 static int buttons_action(rpg_t *rpg, sfEvent event, sfVector2f mouse_pos)
 {
     for (int i = 0; rpg->menu->main_menu->buttons->sprites[i]; i++) {
-        if (get_sprite_bounds
-            (rpg->menu->main_menu->buttons->sprites[i], mouse_pos) == sfTrue) {
+        if (rpg->menu->main_menu->buttons->buttons_status[i] != NORMAL) {
             change_text_rect(&rpg->menu->main_menu->buttons, NORMAL, i);
             change_button_rect(rpg->menu->main_menu->buttons->sprites[i],
                 &rpg->menu->main_menu->buttons->buttons_status[i],
                     NORMAL, NULL);
-            return change_screen_status(&rpg, i);
         }
+        if (get_sprite_bounds
+            (rpg->menu->main_menu->buttons->sprites[i], mouse_pos) == sfTrue)
+            return change_screen_status(&rpg, i);
     }
     return OK;
 }
