@@ -1,68 +1,61 @@
-name: continuons-integration
+name: my_rpg workflow
 
 on:
-    push:
-        branches-ignore: [ga-ignore-*]
-    pull_request:
-        branches-ignore: [ga-ignore-*]
+  push:
+    branches-ignore:
+      - 'ga-ignore-*'
+  pull_request:
+    branches-ignore:
+      - 'ga-ignore-*'
+
+env:
+  MIRROR_URL: git@github.com:EpitechPromo2028/B-MUL-200-BDX-2-1-myrpg-armand.dufresne.git
+  EXECUTABLES: 'my_rpg'
 
 jobs:
+  check_coding_style:
+    name: Checking the coding style
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
 
-    coding-style:
-        runs-on: ubuntu-latest
-        container:
-            image: ghcr.io/epitech/coding-style-checker:latest
-        steps:
+      - name: Run coding-style checker
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/workspace ghcr.io/epitech/coding-style-checker:latest
 
-            - name: Checkout GH repo
-              uses: actions/checkout@v4
+  check_program_compilation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    needs: check_coding_style
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Compile Repository
+        run: make
+      - name: Verify Executables
+        run: |
+          for file in ${{ env.EXECUTABLES }};do
+            if [ ! -x "$file" ]; then
+              echo "File $file does not exist or is not executable"
+              exit 1
+            fi
+          done
 
-            - name: Run coding-style.sh
-              run: check.sh $(pwd) $(pwd)
+  run_tests:
+    container: epitechcontent/epitest-docker:latest
+    name: Run Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    needs: check_program_compilation
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-            - name: Report banana result
-              run: |
-                NB_ERROR=$(cat coding-style-reports.log | wc -l)
-                if [ $NB_ERROR -gt 0 ]; then
-                    ERROR=$(cat coding-style-reports.log)
-                    echo "::ERROR title=$NB_ERROR errors found::$ERROR"
-                    exit 1
-                fi
-                exit 0
+      - name: Run Tests
+        run: make tests_run
 
-    compile:
-        runs-on: ubuntu-latest
-        steps:
-
-            - name: Checkout GM repo
-              uses: actions/checkout@v4
-
-            - name: Compile repository
-              run: make
-
-            - name: Check bianry presence
-              run: |
-                if [ ! -f ./my_rpg ]; then
-                    echo "::error file =my_rpg, title=Binary Error::Binary not found"
-                    exit 1
-                fi
-                exit 0
-
-    # run-test:
-    #     runs-on: ubuntu-latest
-    #     container:
-    #         image: epitechcontent/epitest-docker:latest
-    #     needs: [compile, coding-style]
-    #     steps:
-
-    #         - name: Checkout GH repo
-    #           uses: actions/checkout@v4
-
-    #         - name: Compile unit tests
-    #           run: make tests_run
-
-    #         - name: Run unit tests
-    #           run: ./unit_tests
-
-            # - name: Run integration tests
-            #   run: ./integration_testing
+      - name: Check integration test
+        run: ./unit_testing
