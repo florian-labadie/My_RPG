@@ -43,6 +43,7 @@ static int setup_main_menu(menu_t *menu, sfRenderWindow *window)
     menu->main_menu->wos = create_text(menu->main_menu->buttons->font,
         "World Of Sylveria", get_less_size(window, 80.0),
         get_resize(window, 960.0, 70.0 * 1.5));
+    set_text_mid_origin(menu->main_menu->wos);
     return OK;
 }
 

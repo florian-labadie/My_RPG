@@ -16,6 +16,5 @@ sfText *create_text(sfFont *font, char *sentence, int size, sfVector2f pos)
     sfText_setString(text, sentence);
     sfText_setFillColor(text, sfBlack);
     sfText_setPosition(text, pos);
-    set_text_mid_origin(text);
     return text;
 }

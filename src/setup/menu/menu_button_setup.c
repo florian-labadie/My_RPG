@@ -55,6 +55,7 @@ static int creation_loop(main_menu_buttons_t **button, char **button_name,
             get_less_size(window, 150.0),
             (sfVector2f) {get_resize(window, 960.0, 0).x,
             pos.y - BUTTON_RECT.height * 0.4 / 2.1});
+        set_text_mid_origin((*button)->text[i]);
         pos.y = pos.y + get_less_size(window, 175.0);
     }
     return OK;
