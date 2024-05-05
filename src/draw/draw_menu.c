@@ -14,6 +14,7 @@ static void draw_help_menu(sfRenderWindow *window, menu_t *menu)
 
 static void draw_option_menu(sfRenderWindow *window, menu_t *menu)
 {
+    
 }
 
 static void draw_main_menu(sfRenderWindow *window,
