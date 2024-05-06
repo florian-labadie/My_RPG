@@ -71,10 +71,8 @@ void background_menu_manager(menu_t *menu);
 void game_manager(rpg_t *rpg);
 
 /* OPTION */
-int anim_open_book(settings_t *settings);
-int anim_next_page(settings_t *settings);
-int anim_previous_page(settings_t *settings);
-int anim_close_book(settings_t *settings);
+int turn_book(sfSprite *sprite, sfClock *clock);
+int open_close_book(sfSprite *sprite, sfClock *clock);
 
 /* OPTION */
 int setup(settings_t *settings);

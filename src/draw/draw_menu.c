@@ -14,7 +14,10 @@ static void draw_help_menu(sfRenderWindow *window, menu_t *menu)
 
 static void draw_option_menu(sfRenderWindow *window, menu_t *menu)
 {
-    
+    sfRenderWindow_drawSprite(window, menu->settings->book_sprites[0], NULL);
+    open_close_book(menu->settings->book_sprites[0], menu->settings->book_clock);
+    sfRenderWindow_drawSprite(window, menu->settings->arrows_sprites[0], NULL);
+    sfRenderWindow_drawSprite(window, menu->settings->arrows_sprites[1], NULL);
 }
 
 static void draw_main_menu(sfRenderWindow *window,

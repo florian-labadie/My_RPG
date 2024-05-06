@@ -28,6 +28,7 @@ int open_close_book(sfSprite *sprite, sfClock *clock)
     sfIntRect rect = {0, 0, 0, 0};
 
     rect = sfSprite_getTextureRect(sprite);
+    sfSprite_setTextureRect(sprite, rect);
     if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) > 0.1 &&
         rect.left < 2709) {
         rect.left += 252;

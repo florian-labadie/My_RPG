@@ -20,12 +20,14 @@
     #define OPEN_BOOK_RECT ((sfIntRect) {-50, 0, 252, 297})
     #define TURN_PAGE_RECT ((sfIntRect) {-9, 0, 248, 297})
     #define CLOSE_BOOK_RECT ((sfIntRect) {-9, 0, 252, 297})
+    #define RIGHT_ARROW_RECT ((sfIntRect) {1, 5, 123, 61})
+    #define LEFT_ARROW_RECT ((sfIntRect) {1, 5, 123, 61})
 
 typedef struct settings_s {
     sfTexture **book_textures;
     sfSprite **book_sprites;
-    sfSprite *left_arrow;
-    sfSprite *right_arrow;
+    sfSprite **arrows_text;
+    sfSprite **arrows_sprites;
     sfSprite *plus_sign;
     sfSprite *minus_sign;
     sfClock *book_clock;

@@ -24,9 +24,28 @@ static int setup_book(settings_t *settings)
         if (!settings->book_sprites[i])
             return KO;
     }
-    settings->book_textures = NULL;
-    settings->book_sprites = NULL;
     settings->book_clock = sfClock_create();
+    return OK;
+}
+
+static int setup_arrows(settings_t *settings)
+{
+    char *path[2] = {RIGHT_ARROW_P, LEFT_ARROW_P};
+    sfIntRect rect[2] = {RIGHT_ARROW_RECT, LEFT_ARROW_RECT};
+
+    for (int i = 0; i < 2; i++) {
+        settings->arrows_text[i] = sfTexture_createFromFile(path[i], NULL);
+        if (!settings->arrows_text[i])
+            return KO;
+    }
+    settings->arrows_sprites[0] = create_button(settings->arrows_text[0],
+        (sfVector2f) {1, 1}, (sfVector2f) {0, 0});
+    settings->arrows_sprites[1] = create_button(settings->arrows_text[1],
+        (sfVector2f) {1, 1}, (sfVector2f) {100, 0});
+    sfSprite_setTextureRect(settings->arrows_sprites[0], rect[0]);
+    sfSprite_setTextureRect(settings->arrows_sprites[1], rect[1]);
+    if (!settings->arrows_sprites[0] || !settings->arrows_sprites[1])
+        return KO;
     return OK;
 }
 
@@ -34,7 +53,9 @@ int setup_option_menu(settings_t *settings, sfRenderWindow *window)
 {
     settings->book_sprites = malloc(sizeof(sfSprite *) * (4 + 1));
     settings->book_textures = malloc(sizeof(sfTexture *) * (4 + 1));
-    if (setup_book(settings) == KO)
+    settings->arrows_text = malloc(sizeof(sfTexture *) * (2 + 1));
+    settings->arrows_sprites = malloc(sizeof(sfSprite *) * (2 + 1));
+    if (setup_book(settings) == KO || setup_arrows(settings) == KO)
         return KO;
     return OK;
 }
