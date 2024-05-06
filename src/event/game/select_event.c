@@ -61,6 +61,28 @@ static int buttons_select_action(rpg_t *rpg, sfEvent event,
     return OK;
 }
 
+static void sprite_growth(rpg_t *rpg, sfVector2f mouse_pos)
+{
+    for (int i = 0; rpg->game->select->button_select[i] != NULL; i++) {
+        if (get_sprite_bounds
+            (rpg->game->select->button_select[i], mouse_pos) == sfTrue) {
+            sfSprite_setScale(rpg->game->select->button_select[i],
+                get_resize(rpg->window, 2.5, 2.5));
+        } else
+            sfSprite_setScale(rpg->game->select->button_select[i],
+                get_resize(rpg->window, 2, 2));
+    }
+    for (int i = 0; rpg->game->select->characters[i] != NULL; i++) {
+        if (get_sprite_bounds
+                (rpg->game->select->characters[i], mouse_pos) == sfTrue) {
+            sfSprite_setScale(rpg->game->select->characters[i],
+                get_resize(rpg->window, 3, 3));
+        } else
+            sfSprite_setScale(rpg->game->select->characters[i],
+                get_resize(rpg->window, 2.5, 2.5));
+    }
+}
+
 int select_event(rpg_t *rpg, sfEvent event)
 {
     sfVector2f mouse_pos = get_mouse_pos(rpg->window, rpg->window_size);
@@ -73,14 +95,6 @@ int select_event(rpg_t *rpg, sfEvent event)
     if (event.key.type == sfEvtKeyPressed && event.key.code == sfKeyUp)
         return choose_character(rpg, &rpg->game->select->player,
             (int)rpg->game->select->player - 1);
-    for (int i = 0; rpg->game->select->characters[i] != NULL; i++) {
-        if (get_sprite_bounds
-                (rpg->game->select->characters[i], mouse_pos) == sfTrue) {
-            sfSprite_setScale(rpg->game->select->characters[i],
-                get_resize(rpg->window, 3, 3));
-        } else
-            sfSprite_setScale(rpg->game->select->characters[i],
-                get_resize(rpg->window, 2.5, 2.5));
-    }
+    sprite_growth(rpg, mouse_pos);
     return OK;
 }

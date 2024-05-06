@@ -21,7 +21,8 @@ static void draw_select_charac(sfRenderWindow *window, game_t *game)
     for (int i = 0; game->select->characters[i] != NULL; i += 1)
         sfRenderWindow_drawSprite(window, game->select->characters[i], NULL);
     for (int i = 0; game->select->button_select[i] != NULL; i += 1)
-        sfRenderWindow_drawSprite(window, game->select->button_select[i], NULL);
+        sfRenderWindow_drawSprite
+            (window, game->select->button_select[i], NULL);
     sfRenderWindow_drawText
         (window, game->select->text[game->select->player], NULL);
     sfRenderWindow_drawSprite(window, game->select->arrow_selec, NULL);
