@@ -12,6 +12,10 @@
     #define NEXT_PAGE_P "assets/book_animation/book_2.png"
     #define PREVIOUS_PAGE_P "assets/book_animation/book_3.png"
     #define CLOSE_BOOK_P "assets/book_animation/book_4.png"
+    #define RIGHT_ARROW_P "assets/book_animation/right_arrow.png"
+    #define LEFT_ARROW_P "assets/book_animation/left_arrow.png"
+    #define PLUS_SIGN_P "assets/book_animation/plus_sign.png"
+    #define MINUS_SIGN_P "assets/book_animation/minus_sign.png"
 
     #define OPEN_BOOK_RECT ((sfIntRect) {-50, 0, 252, 297})
     #define TURN_PAGE_RECT ((sfIntRect) {-9, 0, 248, 297})
@@ -20,6 +24,10 @@
 typedef struct settings_s {
     sfTexture **book_textures;
     sfSprite **book_sprites;
+    sfSprite *left_arrow;
+    sfSprite *right_arrow;
+    sfSprite *plus_sign;
+    sfSprite *minus_sign;
     sfClock *book_clock;
 } settings_t;
 
