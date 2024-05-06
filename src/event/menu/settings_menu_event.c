@@ -33,5 +33,5 @@ void music_sound(stock_setting_t *setting, settings_t *sprite, rpg_t *rpg)
             setting->sound_game = fminf(setting->sound_game, 100.0f);
         }
     }
-    set_volume_music(setting);
+    set_volume_music(rpg);
 }
