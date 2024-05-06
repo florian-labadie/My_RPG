@@ -86,8 +86,8 @@ static int setup_button_selec(select_t **select, sfRenderWindow *window)
 {
     sfVector2f scales[2] = {get_resize(window, 2, 2),
         get_resize(window, 2, 2)};
-    sfVector2f pos[2] = {get_resize(window, 1600.0, 825.0),
-        get_resize(window, 250.0, 825.0)};
+    sfVector2f pos[2] = {get_resize(window, 1600.0, 855.0),
+        get_resize(window, 250.0, 855.0)};
     sfIntRect rects[2] = {VALID_RECT, BACK_RECT};
 
     (*select)->button_select_texture =
@@ -100,6 +100,8 @@ static int setup_button_selec(select_t **select, sfRenderWindow *window)
         if (!(*select)->button_select)
             return KO;
         sfSprite_setTextureRect((*select)->button_select[i], rects[i]);
+        sfSprite_setOrigin((*select)->button_select[i],
+            (sfVector2f){rects[i].width / 2, rects[i].height / 2});
     }
     return OK;
 }

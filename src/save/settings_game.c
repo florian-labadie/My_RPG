@@ -17,14 +17,9 @@ static void setting_by_default(stock_setting_t *setting)
         setting->screen_mode = true;
     if (setting->sound_game < 0)
         setting->sound_game = 50.0;
-    if (setting->language != "FR" && setting->language != "EN")
-        setting->language = "FR";
-}
-
-static void check_status(rpg_t *rpg, char *line)
-{
-    if (strcmp(line, SETTING_STR) == 0)
-            rpg->setting->status = SETTINGS;
+    if (!setting->language || my_strcmp(setting->language, "FR") != 0 &&
+        my_strcmp(setting->language, "EN") != 0)
+        setting->language = my_strdup("FR");
 }
 
 static char *check_is_value(void)
@@ -55,8 +50,8 @@ static int set_settings_menu(stock_setting_t *setting, char *line)
         setting->fps = atof(check_is_value());
     if (strcmp(param, "SoundGame") == 0)
         setting->sound_game = atof(check_is_value());
-    if (strcmp(param, "Language=") == 0)
-        setting->language = check_is_value();
+    if (strcmp(param, "Language") == 0)
+        setting->language = my_strdup(check_is_value());
     return OK;
 }
 
@@ -65,7 +60,6 @@ static int get_setting_file(rpg_t *rpg, char *line)
     if (rpg->setting->status == SETTINGS) {
         if (set_settings_menu(rpg->setting, line) == KO)
             return KO;
-        setting_by_default(rpg->setting);
     }
     return OK;
 }
@@ -82,7 +76,6 @@ static int get_line(rpg_t *rpg)
         check_commentary(&line);
         if (check_blankline(line) == OK)
             continue;
-        check_status(rpg, line);
         if (get_setting_file(rpg, line) == KO)
             return KO;
     }
@@ -94,11 +87,13 @@ static int get_line(rpg_t *rpg)
 int settings_game(rpg_t *rpg)
 {
     rpg->setting = malloc(sizeof(stock_setting_t));
+    rpg->setting->language = NULL;
     if (!rpg->setting)
         return KO;
     rpg->setting->status = malloc(sizeof(status_t));
     rpg->setting->status = SETTINGS;
     if (get_line(rpg) == KO)
         return KO;
+    setting_by_default(rpg->setting);
     return OK;
 }
