@@ -33,6 +33,7 @@ SETUP	=	src/setup/menu_setup.c						\
 			src/setup/game/map_setup.c					\
 			src/setup/game/player_setup.c				\
 			src/setup/game/selection_charac.c			\
+			src/setup/menu/option_features.c 			\
 
 EVENT	=	src/event/event.c							\
 			src/event/menu/main_menu_event.c			\

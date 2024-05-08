@@ -17,8 +17,8 @@ static void setting_by_default(stock_setting_t *setting)
         setting->screen_mode = true;
     if (setting->sound_game < 0)
         setting->sound_game = 50.0;
-    if (!setting->language || my_strcmp(setting->language, "FR") != 0 &&
-        my_strcmp(setting->language, "EN") != 0)
+    if (!setting->language || (my_strcmp(setting->language, "FR") != 0 &&
+        my_strcmp(setting->language, "EN") != 0))
         setting->language = my_strdup("FR");
 }
 

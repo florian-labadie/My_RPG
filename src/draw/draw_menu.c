@@ -14,10 +14,19 @@ static void draw_help_menu(sfRenderWindow *window, menu_t *menu)
 
 static void draw_option_menu(sfRenderWindow *window, menu_t *menu)
 {
-    sfRenderWindow_drawSprite(window, menu->settings->book_sprites[0], NULL);
-    open_close_book(menu->settings->book_sprites[0], menu->settings->book_clock);
-    sfRenderWindow_drawSprite(window, menu->settings->arrows_sprites[0], NULL);
-    sfRenderWindow_drawSprite(window, menu->settings->arrows_sprites[1], NULL);
+    sfVector2i mouse_pi = sfMouse_getPositionRenderWindow(window);
+    sfVector2f mouse_p = {(float)mouse_pi.x, (float)mouse_pi.y};
+    sfBool arrow_l = get_sprite_bounds(menu->settings->extern_sp[0], mouse_p);
+    sfBool arrow_r = get_sprite_bounds(menu->settings->extern_sp[1], mouse_p);
+    sfBool exit = get_sprite_bounds(menu->settings->extern_sp[2], mouse_p);
+
+    sfRenderWindow_drawSprite(window, menu->settings->book_sp[0], NULL);
+    open_close_book(menu->settings->book_sp[0], menu->settings->b_clock);
+    sfRenderWindow_drawSprite(window, menu->settings->extern_sp[0], NULL);
+    sfRenderWindow_drawSprite(window, menu->settings->extern_sp[1], NULL);
+    sfRenderWindow_drawSprite(window, menu->settings->extern_sp[2], NULL);
+    exit_action(menu, exit);
+    book_actions(window, menu, arrow_l, arrow_r);
 }
 
 static void draw_main_menu(sfRenderWindow *window,
@@ -46,7 +55,7 @@ static void draw_menu_background(sfRenderWindow *window,
 void draw_menu(rpg_t *rpg)
 {
     void (*draw_menu_fct[])(sfRenderWindow *, menu_t *) =
-        {draw_main_menu, draw_help_menu, draw_option_menu};
+        {draw_main_menu, draw_help_menu, draw_option_menu, draw_help_menu};
 
     draw_menu_background(rpg->window, rpg->menu->background);
     sfRenderWindow_drawSprite(rpg->window, rpg->menu->main_menu->wos_sprite,

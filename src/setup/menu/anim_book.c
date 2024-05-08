@@ -8,7 +8,7 @@
 #include "my.h"
 
 
-int turn_book(sfSprite *sprite, sfClock *clock)
+int turn_book(settings_t *settings, sfSprite *sprite, sfClock *clock)
 {
     sfIntRect rect = {0, 0, 0, 0};
 
@@ -19,6 +19,12 @@ int turn_book(sfSprite *sprite, sfClock *clock)
         rect.left += 252;
         sfSprite_setTextureRect(sprite, rect);
         sfClock_restart(clock);
+    }
+    if (rect.left >= 1244 && rect.left > 0) {
+        rect.left = 0;
+        sfSprite_setTextureRect(sprite, rect);
+        settings->arrow_bool_l = sfFalse;
+        settings->arrow_bool_r = sfFalse;
     }
     return OK;
 }

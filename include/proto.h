@@ -54,7 +54,7 @@ int select_charac(game_t *game, sfRenderWindow *window);
 void event_manager(rpg_t *rpg);
 int main_menu_event(rpg_t *rpg, sfEvent event);
 int help_menu_event(rpg_t *rpg, sfEvent event);
-int settings_menu_event(rpg_t *rpg, sfEvent event);
+int settings_menu_event(sfRenderWindow *window, sfEvent event);
 
 /* GAME EVENT */
 int select_event(rpg_t *rpg, sfEvent event);
@@ -71,7 +71,10 @@ void background_menu_manager(menu_t *menu);
 void game_manager(rpg_t *rpg);
 
 /* OPTION */
-int turn_book(sfSprite *sprite, sfClock *clock);
+void book_actions
+(sfRenderWindow *window, menu_t *menu, sfBool arrow_l, sfBool arrow_r);
+void exit_action(menu_t *menu, sfBool exit);
+int turn_book(settings_t *settings, sfSprite *sprite, sfClock *clock);
 int open_close_book(sfSprite *sprite, sfClock *clock);
 
 /* OPTION */
