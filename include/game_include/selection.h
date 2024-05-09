@@ -16,7 +16,7 @@
     #define BACKBOARD_RECT ((sfIntRect){0, 0, 469, 200})
     #define HUMAN_STILL_RECT ((sfIntRect){0, 0, 52, 56})
     #define DWARF_STILL_RECT ((sfIntRect){0, 110, 52, 60})
-    #define ELF_STILL_RECT ((sfIntRect){0, 228, 56, 62})
+    #define ELF_STILL_RECT ((sfIntRect){0, 228, 52, 62})
     #define VALID_RECT ((sfIntRect){227, 272, 43, 41})
     #define BACK_RECT ((sfIntRect){284, 216, 43, 41})
 

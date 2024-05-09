@@ -10,6 +10,7 @@
 static void draw_story_game(sfRenderWindow *window, game_t *game)
 {
     sfRenderWindow_drawSprite(window, game->map->sprite_ground, NULL);
+    sfRenderWindow_drawSprite(window, game->player->sprites->player, NULL);
     sfRenderWindow_drawSprite(window, game->map->sprite_obj, NULL);
     change_view(game, window);
 }

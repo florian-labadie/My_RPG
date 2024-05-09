@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-int settings_menu_event(sfRenderWindow *window, sfEvent event)
+int settings_menu_event(rpg_t *rpg, sfEvent event)
 {
     return OK;
 }

@@ -54,7 +54,7 @@ int select_charac(game_t *game, sfRenderWindow *window);
 void event_manager(rpg_t *rpg);
 int main_menu_event(rpg_t *rpg, sfEvent event);
 int help_menu_event(rpg_t *rpg, sfEvent event);
-int settings_menu_event(sfRenderWindow *window, sfEvent event);
+int settings_menu_event(rpg_t *rpg, sfEvent event);
 
 /* GAME EVENT */
 int select_event(rpg_t *rpg, sfEvent event);

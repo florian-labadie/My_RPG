@@ -10,14 +10,14 @@
 int rpg_loop(rpg_t *rpg)
 {
     void (*draw_fct[])(rpg_t *rpg) = {draw_menu, draw_game};
-    void (*mangager_fct[])(rpg_t *rpg) = {menu_manager, game_manager};
+    void (*manager_fct[])(rpg_t *rpg) = {menu_manager, game_manager};
 
     while (sfRenderWindow_isOpen(rpg->window)) {
         sfRenderWindow_clear(rpg->window, sfWhite);
         event_manager(rpg);
         if (rpg->screen == END)
             break;
-        mangager_fct[rpg->screen](rpg);
+        manager_fct[rpg->screen](rpg);
         draw_fct[rpg->screen](rpg);
         sfRenderWindow_display(rpg->window);
     }

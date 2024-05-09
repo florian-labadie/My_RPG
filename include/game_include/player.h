@@ -24,6 +24,8 @@ typedef struct player_stats_s {
 typedef struct player_sprites_s {
     sfTexture *player_text;
     sfSprite *player;
+
+    sfClock *player_clock;
 } player_sprites_t;
 
 typedef struct player_s {

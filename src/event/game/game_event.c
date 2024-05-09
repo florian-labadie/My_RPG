@@ -37,18 +37,18 @@ static void get_movements_realesed(rpg_t *rpg, sfEvent event)
 
 static void get_movements(rpg_t *rpg, sfEvent event)
 {
-    if (rpg->game->player_move.y != -0.25 && event.key.code == sfKeyZ &&
+    if (rpg->game->player_move.y >= -0.10 && event.key.code == sfKeyZ &&
         event.key.type == sfEvtKeyPressed)
-        rpg->game->player_move.y += -0.25;
-    if (rpg->game->player_move.y != 0.25 && event.key.code == sfKeyS &&
+        rpg->game->player_move.y += -0.10;
+    if (rpg->game->player_move.y <= 0.10 && event.key.code == sfKeyS &&
         event.key.type == sfEvtKeyPressed)
-            rpg->game->player_move.y += 0.25;
-    if (rpg->game->player_move.x != -0.25 && event.key.code == sfKeyQ &&
+        rpg->game->player_move.y += 0.10;
+    if (rpg->game->player_move.x >= -0.10 && event.key.code == sfKeyQ &&
         event.key.type == sfEvtKeyPressed)
-        rpg->game->player_move.x += -0.25;
-    if (rpg->game->player_move.x != 0.25 && event.key.code == sfKeyD &&
+        rpg->game->player_move.x += -0.10;
+    if (rpg->game->player_move.x <= 0.10 && event.key.code == sfKeyD &&
         event.key.type == sfEvtKeyPressed)
-            rpg->game->player_move.x += 0.25;
+        rpg->game->player_move.x += 0.10;
 }
 
 int game_event(rpg_t *rpg, sfEvent event)

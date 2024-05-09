@@ -28,8 +28,8 @@
     #define BG_RECT ((sfIntRect){0, 0, 560, 272})
     #define BUTTON_RECT ((sfIntRect){0, 0, 748, 287})
     #define HUMAN_RECT ((sfIntRect){210, 0, 52, 56})
-    #define DWARF_RECT ((sfIntRect){156, 110, 52, 60})
-    #define ELF_RECT ((sfIntRect){212, 228, 52, 62})
+    #define DWARF_RECT ((sfIntRect){209, 112, 52, 57})
+    #define ELF_RECT ((sfIntRect){210, 226, 52, 62})
     #define BACK_HELP ((sfIntRect){275, 261, 51, 57})
 
 typedef enum menu_state_s {

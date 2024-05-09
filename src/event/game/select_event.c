@@ -32,10 +32,14 @@ static int choose_character(rpg_t *rpg, player_race_t *current,
     return OK;
 }
 
-static int change_screen_status(rpg_t **rpg, int i)
+static int change_screen_status(rpg_t **rpg, int i, player_race_t race)
 {
-    if (i == 0)
+    if (i == 0) {
         (*rpg)->game->screen = LOAD_GAME;
+        (*rpg)->game->player->race = race;
+        if (player_setup((*rpg)->window, (*rpg)->game->player) == KO)
+            return KO;
+    }
     if (i == 1) {
         (*rpg)->screen = MAIN_MENU;
         (*rpg)->menu->screen = MAIN;
@@ -51,7 +55,7 @@ static int buttons_select_action(rpg_t *rpg, sfEvent event,
     for (int i = 0; rpg->game->select->button_select[i] != NULL; i++) {
         if (get_sprite_bounds
             (rpg->game->select->button_select[i], mouse_pos) == sfTrue)
-            return change_screen_status(&rpg, i);
+            return change_screen_status(&rpg, i, rpg->game->select->player);
     }
     for (int i = 0; rpg->game->select->characters[i] != NULL; i++) {
         if (get_sprite_bounds
