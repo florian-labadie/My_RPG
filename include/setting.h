@@ -16,11 +16,6 @@
     #define SETTING_STR "[SETTINGS]"
     #define SAVE_STR "[SAVE]"
 
-typedef enum status_s {
-    SETTINGS,
-    SAVE
-} status_t;
-
 typedef struct stock_setting_s {
     sfVector2f size_screen;
 
@@ -28,8 +23,6 @@ typedef struct stock_setting_s {
     float fps;
     float sound_game;
     char *language;
-
-    status_t *status;
 } stock_setting_t;
 
 #endif /* !SETTING_H_ */

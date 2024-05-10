@@ -9,7 +9,7 @@
 
 static void set_volume_game(game_t *game, stock_setting_t *setting)
 {
-    if (game->map)
+    if (game->map && game->map->game_sound)
         sfMusic_setVolume(game->map->game_sound, setting->sound_game);
 }
 

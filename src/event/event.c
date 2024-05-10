@@ -26,7 +26,7 @@ void event_manager(rpg_t *rpg)
     char status = 0;
 
     while (sfRenderWindow_pollEvent(rpg->window, &event)) {
-        if (event.type == sfEvtClosed) {
+        if (event.type == sfEvtClosed || rpg->screen == END) {
             rpg->screen = END;
             return sfRenderWindow_close(rpg->window);
         }

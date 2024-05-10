@@ -7,16 +7,6 @@
 
 #include "my.h"
 
-static int free_tmps(sfVector2f *scales, sfVector2f *pos,
-    sfVector2f *origins, sfIntRect *rects)
-{
-    free(scales);
-    free(pos);
-    free(origins);
-    free(rects);
-    return OK;
-}
-
 static int setup_background_characters(background_menu_t **background,
     sfRenderWindow *window)
 {

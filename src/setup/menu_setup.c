@@ -11,6 +11,8 @@ static int malloc_struct(rpg_t *rpg)
 {
     rpg->menu = malloc(sizeof(menu_t));
     rpg->game = malloc(sizeof(game_t));
+    rpg->game->map = NULL;
+    rpg->game->player = NULL;
     rpg->menu->main_menu = malloc(sizeof(main_menu_t));
     rpg->menu->help = malloc(sizeof(help_t));
     rpg->menu->settings = malloc(sizeof(settings_t));

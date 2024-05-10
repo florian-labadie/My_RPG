@@ -23,6 +23,7 @@ GLOBALS	=	src/global_functions/create_button.c		\
 			src/global_functions/get_resize.c			\
 			src/global_functions/set_mid_origin.c		\
 			src/global_functions/set_volume_music.c		\
+			src/global_functions/read_dialogue_file.c	\
 
 SETUP	=	src/setup/menu_setup.c						\
 			src/setup/menu/background_menu_setup.c		\
@@ -66,7 +67,7 @@ NAME =		my_rpg
 
 NAMETEST = 	unit_tests
 
-CFLAGS = -Wall -Wextra -std=c99 -g
+CFLAGS = -Wall -Wextra -g
 
 CPPFLAGS	=	-I./include
 

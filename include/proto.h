@@ -33,8 +33,9 @@ sfVector2f get_resize(sfRenderWindow *window, float x, float y);
 sfVector2f get_mouse_pos(sfRenderWindow *window, sfVector2u window_size);
 float get_less_size(sfRenderWindow *window, float value);
 void set_text_mid_origin(sfText *text);
-void set_srpite_mid_origin(sfSprite *sprite);
 void set_volume_music(rpg_t *rpg);
+char *read_one_dialogue(char *filepath);
+char *read_many_dialogue(char *filepath, int dialogue_number);
 
 /* MENU SETUP */
 int menu_setup(rpg_t *rpg, char const *user);

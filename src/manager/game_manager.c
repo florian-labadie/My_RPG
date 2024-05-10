@@ -41,7 +41,7 @@ static void player_still_manager(game_t *game, player_race_t race)
 {
     sfIntRect rects[3] = {HUMAN_STILL_RECT, DWARF_STILL_RECT, ELF_STILL_RECT};
     sfIntRect rect = rects[race];
-    sfVector2f origins[3] = 
+    sfVector2f origins[3] =
         {{HUMAN_STILL_RECT.width / 2, HUMAN_STILL_RECT.height / 2},
         {DWARF_STILL_RECT.width / 2, DWARF_STILL_RECT.height / 2},
         {ELF_STILL_RECT.width / 2, ELF_STILL_RECT.height / 2}};

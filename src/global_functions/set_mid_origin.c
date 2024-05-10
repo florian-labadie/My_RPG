@@ -14,11 +14,3 @@ void set_text_mid_origin(sfText *text)
     rect = sfText_getGlobalBounds(text);
     sfText_setOrigin(text, (sfVector2f){rect.width / 2, rect.height / 2});
 }
-
-void set_srpite_mid_origin(sfSprite *sprite)
-{
-    sfFloatRect rect = {0, 0, 0, 0};
-
-    rect = sfSprite_getGlobalBounds(sprite);
-    sfSprite_setOrigin(sprite, (sfVector2f){rect.width / 2, rect.height / 2});
-}

@@ -1,4 +1,3 @@
-#[HUMAN]
 Je suis devenu un puissant aventurier afin de venger mon village.
 Je combat maintenant afin de proteger les plus faibles
 de la menace des orcs.
@@ -12,7 +11,6 @@ Defense : 75
 Les Humains sont un choix polyvalent, ils ont une certaine affinite
 avec la magie et le combat.
 ===============================================================
-#[NAIN]
 Je viens du royaume de Grimbergen. Vivant depuis longtemps
 sous la montagne, j ai decide de quitter mon royaume afin de
 decouvrir le monde et de parfaire mon art.
@@ -26,7 +24,6 @@ Defense : 100
 Les nains sont un choix interessant si vous voulez
 juste briser des cranes a la seule force de vos bras (DEMACIA).
 ===============================================================
-#[ELF]
 Je viens du royaume de Sapin. Vivant depuis longtemps
 au sein de la foret et avec les esprits. J ai decide de quitter
 ma foret natale afin d apprendre de nouveaux sortileges.

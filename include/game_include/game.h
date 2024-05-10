@@ -9,6 +9,8 @@
     #define GAME_H_
 
     #include "player.h"
+    #include "pause.h"
+    #include "inventory.h"
     #include "selection.h"
 
 typedef enum game_state_s {
@@ -28,6 +30,8 @@ typedef struct game_s {
     select_t *select;
     map_t *map;
     player_t *player;
+    inventory_t *inventory;
+    pause_t *pause;
 } game_t;
 
 #endif /* !GAME_H_ */
