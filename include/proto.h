@@ -50,6 +50,7 @@ int player_setup(sfRenderWindow *window, player_t *player);
 int setup_map(map_t *map, sfRenderWindow *window);
 void change_view(game_t *game, sfRenderWindow *window);
 int select_charac(game_t *game, sfRenderWindow *window);
+int pause_menu_setup(game_t *game, sfRenderWindow *window);
 
 /* MENU EVENT */
 void event_manager(rpg_t *rpg);

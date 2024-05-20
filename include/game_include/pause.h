@@ -10,6 +10,7 @@
 
 typedef struct pause_s {
     sfRectangleShape *background;
+    sfFont *font;
 } pause_t;
 
 #endif /* !PAUSE_H_ */

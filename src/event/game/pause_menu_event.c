@@ -9,5 +9,7 @@
 
 int pause_menu_event(rpg_t *rpg, sfEvent event)
 {
+    if (event.key.code == sfKeyEscape && event.key.type == sfEvtKeyPressed)
+        rpg->game->screen = LOAD_GAME;
     return OK;
 }

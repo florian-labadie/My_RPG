@@ -9,7 +9,6 @@
 
 static void player_mouvement(sfSprite *sprite, sfVector2f player_move)
 {
-    sfSprite_move(sprite, (sfVector2f){player_move.x, player_move.y});
     if (player_move.x > 0)
         sfSprite_setScale(sprite, (sfVector2f){0.5, 0.5});
     if (player_move.x < 0)

@@ -7,11 +7,13 @@
 
 #include "my.h"
 
+static void draw_pause_menu(sfRenderWindow *window, game_t *game)
+{
+    sfRenderWindow_drawRectangleShape(window, game->pause->background, NULL);
+}
+
 static void draw_story_game(sfRenderWindow *window, game_t *game)
 {
-    sfRenderWindow_drawSprite(window, game->map->sprite_ground, NULL);
-    sfRenderWindow_drawSprite(window, game->player->sprites->player, NULL);
-    sfRenderWindow_drawSprite(window, game->map->sprite_obj, NULL);
     change_view(game, window);
 }
 
@@ -34,6 +36,17 @@ void draw_game(rpg_t *rpg)
     void (*draw_game_fct[])(sfRenderWindow *, game_t *) =
         {draw_select_charac, draw_story_game};
 
-    draw_game_fct[rpg->game->screen](rpg->window, rpg->game);
+    if (rpg->game->screen >= LOAD_GAME) {
+        sfRenderWindow_drawSprite(rpg->window,
+            rpg->game->map->sprite_ground, NULL);
+        sfRenderWindow_drawSprite(rpg->window,
+            rpg->game->player->sprites->player, NULL);
+        sfRenderWindow_drawSprite(rpg->window,
+            rpg->game->map->sprite_obj, NULL);
+    }
+    if (rpg->game->screen != PAUSE)
+        draw_game_fct[rpg->game->screen](rpg->window, rpg->game);
+    else
+        draw_pause_menu(rpg->window, rpg->game);
     return;
 }
