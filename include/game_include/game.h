@@ -12,6 +12,7 @@
     #include "pause.h"
     #include "inventory.h"
     #include "selection.h"
+    #include "map.h"
 
 typedef enum game_state_s {
     SELECTION,

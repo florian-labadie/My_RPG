@@ -25,6 +25,7 @@ typedef struct player_sprites_s {
     sfTexture *player_text;
     sfSprite *player;
 
+    sfIntRect player_rect;
     sfClock *player_clock;
 } player_sprites_t;
 

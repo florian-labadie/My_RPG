@@ -11,7 +11,6 @@
     #include "enum.h"
 
     #include "setting.h"
-    #include "map.h"
     #include "menu_include/menu.h"
     #include "game_include/game.h"
 
