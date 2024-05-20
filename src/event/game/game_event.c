@@ -14,21 +14,21 @@ static int top_down(game_t *game)
     sfVector2f pos_1 = game->player->position;
     sfVector2f pos_2 =  game->player->position;
 
-    if (game->player->position.y > 0) {
-        pos_1.x += (game->player->sprites->player_rect.left / 2);
-        pos_1.y += (game->player->sprites->player_rect.top / 2);
-        pos_2.x -= (game->player->sprites->player_rect.left / 2);
-        pos_2.y += (game->player->sprites->player_rect.top / 2);
+    if (game->player_move.y > 0) {
+        pos_1.x += (game->player->sprites->player_rect.width / 4);
+        pos_1.y += (game->player->sprites->player_rect.height / 4);
+        pos_2.x -= (game->player->sprites->player_rect.width / 4);
+        pos_2.y += (game->player->sprites->player_rect.height / 4);
     }
-    if (game->player->position.y < 0) {
-        pos_1.x += (game->player->sprites->player_rect.left / 2);
-        pos_1.y -= (game->player->sprites->player_rect.top / 2);
-        pos_2.x -= (game->player->sprites->player_rect.left / 2);
-        pos_2.y -= (game->player->sprites->player_rect.top / 2);   
+    if (game->player_move.y < 0) {
+        pos_1.x += (game->player->sprites->player_rect.width / 4);
+        pos_1.y -= (game->player->sprites->player_rect.height / 4);
+        pos_2.x -= (game->player->sprites->player_rect.width / 4);
+        pos_2.y -= (game->player->sprites->player_rect.height / 4);   
     }
     color1 = sfImage_getPixel(game->map->layers, pos_1.x, pos_1.y);
     color2 = sfImage_getPixel(game->map->layers, pos_2.x, pos_2.y);
-    if (color1.a == 255 && color2.a == 255)
+    if (color1.a == 0 || color2.a == 0)
         return KO;
     return OK;
 }
@@ -40,30 +40,30 @@ static int left_right(game_t *game)
     sfVector2f pos_1 = game->player->position;
     sfVector2f pos_2 =  game->player->position;
 
-    if (game->player->position.x > 0) {
-        pos_1.x += (game->player->sprites->player_rect.width / 2);
-        pos_1.y += (game->player->sprites->player_rect.height / 2);
-        pos_2.x += (game->player->sprites->player_rect.width / 2);
-        pos_2.y -= (game->player->sprites->player_rect.height / 2);
+    if (game->player_move.x > 0) {
+        pos_1.x += (game->player->sprites->player_rect.width / 4);
+        pos_1.y += (game->player->sprites->player_rect.height / 4);
+        pos_2.x += (game->player->sprites->player_rect.width / 4);
+        pos_2.y -= (game->player->sprites->player_rect.height / 4);
     }
-    if (game->player->position.x < 0) {
-        pos_1.x -= (game->player->sprites->player_rect.width / 2);
-        pos_1.y += (game->player->sprites->player_rect.height / 2);
-        pos_2.x -= (game->player->sprites->player_rect.width / 2);
-        pos_2.y -= (game->player->sprites->player_rect.height / 2);   
+    if (game->player_move.x < 0) {
+        pos_1.x -= (game->player->sprites->player_rect.width / 4);
+        pos_1.y += (game->player->sprites->player_rect.height / 4);
+        pos_2.x -= (game->player->sprites->player_rect.width / 4);
+        pos_2.y -= (game->player->sprites->player_rect.height / 4);   
     }
     color1 = sfImage_getPixel(game->map->layers, pos_1.x, pos_1.y);
     color2 = sfImage_getPixel(game->map->layers, pos_2.x, pos_2.y);
-    if (color1.a == 255 && color2.a == 255)
+    if (color1.a == 0 || color2.a == 0)
         return KO;
     return OK;
 }
 
 static int sprite_move_player(game_t *game)
 {
-    if (game->player->position.x != 0 && left_right(game) == OK)
+    if (game->player_move.x != 0 && left_right(game) == OK)
         game->player->position.x += game->player_move.x;
-    if (game->player->position.y != 0 && top_down(game) == OK)
+    if (game->player_move.y != 0 && top_down(game) == OK)
         game->player->position.y += game->player_move.y;
     if (game->player->position.x < 30)
         game->player->position.x = 30;

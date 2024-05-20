@@ -31,10 +31,11 @@ static int player_sprites_setup(sfRenderWindow *window, player_t *player)
     player->sprites->player_text = sfTexture_createFromFile(PLAYER, NULL);
     player->sprites->player_clock = sfClock_create();
     player->sprites->player_rect = rects[player->race];
+    player->position = (sfVector2f){170, 660};
     if (!player->sprites->player_text)
         return KO;
     player->sprites->player = create_button(player->sprites->player_text,
-        (sfVector2f){0.5, 0.5}, (sfVector2f){170, 670});
+        (sfVector2f){0.5, 0.5}, player->position);
     sfSprite_setTextureRect(player->sprites->player, rects[player->race]);
     sfSprite_setOrigin(player->sprites->player, origins[player->race]);
     return OK;
