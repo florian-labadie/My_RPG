@@ -11,6 +11,8 @@
     #define MAP_P "assets/map/map_rpg.png"
     #define MAP_OBJ "assets/map/map_rpg_texture.png"
     #define AMB_MUSIC "assets/music/ambiance_music.ogg"
+    #define PARTICLE "assets/map/portal_particles.png"
+    #define NB_PARTICLE 15
 
     #include <SFML/Graphics.h>
     #include <SFML/Window.h>
@@ -21,6 +23,13 @@ typedef struct map_s {
     sfSprite *sprite_obj;
 
     sfMusic *game_sound;
+
+    sfTexture *particle_text;
+    sfSprite **particule_spr;
+    sfIntRect *particle_rect;
+    sfClock *part_clock;
+    sfTime time_clock;
+    int seconds;
 
     sfTexture *texture_ground;
     sfSprite *sprite_ground;
