@@ -8,6 +8,7 @@
 #ifndef MAP_H_
     #define MAP_H_
 
+    #define LAYER_MAP "assets/map/layer_texture.png"
     #define MAP_P "assets/map/map_rpg.png"
     #define MAP_OBJ "assets/map/map_rpg_texture.png"
     #define LAYER_MAP "assets/map/layer_texture.png"
