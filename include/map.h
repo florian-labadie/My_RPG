@@ -8,6 +8,7 @@
 #ifndef MAP_H_
     #define MAP_H_
 
+    #define LAYER_MAP "assets/map/layer_texture.png"
     #define MAP_P "assets/map/map_rpg.png"
     #define MAP_OBJ "assets/map/map_rpg_texture.png"
     #define AMB_MUSIC "assets/music/ambiance_music.ogg"
@@ -21,6 +22,7 @@
 typedef struct map_s {
     sfTexture *texture_obj;
     sfSprite *sprite_obj;
+    sfImage *layers;
 
     sfMusic *game_sound;
 
