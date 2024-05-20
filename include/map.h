@@ -10,6 +10,7 @@
 
     #define MAP_P "assets/map/map_rpg.png"
     #define MAP_OBJ "assets/map/map_rpg_texture.png"
+    #define LAYER_MAP "assets/map/layer_texture.png"
     #define AMB_MUSIC "assets/music/ambiance_music.ogg"
     #define PARTICLE "assets/map/portal_particles.png"
     #define NB_PARTICLE 15
@@ -21,6 +22,7 @@
 typedef struct map_s {
     sfTexture *texture_obj;
     sfSprite *sprite_obj;
+    sfImage *layers;
 
     sfMusic *game_sound;
 

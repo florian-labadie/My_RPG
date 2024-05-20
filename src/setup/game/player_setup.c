@@ -30,6 +30,7 @@ static int player_sprites_setup(sfRenderWindow *window, player_t *player)
 
     player->sprites->player_text = sfTexture_createFromFile(PLAYER, NULL);
     player->sprites->player_clock = sfClock_create();
+    player->sprites->player_rect = rects[player->race];
     if (!player->sprites->player_text)
         return KO;
     player->sprites->player = create_button(player->sprites->player_text,

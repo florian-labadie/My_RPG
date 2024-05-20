@@ -7,24 +7,76 @@
 
 #include "my.h"
 
+static int top_down(game_t *game)
+{
+    sfColor color1 = sfBlack;
+    sfColor color2 = sfBlack;
+    sfVector2f pos_1 = game->player->position;
+    sfVector2f pos_2 =  game->player->position;
+
+    if (game->player->position.y > 0) {
+        pos_1.x += (game->player->sprites->player_rect.left / 2);
+        pos_1.y += (game->player->sprites->player_rect.top / 2);
+        pos_2.x -= (game->player->sprites->player_rect.left / 2);
+        pos_2.y += (game->player->sprites->player_rect.top / 2);
+    }
+    if (game->player->position.y < 0) {
+        pos_1.x += (game->player->sprites->player_rect.left / 2);
+        pos_1.y -= (game->player->sprites->player_rect.top / 2);
+        pos_2.x -= (game->player->sprites->player_rect.left / 2);
+        pos_2.y -= (game->player->sprites->player_rect.top / 2);   
+    }
+    color1 = sfImage_getPixel(game->map->layers, pos_1.x, pos_1.y);
+    color2 = sfImage_getPixel(game->map->layers, pos_2.x, pos_2.y);
+    if (color1.a == 255 && color2.a == 255)
+        return KO;
+    return OK;
+}
+
+static int left_right(game_t *game)
+{
+    sfColor color1 = sfBlack;
+    sfColor color2 = sfBlack;
+    sfVector2f pos_1 = game->player->position;
+    sfVector2f pos_2 =  game->player->position;
+
+    if (game->player->position.x > 0) {
+        pos_1.x += (game->player->sprites->player_rect.width / 2);
+        pos_1.y += (game->player->sprites->player_rect.height / 2);
+        pos_2.x += (game->player->sprites->player_rect.width / 2);
+        pos_2.y -= (game->player->sprites->player_rect.height / 2);
+    }
+    if (game->player->position.x < 0) {
+        pos_1.x -= (game->player->sprites->player_rect.width / 2);
+        pos_1.y += (game->player->sprites->player_rect.height / 2);
+        pos_2.x -= (game->player->sprites->player_rect.width / 2);
+        pos_2.y -= (game->player->sprites->player_rect.height / 2);   
+    }
+    color1 = sfImage_getPixel(game->map->layers, pos_1.x, pos_1.y);
+    color2 = sfImage_getPixel(game->map->layers, pos_2.x, pos_2.y);
+    if (color1.a == 255 && color2.a == 255)
+        return KO;
+    return OK;
+}
+
 static int sprite_move_player(game_t *game)
 {
-    sfVector2f pos = sfSprite_getPosition(game->player->sprites->player);
-
-    pos.x += game->player_move.x;
-    pos.y += game->player_move.y;
-    if (pos.x < 30)
-        pos.x = 30;
-    if (pos.x > 930)
-        pos.x = 930;
-    if (pos.y < 30)
-        pos.y = 30;
-    if (pos.y > 665)
-        pos.y = 665;
-    sfSprite_setPosition(game->player->sprites->player, pos);
-    if (pos.x > 200 && pos.x < 760)
+    if (game->player->position.x != 0 && left_right(game) == OK)
+        game->player->position.x += game->player_move.x;
+    if (game->player->position.y != 0 && top_down(game) == OK)
+        game->player->position.y += game->player_move.y;
+    if (game->player->position.x < 30)
+        game->player->position.x = 30;
+    if (game->player->position.x > 930)
+        game->player->position.x = 930;
+    if (game->player->position.y < 30)
+        game->player->position.y = 30;
+    if (game->player->position.y > 665)
+        game->player->position.y = 665;
+    sfSprite_setPosition(game->player->sprites->player, game->player->position);
+    if (game->player->position.x > 200 && game->player->position.x < 760)
         game->map->rect.left += game->player_move.x;
-    if (pos.y > 100 && pos.y < 595)
+    if (game->player->position.y > 100 && game->player->position.y < 595)
         game->map->rect.top += game->player_move.y;
     return OK;
 }
