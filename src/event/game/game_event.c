@@ -65,15 +65,9 @@ static int sprite_move_player(game_t *game)
         game->player->position.x += game->player_move.x;
     if (game->player_move.y != 0 && top_down(game) == OK)
         game->player->position.y += game->player_move.y;
-    if (game->player->position.x < 30)
-        game->player->position.x = 30;
-    if (game->player->position.x > 930)
-        game->player->position.x = 930;
-    if (game->player->position.y < 30)
-        game->player->position.y = 30;
-    if (game->player->position.y > 665)
-        game->player->position.y = 665;
     sfSprite_setPosition(game->player->sprites->player, game->player->position);
+    game->map->rect.left = game->player->position.x - 200;
+    game->map->rect.top = game->player->position.y - 100;
     if (game->player->position.x > 200 && game->player->position.x < 760)
         game->map->rect.left += game->player_move.x;
     if (game->player->position.y > 100 && game->player->position.y < 595)
