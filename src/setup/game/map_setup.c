@@ -13,6 +13,7 @@ int setup_map(map_t *map, sfRenderWindow *window)
                 400.0, 200.0};
     map->texture_ground = sfTexture_createFromFile(MAP_P, NULL);
     map->texture_obj = sfTexture_createFromFile(MAP_OBJ, NULL);
+    map->layers = sfImage_createFromFile(LAYER_MAP);
     map->game_sound = sfMusic_createFromFile(AMB_MUSIC);
     if (!map->texture_ground)
         return KO;
