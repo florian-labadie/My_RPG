@@ -65,6 +65,7 @@ static void draw_help_flag(game_t *game, sfTime flag_time,
         set_pos_flag(game, window);
         set_pos_text_flag(game, window);
     }
+    
 }
 
 static void draw_flag(game_t *game, sfRenderWindow *window)
