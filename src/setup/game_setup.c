@@ -19,10 +19,11 @@ int game_setup(rpg_t *rpg)
     if (!rpg->game->player || !rpg->game->map || !rpg->game->select ||
         !rpg->game->player->sprites)
         return KO;
-    if (setup_map(rpg->game->map, rpg->window) == KO ||
-        select_charac(rpg->game, rpg->window) == KO ||
+    if (setup_map(rpg->game->map, rpg->window, rpg->setting->sound_game) == KO
+        || select_charac(rpg->game, rpg->window) == KO ||
         pause_menu_setup(rpg->game, rpg->window) == KO ||
-        setup_house(rpg->game->map, rpg->window) == KO)
+        setup_house(rpg->game->map, rpg->window) == KO ||
+        set_up_battlefield(rpg->game->map, rpg->setting->sound_game) == KO)
         return KO;
     set_volume_music(rpg);
     return OK;

@@ -16,8 +16,7 @@
 
 typedef enum game_state_s {
     SELECTION,
-    LOAD_GAME,
-    // PLAYING,
+    PLAYING,
     PAUSE,
     INVENTORY,
     GAME_STATE_SIZE
