@@ -15,6 +15,7 @@
     #define ALCHEMY_MAP "assets/map/alchemist.png"
     #define LAYER_MAP "assets/map/layer_texture.png"
     #define AMB_MUSIC "assets/music/ambiance_music.ogg"
+    #define SHOP_MUSIC "assets/music/shop_music.ogg"
     #define PARTICLE "assets/map/portal_particles.png"
     #define FLAG "assets/map/flag_portal.png"
     #define NB_PARTICLE 15
@@ -25,6 +26,8 @@
 
 typedef enum choice_map_s {
     VILLAGE,
+    FORGE,
+    ALCHEMY,
     BATTLEFIELD,
     NB_MAP
 } choice_map_t;

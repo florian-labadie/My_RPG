@@ -41,6 +41,12 @@ static int top_down(game_t *game)
     color3 = sfImage_getPixel(game->map->layers, pos_3.x, pos_3.y);
     if (color1.a == 0 || color2.a == 0 || color3.a == 0)
         return KO;
+    if (color1.r == 254 || color2.r == 254 || color3.r == 254) {
+        game->map->choice_map = ALCHEMY;
+    }
+    if (color1.g == 254 || color2.g == 254 || color3.g == 254) {
+        game->map->choice_map = FORGE;
+    }
     return OK;
 }
 
