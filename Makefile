@@ -48,6 +48,7 @@ EVENT	=	src/event/event.c							\
 			src/event/game/game_event.c					\
 			src/event/game/pause_menu_event.c			\
 			src/event/game/inventory_menu_event.c		\
+			src/event/game/collision_map.c				\
 
 MANAGER	=	src/manager/menu_manager.c					\
 			src/manager/background_menu_manager.c		\
