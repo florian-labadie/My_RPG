@@ -35,16 +35,48 @@ static void draw_pause_menu(sfRenderWindow *window, game_t *game)
     sfRenderWindow_drawRectangleShape(window, game->pause->background, NULL);
 }
 
+static void set_pos_flag(game_t *game, sfRenderWindow *window)
+{
+    sfSprite_setPosition(game->map->flag_spr, (sfVector2f)
+    {sfSprite_getPosition(game->player->sprites->player).x -
+    game->map->flag_pos,
+    sfSprite_getPosition(game->player->sprites->player).y - 80});
+    sfRenderWindow_drawSprite(window, game->map->flag_spr, NULL);
+}
+
+static void draw_flag(game_t *game, sfRenderWindow *window)
+{
+    sfTime flag_time = sfClock_getElapsedTime(game->map->flag_clock);
+
+    if (game->map->is_flag == true) {
+        game->map->was_open = true;
+        if (flag_time.microseconds > 10000 && game->map->flag_pos > 210) {
+            game->map->flag_pos -= 2;
+            sfClock_restart(game->map->flag_clock);
+        }
+        set_pos_flag(game, window);
+    }
+    if (game->map->was_open == true && game->map->is_flag == false) {
+        if (flag_time.microseconds > 10000 && game->map->flag_pos <= 300) {
+            game->map->flag_pos += 2;
+            sfClock_restart(game->map->flag_clock);
+        }
+        set_pos_flag(game, window);
+        if (game->map->flag_pos >= 300)
+            game->map->was_open = false;
+    }
+}
+
 static void draw_story_game(sfRenderWindow *window, game_t *game)
 {
     game->map->time_clock = sfClock_getElapsedTime(game->map->part_clock);
-    game->map->seconds = game->map->time_clock.microseconds / 1000000.0;
     particles_movement(game);
     for (int i = 0; i < NB_PARTICLE; i += 1) {
         sfSprite_setTextureRect(game->map->particule_spr[i],
         game->map->particle_rect[i]);
         sfRenderWindow_drawSprite(window, game->map->particule_spr[i], NULL);
     }
+    draw_flag(game, window);
     change_view(game, window);
 }
 

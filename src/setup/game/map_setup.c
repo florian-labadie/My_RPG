@@ -38,6 +38,24 @@ static int setup_particles(map_t *map)
     return OK;
 }
 
+static int setup_flag(map_t *map)
+{
+    map->is_flag = false;
+    map->was_open = false;
+    map->flag_pos = 300;
+    map->flag_clock = sfClock_create();
+    map->flag_text = sfTexture_createFromFile(FLAG, NULL);
+    map->flag_zone = sfRectangleShape_create();
+    if (!map->flag_text || !map->flag_zone)
+        return KO;
+    map->flag_spr = create_button(map->flag_text, (sfVector2f) {0.5, 0.5},
+    (sfVector2f) {0.0, 520.0});
+    sfRectangleShape_setSize(map->flag_zone, (sfVector2f) {100.0, 35.0});
+    sfRectangleShape_setPosition(map->flag_zone, (sfVector2f) {654.0, 236.0});
+    sfRectangleShape_setFillColor(map->flag_zone, sfWhite);
+    return OK;
+}
+
 int setup_map(map_t *map, sfRenderWindow *window)
 {
     map->rect = (sfFloatRect) {0.0, get_resize(window, 495.0, 0).x,
@@ -54,7 +72,7 @@ int setup_map(map_t *map, sfRenderWindow *window)
     (sfVector2f) {0.0, 0.0});
     map->view = sfView_createFromRect(map->rect);
     sfMusic_setLoop(map->game_sound, sfTrue);
-    if (setup_particles(map) == KO)
+    if (setup_particles(map) == KO || setup_flag(map) == KO)
         return KO;
     return OK;
 }
