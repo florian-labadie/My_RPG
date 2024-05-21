@@ -53,7 +53,7 @@ int game_setup(rpg_t *rpg);
 int player_setup(sfRenderWindow *window, player_t *player);
 int setup_flag(map_t *map, sfRenderWindow *window);
 int setup_particles(map_t *map);
-int setup_map(map_t *map, sfRenderWindow *window);
+int setup_map(map_t *map, sfRenderWindow *window, float volume);
 void change_view(game_t *game, sfRenderWindow *window);
 int select_charac(game_t *game, sfRenderWindow *window);
 int pause_menu_setup(game_t *game, sfRenderWindow *window);

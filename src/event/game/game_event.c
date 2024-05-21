@@ -164,8 +164,19 @@ static void show_flag(rpg_t *rpg, sfEvent event)
 {
     rpg->game->map->flag.is_flag = false;
     if (get_rectangle_bounds(rpg->game->map->flag.flag_zone,
-    sfSprite_getPosition(rpg->game->player->sprites->player)) == sfTrue)
+    sfSprite_getPosition(rpg->game->player->sprites->player)) == sfTrue) {
+        if (event.key.code == sfKeyF && event.type == sfEvtKeyPressed) {
+            rpg->game->map->choice_map = BATTLEFIELD;
+            sfMusic_stop(rpg->game->map->game_sound);
+            sfMusic_play(rpg->game->map->battle_music);
+            sfView_setSize(rpg->game->map->view,
+            get_resize(rpg->window, 1920, 1080));
+            sfView_setCenter(rpg->game->map->view,
+                get_resize(rpg->window, 960, 540));
+            sfRenderWindow_setView(rpg->window, rpg->game->map->view);
+        }
         rpg->game->map->flag.is_flag = true;
+    }
 }
 
 int game_event(rpg_t *rpg, sfEvent event)

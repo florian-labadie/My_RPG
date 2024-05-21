@@ -85,8 +85,9 @@ static void player_still_manager(game_t *game, player_race_t race)
 
 static void game_music(rpg_t *rpg)
 {
-    if (sfMusic_getStatus(rpg->game->map->game_sound) == sfStopped ||
-        sfMusic_getStatus(rpg->game->map->game_sound) == sfPaused)
+    if (rpg->game->map->choice_map == VILLAGE &&
+        (sfMusic_getStatus(rpg->game->map->game_sound) == sfStopped ||
+        sfMusic_getStatus(rpg->game->map->game_sound) == sfPaused))
         sfMusic_play(rpg->game->map->game_sound);
 }
 

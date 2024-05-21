@@ -15,8 +15,10 @@
     #define ALCHEMY_MAP "assets/map/alchemist.png"
     #define LAYER_MAP "assets/map/layer_texture.png"
     #define AMB_MUSIC "assets/music/ambiance_music.ogg"
+    #define BATTLE_MUSIC "assets/music/fight_music.ogg"
     #define PARTICLE "assets/map/portal_particles.png"
     #define FLAG "assets/map/flag_portal.png"
+    #define BATTLE_MAP "assets/map/map_battelfiel.png"
     #define NB_PARTICLE 15
 
     #include <SFML/Graphics.h>
@@ -64,6 +66,10 @@ typedef struct map_s {
     sfTexture *texture_obj;
     sfSprite *sprite_obj;
     sfImage *layers;
+
+    sfTexture *battle_text;
+    sfSprite *battle_spr;
+    sfMusic *battle_music;
 
     sfMusic *game_sound;
 

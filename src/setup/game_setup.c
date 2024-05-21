@@ -18,7 +18,7 @@ int game_setup(rpg_t *rpg)
     if (!rpg->game->player || !rpg->game->map || !rpg->game->select ||
         !rpg->game->player->sprites)
         return KO;
-    if (setup_map(rpg->game->map, rpg->window) == KO ||
+    if (setup_map(rpg->game->map, rpg->window, rpg->setting->sound_game) == KO ||
         select_charac(rpg->game, rpg->window) == KO ||
         pause_menu_setup(rpg->game, rpg->window) == KO)
         return KO;

@@ -18,13 +18,6 @@ static void draw_pause_menu(sfRenderWindow *window, game_t *game)
     }
 }
 
-static void draw_story_game(sfRenderWindow *window, game_t *game)
-{
-    draw_particles(game, window);
-    draw_flag(game, window);
-    change_view(game, window);
-}
-
 static void draw_village(sfRenderWindow *window, game_t *game)
 {
     sfRenderWindow_drawSprite(window,
@@ -33,10 +26,20 @@ static void draw_village(sfRenderWindow *window, game_t *game)
         game->player->sprites->player, NULL);
     sfRenderWindow_drawSprite(window,
         game->map->sprite_obj, NULL);
+    draw_particles(game, window);
+    draw_flag(game, window);
+    change_view(game, window);
 }
 
 static void draw_battlefield(sfRenderWindow *window, game_t *game)
 {
+    sfRenderWindow_drawSprite(window, game->map->battle_spr, NULL);
+}
+
+static void draw_story_game(sfRenderWindow *window, game_t *game)
+{
+    return;
+    // draw_map_function[game->map->choice_map](window, game);
 }
 
 static void draw_select_charac(sfRenderWindow *window, game_t *game)
