@@ -36,6 +36,8 @@ typedef struct map_s {
 
     sfTexture *flag_text;
     sfSprite *flag_spr;
+    sfText *write_flag;
+    sfFont *flag_font;
     sfRectangleShape *flag_zone;
     bool is_flag;
     bool was_open;

@@ -44,10 +44,18 @@ static void set_pos_flag(game_t *game, sfRenderWindow *window)
     sfRenderWindow_drawSprite(window, game->map->flag_spr, NULL);
 }
 
-static void draw_flag(game_t *game, sfRenderWindow *window)
+static void set_pos_text_flag(game_t *game, sfRenderWindow *window)
 {
-    sfTime flag_time = sfClock_getElapsedTime(game->map->flag_clock);
+    sfText_setPosition(game->map->write_flag, (sfVector2f)
+    {sfSprite_getPosition(game->player->sprites->player).x -
+    (game->map->flag_pos - 15),
+    sfSprite_getPosition(game->player->sprites->player).y - 80});
+    sfRenderWindow_drawText(window, game->map->write_flag, NULL);
+}
 
+static void draw_help_flag(game_t *game, sfTime flag_time,
+    sfRenderWindow *window)
+{
     if (game->map->is_flag == true) {
         game->map->was_open = true;
         if (flag_time.microseconds > 10000 && game->map->flag_pos > 210) {
@@ -55,15 +63,24 @@ static void draw_flag(game_t *game, sfRenderWindow *window)
             sfClock_restart(game->map->flag_clock);
         }
         set_pos_flag(game, window);
+        set_pos_text_flag(game, window);
     }
+}
+
+static void draw_flag(game_t *game, sfRenderWindow *window)
+{
+    sfTime flag_time = sfClock_getElapsedTime(game->map->flag_clock);
+
+    draw_help_flag(game, flag_time, window);
     if (game->map->was_open == true && game->map->is_flag == false) {
         if (flag_time.microseconds > 10000 && game->map->flag_pos <= 300) {
             game->map->flag_pos += 2;
             sfClock_restart(game->map->flag_clock);
         }
         set_pos_flag(game, window);
-        if (game->map->flag_pos >= 300)
-            game->map->was_open = false;
+        set_pos_text_flag(game, window);
+    if (game->map->flag_pos >= 300)
+        game->map->was_open = false;
     }
 }
 

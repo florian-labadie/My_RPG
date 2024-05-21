@@ -38,7 +38,7 @@ static int setup_particles(map_t *map)
     return OK;
 }
 
-static int setup_flag(map_t *map)
+static int setup_flag(map_t *map, sfRenderWindow *window)
 {
     map->is_flag = false;
     map->was_open = false;
@@ -48,6 +48,10 @@ static int setup_flag(map_t *map)
     map->flag_zone = sfRectangleShape_create();
     if (!map->flag_text || !map->flag_zone)
         return KO;
+    map->flag_font = sfFont_createFromFile(FONT);
+    map->write_flag = create_text(map->flag_font,
+    "Appuyer sur F pour\nSauver le village !", get_less_size(window, 20),
+    (sfVector2f) {0.0, 0.0});
     map->flag_spr = create_button(map->flag_text, (sfVector2f) {0.5, 0.5},
     (sfVector2f) {0.0, 520.0});
     sfRectangleShape_setSize(map->flag_zone, (sfVector2f) {100.0, 35.0});
@@ -72,7 +76,7 @@ int setup_map(map_t *map, sfRenderWindow *window)
     (sfVector2f) {0.0, 0.0});
     map->view = sfView_createFromRect(map->rect);
     sfMusic_setLoop(map->game_sound, sfTrue);
-    if (setup_particles(map) == KO || setup_flag(map) == KO)
+    if (setup_particles(map) == KO || setup_flag(map, window) == KO)
         return KO;
     return OK;
 }
