@@ -11,6 +11,8 @@
     #define LAYER_MAP "assets/map/layer_texture.png"
     #define MAP_P "assets/map/map_rpg.png"
     #define MAP_OBJ "assets/map/map_rpg_texture.png"
+    #define FORGE_MAP "assets/map/forgeron.png"
+    #define ALCHEMY_MAP "assets/map/alchemist.png"
     #define LAYER_MAP "assets/map/layer_texture.png"
     #define AMB_MUSIC "assets/music/ambiance_music.ogg"
     #define PARTICLE "assets/map/portal_particles.png"
@@ -47,6 +49,15 @@ typedef struct flag_s {
     int flag_pos;
 } flag_t;
 
+typedef struct house_s {
+    sfTexture *house_texture;
+    sfSprite *house;
+    sfText *house_text;
+    sfFont *house_font;
+
+    sfMusic *house_music;
+} house_t;
+
 typedef struct map_s {
     choice_map_t choice_map;
 
@@ -56,6 +67,7 @@ typedef struct map_s {
 
     sfMusic *game_sound;
 
+    house_t **house;
     particle_t particle;
     flag_t flag;
 

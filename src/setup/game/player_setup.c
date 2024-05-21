@@ -32,6 +32,7 @@ static int player_sprites_setup(sfRenderWindow *window, player_t *player)
     player->sprites->player_clock = sfClock_create();
     player->sprites->move_clock = sfClock_create();
     player->sprites->player_rect = rects[player->race];
+    player->attack = false;
     player->position = (sfVector2f){170, 660};
     if (!player->sprites->player_text)
         return KO;

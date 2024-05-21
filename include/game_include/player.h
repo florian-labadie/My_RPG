@@ -12,6 +12,27 @@
 
     #include <SFML/Graphics.h>
     #include <SFML/Window.h>
+    #define HUMAN_STILL_RECT ((sfIntRect){0, 0, 52, 56})
+    #define DWARF_STILL_RECT ((sfIntRect){0, 110, 52, 60})
+    #define ELF_STILL_RECT ((sfIntRect){0, 228, 52, 62})
+    #define HUMAN_RECT ((sfIntRect){210, 0, 52, 56})
+    #define DWARF_RECT ((sfIntRect){209, 112, 52, 57})
+    #define ELF_RECT ((sfIntRect){210, 226, 52, 62})
+    #define HUMAN_ATT_RECT ((sfIntRect){210, 56, 52, 56})
+    #define DWARF_ATT_RECT ((sfIntRect){209, 169, 52, 57})
+    #define ELF_ATT_RECT ((sfIntRect){210, 290, 52, 62})
+
+    typedef enum player_direction_e {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT
+    } player_direction_t;
+
+    typedef enum player_state_e {
+        STILL,
+        MOVE
+    } player_state_t;
 
 typedef struct player_stats_s {
     float health;
@@ -33,6 +54,7 @@ typedef struct player_sprites_s {
 typedef struct player_s {
     char *name;
     player_race_t race;
+    bool attack;
 
     sfVector2f position;
 

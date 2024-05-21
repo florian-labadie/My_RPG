@@ -15,6 +15,31 @@ static void player_mouvement(sfSprite *sprite, sfVector2f player_move)
         sfSprite_setScale(sprite, (sfVector2f){-0.5, 0.5});
 }
 
+static void player_attack_manager(game_t *game, player_race_t race)
+{
+    sfIntRect rects[3] = {HUMAN_ATT_RECT, DWARF_ATT_RECT, ELF_ATT_RECT};
+    sfIntRect rect = rects[race];
+    sfVector2f origins[3] =
+        {{HUMAN_ATT_RECT.width / 2, HUMAN_ATT_RECT.height / 2},
+        {DWARF_ATT_RECT.width / 2, DWARF_ATT_RECT.height / 2},
+        {ELF_ATT_RECT.width / 2, ELF_ATT_RECT.height / 2}};
+
+    player_mouvement(game->player->sprites->player, game->player_move);
+    if (sfTime_asMilliseconds(sfClock_getElapsedTime
+        (game->player->sprites->player_clock)) > 200) {
+        rect.left = sfSprite_getTextureRect(game->player->sprites->player).left;
+        printf("width = %d; height = %d\n", rects[race].left, rects[race].top);
+        rect.left += rects[race].width;
+        if (rect.left >= 415) {
+            game->player->attack = false;
+            return;
+        }
+        sfSprite_setOrigin(game->player->sprites->player, origins[race]);
+        sfSprite_setTextureRect(game->player->sprites->player, rect);
+        sfClock_restart(game->player->sprites->player_clock);
+    }
+}
+
 static void player_move_manager(game_t *game, player_race_t race)
 {
     sfIntRect rects[3] = {HUMAN_RECT, DWARF_RECT, ELF_RECT};
@@ -26,7 +51,7 @@ static void player_move_manager(game_t *game, player_race_t race)
     player_mouvement(game->player->sprites->player, game->player_move);
     if (sfTime_asMilliseconds(sfClock_getElapsedTime
         (game->player->sprites->player_clock)) > 200) {
-        rect = sfSprite_getTextureRect(game->player->sprites->player);
+        rect.left = sfSprite_getTextureRect(game->player->sprites->player).left;
         rect.left += rects[race].width;
         if (rect.left >= 415)
             rect.left = rects[race].left;
@@ -47,7 +72,7 @@ static void player_still_manager(game_t *game, player_race_t race)
 
     if (sfTime_asMilliseconds(sfClock_getElapsedTime
         (game->player->sprites->player_clock)) > 200) {
-        rect = sfSprite_getTextureRect(game->player->sprites->player);
+        rect.left = sfSprite_getTextureRect(game->player->sprites->player).left;
         rect.left += rects[race].width;
         if (rect.left >= 208)
             rect.left = rects[race].left;
@@ -68,11 +93,15 @@ void game_manager(rpg_t *rpg)
 {
     game_music(rpg);
     if (rpg->game->player->sprites->player) {
-        if (rpg->game->player_move.x != 0 || rpg->game->player_move.y != 0) {
-            player_move_manager(rpg->game, rpg->game->player->race);
-        }
-        if (rpg->game->player_move.x == 0 && rpg->game->player_move.y == 0) {
-            player_still_manager(rpg->game, rpg->game->player->race);
+        if (rpg->game->player->attack == true) {
+            player_attack_manager(rpg->game, rpg->game->player->race);
+        } else {
+            if (rpg->game->player_move.x != 0 || rpg->game->player_move.y != 0) {
+                player_move_manager(rpg->game, rpg->game->player->race);
+            }
+            if (rpg->game->player_move.x == 0 && rpg->game->player_move.y == 0) {
+                player_still_manager(rpg->game, rpg->game->player->race);
+            }
         }
     }
     return;

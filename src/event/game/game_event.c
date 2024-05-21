@@ -170,6 +170,11 @@ int game_event(rpg_t *rpg, sfEvent event)
 {
     if (check_game_screen_changes(&rpg, event) == END)
         return OK;
+    if (event.mouseButton.type == sfEvtMouseButtonPressed) {
+        if (event.mouseButton.button == sfMouseLeft &&
+            rpg->game->player->attack == false)
+            rpg->game->player->attack = true;            
+    }
     get_movements(rpg, event);
     get_movements_realesed(rpg, event);
     show_flag(rpg, event);
