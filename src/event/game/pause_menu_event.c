@@ -7,15 +7,43 @@
 
 #include "my.h"
 
-void set_pause_screen(pause_t *pause, sfFloatRect view_rect)
+static void set_big_pause_screen(pause_t *pause, sfVector2f pos,
+    sfRenderWindow *window)
+{
+    pos = (sfVector2f){960, 120};
+    sfSprite_setPosition(pause->sprites[3], pos);
+    sfSprite_setScale(pause->sprites[3], (sfVector2f){8.16, 7.2});
+    sfText_setCharacterSize(pause->text[3], get_less_size(window, 96));
+    set_text_mid_origin(pause->text[3]);
+    sfText_setPosition(pause->text[3], pos);
+    pos.y += 240;
+    for (int i = 0; i < 3; i++) {
+        sfSprite_setPosition(pause->sprites[i], pos);
+        sfSprite_setScale(pause->sprites[i], (sfVector2f){11.28, 8.16});
+        sfText_setCharacterSize(pause->text[i], get_less_size(window, 76));
+        set_text_mid_origin(pause->text[i]);
+        sfText_setPosition(pause->text[i], (sfVector2f){pos.x, pos.y - 15});
+        pos.y += 240;
+    }
+}
+
+void set_pause_screen(pause_t *pause, sfFloatRect view_rect,
+    choice_map_t map, sfRenderWindow *window)
 {
     sfVector2f pos = (sfVector2f){view_rect.left + 200, view_rect.top + 25};
 
+    if (map > VILLAGE)
+        return set_big_pause_screen(pause, pos, window);
     sfSprite_setPosition(pause->sprites[3], pos);
-    sfText_setPosition(pause->text[3], (sfVector2f){pos.x, pos.y});
+    sfText_setCharacterSize(pause->text[3], get_less_size(window, 20));
+    set_text_mid_origin(pause->text[3]);
+    sfText_setPosition(pause->text[3], pos);
     pos.y += 50;
     for (int i = 0; i < 3; i++) {
         sfSprite_setPosition(pause->sprites[i], pos);
+        sfSprite_setScale(pause->sprites[i], (sfVector2f){2.35, 1.7});
+        sfText_setCharacterSize(pause->text[i], get_less_size(window, 15));
+        set_text_mid_origin(pause->text[i]);
         sfText_setPosition(pause->text[i], (sfVector2f){pos.x, pos.y - 2.0});
         pos.y += 50;
     }
@@ -77,6 +105,8 @@ int pause_menu_event(rpg_t *rpg, sfEvent event)
 
     mouse_pos = (sfVector2f){mouse_pos.x + rpg->game->map->rect.left,
         mouse_pos.y + rpg->game->map->rect.top};
+    if (rpg->game->map->choice_map > VILLAGE)
+        mouse_pos = get_mouse_pos(rpg->window, rpg->window_size);
     if (event.key.code == sfKeyEscape && event.key.type == sfEvtKeyPressed)
         rpg->game->screen = PLAYING;
     if (event.mouseButton.type == sfEvtMouseButtonReleased)

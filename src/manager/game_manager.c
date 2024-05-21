@@ -9,10 +9,12 @@
 
 static void player_mouvement(sfSprite *sprite, sfVector2f player_move)
 {
+    sfVector2f scale = sfSprite_getScale(sprite);
+
     if (player_move.x > 0)
-        sfSprite_setScale(sprite, (sfVector2f){0.5, 0.5});
+        sfSprite_setScale(sprite, (sfVector2f){ABS(scale.x), ABS(scale.y)});
     if (player_move.x < 0)
-        sfSprite_setScale(sprite, (sfVector2f){-0.5, 0.5});
+        sfSprite_setScale(sprite, (sfVector2f){-ABS(scale.x), ABS(scale.y)});
 }
 
 static void player_attack_manager(game_t *game, player_race_t race)

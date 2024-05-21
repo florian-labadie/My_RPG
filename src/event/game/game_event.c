@@ -41,7 +41,8 @@ static int check_game_screen_changes(rpg_t **rpg, sfEvent event)
         return END;
     }
     if (event.key.code == sfKeyEscape && event.key.type == sfEvtKeyPressed) {
-        set_pause_screen((*rpg)->game->pause, (*rpg)->game->map->rect);
+        set_pause_screen((*rpg)->game->pause, (*rpg)->game->map->rect,
+            (*rpg)->game->map->choice_map, (*rpg)->window);
         (*rpg)->game->player_move = (sfVector2f){0, 0};
         (*rpg)->game->screen = PAUSE;
         return OK;

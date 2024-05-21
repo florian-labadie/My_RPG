@@ -41,7 +41,6 @@ static int setup_pause_sprites(pause_t **pause, sfRenderWindow *window)
             sfTrue);
         set_sprite_button_mid_origin((*pause)->sprites[i]);
         sfSprite_setPosition((*pause)->sprites[i], pos);
-        sfSprite_setScale((*pause)->sprites[i], (sfVector2f){2.35, 1.7});
         sfSprite_setTextureRect((*pause)->sprites[i], PAUSE_BUTTON_RECT);
         if (!(*pause)->sprites || !(*pause)->sprites[i])
             return KO;
@@ -57,9 +56,9 @@ int pause_menu_setup(game_t *game, sfRenderWindow *window)
 {
     game->pause->background = sfRectangleShape_create();
     sfRectangleShape_setSize(game->pause->background,
-        (sfVector2f){960.0, 695.0});
+        get_resize(window, 1920, 1080));
     sfRectangleShape_setFillColor(game->pause->background,
-        sfColor_fromRGBA(50, 50, 50, 100));
+        sfColor_fromRGBA(50, 100, 50, 100));
     game->pause->textures = malloc(sizeof(sfTexture *) * 2);
     game->pause->sprites = malloc(sizeof(sfSprite *) * 4);
     game->pause->text = malloc(sizeof(sfText *) * 4);

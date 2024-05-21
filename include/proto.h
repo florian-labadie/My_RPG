@@ -60,7 +60,8 @@ int set_up_battlefield(sfRenderWindow *window, map_t *map, float volume);
 void change_view(game_t *game, sfRenderWindow *window);
 int select_charac(game_t *game, sfRenderWindow *window);
 int pause_menu_setup(game_t *game, sfRenderWindow *window);
-void set_pause_screen(pause_t *pause, sfFloatRect view_rect);
+void set_pause_screen(pause_t *pause, sfFloatRect view_rect,
+    choice_map_t map, sfRenderWindow *window);
 
 /* MENU EVENT */
 void event_manager(rpg_t *rpg);
