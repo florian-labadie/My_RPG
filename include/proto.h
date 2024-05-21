@@ -24,6 +24,7 @@ void destroy_resources(rpg_t *rpg);
 sfSprite *create_button(sfTexture *texture, sfVector2f scale, sfVector2f pos);
 sfText *create_text(sfFont *font, char *sentence, int size, sfVector2f pos);
 bool get_sprite_bounds(sfSprite *sprite, sfVector2f pos);
+bool get_rectangle_bounds(sfRectangleShape *rectangle, sfVector2f pos);
 void set_rect_button(sfSprite *button, button_state_t status);
 int change_button_rect(sfSprite *sprite, button_state_t *changed_status,
     button_state_t status, sfSound *sound);

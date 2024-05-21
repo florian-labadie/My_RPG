@@ -22,7 +22,7 @@ static void check_top_and_down(game_t *game, sfVector2f *pos_1,
         (*pos_1).y -= (game->player->sprites->player_rect.height / 4);
         (*pos_2).x -= (game->player->sprites->player_rect.width / 4);
         (*pos_2).y -= (game->player->sprites->player_rect.height / 4);
-        (*pos_3).y -= (game->player->sprites->player_rect.height / 4);  
+        (*pos_3).y -= (game->player->sprites->player_rect.height / 4);
     }
 }
 
@@ -32,8 +32,8 @@ static int top_down(game_t *game)
     sfColor color2 = sfBlack;
     sfColor color3 = sfBlack;
     sfVector2f pos_1 = game->player->position;
-    sfVector2f pos_2 =  game->player->position;
-    sfVector2f pos_3 =  game->player->position;
+    sfVector2f pos_2 = game->player->position;
+    sfVector2f pos_3 = game->player->position;
 
     check_top_and_down(game, &pos_1, &pos_2, &pos_3);
     color1 = sfImage_getPixel(game->map->layers, pos_1.x, pos_1.y);
@@ -59,7 +59,7 @@ static void check_left_and_right(game_t *game, sfVector2f *pos_1,
         (*pos_1).y += (game->player->sprites->player_rect.height / 4);
         (*pos_2).x -= (game->player->sprites->player_rect.width / 4);
         (*pos_2).y -= (game->player->sprites->player_rect.height / 4);
-        (*pos_3).y -= (game->player->sprites->player_rect.width / 4);  
+        (*pos_3).y -= (game->player->sprites->player_rect.width / 4);
     }
 }
 
@@ -69,8 +69,8 @@ static int left_right(game_t *game)
     sfColor color2 = sfBlack;
     sfColor color3 = sfBlack;
     sfVector2f pos_1 = game->player->position;
-    sfVector2f pos_2 =  game->player->position;
-    sfVector2f pos_3 =  game->player->position;
+    sfVector2f pos_2 = game->player->position;
+    sfVector2f pos_3 = game->player->position;
 
     check_left_and_right(game, &pos_1, &pos_2, &pos_3);
     color1 = sfImage_getPixel(game->map->layers, pos_1.x, pos_1.y);
@@ -87,7 +87,8 @@ static int sprite_move_player(game_t *game)
         game->player->position.x += game->player_move.x;
     if (game->player_move.y != 0 && top_down(game) == OK)
         game->player->position.y += game->player_move.y;
-    sfSprite_setPosition(game->player->sprites->player, game->player->position);
+    sfSprite_setPosition(game->player->sprites->player,
+    game->player->position);
     game->map->rect.left = game->player->position.x - 200;
     game->map->rect.top = game->player->position.y - 100;
     if (game->player->position.x > 200 && game->player->position.x < 760)
@@ -155,11 +156,20 @@ static int check_game_screen_changes(rpg_t **rpg, sfEvent event)
     return OK;
 }
 
+static void show_flag(rpg_t *rpg, sfEvent event)
+{
+    rpg->game->map->is_flag = false;
+    if (get_rectangle_bounds(rpg->game->map->flag_zone,
+    sfSprite_getPosition(rpg->game->player->sprites->player)) == sfTrue)
+        rpg->game->map->is_flag = true;
+}
+
 int game_event(rpg_t *rpg, sfEvent event)
 {
     if (check_game_screen_changes(&rpg, event) == END)
         return OK;
     get_movements(rpg, event);
     get_movements_realesed(rpg, event);
+    show_flag(rpg, event);
     return OK;
 }
