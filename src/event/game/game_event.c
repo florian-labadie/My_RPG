@@ -12,17 +12,17 @@ static void check_top_and_down(game_t *game, sfVector2f *pos_1,
 {
     if (game->player_move.y > 0) {
         (*pos_1).x += (game->player->sprites->player_rect.width / 4);
-        (*pos_1).y += (game->player->sprites->player_rect.height / 4);
+        (*pos_1).y += (game->player->sprites->player_rect.height / 4) + 1;
         (*pos_2).x -= (game->player->sprites->player_rect.width / 4);
-        (*pos_2).y += (game->player->sprites->player_rect.height / 4);
-        (*pos_3).y += (game->player->sprites->player_rect.height / 4);
+        (*pos_2).y += (game->player->sprites->player_rect.height / 4) + 1;
+        (*pos_3).y += (game->player->sprites->player_rect.height / 4) + 1;
     }
     if (game->player_move.y < 0) {
         (*pos_1).x += (game->player->sprites->player_rect.width / 4);
-        (*pos_1).y -= (game->player->sprites->player_rect.height / 4);
+        (*pos_1).y -= (game->player->sprites->player_rect.height / 4) + 1;
         (*pos_2).x -= (game->player->sprites->player_rect.width / 4);
-        (*pos_2).y -= (game->player->sprites->player_rect.height / 4);
-        (*pos_3).y -= (game->player->sprites->player_rect.height / 4);
+        (*pos_2).y -= (game->player->sprites->player_rect.height / 4) + 1;
+        (*pos_3).y -= (game->player->sprites->player_rect.height / 4) + 1;  
     }
 }
 
@@ -48,18 +48,18 @@ static void check_left_and_right(game_t *game, sfVector2f *pos_1,
     sfVector2f *pos_2, sfVector2f *pos_3)
 {
     if (game->player_move.x > 0) {
-        (*pos_1).x += (game->player->sprites->player_rect.width / 4);
+        (*pos_1).x += (game->player->sprites->player_rect.width / 4) + 1;
         (*pos_1).y += (game->player->sprites->player_rect.height / 4);
-        (*pos_2).x += (game->player->sprites->player_rect.width / 4);
+        (*pos_2).x += (game->player->sprites->player_rect.width / 4) + 1;
         (*pos_2).y -= (game->player->sprites->player_rect.height / 4);
-        (*pos_3).y += (game->player->sprites->player_rect.width / 4);
+        (*pos_3).x += (game->player->sprites->player_rect.width / 4) + 1;
     }
     if (game->player_move.x < 0) {
-        (*pos_1).x -= (game->player->sprites->player_rect.width / 4);
+        (*pos_1).x -= (game->player->sprites->player_rect.width / 4) + 1;
         (*pos_1).y += (game->player->sprites->player_rect.height / 4);
-        (*pos_2).x -= (game->player->sprites->player_rect.width / 4);
+        (*pos_2).x -= (game->player->sprites->player_rect.width / 4) + 1;
         (*pos_2).y -= (game->player->sprites->player_rect.height / 4);
-        (*pos_3).y -= (game->player->sprites->player_rect.width / 4);
+        (*pos_3).x -= (game->player->sprites->player_rect.width / 4) + 1;  
     }
 }
 
@@ -83,12 +83,14 @@ static int left_right(game_t *game)
 
 static int sprite_move_player(game_t *game)
 {
-    if (game->player_move.x != 0 && left_right(game) == OK)
+    if (game->player_move.x != 0 && left_right(game) == OK) {
+        sfSprite_move(game->player->sprites->player, (sfVector2f){game->player_move.x, 0});
         game->player->position.x += game->player_move.x;
-    if (game->player_move.y != 0 && top_down(game) == OK)
+    }
+    if (game->player_move.y != 0 && top_down(game) == OK) {
+        sfSprite_move(game->player->sprites->player, (sfVector2f){0, game->player_move.y});
         game->player->position.y += game->player_move.y;
-    sfSprite_setPosition(game->player->sprites->player,
-    game->player->position);
+    }
     game->map->rect.left = game->player->position.x - 200;
     game->map->rect.top = game->player->position.y - 100;
     if (game->player->position.x > 200 && game->player->position.x < 760)
@@ -116,14 +118,12 @@ void change_view(game_t *game, sfRenderWindow *window)
 
 static void get_movements_realesed(rpg_t *rpg, sfEvent event)
 {
-    if (event.key.code == sfKeyZ && event.key.type == sfEvtKeyReleased)
-        rpg->game->player_move.y = 0;
-    if ((event.key.code == sfKeyS && event.key.type == sfEvtKeyReleased))
-        rpg->game->player_move.y = 0;
-    if ((event.key.code == sfKeyQ && event.key.type == sfEvtKeyReleased))
-        rpg->game->player_move.x = 0;
-    if ((event.key.code == sfKeyD && event.key.type == sfEvtKeyReleased))
-        rpg->game->player_move.x = 0;
+    if (event.type == sfEvtKeyReleased) {
+        if (event.key.code == sfKeyZ || event.key.code == sfKeyS)
+            rpg->game->player_move.y = 0;
+        if (event.key.code == sfKeyQ || event.key.code == sfKeyD)
+            rpg->game->player_move.x = 0;
+    }
 }
 
 static void get_movements(rpg_t *rpg, sfEvent event)

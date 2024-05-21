@@ -27,6 +27,7 @@ typedef struct player_sprites_s {
 
     sfIntRect player_rect;
     sfClock *player_clock;
+    sfClock *move_clock;
 } player_sprites_t;
 
 typedef struct player_s {
