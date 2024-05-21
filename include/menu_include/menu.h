@@ -13,6 +13,7 @@
     #include "main_menu.h"
     #include "help.h"
     #include "menu_settings.h"
+    #include "parallax.h"
 
     #define BACKGROUND "assets/sprite/background_menu.png"
     #define WOS_SIGN "assets/sprite/tropical_button.png"
@@ -33,6 +34,7 @@
     #define BACK_HELP ((sfIntRect){275, 261, 51, 57})
 
 typedef enum menu_state_s {
+    PARALLAX,
     MAIN,
     HELP,
     SETTING,
@@ -61,6 +63,7 @@ typedef struct menu_s {
     main_menu_t *main_menu;
     help_t *help;
     settings_t *settings;
+    parallax_t *parallax;
 } menu_t;
 
 #endif /* !MENU_H_ */

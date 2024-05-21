@@ -37,6 +37,7 @@ void set_text_mid_origin(sfText *text);
 void set_volume_music(rpg_t *rpg);
 char *read_one_dialogue(char *filepath);
 char *read_many_dialogue(char *filepath, int dialogue_number);
+int parallax_event(rpg_t *rpg, sfEvent event);
 
 /* MENU SETUP */
 int menu_setup(rpg_t *rpg, char const *user);
@@ -44,6 +45,7 @@ int background_menu_setup(menu_t *menu, sfRenderWindow *window);
 int menu_button_setup(main_menu_buttons_t **button, sfRenderWindow *window);
 int setup_option_menu(settings_t *settings, sfRenderWindow *window);
 int open_book(settings_t *settings);
+int init_parallax(parallax_t *parallax);
 
 /* GAME SETUP */
 int game_setup(rpg_t *rpg);

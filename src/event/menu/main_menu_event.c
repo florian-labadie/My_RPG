@@ -106,3 +106,11 @@ int main_menu_event(rpg_t *rpg, sfEvent event)
     return main_menu_button(&rpg->menu->main_menu->buttons, mouse_pos,
                         HOVER, rpg->menu->click_button_sound);
 }
+
+int parallax_event(rpg_t *rpg, sfEvent event)
+{
+    if (event.type == sfEvtKeyPressed && event.key.code == sfKeySpace) {
+        rpg->menu->screen = MAIN;
+    }
+    return 0;
+}

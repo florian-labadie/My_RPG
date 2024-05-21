@@ -52,14 +52,30 @@ static void draw_menu_background(sfRenderWindow *window,
         sfRenderWindow_drawSprite(window, background->characters[i], NULL);
 }
 
+static void draw_parallax(sfRenderWindow *window, menu_t *menu)
+{
+    sfRenderWindow_drawSprite(window, menu->parallax->background_sprite, NULL);
+    for (int i = 0; i < NB_PARALLAX; i++) {
+        sfRenderWindow_drawSprite(window, menu->parallax->sprites[i], NULL);
+        sfSprite_move(menu->parallax->sprites[i], (sfVector2f){-1920, 0});
+        sfRenderWindow_drawSprite(window, menu->parallax->sprites[i], NULL);
+        sfSprite_move(menu->parallax->sprites[i], (sfVector2f){1920, 0});
+    }
+    sfRenderWindow_drawText(window, menu->parallax->parallax_text, NULL);
+}
+
 void draw_menu(rpg_t *rpg)
 {
     void (*draw_menu_fct[])(sfRenderWindow *, menu_t *) =
-        {draw_main_menu, draw_help_menu, draw_option_menu, draw_help_menu};
+        {draw_parallax, draw_main_menu, draw_help_menu, draw_option_menu,
+        draw_help_menu};
 
-    draw_menu_background(rpg->window, rpg->menu->background);
-    sfRenderWindow_drawSprite(rpg->window, rpg->menu->main_menu->wos_sprite,
-    NULL);
-    sfRenderWindow_drawText(rpg->window, rpg->menu->main_menu->wos, NULL);
+    if (rpg->menu->screen != PARALLAX) {
+        draw_menu_background(rpg->window, rpg->menu->background);
+        sfRenderWindow_drawSprite(rpg->window,
+        rpg->menu->main_menu->wos_sprite,
+            NULL);
+        sfRenderWindow_drawText(rpg->window, rpg->menu->main_menu->wos, NULL);
+    }
     draw_menu_fct[rpg->menu->screen](rpg->window, rpg->menu);
 }
