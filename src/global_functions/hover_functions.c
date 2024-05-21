@@ -7,7 +7,16 @@
 
 #include "my.h"
 
-void set_rect_button(sfSprite *button, button_state_t status)
+int already_pressed(button_state_t *button_status, int size)
+{
+    for (int i = 0; i < size; i++) {
+        if (button_status[i] == BUTTON_PRESSED)
+            return OK;
+    }
+    return KO;
+}
+
+static void set_rect_button(sfSprite *button, button_state_t status)
 {
     sfIntRect rect = {0, 0, 0, 0};
 

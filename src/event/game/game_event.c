@@ -152,6 +152,8 @@ static int check_game_screen_changes(rpg_t **rpg, sfEvent event)
         return END;
     }
     if (event.key.code == sfKeyEscape && event.key.type == sfEvtKeyPressed) {
+        set_pause_screen((*rpg)->game->pause, (*rpg)->game->map->rect);
+        (*rpg)->game->player_move = (sfVector2f){0, 0};
         (*rpg)->game->screen = PAUSE;
         return OK;
     }
@@ -173,7 +175,7 @@ int game_event(rpg_t *rpg, sfEvent event)
     if (event.mouseButton.type == sfEvtMouseButtonPressed) {
         if (event.mouseButton.button == sfMouseLeft &&
             rpg->game->player->attack == false)
-            rpg->game->player->attack = true;            
+            rpg->game->player->attack = true;
     }
     get_movements(rpg, event);
     get_movements_realesed(rpg, event);
