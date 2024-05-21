@@ -50,6 +50,8 @@ int init_parallax(parallax_t *parallax);
 /* GAME SETUP */
 int game_setup(rpg_t *rpg);
 int player_setup(sfRenderWindow *window, player_t *player);
+int setup_flag(map_t *map, sfRenderWindow *window);
+int setup_particles(map_t *map);
 int setup_map(map_t *map, sfRenderWindow *window);
 void change_view(game_t *game, sfRenderWindow *window);
 int select_charac(game_t *game, sfRenderWindow *window);
@@ -93,5 +95,7 @@ int write_setting_in_file(rpg_t *rpg);
 /* DRAWING FUNCTIONS */
 void draw_game(rpg_t *rpg);
 void draw_menu(rpg_t *rpg);
+void draw_particles(game_t *game, sfRenderWindow *window);
+void draw_flag(game_t *game, sfRenderWindow *window);
 
 #endif /* PROTO_H_ */

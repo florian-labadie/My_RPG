@@ -35,6 +35,7 @@ SETUP	=	src/setup/menu_setup.c						\
 			src/setup/game/player_setup.c				\
 			src/setup/game/selection_charac.c			\
 			src/setup/game/pause_menu_setup.c			\
+			src/setup/game/particule_n_flag_set_up.c	\
 			src/setup/menu/option_features.c 			\
 			src/setup/menu/parallax_setup.c				\
 
@@ -54,6 +55,7 @@ MANAGER	=	src/manager/menu_manager.c					\
 
 DRAW	=	src/draw/draw_menu.c						\
 			src/draw/draw_game.c						\
+			src/draw/draw_particles_n_flag.c			\
 
 SAVE	=	src/save/settings_game.c					\
 			src/save/write_setting_in_file.c			\

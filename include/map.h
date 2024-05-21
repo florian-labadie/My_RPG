@@ -21,19 +21,21 @@
     #include <SFML/Window.h>
     #include <SFML/Audio.h>
 
-typedef struct map_s {
-    sfTexture *texture_obj;
-    sfSprite *sprite_obj;
-    sfImage *layers;
+typedef enum choice_map_s {
+    VILLAGE,
+    BATTLEFIELD,
+    NB_MAP
+} choice_map_t;
 
-    sfMusic *game_sound;
-
+typedef struct particle_s {
     sfTexture *particle_text;
     sfSprite **particule_spr;
     sfIntRect *particle_rect;
     sfClock *part_clock;
     sfTime time_clock;
+} particle_t;
 
+typedef struct flag_s {
     sfTexture *flag_text;
     sfSprite *flag_spr;
     sfText *write_flag;
@@ -43,6 +45,19 @@ typedef struct map_s {
     bool was_open;
     sfClock *flag_clock;
     int flag_pos;
+} flag_t;
+
+typedef struct map_s {
+    choice_map_t choice_map;
+
+    sfTexture *texture_obj;
+    sfSprite *sprite_obj;
+    sfImage *layers;
+
+    sfMusic *game_sound;
+
+    particle_t particle;
+    flag_t flag;
 
     sfTexture *texture_ground;
     sfSprite *sprite_ground;

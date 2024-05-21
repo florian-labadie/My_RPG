@@ -160,10 +160,10 @@ static int check_game_screen_changes(rpg_t **rpg, sfEvent event)
 
 static void show_flag(rpg_t *rpg, sfEvent event)
 {
-    rpg->game->map->is_flag = false;
-    if (get_rectangle_bounds(rpg->game->map->flag_zone,
+    rpg->game->map->flag.is_flag = false;
+    if (get_rectangle_bounds(rpg->game->map->flag.flag_zone,
     sfSprite_getPosition(rpg->game->player->sprites->player)) == sfTrue)
-        rpg->game->map->is_flag = true;
+        rpg->game->map->flag.is_flag = true;
 }
 
 int game_event(rpg_t *rpg, sfEvent event)
