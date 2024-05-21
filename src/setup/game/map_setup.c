@@ -52,7 +52,6 @@ static int setup_flag(map_t *map, sfRenderWindow *window)
     map->write_flag = create_text(map->flag_font,
     "Appuyer sur F pour\nSauver le village !", get_less_size(window, 20),
     (sfVector2f) {0.0, 0.0});
-    
     map->flag_spr = create_button(map->flag_text, (sfVector2f) {0.5, 0.5},
     (sfVector2f) {0.0, 520.0});
     sfRectangleShape_setSize(map->flag_zone, (sfVector2f) {100.0, 35.0});

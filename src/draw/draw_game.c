@@ -37,19 +37,19 @@ static void draw_pause_menu(sfRenderWindow *window, game_t *game)
 
 static void set_pos_flag(game_t *game, sfRenderWindow *window)
 {
-    sfSprite_setPosition(game->map->flag_spr, (sfVector2f)
-    {sfSprite_getPosition(game->player->sprites->player).x -
+    sfSprite_setPosition(game->map->flag_spr, get_resize(window,
+    sfSprite_getPosition(game->player->sprites->player).x -
     game->map->flag_pos,
-    sfSprite_getPosition(game->player->sprites->player).y - 80});
+    sfSprite_getPosition(game->player->sprites->player).y - 80));
     sfRenderWindow_drawSprite(window, game->map->flag_spr, NULL);
 }
 
 static void set_pos_text_flag(game_t *game, sfRenderWindow *window)
 {
-    sfText_setPosition(game->map->write_flag, (sfVector2f)
-    {sfSprite_getPosition(game->player->sprites->player).x -
+    sfText_setPosition(game->map->write_flag, get_resize(window,
+    sfSprite_getPosition(game->player->sprites->player).x -
     (game->map->flag_pos - 15),
-    sfSprite_getPosition(game->player->sprites->player).y - 80});
+    sfSprite_getPosition(game->player->sprites->player).y - 80));
     sfRenderWindow_drawText(window, game->map->write_flag, NULL);
 }
 
@@ -65,7 +65,6 @@ static void draw_help_flag(game_t *game, sfTime flag_time,
         set_pos_flag(game, window);
         set_pos_text_flag(game, window);
     }
-    
 }
 
 static void draw_flag(game_t *game, sfRenderWindow *window)

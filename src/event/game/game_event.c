@@ -22,7 +22,7 @@ static void check_top_and_down(game_t *game, sfVector2f *pos_1,
         (*pos_1).y -= (game->player->sprites->player_rect.height / 4) + 1;
         (*pos_2).x -= (game->player->sprites->player_rect.width / 4);
         (*pos_2).y -= (game->player->sprites->player_rect.height / 4) + 1;
-        (*pos_3).y -= (game->player->sprites->player_rect.height / 4) + 1;  
+        (*pos_3).y -= (game->player->sprites->player_rect.height / 4) + 1;
     }
 }
 
@@ -59,7 +59,7 @@ static void check_left_and_right(game_t *game, sfVector2f *pos_1,
         (*pos_1).y += (game->player->sprites->player_rect.height / 4);
         (*pos_2).x -= (game->player->sprites->player_rect.width / 4) + 1;
         (*pos_2).y -= (game->player->sprites->player_rect.height / 4);
-        (*pos_3).x -= (game->player->sprites->player_rect.width / 4) + 1;  
+        (*pos_3).x -= (game->player->sprites->player_rect.width / 4) + 1;
     }
 }
 
@@ -84,11 +84,13 @@ static int left_right(game_t *game)
 static int sprite_move_player(game_t *game)
 {
     if (game->player_move.x != 0 && left_right(game) == OK) {
-        sfSprite_move(game->player->sprites->player, (sfVector2f){game->player_move.x, 0});
+        sfSprite_move(game->player->sprites->player,
+        (sfVector2f){game->player_move.x, 0});
         game->player->position.x += game->player_move.x;
     }
     if (game->player_move.y != 0 && top_down(game) == OK) {
-        sfSprite_move(game->player->sprites->player, (sfVector2f){0, game->player_move.y});
+        sfSprite_move(game->player->sprites->player,
+        (sfVector2f){0, game->player_move.y});
         game->player->position.y += game->player_move.y;
     }
     game->map->rect.left = game->player->position.x - 200;
