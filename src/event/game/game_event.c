@@ -63,6 +63,10 @@ static void show_flag(rpg_t *rpg, sfEvent event)
             sfView_setCenter(rpg->game->map->view,
                 get_resize(rpg->window, 960, 540));
             sfRenderWindow_setView(rpg->window, rpg->game->map->view);
+            sfSprite_setPosition(rpg->game->player->sprites->player,
+            (sfVector2f) {1685.0, 940});
+            sfSprite_setScale(rpg->game->player->sprites->player,
+            (sfVector2f) {2.5, 2.5});
         }
         rpg->game->map->flag.is_flag = true;
     }

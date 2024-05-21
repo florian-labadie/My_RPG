@@ -56,7 +56,7 @@ int setup_flag(map_t *map, sfRenderWindow *window);
 int setup_particles(map_t *map);
 int setup_map(map_t *map, sfRenderWindow *window, float volume);
 int setup_house(map_t *map, sfRenderWindow *window);
-int set_up_battlefield(map_t *map, float volume);
+int set_up_battlefield(sfRenderWindow *window, map_t *map, float volume);
 void change_view(game_t *game, sfRenderWindow *window);
 int select_charac(game_t *game, sfRenderWindow *window);
 int pause_menu_setup(game_t *game, sfRenderWindow *window);

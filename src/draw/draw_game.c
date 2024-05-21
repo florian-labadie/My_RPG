@@ -44,7 +44,20 @@ static void draw_alchemist(sfRenderWindow *window, game_t *game)
 
 static void draw_battlefield(sfRenderWindow *window, game_t *game)
 {
+    sfTime time = sfClock_getElapsedTime(game->map->entities->wizz_clock);
+
     sfRenderWindow_drawSprite(window, game->map->battle_spr, NULL);
+    if (time.microseconds >= 300000) {
+        game->map->entities->wizzard_rect.left += 204;
+        if (game->map->entities->wizzard_rect.left >= 408)
+            game->map->entities->wizzard_rect.left = 0;
+        sfSprite_setTextureRect(game->map->entities->wizzard_spr,
+        game->map->entities->wizzard_rect);
+        sfClock_restart(game->map->entities->wizz_clock);
+    }
+    sfRenderWindow_drawSprite(window, game->map->entities->wizzard_spr, NULL);
+    sfRenderWindow_drawSprite(window,
+    game->player->sprites->player, NULL);
 }
 
 static void draw_story_game(sfRenderWindow *window, game_t *game)

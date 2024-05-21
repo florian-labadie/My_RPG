@@ -31,14 +31,24 @@ int setup_house(map_t *map, sfRenderWindow *window)
     sfSprite_setScale(map->house[1]->house, (sfVector2f){1.56, 1.56});
 }
 
-int set_up_battlefield(map_t *map, float volume)
+int set_up_battlefield(sfRenderWindow *window, map_t *map, float volume)
 {
     map->battle_text = sfTexture_createFromFile(BATTLE_MAP, NULL);
-    if (!map->battle_text)
+    map->entities = malloc(sizeof(entities_bf_t));
+    map->entities->wizzard_rect = (sfIntRect) {0, 202, 204, 202};
+    map->entities->wizz_clock = sfClock_create();
+    if (!map->battle_text || !map->entities)
         return KO;
     sfMusic_setVolume(map->battle_music, volume);
     map->battle_spr = create_button(map->battle_text,
-    (sfVector2f) {1.0, 1.0}, (sfVector2f) {0.0, 0.0});
+    (sfVector2f) {1.0, 1.0}, get_resize(window, 0.0, 0.0));
+    map->entities->wizzard_text = sfTexture_createFromFile(WIZZARD, NULL);
+    if (!map->entities->wizzard_text)
+        return KO;
+    map->entities->wizzard_spr = create_button(map->entities->wizzard_text,
+    (sfVector2f) {1.5, 1.5}, get_resize(window, 1700.0, 840.0));
+    sfSprite_setTextureRect(map->entities->wizzard_spr,
+    map->entities->wizzard_rect);
     return OK;
 }
 
