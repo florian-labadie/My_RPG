@@ -7,17 +7,6 @@
 
 #include "my.h"
 
-static void draw_pause_menu(sfRenderWindow *window, game_t *game)
-{
-    sfRenderWindow_drawRectangleShape(window, game->pause->background, NULL);
-    sfRenderWindow_drawSprite(window, game->pause->sprites[3], NULL);
-    sfRenderWindow_drawText(window, game->pause->text[3], NULL);
-    for (int i = 0; i < 3; i++) {
-        sfRenderWindow_drawSprite(window, game->pause->sprites[i], NULL);
-        sfRenderWindow_drawText(window, game->pause->text[i], NULL);
-    }
-}
-
 static void draw_village(sfRenderWindow *window, game_t *game)
 {
     sfRenderWindow_drawSprite(window, game->map->sprite_ground, NULL);

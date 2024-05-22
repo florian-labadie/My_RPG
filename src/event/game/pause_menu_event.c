@@ -54,11 +54,7 @@ static int change_event_from_pause(rpg_t **rpg, int i)
     if (i == 0)
         (*rpg)->game->screen = PLAYING;
     if (i == 1) {
-        sfView_setSize((*rpg)->game->map->view,
-            get_resize((*rpg)->window, 1920, 1080));
-        sfView_setCenter((*rpg)->game->map->view,
-            get_resize((*rpg)->window, 960, 540));
-        sfRenderWindow_setView((*rpg)->window, (*rpg)->game->map->view);
+        sfRenderWindow_setView((*rpg)->window, (*rpg)->game->original_view);
         (*rpg)->screen = MAIN_MENU;
         (*rpg)->menu->screen = MAIN;
     }
@@ -101,12 +97,8 @@ static int pause_menu_button(pause_t **pause,
 
 int pause_menu_event(rpg_t *rpg, sfEvent event)
 {
-    sfVector2f mouse_pos = get_mouse_pos(rpg->window, (sfVector2u){400, 200});
+    sfVector2f mouse_pos = get_mouse_pos(rpg->window, rpg->window_size);
 
-    mouse_pos = (sfVector2f){mouse_pos.x + rpg->game->map->rect.left,
-        mouse_pos.y + rpg->game->map->rect.top};
-    if (rpg->game->map->choice_map > VILLAGE)
-        mouse_pos = get_mouse_pos(rpg->window, rpg->window_size);
     if (event.key.code == sfKeyEscape && event.key.type == sfEvtKeyPressed)
         rpg->game->screen = PLAYING;
     if (event.mouseButton.type == sfEvtMouseButtonReleased)
