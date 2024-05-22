@@ -20,6 +20,7 @@ static int house_loop(map_t *map, sfRenderWindow *window)
         map->house[i]->house_font = sfFont_createFromFile(FONT);
         set_sprite_mid_origin(map->house[i]->house);
     }
+    return OK;
 }
 
 int setup_house(map_t *map, sfRenderWindow *window)
@@ -68,7 +69,7 @@ int setup_map(map_t *map, sfRenderWindow *window, float volume)
     sfMusic_setLoop(map->game_sound, sfTrue);
     sfMusic_setLoop(map->battle_music, sfTrue);
     if (setup_particles(map) == KO || setup_flag(map, window) == KO ||
-    entities_setup(&(map->entities), window) == KO)
+        entities_setup(&(map->entities), window) == KO)
         return KO;
     return OK;
 }

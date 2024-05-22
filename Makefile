@@ -41,6 +41,7 @@ SETUP	=	src/setup/menu_setup.c						\
 			src/setup/menu/option_features.c 			\
 			src/setup/menu/parallax_setup.c				\
 			src/setup/game/interaction_setup.c			\
+			src/setup/game/weapon_setup.c				\
 
 EVENT	=	src/event/event.c							\
 			src/event/menu/main_menu_event.c			\
@@ -60,6 +61,7 @@ MANAGER	=	src/manager/menu_manager.c					\
 
 DRAW	=	src/draw/draw_menu.c						\
 			src/draw/draw_game.c						\
+			src/draw/draw_shop.c						\
 			src/draw/draw_particles_n_flag.c			\
 
 SAVE	=	src/save/settings_game.c					\

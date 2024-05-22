@@ -32,7 +32,7 @@ static int setup_rect_for_text(sfRectangleShape ***shape, sfVector2f pos)
         sfRectangleShape_setPosition(
             (*shape)[i], (sfVector2f){pos.x + 80, pos.y + 30 * (i + 1)});
         sfRectangleShape_setOrigin((*shape)[i], (sfVector2f){100 / 2, 20 / 2});
-        sfRectangleShape_setFillColor((*shape)[i], sfRed);
+        sfRectangleShape_setFillColor((*shape)[i], sfTransparent);
     }
     return OK;
 }
@@ -44,6 +44,7 @@ static int setup_sprite_text(game_t **game, sfRenderWindow *window)
     sfVector2f pos[2] = {get_resize(window, 910, 200),
         get_resize(window, 920, 410)};
 
+    (*game)->interaction->shop = QUITT;
     for (int i = 0; (*game)->interaction->texture[i] != NULL; i++) {
         (*game)->interaction->sprite[i] =
             create_button((*game)->interaction->texture[i], scale[i], pos[i]);
