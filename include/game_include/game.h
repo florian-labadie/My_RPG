@@ -13,6 +13,8 @@
     #include "inventory.h"
     #include "selection.h"
     #include "map.h"
+    #include "interaction.h"
+    #define BULLE_SHOP "assets/sprite/bulle.png"
 
 typedef enum game_state_s {
     SELECTION,
@@ -32,6 +34,7 @@ typedef struct game_s {
     player_t *player;
     inventory_t *inventory;
     pause_t *pause;
+    interaction_t *interaction;
 } game_t;
 
 #endif /* !GAME_H_ */

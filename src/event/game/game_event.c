@@ -87,5 +87,9 @@ int game_event(rpg_t *rpg, sfEvent event)
         get_movements_realesed(rpg, event);
         show_flag(rpg, event);
     }
+    if (rpg->game->map->choice_map == FORGE ||
+        rpg->game->map->choice_map == ALCHEMY) {
+        interaction_event(rpg, event);
+    }
     return OK;
 }

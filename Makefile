@@ -24,6 +24,7 @@ GLOBALS	=	src/global_functions/create_button.c		\
 			src/global_functions/set_mid_origin.c		\
 			src/global_functions/set_volume_music.c		\
 			src/global_functions/read_dialogue_file.c	\
+			src/global_functions/reset_view.c			\
 
 SETUP	=	src/setup/menu_setup.c						\
 			src/setup/menu/background_menu_setup.c		\
@@ -39,6 +40,7 @@ SETUP	=	src/setup/menu_setup.c						\
 			src/setup/game/particule_n_flag_set_up.c	\
 			src/setup/menu/option_features.c 			\
 			src/setup/menu/parallax_setup.c				\
+			src/setup/game/interaction_setup.c			\
 
 EVENT	=	src/event/event.c							\
 			src/event/menu/main_menu_event.c			\
@@ -50,6 +52,7 @@ EVENT	=	src/event/event.c							\
 			src/event/game/pause_menu_event.c			\
 			src/event/game/inventory_menu_event.c		\
 			src/event/game/collision_map.c				\
+			src/event/game/interaction_event.c			\
 
 MANAGER	=	src/manager/menu_manager.c					\
 			src/manager/background_menu_manager.c		\

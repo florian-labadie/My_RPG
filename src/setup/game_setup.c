@@ -30,11 +30,12 @@ int game_setup(rpg_t *rpg)
     rpg->game->player->sprites = malloc(sizeof(player_sprites_t));
     rpg->game->select = malloc(sizeof(select_t));
     rpg->game->pause = malloc(sizeof(pause_t));
+    rpg->game->interaction = malloc(sizeof(interaction_t));
     if (!rpg->game->player || !rpg->game->map || !rpg->game->select ||
         !rpg->game->player->sprites)
         return KO;
-    if (check_setup_map(rpg) == KO)
+    if (check_setup_map(rpg) == KO ||
+        interaction_setup(rpg->game, rpg->window) == KO)
         return KO;
-    set_volume_music(rpg);
     return OK;
 }
