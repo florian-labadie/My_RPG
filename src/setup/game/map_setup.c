@@ -29,26 +29,17 @@ int setup_house(map_t *map, sfRenderWindow *window)
     }
     sfSprite_setScale(map->house[0]->house, (sfVector2f){1.94, 1.94});
     sfSprite_setScale(map->house[1]->house, (sfVector2f){1.56, 1.56});
+    return OK;
 }
 
 int set_up_battlefield(sfRenderWindow *window, map_t *map, float volume)
 {
     map->battle_text = sfTexture_createFromFile(BATTLE_MAP, NULL);
-    map->entities = malloc(sizeof(entities_bf_t));
-    map->entities->wizzard_rect = (sfIntRect) {0, 202, 204, 202};
-    map->entities->wizz_clock = sfClock_create();
-    if (!map->battle_text || !map->entities)
+    if (!map->battle_text)
         return KO;
     sfMusic_setVolume(map->battle_music, volume);
     map->battle_spr = create_button(map->battle_text,
     (sfVector2f) {1.0, 1.0}, get_resize(window, 0.0, 0.0));
-    map->entities->wizzard_text = sfTexture_createFromFile(WIZZARD, NULL);
-    if (!map->entities->wizzard_text)
-        return KO;
-    map->entities->wizzard_spr = create_button(map->entities->wizzard_text,
-    (sfVector2f) {1.5, 1.5}, get_resize(window, 1700.0, 840.0));
-    sfSprite_setTextureRect(map->entities->wizzard_spr,
-    map->entities->wizzard_rect);
     return OK;
 }
 
@@ -71,7 +62,8 @@ int setup_map(map_t *map, sfRenderWindow *window, float volume)
     map->view = sfView_createFromRect(map->rect);
     sfMusic_setLoop(map->game_sound, sfTrue);
     sfMusic_setLoop(map->battle_music, sfTrue);
-    if (setup_particles(map) == KO || setup_flag(map, window) == KO)
+    if (setup_particles(map) == KO || setup_flag(map, window) == KO ||
+    entities_setup(&(map->entities), window) == KO)
         return KO;
     return OK;
 }

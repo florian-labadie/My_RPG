@@ -33,6 +33,7 @@ SETUP	=	src/setup/menu_setup.c						\
 			src/setup/game_setup.c						\
 			src/setup/game/map_setup.c					\
 			src/setup/game/player_setup.c				\
+			src/setup/game/entities_setup.c				\
 			src/setup/game/selection_charac.c			\
 			src/setup/game/pause_menu_setup.c			\
 			src/setup/game/particule_n_flag_set_up.c	\

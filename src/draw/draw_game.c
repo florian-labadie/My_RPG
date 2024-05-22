@@ -42,12 +42,17 @@ static void draw_alchemist(sfRenderWindow *window, game_t *game)
     sfRenderWindow_drawSprite(window, game->player->sprites->player, NULL);
 }
 
-static void draw_battlefield(sfRenderWindow *window, game_t *game)
+static void move_battle_sprite(game_t *game)
 {
     sfTime time = sfClock_getElapsedTime(game->map->entities->wizz_clock);
 
-    sfRenderWindow_drawSprite(window, game->map->battle_spr, NULL);
-    if (time.microseconds >= 300000) {
+    if (time.microseconds >= 350000) {
+            game->map->entities->ork_rect.left += 50;
+        if (game->map->entities->ork_rect.left >= 300)
+            game->map->entities->ork_rect.left = 0;
+        for (int i = 0; i < NB_ORK; i += 1)
+            sfSprite_setTextureRect(game->map->entities->ork_spr[i],
+            game->map->entities->ork_rect);
         game->map->entities->wizzard_rect.left += 204;
         if (game->map->entities->wizzard_rect.left >= 408)
             game->map->entities->wizzard_rect.left = 0;
@@ -55,6 +60,15 @@ static void draw_battlefield(sfRenderWindow *window, game_t *game)
         game->map->entities->wizzard_rect);
         sfClock_restart(game->map->entities->wizz_clock);
     }
+}
+
+static void draw_battlefield(sfRenderWindow *window, game_t *game)
+{
+    sfRenderWindow_drawSprite(window, game->map->battle_spr, NULL);
+    move_battle_sprite(game);
+    for (int i = 0; i < NB_ORK; i += 1)
+        sfRenderWindow_drawSprite(window, game->map->entities->ork_spr[i],
+        NULL);
     sfRenderWindow_drawSprite(window, game->map->entities->wizzard_spr, NULL);
     sfRenderWindow_drawSprite(window,
     game->player->sprites->player, NULL);

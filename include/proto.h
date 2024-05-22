@@ -52,6 +52,7 @@ int init_parallax(parallax_t *parallax);
 /* GAME SETUP */
 int game_setup(rpg_t *rpg);
 int player_setup(sfRenderWindow *window, player_t *player);
+int entities_setup(entities_bf_t **entities, sfRenderWindow *window);
 int setup_flag(map_t *map, sfRenderWindow *window);
 int setup_particles(map_t *map);
 int setup_map(map_t *map, sfRenderWindow *window, float volume);
