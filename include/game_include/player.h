@@ -7,6 +7,7 @@
 
 #ifndef PLAYER_H_
     #define PLAYER_H_
+    #define HEALTH_BAR "assets/sprite/life.jpg"
 
     #include "rpg.h"
 
@@ -49,9 +50,18 @@ typedef struct player_sprites_s {
     sfClock *move_clock;
 } player_sprites_t;
 
+typedef struct life_player_s {
+    sfTexture *health_bar_text;
+    sfSprite *health_bar_spr;
+
+    sfRectangleShape *back;
+    sfRectangleShape *red;
+} life_player_t;
+
 typedef struct player_s {
     char *name;
     player_race_t race;
+    life_player_t *life;
     bool attack;
 
     sfVector2f position;

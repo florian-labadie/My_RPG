@@ -7,6 +7,11 @@
 
 #include "my.h"
 
+static void buy_article()
+{
+    
+}
+
 static void actions_rect_reponse(rpg_t *rpg, sfRectangleShape **shape,
     int i, sfVector2f mouse_pos)
 {
@@ -14,10 +19,10 @@ static void actions_rect_reponse(rpg_t *rpg, sfRectangleShape **shape,
         rpg->game->player->position = (sfVector2f){140.0, 415.0};
     if (rpg->game->map->choice_map == FORGE)
         rpg->game->player->position = (sfVector2f){816.0, 610.0};
-    if (get_rectangle_bounds(shape[0], mouse_pos) == sfTrue) {
+    if (get_rectangle_bounds(shape[0], mouse_pos) == sfTrue)
         rpg->game->interaction->shop = BUY;
-    }
     if (get_rectangle_bounds(shape[1], mouse_pos) == sfTrue) {
+        rpg->game->interaction->shop = QUITT;
         sfSprite_setPosition(rpg->game->player->sprites->player,
             rpg->game->player->position);
         sfSprite_setScale(rpg->game->player->sprites->player,
