@@ -84,7 +84,7 @@ void draw_game(rpg_t *rpg)
     void (*draw_game_fct[])(sfRenderWindow *, game_t *) =
         {draw_select_charac, draw_story_game, draw_pause_menu};
     void (*draw_map_function[])(sfRenderWindow *, game_t *) =
-        {draw_village, draw_forge, draw_alchemist, draw_battlefield};
+        {draw_village, draw_battlefield, draw_forge, draw_alchemist};
 
     if (rpg->game->screen >= PLAYING)
         draw_map_function[rpg->game->map->choice_map](rpg->window, rpg->game);

@@ -95,14 +95,15 @@ static void game_music(rpg_t *rpg)
 
 static void move_player(rpg_t *rpg)
 {
+    if (rpg->game->map->choice_map <= BATTLEFIELD) {
     if (rpg->game->player_move.x != 0 || rpg->game->player_move.y
-        != 0) {
+        != 0)
         player_move_manager(rpg->game, rpg->game->player->race);
-    }
     if (rpg->game->player_move.x == 0 && rpg->game->player_move.y
-        == 0) {
+        == 0)
         player_still_manager(rpg->game, rpg->game->player->race);
-    }
+    } else
+        player_still_manager(rpg->game, rpg->game->player->race);
 }
 
 void game_manager(rpg_t *rpg)

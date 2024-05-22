@@ -29,9 +29,9 @@
 
 typedef enum choice_map_s {
     VILLAGE,
+    BATTLEFIELD,
     FORGE,
     ALCHEMY,
-    BATTLEFIELD,
     NB_MAP
 } choice_map_t;
 
