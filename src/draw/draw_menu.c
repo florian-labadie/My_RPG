@@ -27,6 +27,12 @@ static void draw_option_menu(sfRenderWindow *window, menu_t *menu)
     sfRenderWindow_drawSprite(window, menu->settings->extern_sp[2], NULL);
     exit_action(menu, exit);
     book_actions(window, menu, arrow_l, arrow_r);
+    if (sfSprite_getTextureRect(menu->settings->book_sp[0]).left >= 2709) {
+        if (menu->settings->current_page == 0)
+            display_page_1(window, menu);
+        if (menu->settings->current_page == 1)
+            display_page_2(window, menu);
+    }
 }
 
 static void draw_main_menu(sfRenderWindow *window,

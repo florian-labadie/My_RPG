@@ -55,12 +55,14 @@ typedef struct menu_s {
     sfMusic *menu_sound;
     sfSound *click_button_sound;
     sfSoundBuffer *sound_buffer;
+    sfRenderWindow *window;
 
     background_menu_t *background;
 
     main_menu_t *main_menu;
     help_t *help;
     settings_t *settings;
+    stock_setting_t *setting;
 } menu_t;
 
 #endif /* !MENU_H_ */

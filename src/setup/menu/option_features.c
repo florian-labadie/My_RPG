@@ -20,3 +20,14 @@ void set_window_size(rpg_t *wiw, unsigned int width, unsigned int height)
 {
     sfRenderWindow_setSize(wiw->window, (sfVector2u){width, height});
 }
+
+void update_volume_text(settings_t *settings, float volume)
+{
+    sprintf(settings->volume_str, "%d", (int)volume);
+    sfText_setString(settings->volume_text, settings->volume_str);
+}
+
+void set_keybindings(keyboard_t *key)
+{
+    return;
+}
