@@ -41,7 +41,8 @@ static int check_game_screen_changes(rpg_t **rpg, sfEvent event)
         return END;
     }
     if (event.key.code == sfKeyEscape && event.key.type == sfEvtKeyPressed) {
-        set_pause_screen((*rpg)->game->pause, (*rpg)->game->map->rect);
+        set_pause_screen((*rpg)->game->pause, (*rpg)->game->map->rect,
+            (*rpg)->game->map->choice_map, (*rpg)->window);
         (*rpg)->game->player_move = (sfVector2f){0, 0};
         (*rpg)->game->screen = PAUSE;
         return OK;
@@ -63,6 +64,10 @@ static void show_flag(rpg_t *rpg, sfEvent event)
             sfView_setCenter(rpg->game->map->view,
                 get_resize(rpg->window, 960, 540));
             sfRenderWindow_setView(rpg->window, rpg->game->map->view);
+            sfSprite_setPosition(rpg->game->player->sprites->player,
+            (sfVector2f) {1685.0, 940});
+            sfSprite_setScale(rpg->game->player->sprites->player,
+            (sfVector2f) {2.5, 2.5});
         }
         rpg->game->map->flag.is_flag = true;
     }

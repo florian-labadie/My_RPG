@@ -20,7 +20,10 @@
     #define PARTICLE "assets/map/portal_particles.png"
     #define FLAG "assets/map/flag_portal.png"
     #define BATTLE_MAP "assets/map/map_battelfiel.png"
+    #define WIZZARD "assets/sprite/wizard_bf.png"
+    #define ORK "assets/sprite/orc.png"
     #define NB_PARTICLE 15
+    #define NB_ORK 5
 
     #include <SFML/Graphics.h>
     #include <SFML/Window.h>
@@ -28,9 +31,9 @@
 
 typedef enum choice_map_s {
     VILLAGE,
+    BATTLEFIELD,
     FORGE,
     ALCHEMY,
-    BATTLEFIELD,
     NB_MAP
 } choice_map_t;
 
@@ -63,6 +66,17 @@ typedef struct house_s {
     sfMusic *house_music;
 } house_t;
 
+typedef struct entities_bf_s {
+    sfTexture *wizzard_text;
+    sfSprite *wizzard_spr;
+    sfClock *wizz_clock;
+    sfIntRect wizzard_rect;
+
+    sfTexture *ork_text;
+    sfSprite **ork_spr;
+    sfIntRect ork_rect;
+} entities_bf_t;
+
 typedef struct map_s {
     choice_map_t choice_map;
 
@@ -79,6 +93,7 @@ typedef struct map_s {
     house_t **house;
     particle_t particle;
     flag_t flag;
+    entities_bf_t *entities;
 
     sfTexture *texture_ground;
     sfSprite *sprite_ground;

@@ -8,6 +8,7 @@
 #ifndef MACRO_H_
     #define MACRO_H_
 
+    #define ABS(x) x < 0 ? -x : x
     #define COMMENT_CHAR '#'
 
 #endif /* !MACRO_H_ */

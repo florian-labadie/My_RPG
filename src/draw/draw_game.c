@@ -72,9 +72,36 @@ static void draw_alchemist(sfRenderWindow *window, game_t *game)
     }
 }
 
+static void move_battle_sprite(game_t *game)
+{
+    sfTime time = sfClock_getElapsedTime(game->map->entities->wizz_clock);
+
+    if (time.microseconds >= 350000) {
+            game->map->entities->ork_rect.left += 50;
+        if (game->map->entities->ork_rect.left >= 300)
+            game->map->entities->ork_rect.left = 0;
+        for (int i = 0; i < NB_ORK; i += 1)
+            sfSprite_setTextureRect(game->map->entities->ork_spr[i],
+            game->map->entities->ork_rect);
+        game->map->entities->wizzard_rect.left += 204;
+        if (game->map->entities->wizzard_rect.left >= 408)
+            game->map->entities->wizzard_rect.left = 0;
+        sfSprite_setTextureRect(game->map->entities->wizzard_spr,
+        game->map->entities->wizzard_rect);
+        sfClock_restart(game->map->entities->wizz_clock);
+    }
+}
+
 static void draw_battlefield(sfRenderWindow *window, game_t *game)
 {
     sfRenderWindow_drawSprite(window, game->map->battle_spr, NULL);
+    move_battle_sprite(game);
+    for (int i = 0; i < NB_ORK; i += 1)
+        sfRenderWindow_drawSprite(window, game->map->entities->ork_spr[i],
+        NULL);
+    sfRenderWindow_drawSprite(window, game->map->entities->wizzard_spr, NULL);
+    sfRenderWindow_drawSprite(window,
+    game->player->sprites->player, NULL);
 }
 
 static void draw_story_game(sfRenderWindow *window, game_t *game)
@@ -101,7 +128,7 @@ void draw_game(rpg_t *rpg)
     void (*draw_game_fct[])(sfRenderWindow *, game_t *) =
         {draw_select_charac, draw_story_game, draw_pause_menu};
     void (*draw_map_function[])(sfRenderWindow *, game_t *) =
-        {draw_village, draw_forge, draw_alchemist, draw_battlefield};
+        {draw_village, draw_battlefield, draw_forge, draw_alchemist};
 
     if (rpg->game->screen >= PLAYING)
         draw_map_function[rpg->game->map->choice_map](rpg->window, rpg->game);

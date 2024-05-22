@@ -28,7 +28,7 @@ int setup_house(map_t *map, sfRenderWindow *window)
     map->house[1] = malloc(sizeof(house_t));
     map->house[0]->house_texture = sfTexture_createFromFile(FORGE_MAP, NULL);
     map->house[1]->house_texture = sfTexture_createFromFile(ALCHEMY_MAP, NULL);
-    map->house[2]->house_texture = NULL;
+    map->house[2] = NULL;
     if (!map->house[0]->house_texture || !map->house[1]->house_texture ||
         house_loop(map, window) == KO)
         return KO;
@@ -37,14 +37,14 @@ int setup_house(map_t *map, sfRenderWindow *window)
     return OK;
 }
 
-int set_up_battlefield(map_t *map, float volume)
+int set_up_battlefield(sfRenderWindow *window, map_t *map, float volume)
 {
     map->battle_text = sfTexture_createFromFile(BATTLE_MAP, NULL);
     if (!map->battle_text)
         return KO;
     sfMusic_setVolume(map->battle_music, volume);
     map->battle_spr = create_button(map->battle_text,
-    (sfVector2f) {1.0, 1.0}, (sfVector2f) {0.0, 0.0});
+    (sfVector2f) {1.0, 1.0}, get_resize(window, 0.0, 0.0));
     return OK;
 }
 
@@ -67,7 +67,8 @@ int setup_map(map_t *map, sfRenderWindow *window, float volume)
     map->view = sfView_createFromRect(map->rect);
     sfMusic_setLoop(map->game_sound, sfTrue);
     sfMusic_setLoop(map->battle_music, sfTrue);
-    if (setup_particles(map) == KO || setup_flag(map, window) == KO)
+    if (setup_particles(map) == KO || setup_flag(map, window) == KO ||
+    entities_setup(&(map->entities), window) == KO)
         return KO;
     return OK;
 }

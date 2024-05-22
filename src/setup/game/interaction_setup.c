@@ -24,6 +24,8 @@ static int texture_setup(game_t **game)
 static int setup_rect_for_text(sfRectangleShape ***shape, sfVector2f pos)
 {
     (*shape) = malloc(sizeof(sfRectangleShape *) * 3);
+    if (!(*shape))
+        return KO;
     for (int i = 0; i < 2; i++) {
         (*shape)[i] = sfRectangleShape_create();
         sfRectangleShape_setSize((*shape)[i], (sfVector2f){100, 20});
@@ -32,6 +34,7 @@ static int setup_rect_for_text(sfRectangleShape ***shape, sfVector2f pos)
         sfRectangleShape_setOrigin((*shape)[i], (sfVector2f){100 / 2, 20 / 2});
         sfRectangleShape_setFillColor((*shape)[i], sfRed);
     }
+    return OK;
 }
 
 static int setup_sprite_text(game_t **game, sfRenderWindow *window)
@@ -49,8 +52,9 @@ static int setup_sprite_text(game_t **game, sfRenderWindow *window)
             "Acheter\nQuitter", get_less_size(window, 50.0),
             (sfVector2f){pos[i].x + 80, pos[i].y + 7.5});
         set_text_mid_origin((*game)->interaction->text[i]);
-        setup_rect_for_text(&((*game)->interaction->zone_text[i]), pos[i]);
-        if (!(*game)->interaction->sprite[i] || !(*game)->interaction->text[i])
+        if (setup_rect_for_text(&((*game)->interaction->zone_text[i]), pos[i])
+            == KO || !(*game)->interaction->sprite[i] ||
+            !(*game)->interaction->text[i])
             return KO;
     }
     return OK;
