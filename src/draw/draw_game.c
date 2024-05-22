@@ -23,9 +23,23 @@ static void draw_village(sfRenderWindow *window, game_t *game)
     sfRenderWindow_drawSprite(window, game->map->sprite_ground, NULL);
     sfRenderWindow_drawSprite(window, game->player->sprites->player, NULL);
     sfRenderWindow_drawSprite(window, game->map->sprite_obj, NULL);
+    for (int i = 0; i < 2; i++) {
+        if (game->interaction->field[i] == game->map->choice_map) {
+            sfRenderWindow_drawSprite(window, game->interaction->sprite[i],
+                NULL);
+            sfRenderWindow_drawText(window, game->interaction->text[i], NULL);
+        }
+    }
     draw_particles(game, window);
     draw_flag(game, window);
     change_view(game, window);
+}
+
+static void draw_rectangle(sfRenderWindow *window, sfRectangleShape **shape)
+{
+    for (int i = 0; i < 2; i += 1) {
+        sfRenderWindow_drawRectangleShape(window, shape[i], NULL);
+    }
 }
 
 static void draw_forge(sfRenderWindow *window, game_t *game)
@@ -33,6 +47,14 @@ static void draw_forge(sfRenderWindow *window, game_t *game)
     sfRenderWindow_clear(window, sfBlack);
     sfRenderWindow_drawSprite(window, game->map->house[0]->house, NULL);
     sfRenderWindow_drawSprite(window, game->player->sprites->player, NULL);
+    for (int i = 0; i < 2; i++) {
+        if (game->interaction->field[i] == game->map->choice_map) {
+            sfRenderWindow_drawSprite(window, game->interaction->sprite[i],
+                NULL);
+            draw_rectangle(window, game->interaction->zone_text[i]);
+            sfRenderWindow_drawText(window, game->interaction->text[i], NULL);
+        }
+    }
 }
 
 static void draw_alchemist(sfRenderWindow *window, game_t *game)
@@ -40,6 +62,14 @@ static void draw_alchemist(sfRenderWindow *window, game_t *game)
     sfRenderWindow_clear(window, sfBlack);
     sfRenderWindow_drawSprite(window, game->map->house[1]->house, NULL);
     sfRenderWindow_drawSprite(window, game->player->sprites->player, NULL);
+    for (int i = 0; i < 2; i++) {
+        if (game->interaction->field[i] == game->map->choice_map) {
+            sfRenderWindow_drawSprite(window, game->interaction->sprite[i],
+                NULL);
+            draw_rectangle(window, game->interaction->zone_text[i]);
+            sfRenderWindow_drawText(window, game->interaction->text[i], NULL);
+        }
+    }
 }
 
 static void draw_battlefield(sfRenderWindow *window, game_t *game)

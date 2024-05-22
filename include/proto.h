@@ -40,6 +40,7 @@ void set_volume_music(rpg_t *rpg);
 char *read_one_dialogue(char *filepath);
 char *read_many_dialogue(char *filepath, int dialogue_number);
 int parallax_event(rpg_t *rpg, sfEvent event);
+void reset_view(sfView *view, sfRenderWindow *window, sfVector2f pos);
 
 /* MENU SETUP */
 int menu_setup(rpg_t *rpg, char const *user);
@@ -61,6 +62,7 @@ void change_view(game_t *game, sfRenderWindow *window);
 int select_charac(game_t *game, sfRenderWindow *window);
 int pause_menu_setup(game_t *game, sfRenderWindow *window);
 void set_pause_screen(pause_t *pause, sfFloatRect view_rect);
+int interaction_setup(game_t *game, sfRenderWindow *window);
 
 /* MENU EVENT */
 void event_manager(rpg_t *rpg);
@@ -74,6 +76,7 @@ int load_save_event(rpg_t *rpg, sfEvent event);
 int game_event(rpg_t *rpg, sfEvent event);
 int pause_menu_event(rpg_t *rpg, sfEvent event);
 int inventory_menu_event(rpg_t *rpg, sfEvent event);
+void interaction_event(rpg_t *rpg, sfEvent event);
 
 /* MENU MANAGER */
 void menu_manager(rpg_t *rpg);

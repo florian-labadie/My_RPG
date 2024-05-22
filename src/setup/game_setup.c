@@ -16,6 +16,7 @@ int game_setup(rpg_t *rpg)
     rpg->game->player->sprites = malloc(sizeof(player_sprites_t));
     rpg->game->select = malloc(sizeof(select_t));
     rpg->game->pause = malloc(sizeof(pause_t));
+    rpg->game->interaction = malloc(sizeof(interaction_t));
     if (!rpg->game->player || !rpg->game->map || !rpg->game->select ||
         !rpg->game->player->sprites)
         return KO;
@@ -23,8 +24,8 @@ int game_setup(rpg_t *rpg)
         || select_charac(rpg->game, rpg->window) == KO ||
         pause_menu_setup(rpg->game, rpg->window) == KO ||
         setup_house(rpg->game->map, rpg->window) == KO ||
-        set_up_battlefield(rpg->game->map, rpg->setting->sound_game) == KO)
+        set_up_battlefield(rpg->game->map, rpg->setting->sound_game) == KO ||
+        interaction_setup(rpg->game, rpg->window) == KO)
         return KO;
-    set_volume_music(rpg);
     return OK;
 }

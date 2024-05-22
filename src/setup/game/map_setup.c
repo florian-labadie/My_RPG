@@ -7,28 +7,34 @@
 
 #include "my.h"
 
-int setup_house(map_t *map, sfRenderWindow *window)
+static int house_loop(map_t *map, sfRenderWindow *window)
 {
-    map->house[0] = malloc(sizeof(house_t));
-    map->house[1] = malloc(sizeof(house_t));
-    map->house[2] = malloc(sizeof(house_t));
-    map->house[0]->house_texture = sfTexture_createFromFile(FORGE_MAP, NULL);
-    map->house[1]->house_texture = sfTexture_createFromFile(ALCHEMY_MAP, NULL);
-    map->house[2]->house_texture = NULL;
-    if (!map->house[0]->house_texture || !map->house[1]->house_texture)
-        return 84;
     for (int i = 0; i < 2; i += 1) {
         map->house[i]->house = create_button(map->house[i]->house_texture,
             (sfVector2f){1.0, 1.0}, (sfVector2f){960, 540});
         map->house[i]->house_music = sfMusic_createFromFile(SHOP_MUSIC);
+        sfMusic_setLoop(map->house[i]->house_music, sfTrue);
         if (!map->house[i]->house_music)
-            return 84;
+            return KO;
         map->house[i]->house_text = sfText_create();
         map->house[i]->house_font = sfFont_createFromFile(FONT);
         set_sprite_mid_origin(map->house[i]->house);
     }
+}
+
+int setup_house(map_t *map, sfRenderWindow *window)
+{
+    map->house[0] = malloc(sizeof(house_t));
+    map->house[1] = malloc(sizeof(house_t));
+    map->house[0]->house_texture = sfTexture_createFromFile(FORGE_MAP, NULL);
+    map->house[1]->house_texture = sfTexture_createFromFile(ALCHEMY_MAP, NULL);
+    map->house[2]->house_texture = NULL;
+    if (!map->house[0]->house_texture || !map->house[1]->house_texture ||
+        house_loop(map, window) == KO)
+        return KO;
     sfSprite_setScale(map->house[0]->house, (sfVector2f){1.94, 1.94});
     sfSprite_setScale(map->house[1]->house, (sfVector2f){1.56, 1.56});
+    return OK;
 }
 
 int set_up_battlefield(map_t *map, float volume)

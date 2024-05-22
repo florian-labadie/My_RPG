@@ -27,7 +27,6 @@ static void player_attack_manager(game_t *game, player_race_t race)
         (game->player->sprites->player_clock)) > 200) {
         rect.left = sfSprite_getTextureRect
             (game->player->sprites->player).left;
-        printf("width = %d; height = %d\n", base_rect.left, base_rect.top);
         rect.left += base_rect.width;
         if (rect.left >= 415) {
             game->player->attack = false;
