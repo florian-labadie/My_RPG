@@ -23,7 +23,7 @@
     #define WIZZARD "assets/sprite/wizard_bf.png"
     #define ORK "assets/sprite/orc.png"
     #define NB_PARTICLE 15
-    #define NB_ORK 5
+    #define NB_ORK 15
 
     #include <SFML/Graphics.h>
     #include <SFML/Window.h>

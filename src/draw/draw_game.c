@@ -22,6 +22,7 @@ static void draw_village(sfRenderWindow *window, game_t *game)
     draw_particles(game, window);
     draw_flag(game, window);
     change_view(game, window);
+    set_life_village(game, window);
 }
 
 static void draw_rectangle(sfRenderWindow *window, sfRectangleShape **shape)
@@ -66,7 +67,7 @@ static void move_battle_sprite(game_t *game)
     sfTime time = sfClock_getElapsedTime(game->map->entities->wizz_clock);
 
     if (time.microseconds >= 350000) {
-            game->map->entities->ork_rect.left += 50;
+        game->map->entities->ork_rect.left += 50;
         if (game->map->entities->ork_rect.left >= 300)
             game->map->entities->ork_rect.left = 0;
         for (int i = 0; i < NB_ORK; i += 1)
@@ -91,6 +92,7 @@ static void draw_battlefield(sfRenderWindow *window, game_t *game)
     sfRenderWindow_drawSprite(window, game->map->entities->wizzard_spr, NULL);
     sfRenderWindow_drawSprite(window,
     game->player->sprites->player, NULL);
+    set_life_battle(window, game);
 }
 
 static void draw_story_game(sfRenderWindow *window, game_t *game)
