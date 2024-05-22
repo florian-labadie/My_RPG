@@ -104,5 +104,7 @@ void draw_game(rpg_t *rpg);
 void draw_menu(rpg_t *rpg);
 void draw_particles(game_t *game, sfRenderWindow *window);
 void draw_flag(game_t *game, sfRenderWindow *window);
+void set_life_village(game_t *game, sfRenderWindow *window);
+void set_life_battle(sfRenderWindow *window, game_t *game);
 
 #endif /* PROTO_H_ */
