@@ -28,7 +28,7 @@ typedef struct game_s {
     game_state_t screen;
 
     sfVector2f player_move;
-    const sfView *original_view;
+    sfView *original_view;
 
     select_t *select;
     map_t *map;

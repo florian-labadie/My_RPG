@@ -7,9 +7,9 @@
 
 #include "my.h"
 
-static void buy_article()
+static void buy_article(void)
 {
-    
+    return;
 }
 
 static void actions_rect_reponse(rpg_t *rpg, sfRectangleShape **shape,
@@ -33,7 +33,8 @@ static void actions_rect_reponse(rpg_t *rpg, sfRectangleShape **shape,
     }
 }
 
-static void change_status_button(sfRectangleShape **shape, sfVector2f mouse_pos)
+static void change_status_button(sfRectangleShape **shape,
+    sfVector2f mouse_pos)
 {
     if (get_rectangle_bounds(shape[0], mouse_pos) == sfTrue) {
         sfRectangleShape_setFillColor(shape[0],
