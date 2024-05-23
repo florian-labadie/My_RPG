@@ -24,7 +24,7 @@ static int malloc_struct(rpg_t *rpg)
     return OK;
 }
 
-static int setup_menu_music(menu_t *menu, stock_setting_t *setting)
+static int setup_menu_music(menu_t *menu)
 {
     menu->menu_sound = sfMusic_createFromFile(MUSIC_MENU);
     menu->sound_buffer = sfSoundBuffer_createFromFile(SOUND_CLICK_BUTTON);
@@ -59,7 +59,7 @@ int menu_setup(rpg_t *rpg, char const *user)
         return KO;
     if (background_menu_setup(rpg->menu, rpg->window) == KO ||
         setup_main_menu(rpg->menu, rpg->window) == KO ||
-        setup_menu_music(rpg->menu, rpg->setting) == KO ||
+        setup_menu_music(rpg->menu) == KO ||
         setup_option_menu(rpg->menu->settings, rpg->window) == KO ||
         init_parallax(rpg->menu->parallax) == KO)
         return KO;

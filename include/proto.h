@@ -62,9 +62,11 @@ int set_up_battlefield(sfRenderWindow *window, map_t *map, float volume);
 void change_view(game_t *game, sfRenderWindow *window);
 int select_charac(game_t *game, sfRenderWindow *window);
 int pause_menu_setup(game_t *game, sfRenderWindow *window);
+int inventory_menu_setup(game_t *game, sfRenderWindow *window);
 void set_pause_screen(pause_t *pause, sfFloatRect view_rect,
     choice_map_t map, sfRenderWindow *window);
 int interaction_setup(game_t *game, sfRenderWindow *window);
+int shop_buy_setup(game_t *game, sfRenderWindow *window);
 
 /* MENU EVENT */
 void event_manager(rpg_t *rpg);
@@ -105,10 +107,12 @@ int write_setting_in_file(rpg_t *rpg);
 
 /* DRAWING FUNCTIONS */
 void draw_game(rpg_t *rpg);
+void draw_forge(sfRenderWindow *window, game_t *game);
+void draw_alchemist(sfRenderWindow *window, game_t *game);
+void draw_pause_menu(sfRenderWindow *window, game_t *game);
+void draw_inventory(sfRenderWindow *window, game_t *game);
 void draw_menu(rpg_t *rpg);
 void draw_particles(game_t *game, sfRenderWindow *window);
 void draw_flag(game_t *game, sfRenderWindow *window);
-void set_life_village(game_t *game, sfRenderWindow *window);
-void set_life_battle(sfRenderWindow *window, game_t *game);
 
 #endif /* PROTO_H_ */

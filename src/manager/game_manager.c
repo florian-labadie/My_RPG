@@ -24,6 +24,7 @@ static void player_attack_manager(game_t *game, player_race_t race)
     sfVector2f origin = {CHARACTERS_ATK_RECT.width / 2,
         CHARACTERS_ATK_RECT.height / 2};
 
+    (void)race;
     player_mouvement(game->player->sprites->player, game->player_move);
     if (sfTime_asMilliseconds(sfClock_getElapsedTime
         (game->player->sprites->player_clock)) > 200) {
@@ -108,6 +109,8 @@ static void move_player(rpg_t *rpg)
 void game_manager(rpg_t *rpg)
 {
     game_music(rpg);
+    if (rpg->game->screen > SELECTION)
+        level_manager(rpg->game, rpg->window);
     if (rpg->game->player->sprites->player) {
         if (rpg->game->player->attack == true) {
             player_attack_manager(rpg->game, rpg->game->player->race);

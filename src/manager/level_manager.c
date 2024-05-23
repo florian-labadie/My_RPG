@@ -16,5 +16,4 @@ void level_manager(game_t *game, sfRenderWindow *window)
         int_to_str(game->player->stats.level));
         set_text_mid_origin(game->player->stats.level_text);
     }
-    sfRenderWindow_drawText(window, game->player->stats.level_text, NULL);
 }

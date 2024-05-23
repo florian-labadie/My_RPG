@@ -10,10 +10,11 @@
 
     #include <SFML/Graphics.h>
 
-typedef enum text_s {
+typedef enum shop_interac_s {
+    QUITT,
     BUY,
     NB_OF_TEXT
-} text_t;
+} shop_interac_t;
 
 typedef struct interaction_s {
     sfTexture **texture;
@@ -23,6 +24,7 @@ typedef struct interaction_s {
 
     sfRectangleShape ***zone_text;
     choice_map_t *field;
+    shop_interac_t shop;
 } interaction_t;
 
 #endif /* !INTERACTION_H_ */
