@@ -70,13 +70,8 @@ static int setup_inventory_background(inventory_t **inventory,
     return OK;
 }
 
-int inventory_menu_setup(game_t *game, sfRenderWindow *window)
+static int init_struct(game_t *game)
 {
-    game->inventory->background = sfRectangleShape_create();
-    sfRectangleShape_setSize(game->inventory->background,
-        get_resize(window, 1920, 1080));
-    sfRectangleShape_setFillColor(game->inventory->background,
-        sfRectangleShape_getFillColor(game->pause->background));
     game->inventory->textures = malloc(sizeof(sfTexture *) * 4);
     game->inventory->sprites = malloc(sizeof(sfSprite *) * 4);
     game->inventory->text = malloc(sizeof(sfText *) * 7);
@@ -87,6 +82,20 @@ int inventory_menu_setup(game_t *game, sfRenderWindow *window)
     game->inventory->textures[3] = NULL;
     game->inventory->text[6] = NULL;
     game->inventory->stats_text[5] = NULL;
+    return OK;
+}
+
+int inventory_menu_setup(game_t *game, sfRenderWindow *window)
+{
+    game->inventory->background = sfRectangleShape_create();
+    sfRectangleShape_setSize(game->inventory->background,
+        get_resize(window, 1920, 1080));
+    sfRectangleShape_setFillColor(game->inventory->background,
+        sfRectangleShape_getFillColor(game->pause->background));
+    if (init_struct(game) == KO)
+        return KO;
+    game->inventory->nbr_health_pot = 0;
+    game->inventory->nbr_mana_pot = 0;
     if (setup_inventory_background(&game->inventory,
         window, game->pause->font) == KO ||
         setup_item_inventory(game, window) == KO)

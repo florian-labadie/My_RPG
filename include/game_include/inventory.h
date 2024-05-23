@@ -36,6 +36,9 @@ typedef struct inventory_t {
     sfSprite **sprites;
     sfText **text;
 
+    int nbr_health_pot;
+    int nbr_mana_pot;
+
     item_t *item;
     sfText **stats_text;
 } inventory_t;
