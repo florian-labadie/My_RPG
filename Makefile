@@ -12,7 +12,6 @@ SRC =		src/error_handling.c						\
 			src/check_env.c								\
 			src/launch.c								\
 			src/rpg_loop.c								\
-			src/destroy.c								\
 
 GLOBALS	=	src/global_functions/create_button.c		\
 			src/global_functions/create_text.c			\
@@ -69,10 +68,15 @@ DRAW	=	src/draw/draw_menu.c						\
 SAVE	=	src/save/settings_game.c					\
 			src/save/write_setting_in_file.c			\
 
+DESTROY = 	src/destroy/destroy_rpg.c					\
+			src/destroy/destroy_game.c					\
+			src/destroy/destroy_menu.c					\
+
 SRCTEST = 	tests/test_lib.c							\
 
 OBJ = 	$(MAIN:.c=.o) $(SRC:.c=.o) $(SETUP:.c=.o) $(GLOBALS:.c=.o)\
-		$(EVENT:.c=.o) $(MANAGER:.c=.o) $(SAVE:.c=.o) $(DRAW:.c=.o)
+		$(EVENT:.c=.o) $(MANAGER:.c=.o) $(SAVE:.c=.o) $(DRAW:.c=.o)\
+		$(DESTROY:.c=.o)
 
 OBJTEST = $(SRCTEST:.c=.o)
 

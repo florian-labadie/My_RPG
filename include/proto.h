@@ -18,7 +18,6 @@ int error_handling(int argc, char const *const *argv);
 
 int launch_rpg(char const *user);
 int rpg_loop(rpg_t *rpg);
-void destroy_resources(rpg_t *rpg);
 
 /* GLOBAL FUNCTION */
 sfSprite *create_button(sfTexture *texture, sfVector2f scale, sfVector2f pos);
@@ -113,5 +112,10 @@ void draw_inventory(sfRenderWindow *window, game_t *game);
 void draw_menu(rpg_t *rpg);
 void draw_particles(game_t *game, sfRenderWindow *window);
 void draw_flag(game_t *game, sfRenderWindow *window);
+
+/* DESTROY FUNCTIONS */
+void destroy_rpg(rpg_t *rpg);
+void destroy_game(game_t *game);
+void destroy_menu(menu_t *menu);
 
 #endif /* PROTO_H_ */

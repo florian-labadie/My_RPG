@@ -23,6 +23,6 @@ int rpg_loop(rpg_t *rpg)
     }
     sfRenderWindow_close(rpg->window);
     write_setting_in_file(rpg);
-    destroy_resources(rpg);
+    destroy_rpg(rpg);
     return 0;
 }

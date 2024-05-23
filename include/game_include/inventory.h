@@ -16,7 +16,7 @@ typedef struct inventory_t {
     sfRectangleShape *background;
     sfTexture **textures;
     sfSprite **sprites;
-    sfText *text;
+    sfText **text;
 } inventory_t;
 
 #endif /* !INVENTORY_H_ */
