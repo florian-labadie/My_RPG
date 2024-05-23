@@ -44,6 +44,10 @@ static int ork_setup(entities_bf_t **entities, sfRenderWindow *window)
         (*entities)->ork[i] = NULL;
     if (fill_ork_struct(entities, window, ork_texture, pos) == KO)
         return KO;
+    for (int i = 0; i < NB_ORK; i += 1) {
+        (*entities)->ork[i]->is_alive = true;
+        (*entities)->ork[i]->ork_damage = sfClock_create();
+    }
     return OK;
 }
 
@@ -59,7 +63,7 @@ static int wizzard_setup(entities_bf_t **entities, sfRenderWindow *window)
     if (!(*entities)->wizzard_text || !(*entities)->bubble_text || !font_wizz)
         return KO;
     (*entities)->bubble_spr = create_button((*entities)->bubble_text,
-    (sfVector2f) {-1.5 , 1.5}, get_resize(window, 1850.0 , 750));
+    (sfVector2f) {-1.5, 1.5}, get_resize(window, 1850.0 , 750));
     (*entities)->wizzard_spr = create_button((*entities)->wizzard_text,
     (sfVector2f) {1.5, 1.5}, get_resize(window, 1700.0, 840.0));
     (*entities)->wizzard_sent = create_text(font_wizz,

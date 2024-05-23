@@ -63,8 +63,14 @@ static void draw_battlefield(sfRenderWindow *window, game_t *game)
         sfRenderWindow_drawCircleShape(window,
         game->map->entities->ork[i]->hitbox, NULL);
         if (game->map->entities->ork[i]->hp > 0)
-            sfRenderWindow_drawSprite(window, game->map->entities->ork[i]->ork_spr,
-            NULL);
+            sfRenderWindow_drawSprite(window,
+            game->map->entities->ork[i]->ork_spr, NULL);
+        if (game->map->entities->ork[i]->hp <= 0 &&
+        game->map->entities->ork[i]->is_alive != false) {
+            game->player->stats.xp += 50;
+            game->player->stats.nb_gold += 40;
+            game->map->entities->ork[i]->is_alive = false;
+        }
     }
     sfRenderWindow_drawSprite(window, game->map->entities->wizzard_spr, NULL);
     sfRenderWindow_drawSprite(window, game->player->sprites->player, NULL);
