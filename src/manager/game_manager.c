@@ -29,7 +29,8 @@ static void player_attack_manager(game_t *game, player_race_t race)
     player_mouvement(game->player->sprites->player, game->player_move);
     if (sfTime_asMilliseconds(sfClock_getElapsedTime
         (game->player->sprites->player_clock)) > 200) {
-        rect.left =sfSprite_getTextureRect(game->player->sprites->player).left;
+        rect.left =
+            sfSprite_getTextureRect(game->player->sprites->player).left;
         rect.left += rects[race].width;
         if (rect.left >= 415) {
             game->player->attack = false;
@@ -113,7 +114,7 @@ void game_manager(rpg_t *rpg)
         return;
     }
     life_manager(rpg->game, rpg->window, rpg->game->player->stats.health);
-    level_manager(rpg->game, rpg->window);
+    level_manager(rpg->game);
     if (rpg->game->map->choice_map > BATTLEFIELD)
         return;
     if (rpg->game->player->attack == true) {
