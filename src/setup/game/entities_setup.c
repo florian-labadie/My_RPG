@@ -29,6 +29,7 @@ static int fill_ork_struct(entities_bf_t **entities, sfRenderWindow *window,
         sfCircleShape_setPosition((*entities)->ork[i]->hitbox,
         get_resize(window, pos.x - 40, pos.y + 30));
     }
+    return OK;
 }
 
 static int ork_setup(entities_bf_t **entities, sfRenderWindow *window)

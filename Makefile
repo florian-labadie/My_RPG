@@ -55,6 +55,7 @@ EVENT	=	src/event/event.c							\
 			src/event/game/pause_menu_event.c			\
 			src/event/game/inventory_menu_event.c		\
 			src/event/game/collision_map.c				\
+			src/event/game/battlefield_movement.c		\
 			src/event/game/interaction_event.c			\
 			src/event/game/buy_article.c				\
 			src/event/menu/help_event.c					\

@@ -71,6 +71,7 @@ static void draw_battlefield(sfRenderWindow *window, game_t *game)
     sfRenderWindow_drawSprite(window, game->map->entities->bubble_spr, NULL);
     sfRenderWindow_drawText(window, game->map->entities->wizzard_sent, NULL);
     sfRenderWindow_drawText(window, game->map->help_exit, NULL);
+    change_player_pos_bf(game, window);
 }
 
 static void draw_story_game(sfRenderWindow *window, game_t *game)

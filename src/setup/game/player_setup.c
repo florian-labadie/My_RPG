@@ -50,7 +50,7 @@ static int setup_level(player_t *player, sfRenderWindow *window)
     if (!level_font)
         return KO;
     player->stats.level = 1;
-    player->stats.nb_gold = 0;
+    player->stats.nb_gold = 300;
     player->stats.xp = 0;
     player->stats.level_text =
     create_text(level_font, int_to_str(player->stats.level),

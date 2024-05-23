@@ -9,7 +9,7 @@
 
 int help_menu_event(rpg_t *rpg, sfEvent event)
 {
-    if (sfEvtMouseButtonReleased == event.type) {
+    if (sfEvtMouseButtonReleased == event.type)
         rpg->menu->screen = MAIN;
-    }
+    return KO;
 }
