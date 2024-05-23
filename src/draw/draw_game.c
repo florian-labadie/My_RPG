@@ -63,6 +63,7 @@ static void draw_battlefield(sfRenderWindow *window, game_t *game)
     sfRenderWindow_drawSprite(window, game->map->entities->wizzard_spr, NULL);
     sfRenderWindow_drawSprite(window,
     game->player->sprites->player, NULL);
+    sfRenderWindow_drawText(window, game->map->help_exit, NULL);
 }
 
 static void draw_story_game(sfRenderWindow *window, game_t *game)
