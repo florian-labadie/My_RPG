@@ -12,8 +12,8 @@ static int check_ork_bounds(game_t *game, sfFloatRect r)
     sfFloatRect ork_rect = {0};
 
     for (int i = 0; i < NB_ORK; i++) {
-        ork_rect = sfSprite_getGlobalBounds
-            (game->map->entities->ork[i]->ork_spr);
+        ork_rect = sfCircleShape_getGlobalBounds
+            (game->map->entities->ork[i]->hitbox);
         if (sfFloatRect_intersects(&r, &ork_rect, NULL))
             return OK;
     }
@@ -68,4 +68,8 @@ void change_player_pos_bf(game_t *game, sfRenderWindow *window)
         sfSprite_move(game->player->sprites->player,
         (sfVector2f){0, game->player_move.y * 10});
     }
+    sfCircleShape_setPosition(game->player->sprites->range,
+        (sfVector2f){r.left + r.width / 2, r.top + r.height / 2});
+    sfCircleShape_setPosition(game->player->sprites->hitbox,
+        (sfVector2f){r.left + r.width / 2, r.top + r.height / 2});
 }

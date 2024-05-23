@@ -20,7 +20,7 @@ static void player_stats_setup(player_t *player)
     player->stats.defense = stats[player->race][4];
 }
 
-static int player_sprites_setup(sfRenderWindow *window, player_t *player)
+static int set_palyer_sprites(player_t *player, sfRenderWindow *window)
 {
     sfIntRect rects[3] = {HUMAN_STILL_RECT, DWARF_STILL_RECT, ELF_STILL_RECT};
     sfVector2f origins[3] = {
@@ -31,9 +31,9 @@ static int player_sprites_setup(sfRenderWindow *window, player_t *player)
     player->sprites->player_text = sfTexture_createFromFile(PLAYER, NULL);
     player->sprites->player_clock = sfClock_create();
     player->sprites->move_clock = sfClock_create();
-    player->sprites->player_rect = rects[player->race];
     player->attack = false;
     player->position = get_resize(window, 170, 660);
+    player->sprites->player_rect = rects[player->race];
     if (!player->sprites->player_text)
         return KO;
     player->sprites->player = create_button(player->sprites->player_text,
@@ -41,6 +41,17 @@ static int player_sprites_setup(sfRenderWindow *window, player_t *player)
     sfSprite_setTextureRect(player->sprites->player, rects[player->race]);
     sfSprite_setOrigin(player->sprites->player, origins[player->race]);
     return OK;
+}
+
+static int player_sprites_setup(sfRenderWindow *window, player_t *player)
+{
+    set_palyer_sprites(player, window);
+    player->sprites->range = sfCircleShape_create();
+    sfCircleShape_setRadius(player->sprites->range, 130);
+    sfCircleShape_setOrigin(player->sprites->range, (sfVector2f){130, 130});
+    player->sprites->hitbox = sfCircleShape_create();
+    sfCircleShape_setRadius(player->sprites->hitbox, 80);
+    sfCircleShape_setOrigin(player->sprites->hitbox, (sfVector2f){80, 80});
 }
 
 static int setup_level(player_t *player, sfRenderWindow *window)

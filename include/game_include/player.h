@@ -49,6 +49,8 @@ typedef struct player_stats_s {
 } player_stats_t;
 
 typedef struct player_sprites_s {
+    sfCircleShape *range;
+    sfCircleShape *hitbox;
     sfTexture *player_text;
     sfSprite *player;
 
