@@ -20,23 +20,12 @@ static void draw_option_menu(sfRenderWindow *window, menu_t *menu)
     sfRenderWindow_drawSprite(window, menu->settings->extern_sp[1], NULL);
     sfRenderWindow_drawSprite(window, menu->settings->extern_sp[2], NULL);
     if (sfSprite_getTextureRect(menu->settings->book_sp[0]).left >= 2709) {
-        if (menu->settings->current_page == 0) {
+        if (menu->settings->current_page == 0)
             display_page_1(window, menu);
-        }
-        if (menu->settings->current_page == 1) {
+        if (menu->settings->current_page == 1)
             display_page_2(window, menu);
-        }
     }
-    if(menu->settings->arrow_bool_r == sfTrue) {
-        sfRenderWindow_drawSprite(window, menu->settings->book_sp[2], NULL);
-        turn_book
-        (menu->settings, menu->settings->book_sp[2], menu->settings->b_clock);
-    }
-    if (menu->settings->arrow_bool_l == sfTrue) {
-        sfRenderWindow_drawSprite(window, menu->settings->book_sp[1], NULL);
-        turn_book
-        (menu->settings, menu->settings->book_sp[1], menu->settings->b_clock);
-    }
+    draw_arrows_and_turn_pages(window, menu);
 }
 
 static void draw_main_menu(sfRenderWindow *window, menu_t *menu)

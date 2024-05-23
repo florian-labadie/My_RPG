@@ -101,6 +101,7 @@ void handle_events_page_2(rpg_t *rpg, sfEvent event);
 void update_volume_text(settings_t *settings, float volume);
 void music_sound(rpg_t *rpg, sfEvent event);
 void begin_anim(sfSprite *sprite);
+void draw_arrows_and_turn_pages(sfRenderWindow *window, menu_t *menu);
 
 /* OPTION */
 int setup(settings_t *settings);
