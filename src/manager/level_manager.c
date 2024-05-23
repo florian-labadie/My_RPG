@@ -30,7 +30,7 @@ void life_manager(game_t *game, sfRenderWindow *window, float value)
     if (value < 0)
         value = 0.0;
     sfRectangleShape_setSize(game->player->life->rects[1],
-        get_resize(window, LIFE_RECT_SIZE.x / value, LIFE_RECT_SIZE.y));
+        get_resize(window, LIFE_RECT_SIZE.x * value / 100, LIFE_RECT_SIZE.y));
 }
 
 void level_manager(game_t *game, sfRenderWindow *window)

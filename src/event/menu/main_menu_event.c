@@ -43,6 +43,9 @@ static int change_screen_status(rpg_t **rpg, int i)
         (*rpg)->screen = END;
         sfRenderWindow_close((*rpg)->window);
     }
+    if (i == 4) {
+        (*rpg)->menu->screen = HELP;
+    }
     return OK;
 }
 
@@ -68,6 +71,11 @@ static int main_menu_button(main_menu_buttons_t **buttons,
 
 static int buttons_action(rpg_t *rpg, sfVector2f mouse_pos)
 {
+    sfFloatRect rect =
+    sfSprite_getGlobalBounds(rpg->menu->main_menu->buttons->help_back_spr);
+
+    if (sfFloatRect_contains(&rect, mouse_pos.x, mouse_pos.y))
+        return change_screen_status(&rpg, 4);
     for (int i = 0; rpg->menu->main_menu->buttons->sprites[i]; i++) {
         if (rpg->menu->main_menu->buttons->buttons_status[i] != NORMAL) {
             change_text_rect(&rpg->menu->main_menu->buttons, NORMAL, i);
