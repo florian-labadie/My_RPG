@@ -7,6 +7,14 @@
 
 #include "my.h"
 
+void begin_anim(sfSprite *sprite)
+{
+    sfIntRect rect = {0, 0, 0, 0};
+    rect = sfSprite_getTextureRect(sprite);
+    rect.left = 0;
+    sfSprite_setTextureRect(sprite, rect);
+    printf("mlkjhgf\n");
+}
 
 int turn_book(settings_t *settings, sfSprite *sprite, sfClock *clock)
 {
@@ -20,7 +28,7 @@ int turn_book(settings_t *settings, sfSprite *sprite, sfClock *clock)
         sfSprite_setTextureRect(sprite, rect);
         sfClock_restart(clock);
     }
-    if (rect.left >= 1244 && rect.left > 0) {
+    if (rect.left >= 1244) {
         rect.left = 0;
         sfSprite_setTextureRect(sprite, rect);
         settings->arrow_bool_l = sfFalse;

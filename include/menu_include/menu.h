@@ -13,10 +13,14 @@
     #include "main_menu.h"
     #include "help.h"
     #include "menu_settings.h"
+    #include "parallax.h"
 
     #define BACKGROUND "assets/sprite/background_menu.png"
     #define WOS_SIGN "assets/sprite/tropical_button.png"
     #define PLAYER "assets/sprite/main_character.png"
+    #define HUMAN_ATK_SPRITE "assets/sprite/human_atk.png"
+    #define DWARF_ATK_SPRITE "assets/sprite/dwarf_atk.png"
+    #define ELF_ATK_SPRITE "assets/sprite/elf_atk.png"
     #define BUTTON_OPTION "assets/button/option.png"
     #define BUTTON_PANEL "assets/button/wood_button.png"
     #define BUTTON_MENU "assets/button/button.png"
@@ -27,12 +31,10 @@
     #define HELP_BOOK "assets/button/help_book.png"
     #define BG_RECT ((sfIntRect){0, 0, 560, 272})
     #define BUTTON_RECT ((sfIntRect){0, 0, 748, 287})
-    #define HUMAN_RECT ((sfIntRect){210, 0, 52, 56})
-    #define DWARF_RECT ((sfIntRect){209, 112, 52, 57})
-    #define ELF_RECT ((sfIntRect){210, 226, 52, 62})
     #define BACK_HELP ((sfIntRect){275, 261, 51, 57})
 
 typedef enum menu_state_s {
+    PARALLAX,
     MAIN,
     HELP,
     SETTING,
@@ -62,6 +64,7 @@ typedef struct menu_s {
     main_menu_t *main_menu;
     help_t *help;
     settings_t *settings;
+    parallax_t *parallax;
     stock_setting_t *setting;
 } menu_t;
 

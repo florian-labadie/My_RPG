@@ -37,12 +37,12 @@ void display_page_2(sfRenderWindow *wiw, menu_t *menu)
     }
 }
 
-void handle_events_page_1(menu_t *menu)
+void handle_events_page_1(rpg_t *rpg, sfEvent event)
 {
     return;
 }
 
-void handle_events_page_2(menu_t *menu)
+void handle_events_page_2(rpg_t *rpg, sfEvent event)
 {
-    music_sound(menu);
+    music_sound(rpg, event);
 }

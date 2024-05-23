@@ -35,7 +35,7 @@ static int choose_character(rpg_t *rpg, player_race_t *current,
 static int change_screen_status(rpg_t **rpg, int i, player_race_t race)
 {
     if (i == 0) {
-        (*rpg)->game->screen = LOAD_GAME;
+        (*rpg)->game->screen = PLAYING;
         (*rpg)->game->player->race = race;
         if (player_setup((*rpg)->window, (*rpg)->game->player) == KO)
             return KO;

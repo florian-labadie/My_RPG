@@ -17,9 +17,28 @@ static void menu_music(rpg_t *rpg)
         sfMusic_setPlayingOffset(rpg->menu->menu_sound, sfSeconds(1));
 }
 
+void move_parallax(parallax_t *parallax, int move)
+{
+    int y_pos = 0;
+
+    for (int i = 0; i < NB_PARALLAX; i++) {
+        y_pos = sfSprite_getPosition(parallax->sprites[i]).y;
+        if (sfSprite_getPosition(parallax->sprites[i]).x < 1920) {
+            sfSprite_move(parallax->sprites[i], (sfVector2f)
+            {parallax->speeds[i] * move, 0});
+        } else {
+            sfSprite_setPosition(parallax->sprites[i], (sfVector2f){0, y_pos});
+        }
+    }
+}
+
 void menu_manager(rpg_t *rpg)
 {
+    int move = 1;
+
     menu_music(rpg);
+    if (rpg->menu->screen == PARALLAX)
+        move_parallax(rpg->menu->parallax, move);
     background_menu_manager(rpg->menu);
     return;
 }

@@ -30,7 +30,9 @@ static int player_sprites_setup(sfRenderWindow *window, player_t *player)
 
     player->sprites->player_text = sfTexture_createFromFile(PLAYER, NULL);
     player->sprites->player_clock = sfClock_create();
+    player->sprites->move_clock = sfClock_create();
     player->sprites->player_rect = rects[player->race];
+    player->attack = false;
     player->position = (sfVector2f){170, 660};
     if (!player->sprites->player_text)
         return KO;
@@ -41,9 +43,32 @@ static int player_sprites_setup(sfRenderWindow *window, player_t *player)
     return OK;
 }
 
+static int life_setup(player_t *player)
+{
+    player->life = malloc(sizeof(life_player_t));
+    player->life->health_bar_text = sfTexture_createFromFile(HEALTH_BAR, NULL);
+    if (!player->life->health_bar_text)
+        return KO;
+    player->life->health_bar_spr = create_button(player->life->health_bar_text,
+    (sfVector2f) {0.5, 0.5}, (sfVector2f) {-20.0, -200.0});
+    player->life->back = sfRectangleShape_create();
+    player->life->red = sfRectangleShape_create();
+    sfRectangleShape_setSize(player->life->red, (sfVector2f) {227.0, 21.0});
+    sfRectangleShape_setSize(player->life->back, (sfVector2f) {245.0, 21.0});
+    sfRectangleShape_setPosition(player->life->back, (sfVector2f)
+    {57.0, 52.0});
+    sfRectangleShape_setPosition(player->life->red, (sfVector2f) {75.0, 52.0});
+    sfRectangleShape_setFillColor(player->life->back,
+    sfColor_fromRGB(207, 207, 207));
+    sfRectangleShape_setFillColor(player->life->red,
+    sfColor_fromRGB(209, 61, 61));
+    return OK;
+}
+
 int player_setup(sfRenderWindow *window, player_t *player)
 {
-    if (player_sprites_setup(window, player) == KO)
+    if (player_sprites_setup(window, player) == KO || life_setup(player) == KO)
         return KO;
+    player_stats_setup(player);
     return OK;
 }

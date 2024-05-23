@@ -8,7 +8,7 @@
 #include "my.h"
 
 static int (*events_manager[][GAME_STATE_SIZE])(rpg_t *rpg, sfEvent event) = {
-    {main_menu_event, help_menu_event, settings_menu_event},
+    {parallax_event, main_menu_event, help_menu_event, settings_menu_event},
     {select_event, game_event, pause_menu_event, inventory_menu_event}
 };
 

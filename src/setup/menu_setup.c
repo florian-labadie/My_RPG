@@ -17,6 +17,7 @@ static int malloc_struct(rpg_t *rpg)
     rpg->menu->help = malloc(sizeof(help_t));
     rpg->menu->settings = malloc(sizeof(settings_t));
     rpg->menu->background = malloc(sizeof(background_menu_t));
+    rpg->menu->parallax = malloc(sizeof(parallax_t));
     if (!rpg->menu || !rpg->game || !rpg->menu->main_menu ||
         !rpg->menu->help || !rpg->menu->settings || !rpg->menu->background)
         return KO;
@@ -53,13 +54,14 @@ int menu_setup(rpg_t *rpg, char const *user)
 {
     if (!rpg || !user || malloc_struct(rpg) == KO)
         return KO;
-    rpg->menu->screen = MAIN;
+    rpg->menu->screen = PARALLAX;
     if (!rpg->menu->main_menu || !rpg->menu->help || !rpg->menu->settings)
         return KO;
     if (background_menu_setup(rpg->menu, rpg->window) == KO ||
         setup_main_menu(rpg->menu, rpg->window) == KO ||
         setup_menu_music(rpg->menu, rpg->setting) == KO ||
-        setup_option_menu(rpg->menu->settings, rpg->window) == KO)
+        setup_option_menu(rpg->menu->settings, rpg->window) == KO ||
+        init_parallax(rpg->menu->parallax) == KO)
         return KO;
     return OK;
 }
