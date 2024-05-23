@@ -67,6 +67,7 @@ int pause_menu_setup(game_t *game, sfRenderWindow *window);
 int interaction_setup(game_t *game, sfRenderWindow *window);
 int inventory_menu_setup(game_t *game, sfRenderWindow *window);
 int shop_buy_setup(game_t *game, sfRenderWindow *window);
+int setup_item_inventory(game_t *game, sfRenderWindow *window);
 int init_help_menu(rpg_t *rpg, help_menu_t *help_menu);
 
 /* MENU EVENT */
@@ -82,7 +83,7 @@ int game_event(rpg_t *rpg, sfEvent event);
 int pause_menu_event(rpg_t *rpg, sfEvent event);
 int inventory_menu_event(rpg_t *rpg, sfEvent event);
 void interaction_event(rpg_t *rpg, sfEvent event);
-int buy_article(rpg_t *rpg, sfEvent event);
+void buy_article(rpg_t *rpg, sfEvent event);
 
 /* MENU MANAGER */
 void menu_manager(rpg_t *rpg);

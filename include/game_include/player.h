@@ -71,6 +71,7 @@ typedef struct player_s {
     bool attack;
 
     sfVector2f position;
+    sfVector2f last_pos;
 
     player_sprites_t *sprites;
     player_stats_t stats;

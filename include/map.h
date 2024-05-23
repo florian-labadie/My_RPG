@@ -92,6 +92,7 @@ typedef struct map_s {
     sfTexture *battle_text;
     sfSprite *battle_spr;
     sfMusic *battle_music;
+    sfText *help_exit;
 
     sfMusic *game_sound;
 

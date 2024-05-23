@@ -17,14 +17,20 @@ static void quitt_buy_item(rpg_t *rpg, sfSprite *sprite, sfVector2f mouse_pos)
 static void buy_potion(rpg_t *rpg, sfRectangleShape **shape,
     sfVector2f mouse_pos)
 {
+    printf("gold : %d\n", rpg->game->player->stats.nb_gold);
+     printf("health : %d\n", rpg->game->inventory->nbr_health_pot);
     if (get_rectangle_bounds(shape[0], mouse_pos) == sfTrue) {
-        if (rpg->game->player->stats.nb_gold >= 50) {
+        if (rpg->game->player->stats.nb_gold >= 50 &&
+            rpg->game->inventory->nbr_health_pot <= 4) {
             rpg->game->player->stats.nb_gold -= 50;
+            rpg->game->inventory->nbr_health_pot += 1;
         }
     }
     if (get_rectangle_bounds(shape[1], mouse_pos) == sfTrue) {
-        if (rpg->game->player->stats.nb_gold >= 50) {
+        if (rpg->game->player->stats.nb_gold >= 50 &&
+            rpg->game->inventory->nbr_mana_pot <= 4) {
             rpg->game->player->stats.nb_gold -= 50;
+            rpg->game->inventory->nbr_mana_pot += 1;
         }
     }
 }
@@ -32,19 +38,26 @@ static void buy_potion(rpg_t *rpg, sfRectangleShape **shape,
 static void buy_weapon(rpg_t *rpg, sfRectangleShape **shape,
     sfVector2f mouse_pos)
 {
+    printf("gold : %d\n", rpg->game->player->stats.nb_gold);
     if (get_rectangle_bounds(shape[0], mouse_pos) == sfTrue) {
         if (rpg->game->player->stats.nb_gold >= 50) {
             rpg->game->player->stats.nb_gold -= 50;
+            sfSprite_setColor(rpg->game->inventory->item->
+                weapons[rpg->game->player->race][0], sfWhite);
         }
     }
     if (get_rectangle_bounds(shape[1], mouse_pos) == sfTrue) {
         if (rpg->game->player->stats.nb_gold >= 200) {
             rpg->game->player->stats.nb_gold -= 200;
+            sfSprite_setColor(rpg->game->inventory->item->
+                weapons[rpg->game->player->race][1], sfWhite);
         }
     }
     if (get_rectangle_bounds(shape[2], mouse_pos) == sfTrue) {
         if (rpg->game->player->stats.nb_gold >= 500) {
             rpg->game->player->stats.nb_gold -= 500;
+            sfSprite_setColor(rpg->game->inventory->item->
+                weapons[rpg->game->player->race][2], sfWhite);
         }
     }
 }
@@ -67,14 +80,14 @@ static void check_shop(rpg_t *rpg, sfEvent event, sfVector2f mouse_pos)
     }
 }
 
-int buy_article(rpg_t *rpg, sfEvent event)
+void buy_article(rpg_t *rpg, sfEvent event)
 {
     sfVector2i mouse_pos_int = {event.mouseButton.x, event.mouseButton.y};
     sfVector2f mouse_pos = sfRenderWindow_mapPixelToCoords(rpg->window,
         mouse_pos_int, rpg->game->map->view);
 
-    if (event.mouseButton.type == sfEvtMouseButtonReleased) {
+    if (event.mouseButton.type == sfEvtMouseButtonReleased &&
+            event.mouseButton.button == sfMouseLeft) {
         check_shop(rpg, event, mouse_pos);
     }
-    return OK;
 }
