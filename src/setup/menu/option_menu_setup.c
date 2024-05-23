@@ -145,6 +145,7 @@ static int setup_fps(settings_t *settings)
 
 int setup_option_menu(settings_t *settings, sfRenderWindow *window)
 {
+    (void)window;
     settings->book_sp = malloc(sizeof(sfSprite *) * (4 + 1));
     settings->book_text = malloc(sizeof(sfTexture *) * (4 + 1));
     settings->extern_text = malloc(sizeof(sfTexture *) * (3 + 1));

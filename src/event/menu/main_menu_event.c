@@ -26,23 +26,16 @@ static int change_text_rect(main_menu_buttons_t **button,
     return OK;
 }
 
-static int already_pressed(button_state_t *button_status)
-{
-    for (int i = 0; i < 4; i++) {
-        if (button_status[i] == BUTTON_PRESSED)
-            return OK;
-    }
-    return KO;
-}
-
 static int change_screen_status(rpg_t **rpg, int i)
 {
-    if (i <= 1) {
+    if (i == 0) {
         if (!(*rpg)->game->map && game_setup(*rpg) == KO)
             return KO;
+        (*rpg)->game->map->rect = (sfFloatRect){0.0, get_resize((*rpg)->window,
+            495.0, 0).x, 400.0, 200.0};
         (*rpg)->screen = GAME;
         sfMusic_stop((*rpg)->menu->menu_sound);
-        (*rpg)->game->screen = (game_state_t)i;
+        (*rpg)->game->screen = SELECTION;
     }
     if (i == 2)
         (*rpg)->menu->screen = SETTING;
@@ -73,7 +66,7 @@ static int main_menu_button(main_menu_buttons_t **buttons,
     return OK;
 }
 
-static int buttons_action(rpg_t *rpg, sfEvent event, sfVector2f mouse_pos)
+static int buttons_action(rpg_t *rpg, sfVector2f mouse_pos)
 {
     for (int i = 0; rpg->menu->main_menu->buttons->sprites[i]; i++) {
         if (rpg->menu->main_menu->buttons->buttons_status[i] != NORMAL) {
@@ -93,11 +86,14 @@ int main_menu_event(rpg_t *rpg, sfEvent event)
 {
     sfVector2f mouse_pos = get_mouse_pos(rpg->window, rpg->window_size);
 
-    if (event.mouseButton.type == sfEvtMouseButtonReleased)
-        return buttons_action(rpg, event, mouse_pos);
-    if (event.mouseButton.type == sfEvtMouseButtonPressed ||
-        already_pressed(rpg->menu->main_menu->buttons->buttons_status) == OK) {
-        if (already_pressed(rpg->menu->main_menu->buttons->buttons_status)
+    if (event.mouseButton.type == sfEvtMouseButtonReleased &&
+        event.mouseButton.button == sfMouseLeft)
+        return buttons_action(rpg, mouse_pos);
+    if ((event.mouseButton.type == sfEvtMouseButtonPressed &&
+        event.mouseButton.button == sfMouseLeft) ||
+        already_pressed(rpg->menu->main_menu->buttons->buttons_status,
+            4) == OK) {
+        if (already_pressed(rpg->menu->main_menu->buttons->buttons_status, 4)
             == OK)
             return OK;
         return main_menu_button(&rpg->menu->main_menu->buttons, mouse_pos,
@@ -105,4 +101,12 @@ int main_menu_event(rpg_t *rpg, sfEvent event)
     }
     return main_menu_button(&rpg->menu->main_menu->buttons, mouse_pos,
                         HOVER, rpg->menu->click_button_sound);
+}
+
+int parallax_event(rpg_t *rpg, sfEvent event)
+{
+    if (event.type == sfEvtKeyPressed && event.key.code == sfKeySpace) {
+        rpg->menu->screen = MAIN;
+    }
+    return 0;
 }

@@ -7,45 +7,68 @@
 
 #include "my.h"
 
-static void check_pos(game_t *game, int i)
+static void draw_village(sfRenderWindow *window, game_t *game)
 {
-    if (game->map->particle_rect[i].left >= 78)
-        game->map->particle_rect[i].left = 0;
-    sfSprite_setPosition(game->map->particule_spr[i], (sfVector2f)
-    {sfSprite_getPosition(game->map->particule_spr[i]).x,
-    sfSprite_getPosition(game->map->particule_spr[i]).y - rand() % 2});
-    if (sfSprite_getPosition(game->map->particule_spr[i]).y <= 172)
-        sfSprite_setPosition(game->map->particule_spr[i], (sfVector2f)
-        {sfSprite_getPosition(game->map->particule_spr[i]).x, 220.0});
+    sfRenderWindow_drawSprite(window, game->map->sprite_ground, NULL);
+    sfRenderWindow_drawSprite(window, game->player->sprites->player, NULL);
+    sfRenderWindow_drawSprite(window, game->map->sprite_obj, NULL);
+    for (int i = 0; i < 2; i++) {
+        if (game->interaction->field[i] == game->map->choice_map) {
+            sfRenderWindow_drawSprite(window, game->interaction->sprite[i],
+                NULL);
+            sfRenderWindow_drawText(window, game->interaction->text[i], NULL);
+        }
+    }
+    draw_particles(game, window);
+    draw_flag(game, window);
+    change_view(game, window);
 }
 
-static void particles_movement(game_t *game)
+static void move_battle_sprite(game_t *game)
 {
-    if (game->map->time_clock.microseconds > 100000) {
-        for (int i = 0; i < NB_PARTICLE; i += 1) {
-            game->map->particle_rect[i].left += 6;
-            check_pos(game, i);
-        }
-        sfClock_restart(game->map->part_clock);
+    sfTime time = sfClock_getElapsedTime(game->map->entities->wizz_clock);
+
+    if (time.microseconds >= 350000) {
+        game->map->entities->ork_rect.left += 50;
+        if (game->map->entities->ork_rect.left >= 300)
+            game->map->entities->ork_rect.left = 0;
+        for (int i = 0; i < NB_ORK; i += 1)
+            sfSprite_setTextureRect(game->map->entities->ork_spr[i],
+            game->map->entities->ork_rect);
+        game->map->entities->wizzard_rect.left += 204;
+        if (game->map->entities->wizzard_rect.left >= 408)
+            game->map->entities->wizzard_rect.left = 0;
+        sfSprite_setTextureRect(game->map->entities->wizzard_spr,
+        game->map->entities->wizzard_rect);
+        sfClock_restart(game->map->entities->wizz_clock);
     }
 }
 
-static void draw_pause_menu(sfRenderWindow *window, game_t *game)
+static void draw_battlefield(sfRenderWindow *window, game_t *game)
 {
-    sfRenderWindow_drawRectangleShape(window, game->pause->background, NULL);
+    sfRenderWindow_drawSprite(window, game->map->battle_spr, NULL);
+    move_battle_sprite(game);
+    for (int i = 0; i < NB_ORK; i += 1)
+        sfRenderWindow_drawSprite(window, game->map->entities->ork_spr[i],
+        NULL);
+    sfRenderWindow_drawSprite(window, game->map->entities->wizzard_spr, NULL);
+    sfRenderWindow_drawSprite(window,
+    game->player->sprites->player, NULL);
 }
 
 static void draw_story_game(sfRenderWindow *window, game_t *game)
 {
-    game->map->time_clock = sfClock_getElapsedTime(game->map->part_clock);
-    game->map->seconds = game->map->time_clock.microseconds / 1000000.0;
-    particles_movement(game);
-    for (int i = 0; i < NB_PARTICLE; i += 1) {
-        sfSprite_setTextureRect(game->map->particule_spr[i],
-        game->map->particle_rect[i]);
-        sfRenderWindow_drawSprite(window, game->map->particule_spr[i], NULL);
+    if (game->map->choice_map == VILLAGE)
+        sfRenderWindow_setView(window, game->original_view);
+    for (int i = 0; game->player->life->rects[i]; i++)
+        sfRenderWindow_drawRectangleShape(window,
+            game->player->life->rects[i], NULL);
+    sfRenderWindow_drawSprite(window, game->player->life->health_bar_spr,
+    NULL);
+    sfRenderWindow_drawText(window, game->player->stats.level_text, NULL);
+    if (game->map->choice_map == VILLAGE) {
+        sfRenderWindow_setView(window, game->map->view);
     }
-    change_view(game, window);
 }
 
 static void draw_select_charac(sfRenderWindow *window, game_t *game)
@@ -65,19 +88,11 @@ static void draw_select_charac(sfRenderWindow *window, game_t *game)
 void draw_game(rpg_t *rpg)
 {
     void (*draw_game_fct[])(sfRenderWindow *, game_t *) =
-        {draw_select_charac, draw_story_game};
+        {draw_select_charac, draw_story_game, draw_pause_menu, draw_inventory};
+    void (*draw_map_function[])(sfRenderWindow *, game_t *) =
+        {draw_village, draw_battlefield, draw_forge, draw_alchemist};
 
-    if (rpg->game->screen >= LOAD_GAME) {
-        sfRenderWindow_drawSprite(rpg->window,
-            rpg->game->map->sprite_ground, NULL);
-        sfRenderWindow_drawSprite(rpg->window,
-            rpg->game->player->sprites->player, NULL);
-        sfRenderWindow_drawSprite(rpg->window,
-            rpg->game->map->sprite_obj, NULL);
-    }
-    if (rpg->game->screen != PAUSE)
-        draw_game_fct[rpg->game->screen](rpg->window, rpg->game);
-    else
-        draw_pause_menu(rpg->window, rpg->game);
-    return;
+    if (rpg->game->screen >= PLAYING)
+        draw_map_function[rpg->game->map->choice_map](rpg->window, rpg->game);
+    draw_game_fct[rpg->game->screen](rpg->window, rpg->game);
 }

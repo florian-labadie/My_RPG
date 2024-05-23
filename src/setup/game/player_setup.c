@@ -30,8 +30,10 @@ static int player_sprites_setup(sfRenderWindow *window, player_t *player)
 
     player->sprites->player_text = sfTexture_createFromFile(PLAYER, NULL);
     player->sprites->player_clock = sfClock_create();
+    player->sprites->move_clock = sfClock_create();
     player->sprites->player_rect = rects[player->race];
-    player->position = (sfVector2f){170, 660};
+    player->attack = false;
+    player->position = get_resize(window, 170, 660);
     if (!player->sprites->player_text)
         return KO;
     player->sprites->player = create_button(player->sprites->player_text,
@@ -41,9 +43,51 @@ static int player_sprites_setup(sfRenderWindow *window, player_t *player)
     return OK;
 }
 
+static int setup_level(player_t *player, sfRenderWindow *window)
+{
+    sfFont *level_font = sfFont_createFromFile(TITLE_FONT);
+
+    if (!level_font)
+        return KO;
+    player->stats.level = 1;
+    player->stats.nb_gold = 0;
+    player->stats.xp = 0;
+    player->stats.level_text =
+    create_text(level_font, int_to_str(player->stats.level),
+    get_less_size(window, 35), get_resize(window, 68, 47.0));
+    set_text_mid_origin(player->stats.level_text);
+    return OK;
+}
+
+static int life_setup(player_t *player)
+{
+    player->life = malloc(sizeof(life_player_t));
+    player->life->rects = malloc(sizeof(sfRectangleShape *) * 3);
+    player->life->rects[2] = NULL;
+    player->life->health_bar_text = sfTexture_createFromFile(HEALTH_BAR, NULL);
+    if (!player->life->health_bar_text)
+        return KO;
+    player->life->health_bar_spr = create_button(player->life->health_bar_text,
+    (sfVector2f) {0.5, 0.5}, (sfVector2f) {28.0, 15.0});
+    for (int i = 0; i < 2; i++) {
+        player->life->rects[i] = sfRectangleShape_create();
+        sfRectangleShape_setSize(player->life->rects[i],
+            (sfVector2f){245.0, 21.0});
+        sfRectangleShape_setPosition(player->life->rects[i], (sfVector2f)
+            {57.0, 52.0});
+    }
+    sfRectangleShape_setFillColor(player->life->rects[0],
+        sfColor_fromRGB(207, 207, 207));
+    sfRectangleShape_setFillColor(player->life->rects[1],
+        sfColor_fromRGB(209, 61, 61));
+    return OK;
+}
+
 int player_setup(sfRenderWindow *window, player_t *player)
 {
-    if (player_sprites_setup(window, player) == KO)
+    if (player_sprites_setup(window, player) == KO || life_setup(player) == KO
+    || setup_level(player, window) == KO)
         return KO;
+    player_stats_setup(player);
     return OK;
 }
