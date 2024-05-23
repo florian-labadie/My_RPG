@@ -7,12 +7,24 @@
 
 #include "my.h"
 
-void set_fps(rpg_t *rpg, stock_setting_t *setting)
+void set_fps(rpg_t *rpg, sfEvent event)
 {
-    if (setting->fps == 30 || setting->fps == 45 || setting->fps == 60) {
-        sfRenderWindow_setFramerateLimit(rpg->window, setting->fps);
-    } else {
-        my_putstr("Erreur : FPS non pris en charge.\n");
+    sfVector2f mouse = get_mouse_pos(rpg->window, rpg->window_size);
+    sfBool f_15 = get_sprite_bounds(rpg->menu->settings->fps_sp[0], mouse);
+    sfBool f_45 = get_sprite_bounds(rpg->menu->settings->fps_sp[1], mouse);
+    sfBool f_60 = get_sprite_bounds(rpg->menu->settings->fps_sp[2], mouse);
+
+    if (event.type == sfEvtMouseButtonReleased && f_15 == sfTrue) {
+        rpg->setting->fps = 15;
+        sfRenderWindow_setFramerateLimit(rpg->window, rpg->setting->fps);
+    }
+    if (event.type == sfEvtMouseButtonReleased && f_45 == sfTrue) {
+        rpg->setting->fps = 45;
+        sfRenderWindow_setFramerateLimit(rpg->window, rpg->setting->fps);
+    }
+    if (event.type == sfEvtMouseButtonReleased && f_60 == sfTrue) {
+        rpg->setting->fps = 60;
+        sfRenderWindow_setFramerateLimit(rpg->window, rpg->setting->fps);
     }
 }
 
@@ -46,14 +58,10 @@ void music_sound(rpg_t *rpg, sfEvent event)
         rpg->setting->sound_game += 10.0f;
         rpg->setting->sound_game =
         fminf(rpg->setting->sound_game, 100.0f);
-        // update_volume_text
-        // (rpg, rpg->menu->setting->sound_game);
     }
     if (event.type == sfEvtMouseButtonReleased && minus == sfTrue) {
         rpg->setting->sound_game -= 10.0f;
         rpg->setting->sound_game =
         fminf(rpg->setting->sound_game, 100.0f);
-        // update_volume_text
-        // (rpg, rpg->menu->setting->sound_game);
     }
 }

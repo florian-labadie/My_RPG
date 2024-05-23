@@ -125,7 +125,7 @@ static int setup_fps(settings_t *settings, sfRenderWindow *window)
 {
     char *path[3] = {FPS_30_P, FPS_45_P, FPS_60_P};
     sfFont *fps = sfFont_createFromFile(GAMERIA_FONT);
-    char *titles[3] = {"30 FPS", "45 FPS", "60 FPS"};
+    char *titles[3] = {"15 FPS", "45 FPS", "60 FPS"};
 
     if (!fps)
         return KO;
