@@ -86,6 +86,7 @@ void background_menu_manager(menu_t *menu);
 
 /* GAME MANAGER */
 void game_manager(rpg_t *rpg);
+void level_manager(game_t *game, sfRenderWindow *window);
 
 /* OPTION */
 void book_actions

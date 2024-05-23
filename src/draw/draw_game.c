@@ -34,6 +34,7 @@ static void draw_village(sfRenderWindow *window, game_t *game)
     draw_flag(game, window);
     change_view(game, window);
     set_life_village(game, window);
+    level_manager(game, window);
 }
 
 static void draw_rectangle(sfRenderWindow *window, sfRectangleShape **shape)
@@ -104,6 +105,7 @@ static void draw_battlefield(sfRenderWindow *window, game_t *game)
     sfRenderWindow_drawSprite(window,
     game->player->sprites->player, NULL);
     set_life_battle(window, game);
+    level_manager(game, window);
 }
 
 static void draw_story_game(sfRenderWindow *window, game_t *game)

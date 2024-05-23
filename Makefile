@@ -57,6 +57,7 @@ EVENT	=	src/event/event.c							\
 MANAGER	=	src/manager/menu_manager.c					\
 			src/manager/background_menu_manager.c		\
 			src/manager/game_manager.c					\
+			src/manager/level_manager.c					\
 
 DRAW	=	src/draw/draw_menu.c						\
 			src/draw/draw_game.c						\
