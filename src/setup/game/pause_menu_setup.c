@@ -19,12 +19,14 @@ static int setup_pause_sign(pause_t **pause, sfRenderWindow *window,
     sfSprite_setTexture((*pause)->sprites[3], (*pause)->textures[1],
         sfTrue);
     sfSprite_setOrigin((*pause)->sprites[3], (sfVector2f){32, 16});
-    sfSprite_setPosition((*pause)->sprites[3], *pos);
-    sfSprite_setScale((*pause)->sprites[3], get_resize(window, 8.16, 7.2));
+    sfSprite_setPosition((*pause)->sprites[3], get_resize(window,
+        (*pos).x, (*pos).y));
+    sfSprite_setScale((*pause)->sprites[3], get_resize(window, 8, 7.5));
     (*pause)->text[3] = create_text((*pause)->font, "PAUSE",
-        get_less_size(window, 96.0), get_resize(window, (*pos).x, (*pos).y));
+        get_less_size(window, 96.0), get_resize(window,
+            (*pos).x, (*pos).y));
     set_text_mid_origin((*pause)->text[3]);
-    (*pos).y += 200;
+    (*pos).y += 280;
     return OK;
 }
 
@@ -39,12 +41,12 @@ static void setup_pause_buttons(pause_t **pause, sfRenderWindow *window,
     sfSprite_setTextureRect((*pause)->sprites[i], PAUSE_BUTTON_RECT);
     sfSprite_setPosition((*pause)->sprites[i],
         get_resize(window, pos.x, pos.y));
-    sfSprite_setScale((*pause)->sprites[i], get_resize(window, 11.28, 8.16));
+    sfSprite_setScale((*pause)->sprites[i], get_resize(window, 11.28, 8.5));
 }
 
 static int setup_pause_sprites(pause_t **pause, sfRenderWindow *window)
 {
-    sfVector2f pos = get_resize(window, 960, 160);
+    sfVector2f pos = get_resize(window, 960, 120);
     char *texts[3] = {"Reprendre", "Menu Principale", "Quitter"};
 
     (*pause)->font = sfFont_createFromFile(FONT);
@@ -54,7 +56,8 @@ static int setup_pause_sprites(pause_t **pause, sfRenderWindow *window)
         if (!(*pause)->sprites || !(*pause)->sprites[i])
             return KO;
         (*pause)->text[i] = create_text((*pause)->font, texts[i],
-            get_less_size(window, 72.0), (sfVector2f){pos.x, pos.y - 15.0});
+            get_less_size(window, 72.0), get_resize(window,
+                pos.x, pos.y - 15.0));
         set_text_mid_origin((*pause)->text[i]);
         pos.y += 240;
     }
