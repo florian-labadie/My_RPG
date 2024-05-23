@@ -9,6 +9,8 @@
 
 static void draw_help_menu(sfRenderWindow *window, menu_t *menu)
 {
+    (void)window;
+    (void)menu;
     return;
 }
 

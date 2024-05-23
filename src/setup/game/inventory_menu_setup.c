@@ -7,22 +7,41 @@
 
 #include "my.h"
 
-static int setup_inventory_sprites(inventory_t **inventory,
+static int setup_inventory_bg_loop(inventory_t **inventory,
+    sfVector2f *inventory_pos, sfVector2f *inventory_scale, int i)
+{
+    (*inventory)->sprites[i] = sfSprite_create();
+    sfSprite_setTexture((*inventory)->sprites[i],
+        (*inventory)->textures[i], sfFalse);
+    set_sprite_mid_origin((*inventory)->sprites[i]);
+    sfSprite_setPosition((*inventory)->sprites[i],
+        inventory_pos[i]);
+    sfSprite_setScale((*inventory)->sprites[i], inventory_scale[i]);
+    if (!(*inventory)->sprites || !(*inventory)->sprites[i])
+        return KO;
+    return OK;
+}
+
+static int setup_inventory_background(inventory_t **inventory,
     sfRenderWindow *window, sfFont *font)
 {
     char const *path[3] = {INVENTORY_SIGN_PATH, INVENTORY_SLOTS_PATH,
         INVENTORY_STATS_PATH};
+    sfVector2f inventory_pos[3] = {get_resize(window, 960, 120),
+        get_resize(window, 480, 650), get_resize(window, 1440, 650)};
+    sfVector2f inventory_scale[3] = {get_resize(window, 8, 8),
+        get_resize(window, 7.5, 7.5), get_resize(window, 8, 8)};
 
+    (*inventory)->text = create_text(font, "INVENTAIRE",
+        get_less_size(window, 72.0), (sfVector2f){inventory_pos[0].x,
+        inventory_pos[0].y - 20});
+    set_text_mid_origin((*inventory)->text);
     for (int i = 0; i < 3; i++) {
         (*inventory)->textures[i] = sfTexture_createFromFile(path[i], NULL);
-        (*inventory)->sprites[i] = sfSprite_create();
-        sfSprite_setTexture((*inventory)->sprites[i],
-            (*inventory)->textures[i], sfFalse);
-        set_sprite_mid_origin((*inventory)->sprites[i]);
-        sfSprite_setPosition((*inventory)->sprites[i],
-            inventory_pos[i]);
-        if (!(*inventory)->sprites || !(*inventory)->sprites[i])
+        if (setup_inventory_bg_loop(inventory, inventory_pos,
+            inventory_scale, i) == KO)
             return KO;
+        (*inventory)->textures[i] = sfTexture_createFromFile(path[i], NULL);
     }
     return OK;
 }
@@ -30,17 +49,17 @@ static int setup_inventory_sprites(inventory_t **inventory,
 int inventory_menu_setup(game_t *game, sfRenderWindow *window)
 {
     game->inventory->background = sfRectangleShape_create();
-    sfRectangleShape_setSize(game->pause->background,
+    sfRectangleShape_setSize(game->inventory->background,
         get_resize(window, 1920, 1080));
-    sfRectangleShape_setFillColor(game->pause->background,
-        sfColor_fromRGBA(75, 75, 50, 100));
+    sfRectangleShape_setFillColor(game->inventory->background,
+        sfRectangleShape_getFillColor(game->pause->background));
     game->inventory->textures = malloc(sizeof(sfTexture *) * 4);
     game->inventory->sprites = malloc(sizeof(sfSprite *) * 4);
     if (!game->inventory->textures || !game->inventory->sprites)
         return KO;
     game->inventory->sprites[3] = NULL;
     game->inventory->textures[3] = NULL;
-    if (setup_inventory_sprites(&game->inventory,
+    if (setup_inventory_background(&game->inventory,
         window, game->pause->font) == KO)
         return KO;
     return OK;

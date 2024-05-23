@@ -39,6 +39,10 @@ typedef struct player_stats_s {
     float attack;
     float magic_attack;
     float defense;
+    int level;
+    int xp;
+    int nb_gold;
+    sfText *level_text;
 } player_stats_t;
 
 typedef struct player_sprites_s {
@@ -54,8 +58,7 @@ typedef struct life_player_s {
     sfTexture *health_bar_text;
     sfSprite *health_bar_spr;
 
-    sfRectangleShape *back;
-    sfRectangleShape *red;
+    sfRectangleShape **rects;
 } life_player_t;
 
 typedef struct player_s {

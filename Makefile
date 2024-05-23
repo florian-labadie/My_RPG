@@ -60,13 +60,13 @@ EVENT	=	src/event/event.c							\
 MANAGER	=	src/manager/menu_manager.c					\
 			src/manager/background_menu_manager.c		\
 			src/manager/game_manager.c					\
+			src/manager/level_manager.c					\
 
 DRAW	=	src/draw/draw_menu.c						\
 			src/draw/draw_game.c						\
 			src/draw/draw_shop.c						\
 			src/draw/draw_game_menus.c					\
 			src/draw/draw_particles_n_flag.c			\
-			src/draw/set_life.c							\
 
 SAVE	=	src/save/settings_game.c					\
 			src/save/write_setting_in_file.c			\

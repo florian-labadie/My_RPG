@@ -22,7 +22,6 @@ static void draw_village(sfRenderWindow *window, game_t *game)
     draw_particles(game, window);
     draw_flag(game, window);
     change_view(game, window);
-    set_life_village(game, window);
 }
 
 static void move_battle_sprite(game_t *game)
@@ -55,12 +54,21 @@ static void draw_battlefield(sfRenderWindow *window, game_t *game)
     sfRenderWindow_drawSprite(window, game->map->entities->wizzard_spr, NULL);
     sfRenderWindow_drawSprite(window,
     game->player->sprites->player, NULL);
-    set_life_battle(window, game);
 }
 
 static void draw_story_game(sfRenderWindow *window, game_t *game)
 {
-    return;
+    if (game->map->choice_map == VILLAGE)
+        sfRenderWindow_setView(window, game->original_view);
+    for (int i = 0; game->player->life->rects[i]; i++)
+        sfRenderWindow_drawRectangleShape(window,
+            game->player->life->rects[i], NULL);
+    sfRenderWindow_drawSprite(window, game->player->life->health_bar_spr,
+    NULL);
+    sfRenderWindow_drawText(window, game->player->stats.level_text, NULL);
+    if (game->map->choice_map == VILLAGE) {
+        sfRenderWindow_setView(window, game->map->view);
+    }
 }
 
 static void draw_select_charac(sfRenderWindow *window, game_t *game)
@@ -80,7 +88,7 @@ static void draw_select_charac(sfRenderWindow *window, game_t *game)
 void draw_game(rpg_t *rpg)
 {
     void (*draw_game_fct[])(sfRenderWindow *, game_t *) =
-        {draw_select_charac, draw_story_game, draw_pause_menu};
+        {draw_select_charac, draw_story_game, draw_pause_menu, draw_inventory};
     void (*draw_map_function[])(sfRenderWindow *, game_t *) =
         {draw_village, draw_battlefield, draw_forge, draw_alchemist};
 

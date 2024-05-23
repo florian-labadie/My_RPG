@@ -9,5 +9,7 @@
 
 int load_save_event(rpg_t *rpg, sfEvent event)
 {
+    (void)rpg;
+    (void)event;
     return OK;
 }
