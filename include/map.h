@@ -24,6 +24,7 @@
     #define ORK "assets/sprite/orc.png"
     #define NB_PARTICLE 15
     #define NB_ORK 15
+    #define LIFE_RECT_SIZE ((sfVector2f){227, 21})
 
     #include <SFML/Graphics.h>
     #include <SFML/Window.h>

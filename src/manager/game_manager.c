@@ -19,23 +19,23 @@ static void player_mouvement(sfSprite *sprite, sfVector2f player_move)
 
 static void player_attack_manager(game_t *game, player_race_t race)
 {
-    sfIntRect base_rect = CHARACTERS_ATK_RECT;
-    sfIntRect rect = CHARACTERS_ATK_RECT;
-    sfVector2f origin = {CHARACTERS_ATK_RECT.width / 2,
-        CHARACTERS_ATK_RECT.height / 2};
+    sfIntRect rects[3] = {HUMAN_ATT_RECT, DWARF_ATT_RECT, ELF_ATT_RECT};
+    sfIntRect rect = rects[race];
+    sfVector2f origins[3] =
+        {{HUMAN_ATT_RECT.width / 2, HUMAN_ATT_RECT.height / 2},
+        {DWARF_ATT_RECT.width / 2, DWARF_ATT_RECT.height / 2},
+        {ELF_ATT_RECT.width / 2, ELF_ATT_RECT.height / 2}};
 
-    (void)race;
     player_mouvement(game->player->sprites->player, game->player_move);
     if (sfTime_asMilliseconds(sfClock_getElapsedTime
         (game->player->sprites->player_clock)) > 200) {
-        rect.left = sfSprite_getTextureRect
-            (game->player->sprites->player).left;
-        rect.left += base_rect.width;
+        rect.left = sfSprite_getTextureRect(game->player->sprites->player).left;
+        rect.left += rects[race].width;
         if (rect.left >= 415) {
             game->player->attack = false;
             return;
         }
-        sfSprite_setOrigin(game->player->sprites->player, origin);
+        sfSprite_setOrigin(game->player->sprites->player, origins[race]);
         sfSprite_setTextureRect(game->player->sprites->player, rect);
         sfClock_restart(game->player->sprites->player_clock);
     }
@@ -109,14 +109,16 @@ static void move_player(rpg_t *rpg)
 void game_manager(rpg_t *rpg)
 {
     game_music(rpg);
-    if (rpg->game->screen > SELECTION)
-        level_manager(rpg->game, rpg->window);
-    if (rpg->game->player->sprites->player) {
-        if (rpg->game->player->attack == true) {
-            player_attack_manager(rpg->game, rpg->game->player->race);
-        } else {
-            move_player(rpg);
-        }
+    if (!rpg->game->player->sprites->player)
+        return;
+    life_manager(rpg->game, rpg->window, rpg->game->player->stats.health);
+    level_manager(rpg->game, rpg->window);
+    if (rpg->game->map->choice_map > BATTLEFIELD)
+        return;
+    if (rpg->game->player->attack == true) {
+        player_attack_manager(rpg->game, rpg->game->player->race);
+    } else {
+        move_player(rpg);
     }
     return;
 }
