@@ -57,6 +57,7 @@ typedef struct player_sprites_s {
 
     sfIntRect player_rect;
     sfClock *player_clock;
+    sfClock *attack_clock;
     sfClock *move_clock;
 } player_sprites_t;
 

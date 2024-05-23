@@ -107,20 +107,40 @@ static void move_player(rpg_t *rpg)
         player_still_manager(rpg->game, rpg->game->player->race);
 }
 
+static void attack_orks(game_t *game)
+{
+    sfFloatRect r1 = {0};
+    sfFloatRect r2 = {0};
+
+    for (int i = 0; game->map->choice_map == BATTLEFIELD &&
+        i < NB_ORK; i += 1) {
+        if (!game->map->entities->ork[i]->is_alive)
+            continue;
+        r1 = sfCircleShape_getGlobalBounds
+                (game->map->entities->ork[i]->hitbox);
+        r2 = sfCircleShape_getGlobalBounds
+                (game->player->sprites->range);
+        if (sfFloatRect_intersects(&r1, &r2, NULL))
+            game->map->entities->ork[i]->hp -=
+                game->player->stats.attack * 0.5;
+    }
+}
+
 void game_manager(rpg_t *rpg)
 {
     game_music(rpg);
-    if (rpg->game->screen == SELECTION) {
+    if (rpg->game->screen == SELECTION)
         return;
-    }
     life_manager(rpg->game, rpg->window, rpg->game->player->stats.health);
     level_manager(rpg->game);
-    if (rpg->game->map->choice_map > BATTLEFIELD)
-        return;
-    if (rpg->game->player->attack == true) {
+    if (rpg->game->map->choice_map < BATTLEFIELD &&
+        rpg->game->player->attack == true && sfTime_asSeconds
+        (sfClock_getElapsedTime
+        (rpg->game->player->sprites->attack_clock)) >= 1) {
         player_attack_manager(rpg->game, rpg->game->player->race);
-    } else {
+        attack_orks(rpg->game);
+        sfClock_restart(rpg->game->player->sprites->attack_clock);
+    } else
         move_player(rpg);
-    }
     return;
 }
