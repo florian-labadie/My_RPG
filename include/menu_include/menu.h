@@ -14,6 +14,7 @@
     #include "help.h"
     #include "menu_settings.h"
     #include "parallax.h"
+    #include "help_menu.h"
 
     #define BACKGROUND "assets/sprite/background_menu.png"
     #define WOS_SIGN "assets/sprite/tropical_button.png"
@@ -64,6 +65,7 @@ typedef struct menu_s {
     help_t *help;
     settings_t *settings;
     parallax_t *parallax;
+    help_menu_t *help_menu;
 } menu_t;
 
 #endif /* !MENU_H_ */

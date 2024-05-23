@@ -49,6 +49,7 @@ int setup_option_menu(settings_t *settings, sfRenderWindow *window);
 int open_book(settings_t *settings);
 int init_parallax(parallax_t *parallax);
 
+
 /* GAME SETUP */
 int game_setup(rpg_t *rpg);
 int player_setup(sfRenderWindow *window, player_t *player);
@@ -63,12 +64,15 @@ int select_charac(game_t *game, sfRenderWindow *window);
 int pause_menu_setup(game_t *game, sfRenderWindow *window);
 void set_pause_screen(pause_t *pause, sfFloatRect view_rect,
     choice_map_t map, sfRenderWindow *window);
+int init_help_menu(rpg_t *rpg, help_menu_t *help_menu);
+void create_help_text(sfRenderWindow *window, menu_t *menu);
+void setup_help_menu(sfRenderWindow *window, menu_t *menu);
 
 /* MENU EVENT */
 void event_manager(rpg_t *rpg);
 int main_menu_event(rpg_t *rpg, sfEvent event);
-int help_menu_event(rpg_t *rpg, sfEvent event);
 int settings_menu_event(rpg_t *rpg, sfEvent event);
+int help_menu_event(rpg_t *rpg, sfEvent event);
 
 /* GAME EVENT */
 int select_event(rpg_t *rpg, sfEvent event);

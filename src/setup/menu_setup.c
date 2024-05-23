@@ -18,6 +18,7 @@ static int malloc_struct(rpg_t *rpg)
     rpg->menu->settings = malloc(sizeof(settings_t));
     rpg->menu->background = malloc(sizeof(background_menu_t));
     rpg->menu->parallax = malloc(sizeof(parallax_t));
+    rpg->menu->help_menu = malloc(sizeof(help_menu_t));
     if (!rpg->menu || !rpg->game || !rpg->menu->main_menu ||
         !rpg->menu->help || !rpg->menu->settings || !rpg->menu->background)
         return KO;

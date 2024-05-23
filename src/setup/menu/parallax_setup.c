@@ -12,7 +12,6 @@ static void define_font(parallax_t *parallax)
     sfVector2f text_pos;
 
     parallax->font = sfFont_createFromFile("assets/parallax/sewer.ttf");
-    parallax->parallax_text = sfText_create();
     text_pos.x = 1920 / 3.2;
     text_pos.y = 1080 / 2.3;
     parallax->parallax_text = create_text(parallax->font,
