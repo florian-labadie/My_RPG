@@ -41,7 +41,6 @@ int game_setup(rpg_t *rpg)
         !rpg->game->player->sprites)
         return KO;
     if (check_setup_map(rpg) == KO ||
-        interaction_setup(rpg->game, rpg->window) == KO ||
         shop_buy_setup(rpg->game, rpg->window) == KO)
         return KO;
     return OK;

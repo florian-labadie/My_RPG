@@ -22,5 +22,13 @@ void draw_pause_menu(sfRenderWindow *window, game_t *game)
 
 void draw_inventory(sfRenderWindow *window, game_t *game)
 {
-    return;
+    if (game->map->choice_map == VILLAGE)
+        sfRenderWindow_setView(window, game->original_view);
+    sfRenderWindow_drawRectangleShape(window, game->inventory->background,
+        NULL);
+    for (int i = 0; game->inventory->sprites[i]; i++)
+        sfRenderWindow_drawSprite(window, game->inventory->sprites[i], NULL);
+    sfRenderWindow_drawText(window, game->inventory->text, NULL);
+    if (game->map->choice_map == VILLAGE)
+        sfRenderWindow_setView(window, game->map->view);
 }

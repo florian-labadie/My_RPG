@@ -7,9 +7,9 @@
 
 #include "my.h"
 
-static void buy_article()
+static void buy_article(void)
 {
-    
+    return;
 }
 
 static void actions_rect_reponse(rpg_t *rpg, sfRectangleShape **shape,

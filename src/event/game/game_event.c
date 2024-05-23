@@ -36,13 +36,18 @@ static void get_movements(rpg_t *rpg, sfEvent event)
 static int check_game_screen_changes(rpg_t **rpg, sfEvent event)
 {
     if (event.key.code == sfKeyBackspace &&
-            event.key.type == sfEvtKeyPressed) {
+        event.key.type == sfEvtKeyPressed) {
         (*rpg)->screen = END;
         return END;
     }
     if (event.key.code == sfKeyEscape && event.key.type == sfEvtKeyPressed) {
         (*rpg)->game->player_move = (sfVector2f){0, 0};
         (*rpg)->game->screen = PAUSE;
+        return OK;
+    }
+    if (event.key.code == sfKeyTab && event.key.type == sfEvtKeyPressed) {
+        (*rpg)->game->player_move = (sfVector2f){0, 0};
+        (*rpg)->game->screen = INVENTORY;
         return OK;
     }
     return OK;

@@ -24,6 +24,7 @@ static void player_attack_manager(game_t *game, player_race_t race)
     sfVector2f origin = {CHARACTERS_ATK_RECT.width / 2,
         CHARACTERS_ATK_RECT.height / 2};
 
+    (void)race;
     player_mouvement(game->player->sprites->player, game->player_move);
     if (sfTime_asMilliseconds(sfClock_getElapsedTime
         (game->player->sprites->player_clock)) > 200) {

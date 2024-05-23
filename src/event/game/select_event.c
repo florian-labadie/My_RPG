@@ -50,8 +50,7 @@ static int change_screen_status(rpg_t **rpg, int i, player_race_t race)
     return OK;
 }
 
-static int buttons_select_action(rpg_t *rpg, sfEvent event,
-    sfVector2f mouse_pos)
+static int buttons_select_action(rpg_t *rpg, sfVector2f mouse_pos)
 {
     for (int i = 0; rpg->game->select->button_select[i] != NULL; i++) {
         if (get_sprite_bounds
@@ -93,7 +92,7 @@ int select_event(rpg_t *rpg, sfEvent event)
     sfVector2f mouse_pos = get_mouse_pos(rpg->window, rpg->window_size);
 
     if (event.mouseButton.type == sfEvtMouseButtonReleased)
-        return buttons_select_action(rpg, event, mouse_pos);
+        return buttons_select_action(rpg, mouse_pos);
     if (event.key.type == sfEvtKeyPressed && event.key.code == sfKeyDown)
         return choose_character(rpg, &rpg->game->select->player,
             (int)rpg->game->select->player + 1);

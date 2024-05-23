@@ -12,9 +12,6 @@
     #define INVENTORY_SLOTS_PATH "assets/sprite/inventory_slots.png"
     #define INVENTORY_STATS_PATH "assets/sprite/inventory_stats.png"
 
-static const sfVector2f inventory_pos[3] =
-{{960, 120}, {480, 270}, {1440, 810}};
-
 typedef struct inventory_t {
     sfRectangleShape *background;
     sfTexture **textures;

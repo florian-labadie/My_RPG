@@ -101,9 +101,11 @@ int pause_menu_event(rpg_t *rpg, sfEvent event)
 
     if (event.key.code == sfKeyEscape && event.key.type == sfEvtKeyPressed)
         rpg->game->screen = PLAYING;
-    if (event.mouseButton.type == sfEvtMouseButtonReleased)
+    if (event.mouseButton.type == sfEvtMouseButtonReleased &&
+        event.mouseButton.button == sfMouseLeft)
         return pause_buttons_action(&rpg, mouse_pos);
-    if (event.mouseButton.type == sfEvtMouseButtonPressed ||
+    if ((event.mouseButton.type == sfEvtMouseButtonPressed &&
+        event.mouseButton.button == sfMouseLeft) ||
         already_pressed(rpg->menu->main_menu->buttons->buttons_status, 3)
             == OK) {
         if (already_pressed(rpg->menu->main_menu->buttons->buttons_status, 3)

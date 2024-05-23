@@ -20,9 +20,9 @@ static int setup_pause_sign(pause_t **pause, sfRenderWindow *window,
         sfTrue);
     sfSprite_setOrigin((*pause)->sprites[3], (sfVector2f){32, 16});
     sfSprite_setPosition((*pause)->sprites[3], *pos);
-    sfSprite_setScale((*pause)->sprites[3], (sfVector2f){8.16, 7.2});
+    sfSprite_setScale((*pause)->sprites[3], get_resize(window, 8.16, 7.2));
     (*pause)->text[3] = create_text((*pause)->font, "PAUSE",
-        get_less_size(window, 96.0), (sfVector2f){(*pos).x, (*pos).y});
+        get_less_size(window, 96.0), get_resize(window, (*pos).x, (*pos).y));
     set_text_mid_origin((*pause)->text[3]);
     (*pos).y += 200;
     return OK;
@@ -37,13 +37,14 @@ static void setup_pause_buttons(pause_t **pause, sfRenderWindow *window,
         sfTrue);
     set_sprite_button_mid_origin((*pause)->sprites[i]);
     sfSprite_setTextureRect((*pause)->sprites[i], PAUSE_BUTTON_RECT);
-    sfSprite_setPosition((*pause)->sprites[i], pos);
-    sfSprite_setScale((*pause)->sprites[i], (sfVector2f){11.28, 8.16});
+    sfSprite_setPosition((*pause)->sprites[i],
+        get_resize(window, pos.x, pos.y));
+    sfSprite_setScale((*pause)->sprites[i], get_resize(window, 11.28, 8.16));
 }
 
 static int setup_pause_sprites(pause_t **pause, sfRenderWindow *window)
 {
-    sfVector2f pos = (sfVector2f){960, 160};
+    sfVector2f pos = get_resize(window, 960, 160);
     char *texts[3] = {"Reprendre", "Menu Principale", "Quitter"};
 
     (*pause)->font = sfFont_createFromFile(FONT);

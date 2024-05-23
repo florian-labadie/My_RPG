@@ -54,8 +54,7 @@ typedef struct life_player_s {
     sfTexture *health_bar_text;
     sfSprite *health_bar_spr;
 
-    sfRectangleShape *back;
-    sfRectangleShape *red;
+    sfRectangleShape **rects;
 } life_player_t;
 
 typedef struct player_s {
