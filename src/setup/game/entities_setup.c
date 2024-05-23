@@ -48,13 +48,22 @@ static int ork_setup(entities_bf_t **entities, sfRenderWindow *window)
 
 static int wizzard_setup(entities_bf_t **entities, sfRenderWindow *window)
 {
+    sfFont *font_wizz = sfFont_createFromFile(TITLE_FONT);
+
+    (*entities)->ork_is_moving = false;
     (*entities)->wizzard_rect = (sfIntRect) {0, 202, 204, 202};
     (*entities)->wizz_clock = sfClock_create();
     (*entities)->wizzard_text = sfTexture_createFromFile(WIZZARD, NULL);
-    if (!(*entities)->wizzard_text)
+    (*entities)->bubble_text = sfTexture_createFromFile(BULLE_SHOP, NULL);
+    if (!(*entities)->wizzard_text || !(*entities)->bubble_text || !font_wizz)
         return KO;
+    (*entities)->bubble_spr = create_button((*entities)->bubble_text,
+    (sfVector2f) {-1.5 , 1.5}, get_resize(window, 1850.0 , 750));
     (*entities)->wizzard_spr = create_button((*entities)->wizzard_text,
     (sfVector2f) {1.5, 1.5}, get_resize(window, 1700.0, 840.0));
+    (*entities)->wizzard_sent = create_text(font_wizz,
+    "Aidez moi a combatre\n       les Orks", get_less_size(window, 20),
+    get_resize(window, 1600, 790));
     sfSprite_setTextureRect((*entities)->wizzard_spr,
     (*entities)->wizzard_rect);
     return OK;

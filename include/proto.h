@@ -94,6 +94,8 @@ void game_manager(rpg_t *rpg);
 void level_manager(game_t *game, sfRenderWindow *window);
 void life_manager(game_t *game, sfRenderWindow *window, float value);
 void inventory_manager(game_t *game);
+void ork_movement(sfVector2f ork_pos, sfVector2f player_pos, ork_t *ork,
+    float speed);
 
 /* OPTION */
 void book_actions

@@ -32,6 +32,11 @@ static void move_ork(game_t *game)
             game->map->entities->ork[j]->ork_rect.left = 0;
         sfSprite_setTextureRect(game->map->entities->ork[j]->ork_spr,
         game->map->entities->ork[j]->ork_rect);
+        if (game->map->entities->ork_is_moving == true)
+            ork_movement(
+            sfSprite_getPosition(game->map->entities->ork[j]->ork_spr),
+            sfSprite_getPosition(game->player->sprites->player),
+            game->map->entities->ork[j], 2.5);
     }
 }
 
@@ -63,6 +68,8 @@ static void draw_battlefield(sfRenderWindow *window, game_t *game)
     sfRenderWindow_drawSprite(window, game->map->entities->wizzard_spr, NULL);
     sfRenderWindow_drawSprite(window,
     game->player->sprites->player, NULL);
+    sfRenderWindow_drawSprite(window, game->map->entities->bubble_spr, NULL);
+    sfRenderWindow_drawText(window, game->map->entities->wizzard_sent, NULL);
     sfRenderWindow_drawText(window, game->map->help_exit, NULL);
 }
 
