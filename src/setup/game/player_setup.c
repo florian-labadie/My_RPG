@@ -30,6 +30,7 @@ static int set_player_sprites(player_t *player, sfRenderWindow *window)
 
     player->sprites->player_text = sfTexture_createFromFile(PLAYER, NULL);
     player->sprites->player_clock = sfClock_create();
+    player->sprites->attack_clock = sfClock_create();
     player->sprites->move_clock = sfClock_create();
     player->attack = false;
     player->position = get_resize(window, 170, 660);
