@@ -59,6 +59,7 @@ static int setup_map_object_with_file(map_t *map)
     if (!map->texture_ground || !map->texture_obj || !map->layers ||
         !map->game_sound || !map->battle_music)
         return KO;
+    return OK;
 }
 
 int setup_map(map_t *map, sfRenderWindow *window, float volume)

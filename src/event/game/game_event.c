@@ -88,6 +88,8 @@ int game_event(rpg_t *rpg, sfEvent event)
     if (rpg->game->map->choice_map == FORGE ||
         rpg->game->map->choice_map == ALCHEMY) {
         interaction_event(rpg, event);
+        if (rpg->game->interaction->shop == BUY)
+            buy_article(rpg, event);
     }
     return OK;
 }

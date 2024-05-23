@@ -81,6 +81,7 @@ int game_event(rpg_t *rpg, sfEvent event);
 int pause_menu_event(rpg_t *rpg, sfEvent event);
 int inventory_menu_event(rpg_t *rpg, sfEvent event);
 void interaction_event(rpg_t *rpg, sfEvent event);
+int buy_article(rpg_t *rpg, sfEvent event);
 
 /* MENU MANAGER */
 void menu_manager(rpg_t *rpg);

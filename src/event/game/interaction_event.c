@@ -7,11 +7,6 @@
 
 #include "my.h"
 
-static void buy_article()
-{
-    
-}
-
 static void actions_rect_reponse(rpg_t *rpg, sfRectangleShape **shape,
     int i, sfVector2f mouse_pos)
 {
