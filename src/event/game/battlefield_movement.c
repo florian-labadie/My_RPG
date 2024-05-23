@@ -12,8 +12,10 @@ static int check_ork_bounds(game_t *game, sfFloatRect r)
     sfFloatRect ork_rect = {0};
 
     for (int i = 0; i < NB_ORK; i++) {
-        ork_rect = sfCircleShape_getGlobalBounds
-            (game->map->entities->ork[i]->hitbox);
+        if (game->map->entities->ork[i]->hp <= 0)
+            continue;
+        ork_rect = sfSprite_getGlobalBounds
+            (game->map->entities->ork[i]->ork_spr);
         if (sfFloatRect_intersects(&r, &ork_rect, NULL))
             return OK;
     }

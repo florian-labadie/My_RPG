@@ -80,6 +80,10 @@ typedef struct entities_bf_s {
     sfClock *wizz_clock;
     sfIntRect wizzard_rect;
     ork_t **ork;
+    sfTexture *bubble_text;
+    sfSprite *bubble_spr;
+    sfText *wizzard_sent;
+    bool ork_is_moving;
 } entities_bf_t;
 
 typedef struct map_s {
