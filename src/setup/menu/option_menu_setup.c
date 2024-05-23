@@ -60,7 +60,7 @@ int setup_volume_text
     }
     sfText_setFont(settings->volume_text, settings->font);
     sfText_setCharacterSize(settings->volume_text, 24);
-    sfText_setPosition(settings->volume_text,get_resize(window, 100, 50));
+    sfText_setPosition(settings->volume_text, get_resize(window, 100, 50));
     return OK;
 }
 
@@ -132,7 +132,8 @@ static int setup_fps(settings_t *settings, sfRenderWindow *window)
     for (int i = 0; i < 3; i++) {
         settings->fps_text[i] = sfTexture_createFromFile(path[i], NULL);
         settings->fps_sp[i] = create_button(settings->fps_text[i],
-            get_resize(window, 0.35, 0.35), get_resize(window, 1225 + i * 150, 500));
+            get_resize(window, 0.35, 0.35),
+            get_resize(window, 1225 + i * 150, 500));
         settings->fps[i] = create_text(fps, titles[i], 30,
             get_resize(window, 1245 + i * 150, 550));
         if (!settings->fps_sp[i] || !settings->fps[i]
