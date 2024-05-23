@@ -56,6 +56,11 @@ static int set_settings_menu(stock_setting_t *setting, char *line)
 
 static int get_setting_file(rpg_t *rpg, char *line)
 {
+    rpg->setting->size_screen = (sfVector2f) {-1, -1};
+    rpg->setting->fps = -1;
+    rpg->setting->screen_mode = false;
+    rpg->setting->sound_game = -1;
+    rpg->setting->language = NULL;
     if (set_settings_menu(rpg->setting, line) == KO)
         return KO;
     setting_by_default(rpg->setting);

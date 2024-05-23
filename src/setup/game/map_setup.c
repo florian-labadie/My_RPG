@@ -45,7 +45,7 @@ int set_up_battlefield(sfRenderWindow *window, map_t *map, float volume)
         return KO;
     sfMusic_setVolume(map->battle_music, volume);
     map->battle_spr = create_button(map->battle_text,
-    (sfVector2f) {1.0, 1.0}, get_resize(window, 0.0, 0.0));
+    get_resize(window, 1.0, 1.0), get_resize(window, 0.0, 0.0));
     return OK;
 }
 

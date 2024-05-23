@@ -24,17 +24,23 @@ static void draw_village(sfRenderWindow *window, game_t *game)
     change_view(game, window);
 }
 
+static void move_ork(game_t *game)
+{
+    for (int j = 0; j < NB_ORK; j += 1) {
+        game->map->entities->ork[j]->ork_rect.left += 50;
+        if (game->map->entities->ork[j]->ork_rect.left >= 300)
+            game->map->entities->ork[j]->ork_rect.left = 0;
+        sfSprite_setTextureRect(game->map->entities->ork[j]->ork_spr,
+        game->map->entities->ork[j]->ork_rect);
+    }
+}
+
 static void move_battle_sprite(game_t *game)
 {
     sfTime time = sfClock_getElapsedTime(game->map->entities->wizz_clock);
 
     if (time.microseconds >= 350000) {
-        game->map->entities->ork_rect.left += 50;
-        if (game->map->entities->ork_rect.left >= 300)
-            game->map->entities->ork_rect.left = 0;
-        for (int i = 0; i < NB_ORK; i += 1)
-            sfSprite_setTextureRect(game->map->entities->ork_spr[i],
-            game->map->entities->ork_rect);
+        move_ork(game);
         game->map->entities->wizzard_rect.left += 204;
         if (game->map->entities->wizzard_rect.left >= 408)
             game->map->entities->wizzard_rect.left = 0;
@@ -48,9 +54,12 @@ static void draw_battlefield(sfRenderWindow *window, game_t *game)
 {
     sfRenderWindow_drawSprite(window, game->map->battle_spr, NULL);
     move_battle_sprite(game);
-    for (int i = 0; i < NB_ORK; i += 1)
-        sfRenderWindow_drawSprite(window, game->map->entities->ork_spr[i],
+    for (int i = 0; i < NB_ORK; i += 1) {
+        sfRenderWindow_drawCircleShape(window,
+        game->map->entities->ork[i]->hitbox, NULL);
+        sfRenderWindow_drawSprite(window, game->map->entities->ork[i]->ork_spr,
         NULL);
+    }
     sfRenderWindow_drawSprite(window, game->map->entities->wizzard_spr, NULL);
     sfRenderWindow_drawSprite(window,
     game->player->sprites->player, NULL);
