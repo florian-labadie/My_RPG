@@ -68,6 +68,7 @@ static int setup_level(player_t *player, sfRenderWindow *window)
     create_text(level_font, int_to_str(player->stats.level),
     get_less_size(window, 35), get_resize(window, 68, 47.0));
     set_text_mid_origin(player->stats.level_text);
+    player->is_alive = true;
     return OK;
 }
 
@@ -95,10 +96,23 @@ static int life_setup(player_t *player)
     return OK;
 }
 
+static int setup_death(sfRenderWindow *window, player_t *player)
+{
+    player->life->loos_rect = sfRectangleShape_create();
+    sfRectangleShape_setPosition(player->life->loos_rect, (sfVector2f) {0.0, 0.0});
+    sfRectangleShape_setSize(player->life->loos_rect, (sfVector2f){1920.0, 1080});
+    sfRectangleShape_setFillColor(player->life->loos_rect, sfColor_fromRGBA(50, 100, 50, 100));
+    player->life->lose_text = sfTexture_createFromFile(DEAFEAT, NULL);
+    player->life->lose_spr = create_button(player->life->lose_text,
+    (sfVector2f) {1.0, 1.0}, get_resize(window, 600.0, 500.0));
+    player->life->time_lose = sfClock_create();
+    return OK;
+}
+
 int player_setup(sfRenderWindow *window, player_t *player)
 {
     if (player_sprites_setup(window, player) == KO || life_setup(player) == KO
-    || setup_level(player, window) == KO)
+    || setup_level(player, window) == KO || setup_death(window, player) == KO)
         return KO;
     player_stats_setup(player);
     return OK;

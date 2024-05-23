@@ -21,6 +21,14 @@ static void draw_village(sfRenderWindow *window, game_t *game)
     }
     draw_particles(game, window);
     draw_flag(game, window);
+    if (game->player->is_alive == false) {
+        sfRenderWindow_drawRectangleShape(window,
+        game->player->life->loos_rect, NULL);
+        sfRenderWindow_drawSprite(window, game->player->life->lose_spr, NULL);
+        if (sfTime_asSeconds(sfClock_getElapsedTime
+        (game->player->life->time_lose)) > 5)
+            game->player->is_alive = true;
+    }
     change_view(game, window);
 }
 

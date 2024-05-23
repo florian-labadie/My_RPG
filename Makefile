@@ -59,6 +59,7 @@ EVENT	=	src/event/event.c							\
 			src/event/game/interaction_event.c			\
 			src/event/game/buy_article.c				\
 			src/event/menu/help_event.c					\
+			src/event/game/battlefield_event.c			\
 
 MANAGER	=	src/manager/menu_manager.c					\
 			src/manager/background_menu_manager.c		\
