@@ -57,4 +57,5 @@ void handle_events_page_1(rpg_t *rpg, sfEvent event)
 void handle_events_page_2(rpg_t *rpg, sfEvent event)
 {
     music_sound(rpg, event);
+    set_fps(rpg, event);
 }
