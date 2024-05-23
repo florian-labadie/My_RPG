@@ -72,6 +72,8 @@ typedef struct ork_s {
     sfIntRect ork_rect;
     int hp;
     sfCircleShape *hitbox;
+    bool is_alive;
+    sfClock *ork_damage;
 } ork_t;
 
 typedef struct entities_bf_s {
