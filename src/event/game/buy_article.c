@@ -18,7 +18,7 @@ static void buy_potion(rpg_t *rpg, sfRectangleShape **shape,
     sfVector2f mouse_pos)
 {
     printf("gold : %d\n", rpg->game->player->stats.nb_gold);
-     printf("health : %d\n", rpg->game->inventory->nbr_health_pot);
+    printf("health : %d\n", rpg->game->inventory->nbr_health_pot);
     if (get_rectangle_bounds(shape[0], mouse_pos) == sfTrue) {
         if (rpg->game->player->stats.nb_gold >= 50 &&
             rpg->game->inventory->nbr_health_pot <= 4) {

@@ -62,8 +62,9 @@ static void draw_battlefield(sfRenderWindow *window, game_t *game)
     for (int i = 0; i < NB_ORK; i += 1) {
         sfRenderWindow_drawCircleShape(window,
         game->map->entities->ork[i]->hitbox, NULL);
-        sfRenderWindow_drawSprite(window, game->map->entities->ork[i]->ork_spr,
-        NULL);
+        if (game->map->entities->ork[i]->hp > 0)
+            sfRenderWindow_drawSprite(window, game->map->entities->ork[i]->ork_spr,
+            NULL);
     }
     sfRenderWindow_drawSprite(window, game->map->entities->wizzard_spr, NULL);
     sfRenderWindow_drawSprite(window,
