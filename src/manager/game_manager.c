@@ -109,6 +109,8 @@ static void move_player(rpg_t *rpg)
 void game_manager(rpg_t *rpg)
 {
     game_music(rpg);
+    if (rpg->game->screen > SELECTION)
+        level_manager(rpg->game, rpg->window);
     if (rpg->game->player->sprites->player) {
         if (rpg->game->player->attack == true) {
             player_attack_manager(rpg->game, rpg->game->player->race);

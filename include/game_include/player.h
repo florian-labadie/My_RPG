@@ -39,6 +39,10 @@ typedef struct player_stats_s {
     float attack;
     float magic_attack;
     float defense;
+    int level;
+    int xp;
+    int nb_gold;
+    sfText *level_text;
 } player_stats_t;
 
 typedef struct player_sprites_s {

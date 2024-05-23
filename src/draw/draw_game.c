@@ -65,8 +65,10 @@ static void draw_story_game(sfRenderWindow *window, game_t *game)
             game->player->life->rects[i], NULL);
     sfRenderWindow_drawSprite(window, game->player->life->health_bar_spr,
     NULL);
-    if (game->map->choice_map == VILLAGE)
+    sfRenderWindow_drawText(window, game->player->stats.level_text, NULL);
+    if (game->map->choice_map == VILLAGE) {
         sfRenderWindow_setView(window, game->map->view);
+    }
 }
 
 static void draw_select_charac(sfRenderWindow *window, game_t *game)

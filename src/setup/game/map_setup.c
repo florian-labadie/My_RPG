@@ -11,7 +11,7 @@ static int house_loop(map_t *map, sfRenderWindow *window)
 {
     for (int i = 0; i < 2; i += 1) {
         map->house[i]->house = create_button(map->house[i]->house_texture,
-            (sfVector2f){1.0, 1.0},get_resize(window, 960, 540));
+            (sfVector2f){1.0, 1.0}, get_resize(window, 960, 540));
         map->house[i]->house_music = sfMusic_createFromFile(SHOP_MUSIC);
         sfMusic_setLoop(map->house[i]->house_music, sfTrue);
         if (!map->house[i]->house_music)

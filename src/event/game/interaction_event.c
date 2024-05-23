@@ -7,11 +7,6 @@
 
 #include "my.h"
 
-static void buy_article(void)
-{
-    return;
-}
-
 static void actions_rect_reponse(rpg_t *rpg, sfRectangleShape **shape,
     int i, sfVector2f mouse_pos)
 {
@@ -28,7 +23,7 @@ static void actions_rect_reponse(rpg_t *rpg, sfRectangleShape **shape,
         sfSprite_setScale(rpg->game->player->sprites->player,
             (sfVector2f){0.5, 0.5});
         rpg->game->map->choice_map = VILLAGE;
-        sfMusic_stop(rpg->game->map->house[i]->house_music);
+        sfMusic_stop(rpg->game->map->house[0]->house_music);
         sfMusic_play(rpg->game->map->game_sound);
     }
 }
@@ -54,10 +49,10 @@ void interaction_event(rpg_t *rpg, sfEvent event)
     sfVector2f mouse_pos = sfRenderWindow_mapPixelToCoords(rpg->window,
         mouse_pos_int, rpg->game->map->view);
 
-    for (int i = 0; rpg->game->interaction->zone_text[i] != NULL; i++)
+    for (int i = 0; i < 2; i++)
         change_status_button(rpg->game->interaction->zone_text[i], mouse_pos);
     if (event.mouseButton.type == sfEvtMouseButtonReleased) {
-        for (int i = 0; rpg->game->interaction->zone_text[i] != NULL; i++) {
+        for (int i = 0; i < 2; i++) {
             actions_rect_reponse
                 (rpg, rpg->game->interaction->zone_text[i], i, mouse_pos);
         }

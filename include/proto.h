@@ -80,6 +80,7 @@ int game_event(rpg_t *rpg, sfEvent event);
 int pause_menu_event(rpg_t *rpg, sfEvent event);
 int inventory_menu_event(rpg_t *rpg, sfEvent event);
 void interaction_event(rpg_t *rpg, sfEvent event);
+int buy_article(rpg_t *rpg, sfEvent event);
 
 /* MENU MANAGER */
 void menu_manager(rpg_t *rpg);
@@ -87,6 +88,7 @@ void background_menu_manager(menu_t *menu);
 
 /* GAME MANAGER */
 void game_manager(rpg_t *rpg);
+void level_manager(game_t *game, sfRenderWindow *window);
 
 /* OPTION */
 void book_actions

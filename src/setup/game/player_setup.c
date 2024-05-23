@@ -43,6 +43,22 @@ static int player_sprites_setup(sfRenderWindow *window, player_t *player)
     return OK;
 }
 
+static int setup_level(player_t *player, sfRenderWindow *window)
+{
+    sfFont *level_font = sfFont_createFromFile(TITLE_FONT);
+
+    if (!level_font)
+        return KO;
+    player->stats.level = 1;
+    player->stats.nb_gold = 0;
+    player->stats.xp = 0;
+    player->stats.level_text =
+    create_text(level_font, int_to_str(player->stats.level),
+    get_less_size(window, 35), get_resize(window, 68, 47.0));
+    set_text_mid_origin(player->stats.level_text);
+    return OK;
+}
+
 static int life_setup(player_t *player)
 {
     player->life = malloc(sizeof(life_player_t));
@@ -69,7 +85,8 @@ static int life_setup(player_t *player)
 
 int player_setup(sfRenderWindow *window, player_t *player)
 {
-    if (player_sprites_setup(window, player) == KO || life_setup(player) == KO)
+    if (player_sprites_setup(window, player) == KO || life_setup(player) == KO
+    || setup_level(player, window) == KO)
         return KO;
     player_stats_setup(player);
     return OK;
