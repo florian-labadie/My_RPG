@@ -9,9 +9,16 @@
 
 static void draw_help_menu(sfRenderWindow *window, menu_t *menu)
 {
-    (void)window;
-    (void)menu;
-    return;
+    setup_help_menu(window, menu);
+    sfRenderWindow_drawText(window, menu->help_menu->text, NULL);
+    sfRenderWindow_drawText(window, menu->help_menu->text, NULL);
+    sfText_setPosition(menu->help_menu->text, (sfVector2f){1300, 450});
+    sfText_setString(menu->help_menu->text, "Touches\n\n   Z\nQSD");
+    sfRenderWindow_drawText(window, menu->help_menu->text, NULL);
+    sfText_setPosition(menu->help_menu->text, (sfVector2f){500, 450});
+    sfText_setString(menu->help_menu->text,
+    "Createurs\n\nFlorian\nFaris\nBaptiste\nAxel\nArmand");
+    sfRenderWindow_drawText(window, menu->help_menu->text, NULL);
 }
 
 static void draw_option_menu(sfRenderWindow *window, menu_t *menu)

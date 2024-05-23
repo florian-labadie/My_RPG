@@ -27,7 +27,6 @@ void display_page_1(sfRenderWindow *wiw, menu_t *menu)
         sfRenderWindow_drawText(wiw, menu->settings->title[2], NULL);
         sfRenderWindow_drawText(wiw, menu->settings->title[3], NULL);
         sfRenderWindow_drawSprite(wiw, menu->settings->intern_sp[2], NULL);
-        sfRenderWindow_drawSprite(wiw, menu->settings->intern_sp[3], NULL);
         for (int i = 0; i < 2; i++) {
             sfRenderWindow_drawSprite(wiw, menu->settings->reso_sp[i], NULL);
             sfRenderWindow_drawText(wiw, menu->settings->reso[i], NULL);
@@ -52,7 +51,7 @@ void display_page_2(sfRenderWindow *wiw, menu_t *menu)
 
 void handle_events_page_1(rpg_t *rpg, sfEvent event)
 {
-    return;
+    set_window_size(rpg, event);
 }
 
 void handle_events_page_2(rpg_t *rpg, sfEvent event)
