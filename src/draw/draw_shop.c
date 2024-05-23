@@ -21,8 +21,7 @@ static void draw_bubble_forgeron(sfRenderWindow *window, game_t *game)
             sfRenderWindow_drawSprite(window, game->interaction->sprite[i],
                 NULL);
             draw_rectangle(window, game->interaction->zone_text[i]);
-            sfRenderWindow_drawText
-                (window, game->interaction->text[i], NULL);
+            sfRenderWindow_drawText(window, game->interaction->text[i], NULL);
         }
     }
 }
@@ -39,6 +38,19 @@ static void draw_bubble_alchemist(sfRenderWindow *window, game_t *game)
     }
 }
 
+static void draw_alchemist_text(sfRenderWindow *window, game_t *game)
+{
+    for (int i = 0; i < 2; i += 1) {
+        sfRenderWindow_drawRectangleShape(window,
+            game->shop->potion->zone_text[i], NULL);
+        sfRenderWindow_drawText(window, game->shop->potion->text[i], NULL);
+        if (game->player->stats.nb_gold < 50) {
+            sfText_setColor(game->shop->potion->text[i], sfRed);
+        } else
+            sfText_setColor(game->shop->potion->text[i], sfBlack);
+    }
+}
+
 void draw_alchemist(sfRenderWindow *window, game_t *game)
 {
     sfRenderWindow_clear(window, sfBlack);
@@ -50,11 +62,23 @@ void draw_alchemist(sfRenderWindow *window, game_t *game)
         sfRenderWindow_drawSprite(window, game->shop->sprite_sign[1], NULL);
         sfRenderWindow_drawSprite(window, game->shop->sprite_quitt[1], NULL);
         sfRenderWindow_drawSprite(window, game->shop->potion->sprite, NULL);
-        for (int i = 0; i < 2; i += 1) {
-            sfRenderWindow_drawRectangleShape(window,
-                game->shop->potion->zone_text[i], NULL);
-            sfRenderWindow_drawText(window, game->shop->potion->text[i], NULL);
-        }
+        draw_alchemist_text(window, game);
+    }
+}
+
+static void draw_forge_text(sfRenderWindow *window, game_t *game)
+{
+    for (int i = 0; i < 3; i += 1) {
+        sfRenderWindow_drawRectangleShape(window,
+            game->shop->weapon[game->player->race]->zone_text[i], NULL);
+        sfRenderWindow_drawText(window,
+            game->shop->weapon[game->player->race]->text[i], NULL);
+        if (game->player->stats.nb_gold < 50 * (i + 1)) {
+            sfText_setColor(game->shop->weapon[game->player->race]->text[i],
+            sfRed);
+        } else
+            sfText_setColor(game->shop->weapon[game->player->race]->text[i],
+            sfBlack);
     }
 }
 
@@ -69,13 +93,7 @@ void draw_forge(sfRenderWindow *window, game_t *game)
         sfRenderWindow_drawSprite(window, game->shop->sprite_sign[0], NULL);
         sfRenderWindow_drawSprite(window, game->shop->sprite_quitt[0], NULL);
         sfRenderWindow_drawSprite(window,
-            game->shop->weapon[game->player->race]->sprite_weap,
-            NULL);
-        for (int i = 0; i < 3; i += 1) {
-            sfRenderWindow_drawRectangleShape(window,
-                game->shop->weapon[game->player->race]->zone_text[i], NULL);
-            sfRenderWindow_drawText(window,
-                game->shop->weapon[game->player->race]->text[i], NULL);
-        }
+            game->shop->weapon[game->player->race]->sprite_weap, NULL);
+        draw_forge_text(window, game);
     }
 }

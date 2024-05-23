@@ -24,7 +24,7 @@ static void setup_text_weapon(weapon_t **weapon, sfRenderWindow *window)
         sfRectangleShape_setSize((*weapon)->zone_text[j],
             rect_size[j]);
         sfRectangleShape_setPosition((*weapon)->zone_text[j],
-            get_resize(window, pos[j].x, pos[j].y + 50));
+            (sfVector2f){pos[j].x, pos[j].y + get_resize(window, 0, 50.0).y});
         sfRectangleShape_setOrigin((*weapon)->zone_text[j],
             (sfVector2f){rect_size[j].x / 2, 40 / 2});
         sfRectangleShape_setFillColor((*weapon)->zone_text[j], sfTransparent);
@@ -82,7 +82,7 @@ static void setup_text_potion(potion_t **potion, sfRenderWindow *window)
         sfRectangleShape_setSize((*potion)->zone_text[j],
             (sfVector2f){280, 40});
         sfRectangleShape_setPosition((*potion)->zone_text[j],
-            get_resize(window, pos[j].x, pos[j].y + 50));
+            (sfVector2f){pos[j].x, pos[j].y + get_resize(window, 0, 50.0).y});
         sfRectangleShape_setOrigin((*potion)->zone_text[j],
             (sfVector2f){280 / 2, 40 / 2});
         sfRectangleShape_setFillColor((*potion)->zone_text[j], sfTransparent);
@@ -93,7 +93,7 @@ static int setup_sprite_potion(shop_t **shop, sfRenderWindow *window)
 {
     (*shop)->potion->sprite =
         create_button((*shop)->potion->texture_pot, (sfVector2f){0.3, 0.3},
-        (sfVector2f){1110, 140});
+        (sfVector2f){1100, 140});
     (*shop)->potion->font = sfFont_createFromFile(FONT);
     if (!(*shop)->potion->sprite || !(*shop)->potion->font)
         return KO;
