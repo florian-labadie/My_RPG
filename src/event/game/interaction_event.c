@@ -23,7 +23,7 @@ static void actions_rect_reponse(rpg_t *rpg, sfRectangleShape **shape,
         sfSprite_setScale(rpg->game->player->sprites->player,
             (sfVector2f){0.5, 0.5});
         rpg->game->map->choice_map = VILLAGE;
-        sfMusic_stop(rpg->game->map->house[i]->house_music);
+        sfMusic_stop(rpg->game->map->house[0]->house_music);
         sfMusic_play(rpg->game->map->game_sound);
     }
 }
