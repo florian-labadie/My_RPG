@@ -46,14 +46,14 @@ void music_sound(rpg_t *rpg, sfEvent event)
         rpg->setting->sound_game += 10.0f;
         rpg->setting->sound_game =
         fminf(rpg->setting->sound_game, 100.0f);
-        update_volume_text
-        (rpg, rpg->menu->setting->sound_game);
+        // update_volume_text
+        // (rpg, rpg->menu->setting->sound_game);
     }
     if (event.type == sfEvtMouseButtonReleased && minus == sfTrue) {
         rpg->setting->sound_game -= 10.0f;
         rpg->setting->sound_game =
-        fmaxf(rpg->setting->sound_game, 100.0f);
-        update_volume_text
-        (rpg, rpg->menu->setting->sound_game);
+        fminf(rpg->setting->sound_game, 100.0f);
+        // update_volume_text
+        // (rpg, rpg->menu->setting->sound_game);
     }
 }
