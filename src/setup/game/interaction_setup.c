@@ -66,7 +66,7 @@ int interaction_setup(game_t *game, sfRenderWindow *window)
     game->interaction->texture = malloc(sizeof(sfTexture *) * 3);
     game->interaction->sprite = malloc(sizeof(sfSprite *) * 3);
     game->interaction->text = malloc(sizeof(sfText *) * 3);
-    game->interaction->field = malloc(sizeof(choice_map_t));
+    game->interaction->field = malloc(sizeof(choice_map_t) * 3);
     game->interaction->zone_text = malloc(sizeof(sfRectangleShape **) * 3);
     if (!game->interaction->texture || !game->interaction->sprite ||
         !game->interaction->text || texture_setup(&game) == KO ||

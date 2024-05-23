@@ -24,6 +24,7 @@
     #define ORK "assets/sprite/orc.png"
     #define NB_PARTICLE 15
     #define NB_ORK 15
+    #define LIFE_RECT_SIZE ((sfVector2f){227, 21})
 
     #include <SFML/Graphics.h>
     #include <SFML/Window.h>
@@ -66,15 +67,19 @@ typedef struct house_s {
     sfMusic *house_music;
 } house_t;
 
+typedef struct ork_s {
+    sfSprite *ork_spr;
+    sfIntRect ork_rect;
+    int hp;
+    sfCircleShape *hitbox;
+} ork_t;
+
 typedef struct entities_bf_s {
     sfTexture *wizzard_text;
     sfSprite *wizzard_spr;
     sfClock *wizz_clock;
     sfIntRect wizzard_rect;
-
-    sfTexture *ork_text;
-    sfSprite **ork_spr;
-    sfIntRect ork_rect;
+    ork_t **ork;
 } entities_bf_t;
 
 typedef struct map_s {
@@ -87,6 +92,7 @@ typedef struct map_s {
     sfTexture *battle_text;
     sfSprite *battle_spr;
     sfMusic *battle_music;
+    sfText *help_exit;
 
     sfMusic *game_sound;
 

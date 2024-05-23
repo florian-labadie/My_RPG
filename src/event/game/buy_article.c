@@ -67,7 +67,7 @@ static void check_shop(rpg_t *rpg, sfEvent event, sfVector2f mouse_pos)
     }
 }
 
-int buy_article(rpg_t *rpg, sfEvent event)
+void buy_article(rpg_t *rpg, sfEvent event)
 {
     sfVector2i mouse_pos_int = {event.mouseButton.x, event.mouseButton.y};
     sfVector2f mouse_pos = sfRenderWindow_mapPixelToCoords(rpg->window,
@@ -76,5 +76,4 @@ int buy_article(rpg_t *rpg, sfEvent event)
     if (event.mouseButton.type == sfEvtMouseButtonReleased) {
         check_shop(rpg, event, mouse_pos);
     }
-    return OK;
 }

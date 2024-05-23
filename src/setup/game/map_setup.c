@@ -40,12 +40,20 @@ int setup_house(map_t *map, sfRenderWindow *window)
 
 int set_up_battlefield(sfRenderWindow *window, map_t *map, float volume)
 {
+    sfFont *help_font = sfFont_createFromFile(TITLE_FONT);
+
     map->battle_text = sfTexture_createFromFile(BATTLE_MAP, NULL);
     if (!map->battle_text)
         return KO;
     sfMusic_setVolume(map->battle_music, volume);
+    map->help_exit = create_text(help_font,
+    "Pour revenir au village\nappuyer sur la touche T",
+    get_less_size(window, 20), get_resize(window, 1650, 20));
+    sfText_setColor(map->help_exit, sfWhite);
+    sfText_setOutlineThickness(map->help_exit, 2.5);
+    sfText_setOutlineColor(map->help_exit, sfRed);
     map->battle_spr = create_button(map->battle_text,
-    (sfVector2f) {1.0, 1.0}, get_resize(window, 0.0, 0.0));
+    get_resize(window, 1.0, 1.0), get_resize(window, 0.0, 0.0));
     return OK;
 }
 

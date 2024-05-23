@@ -37,6 +37,7 @@ typedef struct inventory_t {
     sfText **text;
 
     item_t *item;
+    sfText **stats_text;
 } inventory_t;
 
 #endif /* !INVENTORY_H_ */

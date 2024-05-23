@@ -72,9 +72,9 @@ static int life_setup(player_t *player)
     for (int i = 0; i < 2; i++) {
         player->life->rects[i] = sfRectangleShape_create();
         sfRectangleShape_setSize(player->life->rects[i],
-            (sfVector2f){245.0, 21.0});
+            (sfVector2f){227.0, 21.0});
         sfRectangleShape_setPosition(player->life->rects[i], (sfVector2f)
-            {57.0, 52.0});
+            {75.0, 52.0});
     }
     sfRectangleShape_setFillColor(player->life->rects[0],
         sfColor_fromRGB(207, 207, 207));

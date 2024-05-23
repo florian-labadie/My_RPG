@@ -42,9 +42,11 @@ void draw_inventory(sfRenderWindow *window, game_t *game)
         NULL);
     for (int i = 0; game->inventory->sprites[i]; i++)
         sfRenderWindow_drawSprite(window, game->inventory->sprites[i], NULL);
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; game->inventory->text[i]; i++)
         sfRenderWindow_drawText(window, game->inventory->text[i], NULL);
     draw_item_inventory(window, game);
+    for (int i = 0; game->inventory->stats_text[i]; i++)
+        sfRenderWindow_drawText(window, game->inventory->stats_text[i], NULL);
     if (game->map->choice_map == VILLAGE)
         sfRenderWindow_setView(window, game->map->view);
 }

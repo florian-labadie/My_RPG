@@ -19,6 +19,9 @@
     #define HUMAN_RECT ((sfIntRect){210, 0, 52, 56})
     #define DWARF_RECT ((sfIntRect){209, 112, 52, 57})
     #define ELF_RECT ((sfIntRect){210, 226, 52, 62})
+    #define HUMAN_ATT_RECT ((sfIntRect){210, 56, 52, 56})
+    #define DWARF_ATT_RECT ((sfIntRect){209, 169, 52, 57})
+    #define ELF_ATT_RECT ((sfIntRect){210, 290, 52, 62})
     #define CHARACTERS_ATK_RECT ((sfIntRect){0, 0, 54, 55})
 
 typedef enum player_direction_e {
@@ -68,6 +71,7 @@ typedef struct player_s {
     bool attack;
 
     sfVector2f position;
+    sfVector2f last_pos;
 
     player_sprites_t *sprites;
     player_stats_t stats;

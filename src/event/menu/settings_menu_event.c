@@ -14,7 +14,7 @@ void exit_action(rpg_t *rpg, sfEvent event, sfBool exit)
     }
 }
 
-void book_pages(rpg_t *rpg, sfEvent event, sfBool arrow_l, sfBool arrow_r)
+void book_pages(rpg_t *rpg, sfEvent event)
 {
     if (rpg->menu->settings->current_page == 0) {
         handle_events_page_1(rpg, event);
@@ -55,30 +55,6 @@ int settings_menu_event(rpg_t *rpg, sfEvent event)
     exit_action(rpg, event, exit);
     book_actions
     (rpg, event, rpg->menu->settings->arrowl, rpg->menu->settings->arrowr);
-    book_pages
-    (rpg, event, rpg->menu->settings->arrowl, rpg->menu->settings->arrowr);
+    book_pages(rpg, event);
     return OK;
-}
-
-void music_sound(rpg_t *rpg, sfEvent event)
-{
-    sfVector2f mouse = get_mouse_pos(rpg->window, rpg->window_size);
-    sfBool plus = get_sprite_bounds(rpg->menu->settings->intern_sp[0], mouse);
-    sfBool minus = get_sprite_bounds(rpg->menu->settings->intern_sp[1], mouse);
-
-    if (event.type == sfEvtMouseButtonReleased && plus == sfTrue) {
-        rpg->menu->setting->sound_game += 10.0f;
-        rpg->menu->setting->sound_game =
-        fminf(rpg->menu->setting->sound_game, 100.0f);
-        update_volume_text
-        (rpg->menu->settings, rpg->menu->setting->sound_game);
-    }
-    if (event.type == sfEvtMouseButtonReleased && minus == sfTrue) {
-        rpg->menu->setting->sound_game -= 10.0f;
-        rpg->menu->setting->sound_game =
-        fminf(rpg->menu->setting->sound_game, 100.0f);
-        update_volume_text
-        (rpg->menu->settings, rpg->menu->setting->sound_game);
-    }
-    set_volume_music(rpg);
 }
