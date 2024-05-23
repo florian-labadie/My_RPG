@@ -20,7 +20,7 @@ static void player_stats_setup(player_t *player)
     player->stats.defense = stats[player->race][4];
 }
 
-static int set_palyer_sprites(player_t *player, sfRenderWindow *window)
+static int set_player_sprites(player_t *player, sfRenderWindow *window)
 {
     sfIntRect rects[3] = {HUMAN_STILL_RECT, DWARF_STILL_RECT, ELF_STILL_RECT};
     sfVector2f origins[3] = {
@@ -45,13 +45,14 @@ static int set_palyer_sprites(player_t *player, sfRenderWindow *window)
 
 static int player_sprites_setup(sfRenderWindow *window, player_t *player)
 {
-    set_palyer_sprites(player, window);
+    set_player_sprites(player, window);
     player->sprites->range = sfCircleShape_create();
     sfCircleShape_setRadius(player->sprites->range, 130);
     sfCircleShape_setOrigin(player->sprites->range, (sfVector2f){130, 130});
     player->sprites->hitbox = sfCircleShape_create();
     sfCircleShape_setRadius(player->sprites->hitbox, 80);
     sfCircleShape_setOrigin(player->sprites->hitbox, (sfVector2f){80, 80});
+    return OK;
 }
 
 static int setup_level(player_t *player, sfRenderWindow *window)

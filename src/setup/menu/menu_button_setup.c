@@ -75,6 +75,7 @@ static int set_button(main_menu_buttons_t **button, sfRenderWindow *window)
     (*button)->rectangle_text = sfTexture_createFromFile(BUTTON_MENU, NULL);
     if (creation_loop(button, button_name, window) == KO)
         return KO;
+    sfSprite_setColor((*button)->sprites[1], (sfColor){100, 100, 100, 255});
     (*button)->sprites[4] = NULL;
     help_button(button, window);
     if (!(*button)->help_book || !(*button)->help_book_spr)
