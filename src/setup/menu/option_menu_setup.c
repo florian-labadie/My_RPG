@@ -156,6 +156,8 @@ int setup_option_menu(settings_t *settings, sfRenderWindow *window)
     settings->fps_text = malloc(sizeof(sfSprite *) * (3 + 1));
     settings->reso_sp = malloc(sizeof(sfSprite *) * (2 + 1));
     settings->reso_text = malloc(sizeof(sfSprite *) * (2 + 1));
+    settings->arrowl = false;
+    settings->arrowr = false;
     settings->current_page = 1;
     if (setup_book(settings) == KO || setup_external(settings) == KO
         || setup_internal(settings) == KO || setup_title(settings) == KO

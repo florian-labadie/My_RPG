@@ -54,8 +54,8 @@ typedef struct settings_s {
     sfSprite *plus_sp;
 
 
-    sfBool arrow_bool_r;
-    sfBool arrow_bool_l;
+    sfBool arrowr;
+    sfBool arrowl;
 
     sfClock *b_clock;
 

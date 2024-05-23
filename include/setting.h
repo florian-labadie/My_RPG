@@ -23,6 +23,9 @@ typedef struct stock_setting_s {
     float fps;
     float sound_game;
     char *language;
+
+    sfText *volume_text;
+    char volume_str[10];
 } stock_setting_t;
 
 #endif /* !SETTING_H_ */

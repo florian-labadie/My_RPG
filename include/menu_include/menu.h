@@ -64,8 +64,8 @@ typedef struct menu_s {
     main_menu_t *main_menu;
     help_t *help;
     settings_t *settings;
-    stock_setting_t *setting;
     parallax_t *parallax;
+    stock_setting_t *setting;
 } menu_t;
 
 #endif /* !MENU_H_ */

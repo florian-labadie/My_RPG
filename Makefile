@@ -30,6 +30,7 @@ SETUP	=	src/setup/menu_setup.c						\
 			src/setup/menu/menu_button_setup.c			\
 			src/setup/menu/option_menu_setup.c			\
 			src/setup/menu/anim_book.c					\
+			src/setup/menu/option_pages.c				\
 			src/setup/game_setup.c						\
 			src/setup/game/map_setup.c					\
 			src/setup/game/player_setup.c				\
@@ -39,7 +40,6 @@ SETUP	=	src/setup/menu_setup.c						\
 			src/setup/game/inventory_menu_setup.c		\
 			src/setup/game/particule_n_flag_set_up.c	\
 			src/setup/menu/option_features.c 			\
-			src/setup/menu/option_pages.c 				\
 			src/setup/menu/parallax_setup.c				\
 			src/setup/game/interaction_setup.c			\
 			src/setup/game/weapon_setup.c				\
@@ -65,8 +65,8 @@ MANAGER	=	src/manager/menu_manager.c					\
 DRAW	=	src/draw/draw_menu.c						\
 			src/draw/draw_game.c						\
 			src/draw/draw_shop.c						\
-			src/draw/draw_game_menus.c					\
 			src/draw/draw_particles_n_flag.c			\
+			src/draw/draw_game_menus.c					\
 
 SAVE	=	src/save/settings_game.c					\
 			src/save/write_setting_in_file.c			\

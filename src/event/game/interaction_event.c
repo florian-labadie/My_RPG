@@ -8,7 +8,7 @@
 #include "my.h"
 
 static void actions_rect_reponse(rpg_t *rpg, sfRectangleShape **shape,
-    int i, sfVector2f mouse_pos)
+    sfVector2f mouse_pos)
 {
     if (rpg->game->map->choice_map == ALCHEMY)
         rpg->game->player->position = (sfVector2f){140.0, 415.0};
@@ -54,7 +54,7 @@ void interaction_event(rpg_t *rpg, sfEvent event)
     if (event.mouseButton.type == sfEvtMouseButtonReleased) {
         for (int i = 0; i < 2; i++) {
             actions_rect_reponse
-                (rpg, rpg->game->interaction->zone_text[i], i, mouse_pos);
+                (rpg, rpg->game->interaction->zone_text[i], mouse_pos);
         }
     }
 }

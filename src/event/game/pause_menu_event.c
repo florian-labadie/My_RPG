@@ -7,6 +7,7 @@
 
 #include "my.h"
 
+
 static void set_big_pause_screen(pause_t *pause, sfVector2f pos,
     sfRenderWindow *window)
 {

@@ -7,10 +7,23 @@
 
 #include "my.h"
 
+void draw_arrows_and_turn_pages(sfRenderWindow *window, menu_t *menu)
+{
+    if (menu->settings->arrowr == sfTrue) {
+        sfRenderWindow_drawSprite(window, menu->settings->book_sp[2], NULL);
+        turn_book
+        (menu->settings, menu->settings->book_sp[2], menu->settings->b_clock);
+    }
+    if (menu->settings->arrowl == sfTrue) {
+        sfRenderWindow_drawSprite(window, menu->settings->book_sp[1], NULL);
+        turn_book
+        (menu->settings, menu->settings->book_sp[1], menu->settings->b_clock);
+    }
+}
 
 void display_page_1(sfRenderWindow *wiw, menu_t *menu)
 {
-    if (menu->settings->arrow_bool_l == sfFalse) {
+    if (menu->settings->arrowl == sfFalse) {
         sfRenderWindow_drawText(wiw, menu->settings->title[2], NULL);
         sfRenderWindow_drawText(wiw, menu->settings->title[3], NULL);
         sfRenderWindow_drawSprite(wiw, menu->settings->intern_sp[2], NULL);
@@ -24,7 +37,7 @@ void display_page_1(sfRenderWindow *wiw, menu_t *menu)
 
 void display_page_2(sfRenderWindow *wiw, menu_t *menu)
 {
-    if (menu->settings->arrow_bool_r == sfFalse) {
+    if (menu->settings->arrowr == sfFalse) {
         sfRenderWindow_drawSprite(wiw, menu->settings->intern_sp[0], NULL);
         sfRenderWindow_drawSprite(wiw, menu->settings->intern_sp[1], NULL);
         sfRenderWindow_drawText(wiw, menu->settings->title[0], NULL);
@@ -37,12 +50,12 @@ void display_page_2(sfRenderWindow *wiw, menu_t *menu)
     }
 }
 
-void handle_events_page_1(menu_t *menu)
+void handle_events_page_1(rpg_t *rpg, sfEvent event)
 {
     return;
 }
 
-void handle_events_page_2(menu_t *menu)
+void handle_events_page_2(rpg_t *rpg, sfEvent event)
 {
-    music_sound(menu);
+    music_sound(rpg, event);
 }

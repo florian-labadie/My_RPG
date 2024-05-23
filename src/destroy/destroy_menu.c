@@ -18,7 +18,6 @@ static void destroy_background_menu(background_menu_t *background)
     free(background);
 }
 
-
 static void destroy_main_menu_button(main_menu_buttons_t *button)
 {
     sfTexture_destroy(button->rectangle_text);

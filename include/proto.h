@@ -61,10 +61,8 @@ int set_up_battlefield(sfRenderWindow *window, map_t *map, float volume);
 void change_view(game_t *game, sfRenderWindow *window);
 int select_charac(game_t *game, sfRenderWindow *window);
 int pause_menu_setup(game_t *game, sfRenderWindow *window);
-int inventory_menu_setup(game_t *game, sfRenderWindow *window);
-void set_pause_screen(pause_t *pause, sfFloatRect view_rect,
-    choice_map_t map, sfRenderWindow *window);
 int interaction_setup(game_t *game, sfRenderWindow *window);
+int inventory_menu_setup(game_t *game, sfRenderWindow *window);
 int shop_buy_setup(game_t *game, sfRenderWindow *window);
 
 /* MENU EVENT */
@@ -92,16 +90,18 @@ void level_manager(game_t *game, sfRenderWindow *window);
 
 /* OPTION */
 void book_actions
-(sfRenderWindow *window, menu_t *menu, sfBool arrow_l, sfBool arrow_r);
-void exit_action(menu_t *menu, sfBool exit);
+(rpg_t *rpg, sfEvent event, sfBool arrow_l, sfBool arrow_r);
+void exit_action(rpg_t *rpg, sfEvent event, sfBool exit);
 int turn_book(settings_t *settings, sfSprite *sprite, sfClock *clock);
 int open_close_book(sfSprite *sprite, sfClock *clock);
 void display_page_1(sfRenderWindow *wiw, menu_t *menu);
 void display_page_2(sfRenderWindow *wiw, menu_t *menu);
-void handle_events_page_1(menu_t *menu);
-void handle_events_page_2(menu_t *menu);
-void update_volume_text(settings_t *settings, float volume);
-void music_sound(menu_t *menu);
+void handle_events_page_1(rpg_t *rpg, sfEvent event);
+void handle_events_page_2(rpg_t *rpg, sfEvent event);
+void update_volume_text(rpg_t *rpg, float volume);
+void music_sound(rpg_t *rpg, sfEvent event);
+void begin_anim(sfSprite *sprite);
+void draw_arrows_and_turn_pages(sfRenderWindow *window, menu_t *menu);
 
 /* OPTION */
 int setup(settings_t *settings);
@@ -125,5 +125,7 @@ void draw_flag(game_t *game, sfRenderWindow *window);
 void destroy_rpg(rpg_t *rpg);
 void destroy_game(game_t *game);
 void destroy_menu(menu_t *menu);
+void set_life_village(game_t *game, sfRenderWindow *window);
+void set_life_battle(sfRenderWindow *window, game_t *game);
 
 #endif /* PROTO_H_ */
