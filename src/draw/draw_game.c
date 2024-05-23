@@ -7,39 +7,21 @@
 
 #include "my.h"
 
-static void draw_pause_menu(sfRenderWindow *window, game_t *game)
-{
-    sfRenderWindow_drawRectangleShape(window, game->pause->background, NULL);
-    sfRenderWindow_drawSprite(window, game->pause->sprites[3], NULL);
-    sfRenderWindow_drawText(window, game->pause->text[3], NULL);
-    for (int i = 0; i < 3; i++) {
-        sfRenderWindow_drawSprite(window, game->pause->sprites[i], NULL);
-        sfRenderWindow_drawText(window, game->pause->text[i], NULL);
-    }
-}
-
 static void draw_village(sfRenderWindow *window, game_t *game)
 {
     sfRenderWindow_drawSprite(window, game->map->sprite_ground, NULL);
     sfRenderWindow_drawSprite(window, game->player->sprites->player, NULL);
     sfRenderWindow_drawSprite(window, game->map->sprite_obj, NULL);
+    for (int i = 0; i < 2; i++) {
+        if (game->interaction->field[i] == game->map->choice_map) {
+            sfRenderWindow_drawSprite(window, game->interaction->sprite[i],
+                NULL);
+            sfRenderWindow_drawText(window, game->interaction->text[i], NULL);
+        }
+    }
     draw_particles(game, window);
     draw_flag(game, window);
     change_view(game, window);
-}
-
-static void draw_forge(sfRenderWindow *window, game_t *game)
-{
-    sfRenderWindow_clear(window, sfBlack);
-    sfRenderWindow_drawSprite(window, game->map->house[0]->house, NULL);
-    sfRenderWindow_drawSprite(window, game->player->sprites->player, NULL);
-}
-
-static void draw_alchemist(sfRenderWindow *window, game_t *game)
-{
-    sfRenderWindow_clear(window, sfBlack);
-    sfRenderWindow_drawSprite(window, game->map->house[1]->house, NULL);
-    sfRenderWindow_drawSprite(window, game->player->sprites->player, NULL);
 }
 
 static void move_battle_sprite(game_t *game)
@@ -47,7 +29,7 @@ static void move_battle_sprite(game_t *game)
     sfTime time = sfClock_getElapsedTime(game->map->entities->wizz_clock);
 
     if (time.microseconds >= 350000) {
-            game->map->entities->ork_rect.left += 50;
+        game->map->entities->ork_rect.left += 50;
         if (game->map->entities->ork_rect.left >= 300)
             game->map->entities->ork_rect.left = 0;
         for (int i = 0; i < NB_ORK; i += 1)
@@ -76,7 +58,17 @@ static void draw_battlefield(sfRenderWindow *window, game_t *game)
 
 static void draw_story_game(sfRenderWindow *window, game_t *game)
 {
-    return;
+    if (game->map->choice_map == VILLAGE)
+        sfRenderWindow_setView(window, game->original_view);
+    for (int i = 0; game->player->life->rects[i]; i++)
+        sfRenderWindow_drawRectangleShape(window,
+            game->player->life->rects[i], NULL);
+    sfRenderWindow_drawSprite(window, game->player->life->health_bar_spr,
+    NULL);
+    sfRenderWindow_drawText(window, game->player->stats.level_text, NULL);
+    if (game->map->choice_map == VILLAGE) {
+        sfRenderWindow_setView(window, game->map->view);
+    }
 }
 
 static void draw_select_charac(sfRenderWindow *window, game_t *game)
@@ -96,7 +88,7 @@ static void draw_select_charac(sfRenderWindow *window, game_t *game)
 void draw_game(rpg_t *rpg)
 {
     void (*draw_game_fct[])(sfRenderWindow *, game_t *) =
-        {draw_select_charac, draw_story_game, draw_pause_menu};
+        {draw_select_charac, draw_story_game, draw_pause_menu, draw_inventory};
     void (*draw_map_function[])(sfRenderWindow *, game_t *) =
         {draw_village, draw_battlefield, draw_forge, draw_alchemist};
 

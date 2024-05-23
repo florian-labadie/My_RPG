@@ -7,6 +7,7 @@
 
 #ifndef PLAYER_H_
     #define PLAYER_H_
+    #define HEALTH_BAR "assets/sprite/life.jpg"
 
     #include "rpg.h"
 
@@ -18,6 +19,9 @@
     #define HUMAN_RECT ((sfIntRect){210, 0, 52, 56})
     #define DWARF_RECT ((sfIntRect){209, 112, 52, 57})
     #define ELF_RECT ((sfIntRect){210, 226, 52, 62})
+    #define HUMAN_ATT_RECT ((sfIntRect){210, 56, 52, 56})
+    #define DWARF_ATT_RECT ((sfIntRect){209, 169, 52, 57})
+    #define ELF_ATT_RECT ((sfIntRect){210, 290, 52, 62})
     #define CHARACTERS_ATK_RECT ((sfIntRect){0, 0, 54, 55})
 
 typedef enum player_direction_e {
@@ -38,6 +42,10 @@ typedef struct player_stats_s {
     float attack;
     float magic_attack;
     float defense;
+    int level;
+    int xp;
+    int nb_gold;
+    sfText *level_text;
 } player_stats_t;
 
 typedef struct player_sprites_s {
@@ -49,9 +57,17 @@ typedef struct player_sprites_s {
     sfClock *move_clock;
 } player_sprites_t;
 
+typedef struct life_player_s {
+    sfTexture *health_bar_text;
+    sfSprite *health_bar_spr;
+
+    sfRectangleShape **rects;
+} life_player_t;
+
 typedef struct player_s {
     char *name;
     player_race_t race;
+    life_player_t *life;
     bool attack;
 
     sfVector2f position;

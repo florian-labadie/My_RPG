@@ -14,6 +14,7 @@ int rpg_loop(rpg_t *rpg)
 
     while (sfRenderWindow_isOpen(rpg->window)) {
         sfRenderWindow_clear(rpg->window, sfWhite);
+        set_volume_music(rpg);
         event_manager(rpg);
         if (rpg->screen == END)
             break;
@@ -23,6 +24,6 @@ int rpg_loop(rpg_t *rpg)
     }
     sfRenderWindow_close(rpg->window);
     write_setting_in_file(rpg);
-    destroy_resources(rpg);
+    destroy_rpg(rpg);
     return 0;
 }

@@ -7,13 +7,6 @@
 
 #include "my.h"
 
-static void reset_view(sfView *view, sfRenderWindow *window, sfVector2f pos)
-{
-    sfView_setSize(view, get_resize(window, pos.x, pos.y));
-    sfView_setCenter(view, get_resize(window, pos.x / 2, pos.y / 2));
-    sfRenderWindow_setView(window, view);
-}
-
 static void enter_house(game_t *game, sfRenderWindow *window, sfVector2f pos,
     choice_map_t choice)
 {
@@ -21,7 +14,14 @@ static void enter_house(game_t *game, sfRenderWindow *window, sfVector2f pos,
     game->player->position = pos;
     sfSprite_setPosition
         (game->player->sprites->player, game->player->position);
-    sfSprite_setScale(game->player->sprites->player, (sfVector2f){2.5, 2.5});
+    if (choice == FORGE) {
+        sfSprite_setScale(game->player->sprites->player, (sfVector2f){4, 5});
+    } else
+        sfSprite_setScale(game->player->sprites->player,
+            (sfVector2f){2.75, 3});
+    sfMusic_stop(game->map->game_sound);
+    sfMusic_play(game->map->house[0]->house_music);
+    game->player_move = (sfVector2f){0, 0};
     game->map->choice_map = choice;
 }
 
@@ -60,9 +60,9 @@ static int top_down(game_t *game, sfRenderWindow *window)
     if (color1.a == 0 || color2.a == 0 || color3.a == 0)
         return KO;
     if (color1.g == 254 || color2.g == 254 || color3.g == 254)
-        enter_house(game, window, (sfVector2f){960, 800}, FORGE);
+        enter_house(game, window, (sfVector2f){880, 800}, FORGE);
     if (color1.r == 254 || color2.r == 254 || color3.r == 254)
-        enter_house(game, window, (sfVector2f){880, 775}, ALCHEMY);
+        enter_house(game, window, (sfVector2f){875, 755}, ALCHEMY);
     return OK;
 }
 

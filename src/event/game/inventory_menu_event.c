@@ -9,5 +9,9 @@
 
 int inventory_menu_event(rpg_t *rpg, sfEvent event)
 {
+    if (event.key.code == sfKeyTab && event.key.type == sfEvtKeyPressed)
+        rpg->game->screen = PLAYING;
+    if (event.key.code == sfKeyPause && event.key.type == sfEvtKeyPressed)
+        rpg->game->screen = PAUSE;
     return OK;
 }

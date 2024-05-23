@@ -49,6 +49,7 @@ int my_getnbr(char const *str);
 char *my_strtok(char *str, char const *delimiter);
 int my_arraylen(char const *const *array);
 char **my_arraydup(char const *const *array);
+char *int_to_str(int num);
 int numeric(char c);
 int alphabetic(char c);
 int alpha_num(char c);

@@ -58,6 +58,7 @@ typedef struct menu_s {
     sfMusic *menu_sound;
     sfSound *click_button_sound;
     sfSoundBuffer *sound_buffer;
+    sfRenderWindow *window;
 
     background_menu_t *background;
 
@@ -65,6 +66,7 @@ typedef struct menu_s {
     help_t *help;
     settings_t *settings;
     parallax_t *parallax;
+    stock_setting_t *setting;
     help_menu_t *help_menu;
 } menu_t;
 

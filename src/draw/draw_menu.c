@@ -23,23 +23,21 @@ static void draw_help_menu(sfRenderWindow *window, menu_t *menu)
 
 static void draw_option_menu(sfRenderWindow *window, menu_t *menu)
 {
-    sfVector2i mouse_pi = sfMouse_getPositionRenderWindow(window);
-    sfVector2f mouse_p = {(float)mouse_pi.x, (float)mouse_pi.y};
-    sfBool arrow_l = get_sprite_bounds(menu->settings->extern_sp[0], mouse_p);
-    sfBool arrow_r = get_sprite_bounds(menu->settings->extern_sp[1], mouse_p);
-    sfBool exit = get_sprite_bounds(menu->settings->extern_sp[2], mouse_p);
-
     sfRenderWindow_drawSprite(window, menu->settings->book_sp[0], NULL);
     open_close_book(menu->settings->book_sp[0], menu->settings->b_clock);
     sfRenderWindow_drawSprite(window, menu->settings->extern_sp[0], NULL);
     sfRenderWindow_drawSprite(window, menu->settings->extern_sp[1], NULL);
     sfRenderWindow_drawSprite(window, menu->settings->extern_sp[2], NULL);
-    exit_action(menu, exit);
-    book_actions(window, menu, arrow_l, arrow_r);
+    if (sfSprite_getTextureRect(menu->settings->book_sp[0]).left >= 2709) {
+        if (menu->settings->current_page == 0)
+            display_page_1(window, menu);
+        if (menu->settings->current_page == 1)
+            display_page_2(window, menu);
+    }
+    draw_arrows_and_turn_pages(window, menu);
 }
 
-static void draw_main_menu(sfRenderWindow *window,
-    menu_t *menu)
+static void draw_main_menu(sfRenderWindow *window, menu_t *menu)
 {
     for (int i = 0; menu->main_menu->buttons->sprites[i] != NULL; i++) {
         sfRenderWindow_drawSprite(window,

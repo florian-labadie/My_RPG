@@ -28,14 +28,14 @@ static int change_text_rect(main_menu_buttons_t **button,
 
 static int change_screen_status(rpg_t **rpg, int i)
 {
-    if (i <= 1) {
+    if (i == 0) {
         if (!(*rpg)->game->map && game_setup(*rpg) == KO)
             return KO;
         (*rpg)->game->map->rect = (sfFloatRect){0.0, get_resize((*rpg)->window,
             495.0, 0).x, 400.0, 200.0};
         (*rpg)->screen = GAME;
         sfMusic_stop((*rpg)->menu->menu_sound);
-        (*rpg)->game->screen = (game_state_t)i;
+        (*rpg)->game->screen = SELECTION;
     }
     if (i == 2)
         (*rpg)->menu->screen = SETTING;
@@ -94,9 +94,11 @@ int main_menu_event(rpg_t *rpg, sfEvent event)
 {
     sfVector2f mouse_pos = get_mouse_pos(rpg->window, rpg->window_size);
 
-    if (event.mouseButton.type == sfEvtMouseButtonReleased)
+    if (event.mouseButton.type == sfEvtMouseButtonReleased &&
+        event.mouseButton.button == sfMouseLeft)
         return buttons_action(rpg, mouse_pos);
-    if (event.mouseButton.type == sfEvtMouseButtonPressed ||
+    if ((event.mouseButton.type == sfEvtMouseButtonPressed &&
+        event.mouseButton.button == sfMouseLeft) ||
         already_pressed(rpg->menu->main_menu->buttons->buttons_status,
             4) == OK) {
         if (already_pressed(rpg->menu->main_menu->buttons->buttons_status, 4)

@@ -11,6 +11,9 @@ static void set_volume_game(game_t *game, stock_setting_t *setting)
 {
     if (game->map && game->map->game_sound)
         sfMusic_setVolume(game->map->game_sound, setting->sound_game);
+    if (game->map && game->map->house[0]->house_music)
+        sfMusic_setVolume(game->map->house[0]->house_music,
+            setting->sound_game / 2);
 }
 
 static void set_volume_menu(menu_t *menu, stock_setting_t *setting)

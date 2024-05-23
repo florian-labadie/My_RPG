@@ -36,15 +36,18 @@ static void get_movements(rpg_t *rpg, sfEvent event)
 static int check_game_screen_changes(rpg_t **rpg, sfEvent event)
 {
     if (event.key.code == sfKeyBackspace &&
-            event.key.type == sfEvtKeyPressed) {
+        event.key.type == sfEvtKeyPressed) {
         (*rpg)->screen = END;
         return END;
     }
     if (event.key.code == sfKeyEscape && event.key.type == sfEvtKeyPressed) {
-        set_pause_screen((*rpg)->game->pause, (*rpg)->game->map->rect,
-            (*rpg)->game->map->choice_map, (*rpg)->window);
         (*rpg)->game->player_move = (sfVector2f){0, 0};
         (*rpg)->game->screen = PAUSE;
+        return OK;
+    }
+    if (event.key.code == sfKeyTab && event.key.type == sfEvtKeyPressed) {
+        (*rpg)->game->player_move = (sfVector2f){0, 0};
+        (*rpg)->game->screen = INVENTORY;
         return OK;
     }
     return OK;
@@ -86,6 +89,12 @@ int game_event(rpg_t *rpg, sfEvent event)
         get_movements(rpg, event);
         get_movements_realesed(rpg, event);
         show_flag(rpg, event);
+    }
+    if (rpg->game->map->choice_map == FORGE ||
+        rpg->game->map->choice_map == ALCHEMY) {
+        interaction_event(rpg, event);
+        if (rpg->game->interaction->shop == BUY)
+            buy_article(rpg, event);
     }
     return OK;
 }
