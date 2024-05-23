@@ -81,7 +81,8 @@ int inventory_menu_setup(game_t *game, sfRenderWindow *window)
     game->inventory->textures[3] = NULL;
     game->inventory->textures[6] = NULL;
     if (setup_inventory_background(&game->inventory,
-        window, game->pause->font) == KO)
+        window, game->pause->font) == KO ||
+        setup_item_inventory(game, window) == KO)
         return KO;
     return OK;
 }

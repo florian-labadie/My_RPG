@@ -16,6 +16,7 @@ static int malloc_init(rpg_t *rpg)
     rpg->game->select = malloc(sizeof(select_t));
     rpg->game->pause = malloc(sizeof(pause_t));
     rpg->game->inventory = malloc(sizeof(inventory_t));
+    rpg->game->inventory->item = malloc(sizeof(item_t));
     rpg->game->interaction = malloc(sizeof(interaction_t));
     rpg->game->shop = malloc(sizeof(shop_t));
     rpg->game->shop->weapon = malloc(sizeof(weapon_t *) * 4);

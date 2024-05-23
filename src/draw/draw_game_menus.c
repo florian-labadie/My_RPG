@@ -20,6 +20,20 @@ void draw_pause_menu(sfRenderWindow *window, game_t *game)
         sfRenderWindow_setView(window, game->map->view);
 }
 
+static void draw_item_inventory(sfRenderWindow *window, game_t *game)
+{
+    for (int i = 0; i < 4; i += 1) {
+        sfRenderWindow_drawSprite(window,
+            game->inventory->item->health_pot[i], NULL);
+        sfRenderWindow_drawSprite(window,
+            game->inventory->item->mana_pot[i], NULL);
+    }
+    for (int i = 0; i < 3; i += 1) {
+        sfRenderWindow_drawSprite(window,
+            game->inventory->item->weapons[game->player->race][i], NULL);
+    }
+}
+
 void draw_inventory(sfRenderWindow *window, game_t *game)
 {
     if (game->map->choice_map == VILLAGE)
@@ -30,6 +44,7 @@ void draw_inventory(sfRenderWindow *window, game_t *game)
         sfRenderWindow_drawSprite(window, game->inventory->sprites[i], NULL);
     for (int i = 0; i < 6; i++)
         sfRenderWindow_drawText(window, game->inventory->text[i], NULL);
+    draw_item_inventory(window, game);
     if (game->map->choice_map == VILLAGE)
         sfRenderWindow_setView(window, game->map->view);
 }

@@ -43,6 +43,7 @@ SETUP	=	src/setup/menu_setup.c						\
 			src/setup/menu/parallax_setup.c				\
 			src/setup/game/interaction_setup.c			\
 			src/setup/game/weapon_setup.c				\
+			src/setup/game/item_inventory_setup.c	\
 
 EVENT	=	src/event/event.c							\
 			src/event/menu/main_menu_event.c			\

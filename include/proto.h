@@ -64,6 +64,7 @@ int pause_menu_setup(game_t *game, sfRenderWindow *window);
 int interaction_setup(game_t *game, sfRenderWindow *window);
 int inventory_menu_setup(game_t *game, sfRenderWindow *window);
 int shop_buy_setup(game_t *game, sfRenderWindow *window);
+int setup_item_inventory(game_t *game, sfRenderWindow *window);
 
 /* MENU EVENT */
 void event_manager(rpg_t *rpg);
