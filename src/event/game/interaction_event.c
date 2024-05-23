@@ -49,10 +49,10 @@ void interaction_event(rpg_t *rpg, sfEvent event)
     sfVector2f mouse_pos = sfRenderWindow_mapPixelToCoords(rpg->window,
         mouse_pos_int, rpg->game->map->view);
 
-    for (int i = 0; rpg->game->interaction->zone_text[i] != NULL; i++)
+    for (int i = 0; i < 2; i++)
         change_status_button(rpg->game->interaction->zone_text[i], mouse_pos);
     if (event.mouseButton.type == sfEvtMouseButtonReleased) {
-        for (int i = 0; rpg->game->interaction->zone_text[i] != NULL; i++) {
+        for (int i = 0; i < 2; i++) {
             actions_rect_reponse
                 (rpg, rpg->game->interaction->zone_text[i], i, mouse_pos);
         }
