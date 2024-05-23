@@ -23,8 +23,8 @@ static void setup_text_weapon(weapon_t **weapon, sfRenderWindow *window)
         (*weapon)->zone_text[j] = sfRectangleShape_create();
         sfRectangleShape_setSize((*weapon)->zone_text[j],
             rect_size[j]);
-        sfRectangleShape_setPosition(
-            (*weapon)->zone_text[j], (sfVector2f){pos[j].x, pos[j].y + 50});
+        sfRectangleShape_setPosition((*weapon)->zone_text[j],
+            get_resize(window, pos[j].x, pos[j].y + 50));
         sfRectangleShape_setOrigin((*weapon)->zone_text[j],
             (sfVector2f){rect_size[j].x / 2, 40 / 2});
         sfRectangleShape_setFillColor((*weapon)->zone_text[j], sfTransparent);
@@ -81,8 +81,8 @@ static void setup_text_potion(potion_t **potion, sfRenderWindow *window)
         (*potion)->zone_text[j] = sfRectangleShape_create();
         sfRectangleShape_setSize((*potion)->zone_text[j],
             (sfVector2f){280, 40});
-        sfRectangleShape_setPosition(
-            (*potion)->zone_text[j], (sfVector2f){pos[j].x, pos[j].y + 50});
+        sfRectangleShape_setPosition((*potion)->zone_text[j],
+            get_resize(window, pos[j].x, pos[j].y + 50));
         sfRectangleShape_setOrigin((*potion)->zone_text[j],
             (sfVector2f){280 / 2, 40 / 2});
         sfRectangleShape_setFillColor((*potion)->zone_text[j], sfTransparent);
