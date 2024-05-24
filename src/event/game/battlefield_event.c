@@ -38,30 +38,6 @@ void show_flag(rpg_t *rpg, sfEvent event)
     }
 }
 
-static void damage_ork(rpg_t *rpg, sfEvent event)
-{
-    sfFloatRect touch = {0.0, 0.0, 0.0, 0.0};
-    sfFloatRect touch2 = {0.0, 0.0, 0.0, 0.0};
-
-    if (event.type == sfEvtMouseButtonReleased)
-        rpg->game->map->entities->ork_is_moving = true;
-    for (int i = 0; rpg->game->map->choice_map == BATTLEFIELD
-    && i < NB_ORK; i += 1) {
-        if (sfTime_asSeconds(sfClock_getElapsedTime(
-            rpg->game->map->entities->ork[i]->ork_damage)) < 2)
-            continue;
-        touch = sfCircleShape_getGlobalBounds
-                (rpg->game->map->entities->ork[i]->hitbox);
-        touch2 = sfCircleShape_getGlobalBounds
-                (rpg->game->player->sprites->hitbox);
-        if (sfFloatRect_intersects(&touch, &touch2, NULL) &&
-        rpg->game->map->entities->ork[i]->hp > 0) {
-            rpg->game->player->stats.health -= 5;
-            sfClock_restart(rpg->game->map->entities->ork[i]->ork_damage);
-        }
-    }
-}
-
 static void death_player(rpg_t *rpg, sfEvent event)
 {
     sfVector2f pos = {0.0, 0.0};
@@ -85,6 +61,9 @@ static void death_player(rpg_t *rpg, sfEvent event)
 
 void event_battlefield(rpg_t *rpg, sfEvent event)
 {
+    if (event.type == sfEvtMouseButtonReleased &&
+        rpg->game->map->choice_map == BATTLEFIELD)
+        rpg->game->map->entities->ork_is_moving = true;
     if (rpg->game->map->choice_map == BATTLEFIELD
     && event.key.code == sfKeyT && event.type == sfEvtKeyPressed) {
         rpg->game->map->choice_map = VILLAGE;
@@ -95,7 +74,10 @@ void event_battlefield(rpg_t *rpg, sfEvent event)
         rpg->game->player->last_pos);
         sfSprite_setScale(rpg->game->player->sprites->player,
             (sfVector2f){0.5, 0.5});
+        for (int i = 0; i < NB_ORK; i += 1) {
+            rpg->game->map->entities->ork[i]->hp = 200;
+            rpg->game->map->entities->ork[i]->is_alive = true;
+        }
     }
-    damage_ork(rpg, event);
     death_player(rpg, event);
 }

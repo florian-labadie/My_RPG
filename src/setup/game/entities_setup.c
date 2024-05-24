@@ -67,7 +67,7 @@ static int wizzard_setup(entities_bf_t **entities, sfRenderWindow *window)
     (*entities)->wizzard_spr = create_button((*entities)->wizzard_text,
     (sfVector2f) {1.5, 1.5}, get_resize(window, 1700.0, 840.0));
     (*entities)->wizzard_sent = create_text(font_wizz,
-    "Aidez moi a combatre\n       les Orks", get_less_size(window, 20),
+    "Aidez moi a combattre\n       les Orks", get_less_size(window, 20),
     get_resize(window, 1600, 790));
     sfSprite_setTextureRect((*entities)->wizzard_spr,
     (*entities)->wizzard_rect);

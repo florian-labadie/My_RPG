@@ -37,7 +37,7 @@ static void move_ork(game_t *game)
             ork_movement(
             sfSprite_getPosition(game->map->entities->ork[j]->ork_spr),
             sfCircleShape_getPosition(game->player->sprites->hitbox),
-            game->map->entities->ork[j], 2.5);
+            game->map->entities->ork[j], 3.5);
     }
 }
 

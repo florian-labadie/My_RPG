@@ -107,6 +107,28 @@ static void move_player(rpg_t *rpg)
         player_still_manager(rpg->game, rpg->game->player->race);
 }
 
+static void damage_for_ork(rpg_t *rpg)
+{
+    sfFloatRect touch = {0.0, 0.0, 0.0, 0.0};
+    sfFloatRect touch2 = {0.0, 0.0, 0.0, 0.0};
+
+    for (int i = 0; rpg->game->map->choice_map == BATTLEFIELD
+    && i < NB_ORK; i += 1) {
+        if (sfTime_asSeconds(sfClock_getElapsedTime(
+            rpg->game->map->entities->ork[i]->ork_damage)) < 2)
+            continue;
+        touch = sfCircleShape_getGlobalBounds
+                (rpg->game->map->entities->ork[i]->hitbox);
+        touch2 = sfCircleShape_getGlobalBounds
+                (rpg->game->player->sprites->hitbox);
+        if (sfFloatRect_intersects(&touch, &touch2, NULL) &&
+        rpg->game->map->entities->ork[i]->hp > 0) {
+            rpg->game->player->stats.health -= 5;
+            sfClock_restart(rpg->game->map->entities->ork[i]->ork_damage);
+        }
+    }
+}
+
 static void attack_orks(game_t *game)
 {
     sfFloatRect r1 = {0};
@@ -122,7 +144,7 @@ static void attack_orks(game_t *game)
                 (game->player->sprites->range);
         if (sfFloatRect_intersects(&r1, &r2, NULL))
             game->map->entities->ork[i]->hp -=
-                game->player->stats.attack * 3;
+                game->player->stats.attack * 2.5;
     }
 }
 
@@ -133,11 +155,13 @@ void game_manager(rpg_t *rpg)
         return;
     life_manager(rpg->game, rpg->window, rpg->game->player->stats.health);
     level_manager(rpg->game);
+    if (rpg->game->map->choice_map == BATTLEFIELD)
+        damage_for_ork(rpg);
     if (rpg->game->map->choice_map <= BATTLEFIELD &&
         rpg->game->player->attack == true) {
         player_attack_manager(rpg->game, rpg->game->player->race);
         if (sfTime_asSeconds(sfClock_getElapsedTime
-        (rpg->game->player->sprites->attack_clock)) >= 1) {
+        (rpg->game->player->sprites->attack_clock)) >= 2) {
             attack_orks(rpg->game);
             sfClock_restart(rpg->game->player->sprites->attack_clock);
         }
