@@ -131,6 +131,7 @@ void game_manager(rpg_t *rpg)
     game_music(rpg);
     if (rpg->game->screen == SELECTION)
         return;
+    inventory_manager(rpg->game);
     life_manager(rpg->game, rpg->window, rpg->game->player->stats.health);
     level_manager(rpg->game);
     if (rpg->game->map->choice_map == BATTLEFIELD)

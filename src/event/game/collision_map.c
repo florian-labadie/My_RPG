@@ -103,7 +103,7 @@ static int left_right(game_t *game)
     return OK;
 }
 
-static void map_move(game_t *game, sfRenderWindow *window)
+static void map_move(game_t *game)
 {
     game->map->rect.left = game->player->position.x - 200;
     game->map->rect.top = game->player->position.y - 100;
@@ -129,7 +129,7 @@ static int sprite_move_player(game_t *game, sfRenderWindow *window)
         }
         sfClock_restart(game->player->sprites->move_clock);
     }
-    map_move(game, window);
+    map_move(game);
     return OK;
 }
 

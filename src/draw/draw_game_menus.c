@@ -20,7 +20,7 @@ void draw_pause_menu(sfRenderWindow *window, game_t *game)
         sfRenderWindow_setView(window, game->map->view);
 }
 
-static void draw_item_potion(sfRenderWindow *window, game_t *game)
+static void draw_item_potion(game_t *game)
 {
     for (int i = 0; i < 4; i += 1)
         if (i < game->inventory->nbr_health_pot) {
@@ -44,7 +44,7 @@ static void draw_item_inventory(sfRenderWindow *window, game_t *game)
         sfRenderWindow_drawSprite(window,
             game->inventory->item->mana_pot[i], NULL);
     }
-    draw_item_potion(window, game);
+    draw_item_potion(game);
     for (int i = 0; i < 3; i += 1) {
         sfRenderWindow_drawSprite(window,
             game->inventory->item->weapons[game->player->race][i], NULL);

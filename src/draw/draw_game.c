@@ -56,7 +56,7 @@ static void move_battle_sprite(game_t *game)
     }
 }
 
-static void draw_death(sfRenderWindow *window, game_t *game)
+static void draw_death(game_t *game)
 {
     if (sfTime_asSeconds(sfClock_getElapsedTime
         (game->player->life->time_lose)) > 3) {
@@ -83,7 +83,7 @@ static void player_life(sfRenderWindow *window, game_t *game)
         sfRenderWindow_drawRectangleShape(window,
         game->player->life->loos_rect, NULL);
         sfRenderWindow_drawSprite(window, game->player->life->lose_spr, NULL);
-        draw_death(window, game);
+        draw_death(game);
     }
 }
 
@@ -98,7 +98,7 @@ static void check_kill(sfRenderWindow *window, game_t *game)
         if (game->map->entities->ork[i]->hp <= 0 &&
         game->map->entities->ork[i]->is_alive != false) {
             game->player->stats.xp += 50;
-            game->player->stats.nb_gold += 40;
+            game->player->stats.nb_gold += 25;
             game->map->entities->ork[i]->is_alive = false;
         }
     }

@@ -38,7 +38,7 @@ void show_flag(rpg_t *rpg, sfEvent event)
     }
 }
 
-static void death_player(rpg_t *rpg, sfEvent event)
+static void death_player(rpg_t *rpg)
 {
     sfVector2f pos = {0.0, 0.0};
 
@@ -79,5 +79,5 @@ void event_battlefield(rpg_t *rpg, sfEvent event)
             rpg->game->map->entities->ork[i]->is_alive = true;
         }
     }
-    death_player(rpg, event);
+    death_player(rpg);
 }

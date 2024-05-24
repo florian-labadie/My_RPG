@@ -61,7 +61,7 @@ static int creation_loop(main_menu_buttons_t **button, char **button_name,
     return OK;
 }
 
-static int free_but(char **button_name)
+static void free_but(char **button_name)
 {
     for (int i = 0; button_name[i] != NULL; i += 1)
         free(button_name[i]);

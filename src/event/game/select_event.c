@@ -39,7 +39,6 @@ static int change_screen_status(rpg_t **rpg, int i, player_race_t race)
         (*rpg)->game->player->race = race;
         if (player_setup((*rpg)->window, (*rpg)->game->player) == KO)
             return KO;
-        inventory_manager((*rpg)->game);
         sfRenderWindow_setView((*rpg)->window, (*rpg)->game->map->view);
     }
     if (i == 1) {

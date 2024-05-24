@@ -68,7 +68,7 @@ static void buy_weapon(rpg_t *rpg, sfRectangleShape **shape,
     buy_weapon_itemleg(rpg, shape, mouse_pos);
 }
 
-static void check_shop(rpg_t *rpg, sfEvent event, sfVector2f mouse_pos)
+static void check_shop(rpg_t *rpg, sfVector2f mouse_pos)
 {
     if (rpg->game->map->choice_map == FORGE) {
         buy_weapon(rpg, rpg->game->shop->
@@ -90,6 +90,6 @@ void buy_article(rpg_t *rpg, sfEvent event)
 
     if (event.mouseButton.type == sfEvtMouseButtonReleased &&
             event.mouseButton.button == sfMouseLeft) {
-        check_shop(rpg, event, mouse_pos);
+        check_shop(rpg, mouse_pos);
     }
 }
