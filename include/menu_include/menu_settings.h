@@ -41,18 +41,15 @@ typedef struct settings_s {
     sfTexture **book_text;
     sfTexture **extern_text;
     sfTexture **intern_text;
-    sfTexture **title_text;
     sfTexture **fps_text;
     sfTexture **reso_text;
     sfSprite **reso_sp;
     sfSprite **fps_sp;
-    sfSprite **title_sp;
     sfSprite **book_sp;
     sfSprite **extern_sp;
     sfSprite **intern_sp;
     sfSprite *minus_sp;
     sfSprite *plus_sp;
-
 
     sfBool arrowr;
     sfBool arrowl;
@@ -70,9 +67,5 @@ typedef struct settings_s {
     sfFont *font;
     char volume_str[4];
 } settings_t;
-
-typedef struct keyboard_s {
-    sfKeyCode code[4];
-} keyboard_t;
 
 #endif /* !SETTINGS_H_ */

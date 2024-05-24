@@ -58,10 +58,53 @@ static void destroy_parallax_menu(parallax_t *parallax)
     free(parallax);
 }
 
+static void destroy_other_settings(settings_t *settings)
+{
+    for (int i = 0; i < 3; i++) {
+        sfTexture_destroy(settings->extern_text[i]);
+        sfSprite_destroy(settings->extern_sp[i]);
+        sfTexture_destroy(settings->intern_text[i]);
+        sfSprite_destroy(settings->intern_sp[i]);
+        sfTexture_destroy(settings->fps_text[i]);
+        sfSprite_destroy(settings->fps_sp[i]);
+        sfText_destroy(settings->fps[i]);
+    }
+    for (int i = 0; i < 4; i++) {
+        sfTexture_destroy(settings->book_text[i]);
+        sfSprite_destroy(settings->book_sp[i]);
+        sfText_destroy(settings->title[i]);
+    }
+    sfClock_destroy(settings->b_clock);
+    sfText_destroy(settings->volume_text);
+    sfFont_destroy(settings->font);
+}
+
+static void destroy_settings_menu(settings_t *settings)
+{
+    for (int i = 0; i < 2; i++) {
+        sfSprite_destroy(settings->reso_sp[i]);
+        sfTexture_destroy(settings->reso_text[i]);
+        sfText_destroy(settings->reso[i]);
+    }
+    destroy_other_settings(settings);
+    free(settings);
+}
+
 void destroy_menu(menu_t *menu)
 {
-    destroy_background_menu(menu->background);
-    destroy_main_menu(menu->main_menu);
-    destroy_parallax_menu(menu->parallax);
+    if (menu->menu_sound)
+        sfMusic_destroy(menu->menu_sound);
+    if (menu->click_button_sound)
+        sfSound_destroy(menu->click_button_sound);
+    if (menu->sound_buffer)
+        sfSoundBuffer_destroy(menu->sound_buffer);
+    if (menu->background)
+        destroy_background_menu(menu->background);
+    if (menu->main_menu)
+        destroy_main_menu(menu->main_menu);
+    if (menu->parallax)
+        destroy_parallax_menu(menu->parallax);
+    if (menu->setting)
+        destroy_settings_menu(menu->settings);
     return;
 }
