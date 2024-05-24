@@ -11,12 +11,13 @@ static void take_potion(rpg_t *rpg, sfEvent event)
 {
     sfVector2i mouse_pos_int = {event.mouseButton.x, event.mouseButton.y};
     sfVector2f mouse_pos = sfRenderWindow_mapPixelToCoords(rpg->window,
-        mouse_pos_int, rpg->game->map->view);
+        mouse_pos_int, rpg->game->original_view);
 
     for (int i = 0; i < 4; i++) {
         if (get_sprite_bounds(rpg->game->inventory->item->health_pot[i],
             mouse_pos) == sfTrue &&
-            i <= rpg->game->inventory->nbr_health_pot) {
+            i <= rpg->game->inventory->nbr_health_pot &&
+            rpg->game->player->stats.health < 100) {
             rpg->game->player->stats.health += 50;
             rpg->game->inventory->nbr_health_pot -= 1;
         }

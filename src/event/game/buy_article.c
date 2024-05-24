@@ -39,6 +39,7 @@ static void buy_weapon_itemleg(rpg_t *rpg, sfRectangleShape **shape,
     if (get_rectangle_bounds(shape[2], mouse_pos) == sfTrue) {
         if (rpg->game->player->stats.nb_gold >= 500) {
             rpg->game->player->stats.nb_gold -= 500;
+            rpg->game->player->stats.attack += 15;
             sfSprite_setColor(rpg->game->inventory->item->
                 weapons[rpg->game->player->race][2], sfWhite);
         }
@@ -51,6 +52,7 @@ static void buy_weapon(rpg_t *rpg, sfRectangleShape **shape,
     if (get_rectangle_bounds(shape[0], mouse_pos) == sfTrue) {
         if (rpg->game->player->stats.nb_gold >= 50) {
             rpg->game->player->stats.nb_gold -= 50;
+            rpg->game->player->stats.attack += 5;
             sfSprite_setColor(rpg->game->inventory->item->
                 weapons[rpg->game->player->race][0], sfWhite);
         }
@@ -58,6 +60,7 @@ static void buy_weapon(rpg_t *rpg, sfRectangleShape **shape,
     if (get_rectangle_bounds(shape[1], mouse_pos) == sfTrue) {
         if (rpg->game->player->stats.nb_gold >= 200) {
             rpg->game->player->stats.nb_gold -= 200;
+            rpg->game->player->stats.attack += 10;
             sfSprite_setColor(rpg->game->inventory->item->
                 weapons[rpg->game->player->race][1], sfWhite);
         }

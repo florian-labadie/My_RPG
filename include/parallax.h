@@ -14,13 +14,6 @@
 
     #include <SFML/Graphics.h>
 
-typedef struct window_s {
-    sfRenderWindow *window;
-    sfClock *clock;
-    sfTime time;
-    float seconds;
-} window_t;
-
 typedef struct parallax_s {
     sfSprite *background_sprite;
     sfTexture *background_texture;
