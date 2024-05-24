@@ -31,18 +31,18 @@ static int setup_inventory_bg_texts(inventory_t **inventory,
     (*inventory)->text[0] = create_text(font, texts[0],
         get_less_size(window, 72.0), get_resize(window, pos.x, pos.y - 5));
         set_text_mid_origin((*inventory)->text[0]);
-    pos = (sfVector2f){1290, 371};
+    pos = get_resize(window, 1290, 397);
     for (int i = 1; i < 6; i++) {
         (*inventory)->text[i] = create_text(font, texts[i],
-            get_less_size(window, 25.0), (sfVector2f){pos.x, pos.y});
-        pos.y += 134.5;
+            get_less_size(window, 25.0), pos);
+        pos.y += get_resize(window, 0, 144).y;
     }
-    pos = (sfVector2f){1500, 300};
+    pos = get_resize(window, 1500, 327);
     for (int i = 0; i < 5; i++) {
         (*inventory)->stats_text[i] = create_text(font, texts[i],
-            get_less_size(window, 100.0), (sfVector2f){pos.x, pos.y});
+            get_less_size(window, 100.0), pos);
         set_text_mid_origin((*inventory)->stats_text[i]);
-        pos.y += 134.5;
+        pos.y += get_resize(window, 0, 144).y;
     }
     return OK;
 }

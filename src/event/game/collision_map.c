@@ -103,24 +103,33 @@ static int left_right(game_t *game)
     return OK;
 }
 
-static int sprite_move_player(game_t *game, sfRenderWindow *window)
+static void map_move(game_t *game)
 {
-    if (game->player_move.x != 0 && left_right(game) == OK) {
-        sfSprite_move(game->player->sprites->player,
-        (sfVector2f){game->player_move.x, 0});
-        game->player->position.x += game->player_move.x;
-    }
-    if (game->player_move.y != 0 && top_down(game, window) == OK) {
-        sfSprite_move(game->player->sprites->player,
-        (sfVector2f){0, game->player_move.y});
-        game->player->position.y += game->player_move.y;
-    }
     game->map->rect.left = game->player->position.x - 200;
     game->map->rect.top = game->player->position.y - 100;
     if (game->player->position.x > 200 && game->player->position.x < 760)
         game->map->rect.left += game->player_move.x;
     if (game->player->position.y > 100 && game->player->position.y < 595)
         game->map->rect.top += game->player_move.y;
+}
+
+static int sprite_move_player(game_t *game, sfRenderWindow *window)
+{
+    if (sfTime_asMilliseconds(sfClock_getElapsedTime
+        (game->player->sprites->move_clock)) > 1) {
+        if (game->player_move.x != 0 && left_right(game) == OK) {
+            sfSprite_move(game->player->sprites->player,
+            (sfVector2f){game->player_move.x, 0});
+            game->player->position.x += game->player_move.x;
+        }
+        if (game->player_move.y != 0 && top_down(game, window) == OK) {
+            sfSprite_move(game->player->sprites->player,
+            (sfVector2f){0, game->player_move.y});
+            game->player->position.y += game->player_move.y;
+        }
+        sfClock_restart(game->player->sprites->move_clock);
+    }
+    map_move(game);
     return OK;
 }
 

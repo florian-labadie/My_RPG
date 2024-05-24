@@ -43,6 +43,23 @@ static int setup_villager_sp(game_t *game, sfRenderWindow *window)
     return OK;
 }
 
+static void set_zone_speak_pnj(game_t *game, int *i)
+{
+    sfCircleShape_setRadius(game->villager->v_cir[*i], CIRCLE_RADIUS);
+    sfCircleShape_setOrigin(game->villager->v_cir[*i], game->villager->set);
+        game->villager->sp_b =
+    sfSprite_getGlobalBounds(game->villager->v_sp[*i]);
+    game->villager->sp_c = (sfVector2f)
+        {game->villager->sp_b.left + game->villager->sp_b.width / 2.0f,
+        game->villager->sp_b.top + game->villager->sp_b.height / 2.0f};
+    sfCircleShape_setPosition
+        (game->villager->v_cir[*i], game->villager->sp_c);
+    sfCircleShape_setFillColor
+        (game->villager->v_cir[*i], game->villager->trans);
+    sfCircleShape_setOutlineColor
+        (game->villager->v_cir[*i], game->villager->trans);
+}
+
 int setup_villager_circle(game_t *game)
 {
     game->villager->set = (sfVector2f){CIRCLE_RADIUS, CIRCLE_RADIUS};
@@ -51,50 +68,50 @@ int setup_villager_circle(game_t *game)
         game->villager->v_cir[i] = sfCircleShape_create();
         if (!game->villager->v_cir[i])
             return KO;
-        sfCircleShape_setRadius(game->villager->v_cir[i], CIRCLE_RADIUS);
-        sfCircleShape_setOrigin(game->villager->v_cir[i], game->villager->set);
-        game->villager->sp_b =
-        sfSprite_getGlobalBounds(game->villager->v_sp[i]);
-        game->villager->sp_c = (sfVector2f)
-        {game->villager->sp_b.left + game->villager->sp_b.width / 2.0f,
-        game->villager->sp_b.top + game->villager->sp_b.height / 2.0f};
-        sfCircleShape_setPosition
-        (game->villager->v_cir[i], game->villager->sp_c);
-        sfCircleShape_setFillColor
-        (game->villager->v_cir[i], game->villager->trans);
-        sfCircleShape_setOutlineColor
-        (game->villager->v_cir[i], game->villager->trans);
+        set_zone_speak_pnj(game, &i);
     }
     return OK;
 }
 
-void set_bubble_texts(villager_t *villager, sfRenderWindow *window) {
+void create_bubble_texts(villager_t *villager, sfRenderWindow *window)
+{
+    sfFont *font = sfFont_createFromFile(GAMERIA_FONT);
     char *texts[4] = {
         "TANT DE MORTS",
         "ALLER VITE AU LAC",
         "ALLER COMBATTRE \n LES ORCS HERO",
         "ENCORE CES ORCS"
     };
-    sfFont *font = sfFont_createFromFile(GAMERIA_FONT);
+
     for (int i = 0; i < 4; i++) {
-        villager->bubble_texts[i] = create_text(font, texts[i], get_less_size(window, 7),
+        villager->bubble_texts[i] =
+        create_text(font, texts[i], get_less_size(window, 7),
         get_resize(window, sfSprite_getPosition(villager->bubble_spr[i]).x,
         sfSprite_getPosition(villager->bubble_spr[i]).y + 50));
     }
-    sfText_setPosition(villager->bubble_texts[0], get_resize
-    (window, sfSprite_getPosition(villager->bubble_spr[0]).x + 15,
-    sfSprite_getPosition(villager->bubble_spr[0]).y + 15));
-    sfText_setPosition(villager->bubble_texts[1], get_resize
-    (window, sfSprite_getPosition(villager->bubble_spr[1]).x + 10,
-    sfSprite_getPosition(villager->bubble_spr[1]).y + 50));
-    sfText_setPosition(villager->bubble_texts[2], get_resize
-    (window, sfSprite_getPosition(villager->bubble_spr[2]).x + 15,
-    sfSprite_getPosition(villager->bubble_spr[2]).y + 25));
-    sfText_setPosition(villager->bubble_texts[3], get_resize
-    (window, sfSprite_getPosition(villager->bubble_spr[3]).x + 15,
-    sfSprite_getPosition(villager->bubble_spr[3]).y + 15));
 }
 
+void set_bubble_text_positions(villager_t *villager, sfRenderWindow *window)
+{
+    sfVector2f offset[4] = {
+        {15, 15},
+        {10, 50},
+        {15, 25},
+        {15, 15}
+    };
+
+    for (int i = 0; i < 4; i++) {
+        sfText_setPosition(villager->bubble_texts[i], get_resize(window,
+        sfSprite_getPosition(villager->bubble_spr[i]).x + offset[i].x,
+        sfSprite_getPosition(villager->bubble_spr[i]).y + offset[i].y));
+    }
+}
+
+void set_bubble_texts(villager_t *villager, sfRenderWindow *window)
+{
+    create_bubble_texts(villager, window);
+    set_bubble_text_positions(villager, window);
+}
 
 static int setup_chat(game_t *game, sfRenderWindow *window)
 {

@@ -62,13 +62,17 @@ void change_player_pos_bf(game_t *game, sfRenderWindow *window)
 {
     sfFloatRect r = sfSprite_getGlobalBounds(game->player->sprites->player);
 
-    if (game->player_move.x != 0 && left_right_bf(game, window, r) == OK) {
-        sfSprite_move(game->player->sprites->player,
-        (sfVector2f){game->player_move.x * 10, 0});
-    }
-    if (game->player_move.y != 0 && top_down_bf(game, window, r) == OK) {
-        sfSprite_move(game->player->sprites->player,
-        (sfVector2f){0, game->player_move.y * 10});
+    if (sfTime_asMilliseconds(sfClock_getElapsedTime
+        (game->player->sprites->move_clock)) > 1) {
+        if (game->player_move.x != 0 && left_right_bf(game, window, r) == OK) {
+            sfSprite_move(game->player->sprites->player,
+            (sfVector2f){game->player_move.x * 10, 0});
+        }
+        if (game->player_move.y != 0 && top_down_bf(game, window, r) == OK) {
+            sfSprite_move(game->player->sprites->player,
+            (sfVector2f){0, game->player_move.y * 10});
+        }
+        sfClock_restart(game->player->sprites->move_clock);
     }
     sfCircleShape_setPosition(game->player->sprites->range,
         (sfVector2f){r.left + r.width / 2, r.top + r.height / 2});

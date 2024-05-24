@@ -40,12 +40,12 @@ static int check_game_screen_changes(rpg_t **rpg, sfEvent event)
         (*rpg)->screen = END;
         return END;
     }
-    if (event.key.code == sfKeyEscape && event.key.type == sfEvtKeyPressed) {
+    if (event.key.code == sfKeyEscape && event.key.type == sfEvtKeyReleased) {
         (*rpg)->game->player_move = (sfVector2f){0, 0};
         (*rpg)->game->screen = PAUSE;
         return OK;
     }
-    if (event.key.code == sfKeyTab && event.key.type == sfEvtKeyPressed) {
+    if (event.key.code == sfKeyTab && event.key.type == sfEvtKeyReleased) {
         (*rpg)->game->player_move = (sfVector2f){0, 0};
         (*rpg)->game->screen = INVENTORY;
         return OK;
