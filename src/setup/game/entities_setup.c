@@ -28,6 +28,7 @@ static int fill_ork_struct(entities_bf_t **entities, sfRenderWindow *window,
         {5, 5});
         sfCircleShape_setPosition((*entities)->ork[i]->hitbox,
         get_resize(window, pos.x - 40, pos.y + 30));
+        sfCircleShape_setFillColor((*entities)->ork[i]->hitbox, sfTransparent);
     }
     return OK;
 }

@@ -100,12 +100,15 @@ static int life_setup(player_t *player)
 static int setup_death(sfRenderWindow *window, player_t *player)
 {
     player->life->loos_rect = sfRectangleShape_create();
-    sfRectangleShape_setPosition(player->life->loos_rect, (sfVector2f) {0.0, 0.0});
-    sfRectangleShape_setSize(player->life->loos_rect, (sfVector2f){1920.0, 1080});
-    sfRectangleShape_setFillColor(player->life->loos_rect, sfColor_fromRGBA(50, 100, 50, 100));
+    sfRectangleShape_setPosition(player->life->loos_rect,
+    (sfVector2f) {0.0, 0.0});
+    sfRectangleShape_setSize(player->life->loos_rect, (sfVector2f)
+    {1920.0, 1080});
+    sfRectangleShape_setFillColor(player->life->loos_rect,
+    sfColor_fromRGBA(100, 100, 100, 200));
     player->life->lose_text = sfTexture_createFromFile(DEAFEAT, NULL);
     player->life->lose_spr = create_button(player->life->lose_text,
-    (sfVector2f) {1.0, 1.0}, get_resize(window, 600.0, 500.0));
+    (sfVector2f) {1.0, 1.0}, get_resize(window, 550.0, 250.0));
     player->life->time_lose = sfClock_create();
     return OK;
 }
