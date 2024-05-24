@@ -9,6 +9,7 @@
     #define GAME_H_
 
     #include "player.h"
+    #include "villager.h"
     #include "pause.h"
     #include "inventory.h"
     #include "selection.h"
@@ -34,6 +35,7 @@ typedef struct game_s {
     select_t *select;
     map_t *map;
     player_t *player;
+    villager_t *villager;
     inventory_t *inventory;
     pause_t *pause;
     interaction_t *interaction;

@@ -66,6 +66,8 @@ int interaction_setup(game_t *game, sfRenderWindow *window);
 int inventory_menu_setup(game_t *game, sfRenderWindow *window);
 int shop_buy_setup(game_t *game, sfRenderWindow *window);
 int init_help_menu(rpg_t *rpg, help_menu_t *help_menu);
+void draw_villager(game_t *game, sfRenderWindow *window);
+int setup_villager(game_t *game, sfRenderWindow *window);
 void create_help_text(sfRenderWindow *window, menu_t *menu);
 void setup_help_menu(sfRenderWindow *window, menu_t *menu);
 
