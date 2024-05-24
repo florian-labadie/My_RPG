@@ -28,10 +28,16 @@ static void draw_item_inventory(sfRenderWindow *window, game_t *game)
         sfRenderWindow_drawSprite(window,
             game->inventory->item->mana_pot[i], NULL);
     }
-    for (int i = 0; i < game->inventory->nbr_health_pot; i += 1)
-        sfSprite_setColor(game->inventory->item->health_pot[i], sfWhite);
-    for (int i = 0; i < game->inventory->nbr_mana_pot; i += 1)
-        sfSprite_setColor(game->inventory->item->mana_pot[i], sfWhite);
+    for (int i = 0; i < 4; i += 1)
+        if (i < game->inventory->nbr_health_pot) {
+            sfSprite_setColor(game->inventory->item->health_pot[i], sfWhite);
+        } else
+            sfSprite_setColor(game->inventory->item->health_pot[i], sfColor_fromRGB(100, 100, 100));
+    for (int i = 0; i < 4; i += 1)
+        if (i < game->inventory->nbr_mana_pot) {
+            sfSprite_setColor(game->inventory->item->mana_pot[i], sfWhite);
+        } else
+            sfSprite_setColor(game->inventory->item->mana_pot[i], sfColor_fromRGB(100, 100, 100));
     for (int i = 0; i < 3; i += 1) {
         sfRenderWindow_drawSprite(window,
             game->inventory->item->weapons[game->player->race][i], NULL);

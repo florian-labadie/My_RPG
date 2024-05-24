@@ -17,8 +17,6 @@ static void quitt_buy_item(rpg_t *rpg, sfSprite *sprite, sfVector2f mouse_pos)
 static void buy_potion(rpg_t *rpg, sfRectangleShape **shape,
     sfVector2f mouse_pos)
 {
-    printf("gold : %d\n", rpg->game->player->stats.nb_gold);
-    printf("health : %d\n", rpg->game->inventory->nbr_health_pot);
     if (get_rectangle_bounds(shape[0], mouse_pos) == sfTrue) {
         if (rpg->game->player->stats.nb_gold >= 50 &&
             rpg->game->inventory->nbr_health_pot <= 4) {
@@ -35,10 +33,21 @@ static void buy_potion(rpg_t *rpg, sfRectangleShape **shape,
     }
 }
 
+static void buy_weapon_itemleg(rpg_t *rpg, sfRectangleShape **shape,
+    sfVector2f mouse_pos)
+{
+    if (get_rectangle_bounds(shape[2], mouse_pos) == sfTrue) {
+        if (rpg->game->player->stats.nb_gold >= 500) {
+            rpg->game->player->stats.nb_gold -= 500;
+            sfSprite_setColor(rpg->game->inventory->item->
+                weapons[rpg->game->player->race][2], sfWhite);
+        }
+    }
+}
+
 static void buy_weapon(rpg_t *rpg, sfRectangleShape **shape,
     sfVector2f mouse_pos)
 {
-    printf("gold : %d\n", rpg->game->player->stats.nb_gold);
     if (get_rectangle_bounds(shape[0], mouse_pos) == sfTrue) {
         if (rpg->game->player->stats.nb_gold >= 50) {
             rpg->game->player->stats.nb_gold -= 50;
@@ -53,29 +62,19 @@ static void buy_weapon(rpg_t *rpg, sfRectangleShape **shape,
                 weapons[rpg->game->player->race][1], sfWhite);
         }
     }
-    if (get_rectangle_bounds(shape[2], mouse_pos) == sfTrue) {
-        if (rpg->game->player->stats.nb_gold >= 500) {
-            rpg->game->player->stats.nb_gold -= 500;
-            sfSprite_setColor(rpg->game->inventory->item->
-                weapons[rpg->game->player->race][2], sfWhite);
-        }
-    }
+    buy_weapon_itemleg(rpg, shape, mouse_pos);
 }
 
 static void check_shop(rpg_t *rpg, sfEvent event, sfVector2f mouse_pos)
 {
     if (rpg->game->map->choice_map == FORGE) {
-        for (int i = 0; i < 3; i++) {
-            buy_weapon(rpg, rpg->game->shop->
+        buy_weapon(rpg, rpg->game->shop->
             weapon[rpg->game->player->race]->zone_text, mouse_pos);
-        }
         quitt_buy_item(rpg, rpg->game->shop->sprite_quitt[0], mouse_pos);
     }
     if (rpg->game->map->choice_map == ALCHEMY) {
-        for (int i = 0; i < 2; i++) {
-            buy_potion(rpg, rpg->game->shop->potion->zone_text,
+        buy_potion(rpg, rpg->game->shop->potion->zone_text,
             mouse_pos);
-        }
         quitt_buy_item(rpg, rpg->game->shop->sprite_quitt[1], mouse_pos);
     }
 }
