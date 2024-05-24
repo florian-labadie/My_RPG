@@ -72,6 +72,8 @@ typedef struct ork_s {
     sfIntRect ork_rect;
     int hp;
     sfCircleShape *hitbox;
+    bool is_alive;
+    sfClock *ork_damage;
 } ork_t;
 
 typedef struct entities_bf_s {
@@ -80,6 +82,10 @@ typedef struct entities_bf_s {
     sfClock *wizz_clock;
     sfIntRect wizzard_rect;
     ork_t **ork;
+    sfTexture *bubble_text;
+    sfSprite *bubble_spr;
+    sfText *wizzard_sent;
+    bool ork_is_moving;
 } entities_bf_t;
 
 typedef struct map_s {
@@ -92,6 +98,7 @@ typedef struct map_s {
     sfTexture *battle_text;
     sfSprite *battle_spr;
     sfMusic *battle_music;
+    sfText *help_exit;
 
     sfMusic *game_sound;
 

@@ -7,21 +7,16 @@
 
 #include "my.h"
 
-static init_stats(game_t *game)
-{
-    game->player->stats.health = 0;
-}
-
 static int malloc_init(rpg_t *rpg)
 {
     rpg->game->map = malloc(sizeof(map_t));
     rpg->game->map->house = malloc(sizeof(house_t *) * 3);
     rpg->game->player = malloc(sizeof(player_t));
-    init_stats(rpg->game);
     rpg->game->player->sprites = malloc(sizeof(player_sprites_t));
     rpg->game->select = malloc(sizeof(select_t));
     rpg->game->pause = malloc(sizeof(pause_t));
     rpg->game->inventory = malloc(sizeof(inventory_t));
+    rpg->game->inventory->item = malloc(sizeof(item_t));
     rpg->game->interaction = malloc(sizeof(interaction_t));
     rpg->game->shop = malloc(sizeof(shop_t));
     rpg->game->shop->weapon = malloc(sizeof(weapon_t *) * 4);

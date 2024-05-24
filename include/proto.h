@@ -46,6 +46,7 @@ int menu_setup(rpg_t *rpg, char const *user);
 int background_menu_setup(menu_t *menu, sfRenderWindow *window);
 int menu_button_setup(main_menu_buttons_t **button, sfRenderWindow *window);
 int setup_option_menu(settings_t *settings, sfRenderWindow *window);
+void setup_help_menu(sfRenderWindow *window, menu_t *menu);
 int open_book(settings_t *settings);
 int init_parallax(parallax_t *parallax);
 
@@ -60,11 +61,13 @@ int setup_map(map_t *map, sfRenderWindow *window, float volume);
 int setup_house(map_t *map, sfRenderWindow *window);
 int set_up_battlefield(sfRenderWindow *window, map_t *map, float volume);
 void change_view(game_t *game, sfRenderWindow *window);
+void change_player_pos_bf(game_t *game, sfRenderWindow *window);
 int select_charac(game_t *game, sfRenderWindow *window);
 int pause_menu_setup(game_t *game, sfRenderWindow *window);
 int interaction_setup(game_t *game, sfRenderWindow *window);
 int inventory_menu_setup(game_t *game, sfRenderWindow *window);
 int shop_buy_setup(game_t *game, sfRenderWindow *window);
+int setup_item_inventory(game_t *game, sfRenderWindow *window);
 int init_help_menu(rpg_t *rpg, help_menu_t *help_menu);
 void draw_villager(game_t *game, sfRenderWindow *window);
 int setup_villager(game_t *game, sfRenderWindow *window);
@@ -84,7 +87,9 @@ int game_event(rpg_t *rpg, sfEvent event);
 int pause_menu_event(rpg_t *rpg, sfEvent event);
 int inventory_menu_event(rpg_t *rpg, sfEvent event);
 void interaction_event(rpg_t *rpg, sfEvent event);
-int buy_article(rpg_t *rpg, sfEvent event);
+void buy_article(rpg_t *rpg, sfEvent event);
+void show_flag(rpg_t *rpg, sfEvent event);
+void event_battlefield(rpg_t *rpg, sfEvent event);
 
 /* MENU MANAGER */
 void menu_manager(rpg_t *rpg);
@@ -92,13 +97,14 @@ void background_menu_manager(menu_t *menu);
 
 /* GAME MANAGER */
 void game_manager(rpg_t *rpg);
-void level_manager(game_t *game, sfRenderWindow *window);
+void level_manager(game_t *game);
 void life_manager(game_t *game, sfRenderWindow *window, float value);
 void inventory_manager(game_t *game);
+void ork_movement(sfVector2f ork_pos, sfVector2f player_pos, ork_t *ork,
+    float speed);
 
 /* OPTION */
-void book_actions
-(rpg_t *rpg, sfEvent event, sfBool arrow_l, sfBool arrow_r);
+void book_actions(rpg_t *rpg, sfEvent event, sfBool arrow_l, sfBool arrow_r);
 void exit_action(rpg_t *rpg, sfEvent event, sfBool exit);
 int turn_book(settings_t *settings, sfSprite *sprite, sfClock *clock);
 int open_close_book(sfSprite *sprite, sfClock *clock);

@@ -53,29 +53,6 @@ static int check_game_screen_changes(rpg_t **rpg, sfEvent event)
     return OK;
 }
 
-static void show_flag(rpg_t *rpg, sfEvent event)
-{
-    rpg->game->map->flag.is_flag = false;
-    if (get_rectangle_bounds(rpg->game->map->flag.flag_zone,
-    sfSprite_getPosition(rpg->game->player->sprites->player)) == sfTrue) {
-        if (event.key.code == sfKeyF && event.type == sfEvtKeyPressed) {
-            rpg->game->map->choice_map = BATTLEFIELD;
-            sfMusic_stop(rpg->game->map->game_sound);
-            sfMusic_play(rpg->game->map->battle_music);
-            sfView_setSize(rpg->game->map->view,
-            get_resize(rpg->window, 1920, 1080));
-            sfView_setCenter(rpg->game->map->view,
-                get_resize(rpg->window, 960, 540));
-            sfRenderWindow_setView(rpg->window, rpg->game->map->view);
-            sfSprite_setPosition(rpg->game->player->sprites->player,
-            (sfVector2f) {1685.0, 940});
-            sfSprite_setScale(rpg->game->player->sprites->player,
-            (sfVector2f) {2.5, 2.5});
-        }
-        rpg->game->map->flag.is_flag = true;
-    }
-}
-
 int game_event(rpg_t *rpg, sfEvent event)
 {
     if (check_game_screen_changes(&rpg, event) == END)
@@ -89,9 +66,12 @@ int game_event(rpg_t *rpg, sfEvent event)
         get_movements(rpg, event);
         get_movements_realesed(rpg, event);
         show_flag(rpg, event);
+        event_battlefield(rpg, event);
     }
     if (rpg->game->map->choice_map == FORGE ||
         rpg->game->map->choice_map == ALCHEMY) {
+        if (rpg->game->interaction->shop == BUY)
+            buy_article(rpg, event);
         interaction_event(rpg, event);
     }
     return OK;

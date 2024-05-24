@@ -53,6 +53,8 @@ static int main_menu_button(main_menu_buttons_t **buttons,
     sfVector2f mouse_pos, button_state_t status, sfSound *sound)
 {
     for (int i = 0; (*buttons)->sprites[i]; i++) {
+        if (i == 1)
+            continue;
         if (get_sprite_bounds((*buttons)->sprites[i], mouse_pos) == sfTrue &&
             (*buttons)->buttons_status[i] != status) {
             change_text_rect(buttons, status, i);
@@ -77,6 +79,8 @@ static int buttons_action(rpg_t *rpg, sfVector2f mouse_pos)
     if (sfFloatRect_contains(&rect, mouse_pos.x, mouse_pos.y))
         return change_screen_status(&rpg, 4);
     for (int i = 0; rpg->menu->main_menu->buttons->sprites[i]; i++) {
+        if (i == 1)
+            continue;
         if (rpg->menu->main_menu->buttons->buttons_status[i] != NORMAL) {
             change_text_rect(&rpg->menu->main_menu->buttons, NORMAL, i);
             change_button_rect(rpg->menu->main_menu->buttons->sprites[i],
@@ -113,8 +117,7 @@ int main_menu_event(rpg_t *rpg, sfEvent event)
 
 int parallax_event(rpg_t *rpg, sfEvent event)
 {
-    if (event.type == sfEvtKeyPressed && event.key.code == sfKeySpace) {
+    if (event.type == sfEvtKeyPressed && event.key.code == sfKeySpace)
         rpg->menu->screen = MAIN;
-    }
     return 0;
 }

@@ -68,12 +68,14 @@ void draw_alchemist(sfRenderWindow *window, game_t *game)
 
 static void draw_forge_text(sfRenderWindow *window, game_t *game)
 {
+    int gold[3] = {50, 200, 500};
+
     for (int i = 0; i < 3; i += 1) {
         sfRenderWindow_drawRectangleShape(window,
             game->shop->weapon[game->player->race]->zone_text[i], NULL);
         sfRenderWindow_drawText(window,
             game->shop->weapon[game->player->race]->text[i], NULL);
-        if (game->player->stats.nb_gold < 50 * (i + 1)) {
+        if (game->player->stats.nb_gold < gold[i]) {
             sfText_setColor(game->shop->weapon[game->player->race]->text[i],
             sfRed);
         } else

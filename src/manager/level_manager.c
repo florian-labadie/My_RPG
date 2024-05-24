@@ -33,7 +33,7 @@ void life_manager(game_t *game, sfRenderWindow *window, float value)
         get_resize(window, LIFE_RECT_SIZE.x * value / 100, LIFE_RECT_SIZE.y));
 }
 
-void level_manager(game_t *game, sfRenderWindow *window)
+void level_manager(game_t *game)
 {
     if (game->player->stats.xp >= 100 * game->player->stats.level) {
         game->player->stats.xp = 0;
