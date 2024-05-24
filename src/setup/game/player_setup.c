@@ -20,7 +20,7 @@ static void player_stats_setup(player_t *player)
     player->stats.defense = stats[player->race][4];
 }
 
-static int player_sprites_setup(sfRenderWindow *window, player_t *player)
+static int set_player_sprites(player_t *player, sfRenderWindow *window)
 {
     sfIntRect rects[3] = {HUMAN_STILL_RECT, DWARF_STILL_RECT, ELF_STILL_RECT};
     sfVector2f origins[3] = {
@@ -30,16 +30,29 @@ static int player_sprites_setup(sfRenderWindow *window, player_t *player)
 
     player->sprites->player_text = sfTexture_createFromFile(PLAYER, NULL);
     player->sprites->player_clock = sfClock_create();
+    player->sprites->attack_clock = sfClock_create();
     player->sprites->move_clock = sfClock_create();
-    player->sprites->player_rect = rects[player->race];
     player->attack = false;
     player->position = get_resize(window, 170, 660);
+    player->sprites->player_rect = rects[player->race];
     if (!player->sprites->player_text)
         return KO;
     player->sprites->player = create_button(player->sprites->player_text,
         (sfVector2f){0.5, 0.5}, player->position);
     sfSprite_setTextureRect(player->sprites->player, rects[player->race]);
     sfSprite_setOrigin(player->sprites->player, origins[player->race]);
+    return OK;
+}
+
+static int player_sprites_setup(sfRenderWindow *window, player_t *player)
+{
+    set_player_sprites(player, window);
+    player->sprites->range = sfCircleShape_create();
+    sfCircleShape_setRadius(player->sprites->range, 130);
+    sfCircleShape_setOrigin(player->sprites->range, (sfVector2f){130, 130});
+    player->sprites->hitbox = sfCircleShape_create();
+    sfCircleShape_setRadius(player->sprites->hitbox, 80);
+    sfCircleShape_setOrigin(player->sprites->hitbox, (sfVector2f){80, 80});
     return OK;
 }
 
@@ -56,6 +69,7 @@ static int setup_level(player_t *player, sfRenderWindow *window)
     create_text(level_font, int_to_str(player->stats.level),
     get_less_size(window, 35), get_resize(window, 68, 47.0));
     set_text_mid_origin(player->stats.level_text);
+    player->is_alive = true;
     return OK;
 }
 
@@ -83,10 +97,23 @@ static int life_setup(player_t *player)
     return OK;
 }
 
+static int setup_death(sfRenderWindow *window, player_t *player)
+{
+    player->life->loos_rect = sfRectangleShape_create();
+    sfRectangleShape_setPosition(player->life->loos_rect, (sfVector2f) {0.0, 0.0});
+    sfRectangleShape_setSize(player->life->loos_rect, (sfVector2f){1920.0, 1080});
+    sfRectangleShape_setFillColor(player->life->loos_rect, sfColor_fromRGBA(50, 100, 50, 100));
+    player->life->lose_text = sfTexture_createFromFile(DEAFEAT, NULL);
+    player->life->lose_spr = create_button(player->life->lose_text,
+    (sfVector2f) {1.0, 1.0}, get_resize(window, 600.0, 500.0));
+    player->life->time_lose = sfClock_create();
+    return OK;
+}
+
 int player_setup(sfRenderWindow *window, player_t *player)
 {
     if (player_sprites_setup(window, player) == KO || life_setup(player) == KO
-    || setup_level(player, window) == KO)
+    || setup_level(player, window) == KO || setup_death(window, player) == KO)
         return KO;
     player_stats_setup(player);
     return OK;

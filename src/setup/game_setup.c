@@ -53,7 +53,8 @@ int game_setup(rpg_t *rpg)
     if (malloc_init(rpg) == KO)
         return KO;
     if (check_setup_map(rpg) == KO ||
-        shop_buy_setup(rpg->game, rpg->window) == KO)
+        shop_buy_setup(rpg->game, rpg->window) == KO ||
+        setup_villager(rpg->game, rpg->window) == KO)
         return KO;
     return OK;
 }

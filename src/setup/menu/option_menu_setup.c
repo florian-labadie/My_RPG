@@ -164,9 +164,9 @@ int setup_option_menu(settings_t *settings, sfRenderWindow *window)
     settings->intern_text = malloc(sizeof(sfTexture *) * (3 + 1));
     settings->intern_sp = malloc(sizeof(sfSprite *) * (3 + 1));
     settings->fps_sp = malloc(sizeof(sfSprite *) * (3 + 1));
-    settings->fps_text = malloc(sizeof(sfSprite *) * (3 + 1));
+    settings->fps_text = malloc(sizeof(sfTexture *) * (3 + 1));
     settings->reso_sp = malloc(sizeof(sfSprite *) * (2 + 1));
-    settings->reso_text = malloc(sizeof(sfSprite *) * (2 + 1));
+    settings->reso_text = malloc(sizeof(sfTexture *) * (2 + 1));
     settings->arrowl = false;
     settings->arrowr = false;
     settings->current_page = 1;

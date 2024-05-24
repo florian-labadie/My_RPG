@@ -69,6 +69,9 @@ int inventory_menu_setup(game_t *game, sfRenderWindow *window);
 int shop_buy_setup(game_t *game, sfRenderWindow *window);
 int setup_item_inventory(game_t *game, sfRenderWindow *window);
 int init_help_menu(rpg_t *rpg, help_menu_t *help_menu);
+void draw_villager(game_t *game, sfRenderWindow *window);
+int setup_villager(game_t *game, sfRenderWindow *window);
+void setup_help_menu(sfRenderWindow *window, menu_t *menu);
 
 /* MENU EVENT */
 void event_manager(rpg_t *rpg);
@@ -84,6 +87,8 @@ int pause_menu_event(rpg_t *rpg, sfEvent event);
 int inventory_menu_event(rpg_t *rpg, sfEvent event);
 void interaction_event(rpg_t *rpg, sfEvent event);
 void buy_article(rpg_t *rpg, sfEvent event);
+void show_flag(rpg_t *rpg, sfEvent event);
+void event_battlefield(rpg_t *rpg, sfEvent event);
 
 /* MENU MANAGER */
 void menu_manager(rpg_t *rpg);
@@ -94,6 +99,8 @@ void game_manager(rpg_t *rpg);
 void level_manager(game_t *game);
 void life_manager(game_t *game, sfRenderWindow *window, float value);
 void inventory_manager(game_t *game);
+void ork_movement(sfVector2f ork_pos, sfVector2f player_pos, ork_t *ork,
+    float speed);
 
 /* OPTION */
 void book_actions(rpg_t *rpg, sfEvent event, sfBool arrow_l, sfBool arrow_r);

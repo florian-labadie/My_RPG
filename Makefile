@@ -45,6 +45,7 @@ SETUP	=	src/setup/menu_setup.c						\
 			src/setup/game/weapon_setup.c				\
 			src/setup/game/item_inventory_setup.c	\
 			src/setup/menu/setup_help.c 				\
+			src/setup/game/villager_setup.c 			\
 
 EVENT	=	src/event/event.c							\
 			src/event/menu/main_menu_event.c			\
@@ -59,17 +60,20 @@ EVENT	=	src/event/event.c							\
 			src/event/game/interaction_event.c			\
 			src/event/game/buy_article.c				\
 			src/event/menu/help_event.c					\
+			src/event/game/battlefield_event.c			\
 
 MANAGER	=	src/manager/menu_manager.c					\
 			src/manager/background_menu_manager.c		\
 			src/manager/game_manager.c					\
 			src/manager/level_manager.c					\
+			src/manager/ork_movement.c					\
 
 DRAW	=	src/draw/draw_menu.c						\
 			src/draw/draw_game.c						\
 			src/draw/draw_shop.c						\
 			src/draw/draw_particles_n_flag.c			\
 			src/draw/draw_game_menus.c					\
+			src/draw/draw_villagers.c 					\
 
 SAVE	=	src/save/settings_game.c					\
 			src/save/write_setting_in_file.c			\
