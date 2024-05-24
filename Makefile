@@ -67,6 +67,7 @@ MANAGER	=	src/manager/menu_manager.c					\
 			src/manager/game_manager.c					\
 			src/manager/level_manager.c					\
 			src/manager/ork_movement.c					\
+			src/manager/ork_manager.c					\
 
 DRAW	=	src/draw/draw_menu.c						\
 			src/draw/draw_game.c						\
