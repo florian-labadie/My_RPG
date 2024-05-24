@@ -62,8 +62,8 @@ void change_player_pos_bf(game_t *game, sfRenderWindow *window)
 {
     sfFloatRect r = sfSprite_getGlobalBounds(game->player->sprites->player);
 
-    if (sfTime_asMilliseconds(sfClock_getElapsedTime(game->player->sprites->move_clock))
-        > 1) {
+    if (sfTime_asMilliseconds(sfClock_getElapsedTime
+        (game->player->sprites->move_clock)) > 1) {
         if (game->player_move.x != 0 && left_right_bf(game, window, r) == OK) {
             sfSprite_move(game->player->sprites->player,
             (sfVector2f){game->player_move.x * 10, 0});

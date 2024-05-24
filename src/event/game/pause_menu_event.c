@@ -100,7 +100,7 @@ int pause_menu_event(rpg_t *rpg, sfEvent event)
 {
     sfVector2f mouse_pos = get_mouse_pos(rpg->window, rpg->window_size);
 
-    if (event.key.code == sfKeyEscape && event.key.type == sfEvtKeyPressed)
+    if (event.key.code == sfKeyEscape && event.key.type == sfEvtKeyReleased)
         rpg->game->screen = PLAYING;
     if (event.mouseButton.type == sfEvtMouseButtonReleased &&
         event.mouseButton.button == sfMouseLeft)
