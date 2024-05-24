@@ -19,6 +19,7 @@ static void draw_village(sfRenderWindow *window, game_t *game)
             sfRenderWindow_drawText(window, game->interaction->text[i], NULL);
         }
     }
+    draw_villager(game, window);
     draw_particles(game, window);
     draw_flag(game, window);
     change_view(game, window);
