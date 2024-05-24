@@ -151,8 +151,8 @@ void game_manager(rpg_t *rpg)
     game_music(rpg);
     if (rpg->game->screen == SELECTION)
         return;
-    life_manager(rpg->game, rpg->window, rpg->game->player->stats.health);
-    level_manager(rpg->game);
+    inventory_manager(rpg->game);
+    call_life_lev(rpg);
     if (rpg->game->map->choice_map == BATTLEFIELD) {
         damage_for_ork(rpg);
         death_player(rpg);

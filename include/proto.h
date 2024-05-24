@@ -103,6 +103,7 @@ void ork_movement(sfVector2f ork_pos, sfVector2f player_pos, ork_t *ork,
     float speed);
 void damage_for_ork(rpg_t *rpg);
 void attack_orks(game_t *game);
+void call_life_lev(rpg_t *rpg);
 
 /* OPTION */
 void book_actions(rpg_t *rpg, sfEvent event, sfBool arrow_l, sfBool arrow_r);

@@ -38,7 +38,7 @@ void show_flag(rpg_t *rpg, sfEvent event)
     }
 }
 
-static set_respawn(rpg_t *rpg, sfEvent event, sfVector2f pos)
+static void set_respawn(rpg_t *rpg, sfVector2f pos)
 {
     for (int i = 0; i < NB_ORK; i += 1) {
         pos = (sfVector2f) {rand() % 1400, rand() % 800};
@@ -63,7 +63,7 @@ static void death_player(rpg_t *rpg, sfEvent event)
             sfMusic_play(rpg->game->map->game_sound);
             rpg->game->map->choice_map = VILLAGE;
             rpg->game->map->entities->ork_is_moving = false;
-            set_respawn(rpg, event, pos);
+            set_respawn(rpg, pos);
             rpg->game->player->stats.health = 100;
             rpg->game->player->is_alive = true;
             sfSprite_setPosition(rpg->game->player->sprites->player,

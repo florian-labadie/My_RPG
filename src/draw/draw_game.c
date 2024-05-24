@@ -7,11 +7,8 @@
 
 #include "my.h"
 
-static void draw_village(sfRenderWindow *window, game_t *game)
+static void interaction_village(sfRenderWindow *window, game_t *game)
 {
-    sfRenderWindow_drawSprite(window, game->map->sprite_ground, NULL);
-    sfRenderWindow_drawSprite(window, game->player->sprites->player, NULL);
-    sfRenderWindow_drawSprite(window, game->map->sprite_obj, NULL);
     for (int i = 0; i < 2; i++) {
         if (game->interaction->field[i] == game->map->choice_map) {
             sfRenderWindow_drawSprite(window, game->interaction->sprite[i],
@@ -19,9 +16,25 @@ static void draw_village(sfRenderWindow *window, game_t *game)
             sfRenderWindow_drawText(window, game->interaction->text[i], NULL);
         }
     }
-    draw_villager(game, window);
+}
+
+static void draw_village(sfRenderWindow *window, game_t *game)
+{
+    sfRenderWindow_drawSprite(window, game->map->sprite_ground, NULL);
+    sfRenderWindow_drawSprite(window, game->player->sprites->player, NULL);
+    sfRenderWindow_drawSprite(window, game->map->sprite_obj, NULL);
+    interaction_village(window, game);
     draw_particles(game, window);
     draw_flag(game, window);
+    if (game->player->is_alive == false) {
+        sfRenderWindow_drawRectangleShape(window,
+        game->player->life->loos_rect, NULL);
+        sfRenderWindow_drawSprite(window, game->player->life->lose_spr, NULL);
+        if (sfTime_asSeconds(sfClock_getElapsedTime
+        (game->player->life->time_lose)) > 5)
+            game->player->is_alive = true;
+    }
+    draw_villager(game, window);
     change_view(game, window);
 }
 
@@ -77,7 +90,7 @@ static void check_kill(sfRenderWindow *window, game_t *game)
         if (game->map->entities->ork[i]->hp <= 0 &&
         game->map->entities->ork[i]->is_alive != false) {
             game->player->stats.xp += 50;
-            game->player->stats.nb_gold += 40;
+            game->player->stats.nb_gold += 25;
             game->map->entities->ork[i]->is_alive = false;
         }
     }
