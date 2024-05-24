@@ -38,24 +38,39 @@ void show_flag(rpg_t *rpg, sfEvent event)
     }
 }
 
+static set_respawn(rpg_t *rpg, sfEvent event, sfVector2f pos)
+{
+    for (int i = 0; i < NB_ORK; i += 1) {
+        pos = (sfVector2f) {rand() % 1400, rand() % 800};
+        sfSprite_setPosition(rpg->game->map->entities->ork[i]->ork_spr,
+        pos);
+        sfCircleShape_setPosition(rpg->game->map->entities->ork[i]->hitbox,
+        get_resize(rpg->window, pos.x - 40, pos.y + 30));
+        }
+        rpg->game->player->stats.nb_gold -= 75;
+        if (rpg->game->player->stats.nb_gold < 0)
+            rpg->game->player->stats.nb_gold = 0;
+}
+
 static void death_player(rpg_t *rpg, sfEvent event)
 {
     sfVector2f pos = {0.0, 0.0};
 
     if (rpg->game->player->stats.health <= 0) {
-        rpg->game->map->entities->ork_is_moving = false;
-        for (int i = 0; i < NB_ORK; i += 1) {
-            pos = (sfVector2f) {rand() % 1400, rand() % 800};
-            sfSprite_setPosition(rpg->game->map->entities->ork[i]->ork_spr,
-            pos);
-            sfCircleShape_setPosition(rpg->game->map->entities->ork[i]->hitbox,
-            get_resize(rpg->window, pos.x - 40, pos.y + 30));
-        }
         rpg->game->player->is_alive = false;
-        sfClock_restart(rpg->game->player->life->time_lose);
-        rpg->game->player->stats.nb_gold -= 75;
-        if (rpg->game->player->stats.nb_gold < 0)
-            rpg->game->player->stats.nb_gold = 0;
+        if (event.type == sfEvtKeyPressed) {
+            sfMusic_stop(rpg->game->map->battle_music);
+            sfMusic_play(rpg->game->map->game_sound);
+            rpg->game->map->choice_map = VILLAGE;
+            rpg->game->map->entities->ork_is_moving = false;
+            set_respawn(rpg, event, pos);
+            rpg->game->player->stats.health = 100;
+            rpg->game->player->is_alive = true;
+            sfSprite_setPosition(rpg->game->player->sprites->player,
+            rpg->game->player->last_pos);
+            sfSprite_setScale(rpg->game->player->sprites->player,
+            (sfVector2f){0.5, 0.5});
+        }
     }
 }
 

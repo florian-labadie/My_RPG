@@ -56,26 +56,6 @@ static void move_battle_sprite(game_t *game)
     }
 }
 
-static void draw_death(sfRenderWindow *window, game_t *game)
-{
-    if (sfTime_asSeconds(sfClock_getElapsedTime
-        (game->player->life->time_lose)) > 3) {
-        game->player->is_alive = true;
-        for (int i = 0; i < NB_ORK; i += 1)
-            game->map->entities->ork[i]->is_alive = true;
-        game->map->choice_map = VILLAGE;
-        sfMusic_stop(game->map->battle_music);
-        sfMusic_play(game->map->game_sound);
-        sfSprite_setPosition(game->player->sprites->player,
-        game->player->last_pos);
-        sfSprite_setPosition(game->player->sprites->player,
-        game->player->last_pos);
-        sfSprite_setScale(game->player->sprites->player,
-        (sfVector2f){0.5, 0.5});
-        game->player->stats.health = 100;
-    }
-}
-
 static void player_life(sfRenderWindow *window, game_t *game)
 {
     change_player_pos_bf(game, window);
@@ -83,7 +63,6 @@ static void player_life(sfRenderWindow *window, game_t *game)
         sfRenderWindow_drawRectangleShape(window,
         game->player->life->loos_rect, NULL);
         sfRenderWindow_drawSprite(window, game->player->life->lose_spr, NULL);
-        draw_death(window, game);
     }
 }
 
@@ -110,7 +89,8 @@ static void draw_battlefield(sfRenderWindow *window, game_t *game)
     move_battle_sprite(game);
     check_kill(window, game);
     sfRenderWindow_drawSprite(window, game->map->entities->wizzard_spr, NULL);
-    sfRenderWindow_drawSprite(window, game->player->sprites->player, NULL);
+    if (game->player->is_alive == true)
+        sfRenderWindow_drawSprite(window, game->player->sprites->player, NULL);
     sfRenderWindow_drawSprite(window, game->map->entities->bubble_spr, NULL);
     sfRenderWindow_drawText(window, game->map->entities->wizzard_sent, NULL);
     sfRenderWindow_drawText(window, game->map->help_exit, NULL);

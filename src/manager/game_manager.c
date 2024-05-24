@@ -126,6 +126,26 @@ static void move_player(rpg_t *rpg)
         player_still_manager(rpg->game, rpg->game->player->race);
 }
 
+static void death_player(rpg_t *rpg)
+{
+    sfVector2f pos = {0.0, 0.0};
+
+    if (rpg->game->player->stats.health <= 0) {
+        rpg->game->map->entities->ork_is_moving = false;
+        for (int i = 0; i < NB_ORK; i += 1) {
+            pos = (sfVector2f) {rand() % 1400, rand() % 800};
+            sfSprite_setPosition(rpg->game->map->entities->ork[i]->ork_spr,
+            pos);
+            sfCircleShape_setPosition(rpg->game->map->entities->ork[i]->hitbox,
+            get_resize(rpg->window, pos.x - 40, pos.y + 30));
+        }
+        rpg->game->player->is_alive = false;
+        rpg->game->player->stats.nb_gold -= 75;
+        if (rpg->game->player->stats.nb_gold < 0)
+            rpg->game->player->stats.nb_gold = 0;
+    }
+}
+
 void game_manager(rpg_t *rpg)
 {
     game_music(rpg);
@@ -133,8 +153,10 @@ void game_manager(rpg_t *rpg)
         return;
     life_manager(rpg->game, rpg->window, rpg->game->player->stats.health);
     level_manager(rpg->game);
-    if (rpg->game->map->choice_map == BATTLEFIELD)
+    if (rpg->game->map->choice_map == BATTLEFIELD) {
         damage_for_ork(rpg);
+        death_player(rpg);
+    }
     if (rpg->game->map->choice_map <= BATTLEFIELD &&
         rpg->game->player->attack == true) {
         player_attack_manager(rpg->game, rpg->game->player->race);
