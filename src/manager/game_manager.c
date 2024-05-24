@@ -133,13 +133,14 @@ void game_manager(rpg_t *rpg)
         return;
     life_manager(rpg->game, rpg->window, rpg->game->player->stats.health);
     level_manager(rpg->game);
-    if (rpg->game->map->choice_map < BATTLEFIELD &&
-        rpg->game->player->attack == true && sfTime_asSeconds
-        (sfClock_getElapsedTime
-        (rpg->game->player->sprites->attack_clock)) >= 1) {
+    if (rpg->game->map->choice_map <= BATTLEFIELD &&
+        rpg->game->player->attack == true) {
         player_attack_manager(rpg->game, rpg->game->player->race);
-        attack_orks(rpg->game);
-        sfClock_restart(rpg->game->player->sprites->attack_clock);
+        if (sfTime_asSeconds(sfClock_getElapsedTime
+        (rpg->game->player->sprites->attack_clock)) >= 1) {
+            attack_orks(rpg->game);
+            sfClock_restart(rpg->game->player->sprites->attack_clock);
+        }
     } else
         move_player(rpg);
     return;
