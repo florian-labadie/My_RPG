@@ -61,6 +61,13 @@ static int creation_loop(main_menu_buttons_t **button, char **button_name,
     return OK;
 }
 
+static int free_but(char **button_name)
+{
+    for (int i = 0; button_name[i] != NULL; i += 1)
+        free(button_name[i]);
+    free(button_name);
+}
+
 static int set_button(main_menu_buttons_t **button, sfRenderWindow *window)
 {
     char **button_name = fill_name();
@@ -80,9 +87,7 @@ static int set_button(main_menu_buttons_t **button, sfRenderWindow *window)
     help_button(button, window);
     if (!(*button)->help_book || !(*button)->help_book_spr)
         return KO;
-    for (int i = 0; button_name[i] != NULL; i += 1)
-        free(button_name[i]);
-    free(button_name);
+    free_but(button_name);
     return OK;
 }
 

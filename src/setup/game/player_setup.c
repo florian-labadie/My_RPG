@@ -9,7 +9,7 @@
 
 static void player_stats_setup(player_t *player)
 {
-    float stats[PLAYER_RACE_SIZE][5] = {{10.0, 50.0, 50.0, 50.0, 75.0},
+    float stats[PLAYER_RACE_SIZE][5] = {{100.0, 50.0, 50.0, 50.0, 75.0},
                                         {100.0, 25.0, 75.0, 25.0, 100.0},
                                         {100.0, 75.0, 25.0, 75.0, 50.0}};
 

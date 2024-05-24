@@ -16,8 +16,7 @@ static int fill_ork_struct(entities_bf_t **entities, sfRenderWindow *window,
             return KO;
         pos = (sfVector2f) {rand() % 1400, rand() % 800};
         (*entities)->ork[i]->ork_spr = create_button(ork_texture,
-        (sfVector2f) {3.0, 3.0}, get_resize(window,
-        pos.x, pos.y));
+        (sfVector2f) {3.0, 3.0}, get_resize(window, pos.x, pos.y));
         (*entities)->ork[i]->ork_rect = (sfIntRect) {0, 0, 50, 65};
         sfSprite_setTextureRect((*entities)->ork[i]->ork_spr,
         (*entities)->ork[i]->ork_rect);
@@ -64,7 +63,7 @@ static int wizzard_setup(entities_bf_t **entities, sfRenderWindow *window)
     if (!(*entities)->wizzard_text || !(*entities)->bubble_text || !font_wizz)
         return KO;
     (*entities)->bubble_spr = create_button((*entities)->bubble_text,
-    (sfVector2f) {-1.5, 1.5}, get_resize(window, 1850.0 , 750));
+    (sfVector2f) {-1.5, 1.5}, get_resize(window, 1850.0, 750));
     (*entities)->wizzard_spr = create_button((*entities)->wizzard_text,
     (sfVector2f) {1.5, 1.5}, get_resize(window, 1700.0, 840.0));
     (*entities)->wizzard_sent = create_text(font_wizz,
