@@ -122,7 +122,7 @@ static void attack_orks(game_t *game)
                 (game->player->sprites->range);
         if (sfFloatRect_intersects(&r1, &r2, NULL))
             game->map->entities->ork[i]->hp -=
-                game->player->stats.attack * 0.5;
+                game->player->stats.attack * 3;
     }
 }
 

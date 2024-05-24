@@ -86,6 +86,8 @@ static void draw_battlefield(sfRenderWindow *window, game_t *game)
         if (sfTime_asSeconds(sfClock_getElapsedTime
         (game->player->life->time_lose)) > 3) {
             game->player->is_alive = true;
+            for (int i = 0; i < NB_ORK; i += 1)
+                game->map->entities->ork[i]->is_alive = true;
             game->map->choice_map = VILLAGE;
             sfMusic_stop(game->map->battle_music);
             sfMusic_play(game->map->game_sound);

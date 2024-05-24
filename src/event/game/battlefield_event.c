@@ -86,7 +86,8 @@ static void damage_ork(rpg_t *rpg, sfEvent event)
                 (rpg->game->map->entities->ork[i]->hitbox);
         touch2 = sfCircleShape_getGlobalBounds
                 (rpg->game->player->sprites->hitbox);
-        if (sfFloatRect_intersects(&touch, &touch2, NULL)) {
+        if (sfFloatRect_intersects(&touch, &touch2, NULL) &&
+        rpg->game->map->entities->ork[i]->hp > 0) {
             rpg->game->player->stats.health -= 5;
             sfClock_restart(rpg->game->map->entities->ork[i]->ork_damage);
         }
