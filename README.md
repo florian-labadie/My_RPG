@@ -6,7 +6,7 @@
 
 - Baptiste Blambert
 - Axel Lavrador
-- Florian Labadie
+- Florian Labadie ([GITHUB](https://github.com/florian-labadie))
 - Armand Dufresne
 - Faris Khsime
 
