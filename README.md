@@ -4,11 +4,11 @@
 
 ## Contributors
 
-- Baptiste Blambert
-- Axel Lavrador
+- Baptiste Blambert ([GITHUB](https://github.com/baptistebd))
+- Axel Lavrador ([GITHUB](https://github.com/Oursegamin))
 - Florian Labadie ([GITHUB](https://github.com/florian-labadie))
-- Armand Dufresne
-- Faris Khsime
+- Armand Dufresne ([GITHUB](https://github.com/Beezarment))
+- Faris Khsime ([GITHUB](https://github.com/fariskhsime))
 
 ## Description
 
